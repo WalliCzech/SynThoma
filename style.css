@@ -1,81 +1,236 @@
+/* Kyberpunkový styl pro wAllICzech AI Studio 2025 – Oranžový a růžový neon! */
+@font-face {
+    font-family: 'Neuropol';
+    src: url('https://db.onlinewebfonts.com/c/7d3b7e7fdda78e84183e9d33671d4823?family=Neuropol');
+}
+
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+}
+
 body {
-  background-color: #0d0d0d;
-  color: #f0f0f0;
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-family: 'Neuropol', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-header {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(to right, #ff6a00, #ff007a);
-  color: black;
+/* Neonový text */
+.neon-text {
+    color: #ffffff;
+    text-shadow:
+        0 0 5px #ff4500,
+        0 0 10px #ff4500,
+        0 0 20px #ff007a,
+        0 0 40px #ff007a;
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
+/* Agresivní glitch efekt */
+.glitch {
+    position: relative;
+    animation: glitch 0.5s linear infinite;
 }
 
-h1 .neon {
-  color: #ff007a;
-  text-shadow: 0 0 5px #ff007a, 0 0 10px #ff007a;
+@keyframes glitch {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    20% {
+        transform: translate(4px, -2px) skew(5deg);
+    }
+    40% {
+        transform: translate(-4px, 2px) skew(-5deg);
+    }
+    60% {
+        transform: translate(2px, 0) skew(3deg);
+    }
+    80% {
+        transform: translate(-2px, 0) skew(-3deg);
+    }
 }
 
-.btn {
-  display: inline-block;
-  background: #ff6a00;
-  color: white;
-  padding: 1rem 2rem;
-  text-decoration: none;
-  margin: 1rem;
-  border-radius: 10px;
-  transition: all 0.3s ease;
+.glitch:before,
+.glitch:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.btn:hover {
-  background: #ff007a;
+.glitch:before {
+    color: #ff4500;
+    animation: glitchTop 0.6s linear infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
 }
 
-.btn.ghost {
-  background: transparent;
-  border: 2px solid #ff6a00;
-  color: #ff6a00;
+.glitch:after {
+    color: #ff007a;
+    animation: glitchBottom 0.7s linear infinite;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
 }
 
-.features, .gallery, .cta, .support {
-  padding: 3rem 2rem;
-  text-align: center;
+@keyframes glitchTop {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    20% {
+        transform: translate(3px, -3px);
+    }
+    40% {
+        transform: translate(-3px, 3px);
+    }
+    60% {
+        transform: translate(2px, -2px);
+    }
+    80% {
+        transform: translate(-2px, 2px);
+    }
 }
 
-.features ul {
-  list-style: none;
-  padding: 0;
+@keyframes glitchBottom {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    20% {
+        transform: translate(-3px, 0);
+    }
+    40% {
+        transform: translate(3px, 0);
+    }
+    60% {
+        transform: translate(-2px, 0);
+    }
+    80% {
+        transform: translate(2px, 0);
+    }
 }
 
-.features li {
-  margin: 1rem 0;
+/* Neonový obrys */
+.neon-border {
+    border: 2px solid #ff4500;
+    box-shadow:
+        0 0 10px #ff4500,
+        0 0 20px #ff007a;
 }
 
-.screenshots {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+/* Neonové tlačítko s pulzováním */
+.neon-button {
+    transition: all 0.3s ease;
+    box-shadow:
+        0 0 5px #ff4500,
+        0 0 10px #ff007a;
 }
 
-.screenshots img {
-  width: 300px;
-  border: 2px solid #ff6a00;
-  border-radius: 12px;
+.neon-button.pulse {
+    animation: pulse 1.5s infinite;
 }
 
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  background: #111;
-  color: #999;
+@keyframes pulse {
+    0% {
+        box-shadow:
+            0 0 5px #ff4500,
+            0 0 10px #ff007a;
+    }
+    50% {
+        box-shadow:
+            0 0 15px #ff4500,
+            0 0 30px #ff007a,
+            0 0 50px #ff007a;
+    }
+    100% {
+        box-shadow:
+            0 0 5px #ff4500,
+            0 0 10px #ff007a;
+    }
+}
+
+.neon-button:hover {
+    box-shadow:
+        0 0 20px #ff4500,
+        0 0 40px #ff007a;
+    transform: scale(1.05);
+}
+
+/* Animace karet modulů */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow:
+        0 0 20px #ff4500,
+        0 0 40px #ff007a;
+}
+
+/* Fade-in animace při scrollování */
+.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsivita */
+@media (max-width: 1024px) {
+    .neon-text {
+        font-size: 2.5rem;
+    }
+
+    .glitch {
+        font-size: 3rem;
+    }
+
+    section {
+        padding: 3rem 1.5rem;
+    }
+
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .neon-text {
+        font-size: 2rem;
+    }
+
+    .glitch {
+        font-size: 2.5rem;
+    }
+
+    section {
+        padding: 2rem 1rem;
+    }
+
+    .grid-cols-4, .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .neon-text {
+        font-size: 1.5rem;
+    }
+
+    .glitch {
+        font-size: 2rem;
+    }
+
+    .neon-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    header img {
+        height: 10rem;
+    }
 }
