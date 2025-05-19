@@ -74,6 +74,7 @@ body.neon-alt .neon-text {
     animation: glitchTop 3.5s linear infinite;
     clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
     top: -8px;
+    animation-delay: 1.2s;
 }
 
 body.neon-alt .glitch:before {
@@ -85,6 +86,7 @@ body.neon-alt .glitch:before {
     animation: glitchBottom 4.6s linear infinite;
     clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
     top: 8px;
+    animation-delay: 1.4s;
 }
 
 body.neon-alt .glitch:after {
