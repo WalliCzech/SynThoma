@@ -38,7 +38,7 @@ body.neon-alt .neon-text {
 /* Agresivní glitch efekt */
 .glitch {
     position: relative;
-    animation: glitch 5.1s linear infinite;
+    animation: glitch 0.4s linear infinite;
 }
 
 @keyframes glitch {
@@ -71,10 +71,8 @@ body.neon-alt .neon-text {
 
 .glitch:before {
     color: #ff4500;
-    animation: glitchTop 3.5s linear infinite;
+    animation: glitchTop 0.5s linear infinite;
     clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-    top: -8px;
-    animation-delay: 0.7s;
 }
 
 body.neon-alt .glitch:before {
@@ -83,10 +81,8 @@ body.neon-alt .glitch:before {
 
 .glitch:after {
     color: #ff007a;
-    animation: glitchBottom 3.6s linear infinite;
+    animation: glitchBottom 0.6s linear infinite;
     clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-    top: 8px;
-    animation-delay: 0.8s;
 }
 
 body.neon-alt .glitch:after {
@@ -217,7 +213,7 @@ body.neon-alt .neon-button:hover {
         0 0 50px #8a2be2;
 }
 
-/* Animace karet modulů */
+/* Animace karet */
 .card-hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -242,6 +238,49 @@ body.neon-alt .card-hover:hover {
 
 body.neon-alt .neon-logo {
     filter: drop-shadow(0 0 10px #00ddeb) drop-shadow(0 0 20px #8a2be2);
+}
+
+/* Časová osa pro roadmapu */
+.timeline {
+    position: relative;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-item:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 2rem;
+    width: 4px;
+    height: 3rem;
+    background: linear-gradient(to bottom, #ff4500, #ff007a);
+}
+
+body.neon-alt .timeline-item:not(:last-child):after {
+    background: linear-gradient(to bottom, #00ddeb, #8a2be2);
+}
+
+/* Tabulka milníků */
+.milestone-table {
+    overflow-x: auto;
+}
+
+.milestone-row {
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.milestone-row:hover {
+    background: rgba(255, 69, 0, 0.1);
+}
+
+body.neon-alt .milestone-row:hover {
+    background: rgba(0, 221, 235, 0.1);
 }
 
 /* Fade-in animace při scrollování */
@@ -273,6 +312,17 @@ body.neon-alt .neon-logo {
     .grid-cols-4 {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .milestone-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    .milestone-row > div {
+        width: 100% !important;
+        margin-bottom: 0.5rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -290,6 +340,12 @@ body.neon-alt .neon-logo {
 
     .grid-cols-4, .grid-cols-2 {
         grid-template-columns: 1fr;
+    }
+
+    .timeline-item:after {
+        left: 1.5rem;
+        width: 3px;
+        height: 2rem;
     }
 }
 
@@ -309,5 +365,11 @@ body.neon-alt .neon-logo {
 
     .neon-logo {
         height: 14rem;
+    }
+
+    .timeline-item:after {
+        left: 1rem;
+        width: 2px;
+        height: 1.5rem;
     }
 }
