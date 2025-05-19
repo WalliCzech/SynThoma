@@ -1,51 +1,269 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>wAllICzech – AI Studio 2025</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="wAllICzech AI Studio 2025 – Jednočlověk-projekt pro AI zpracování obrazu, videa a zvuku s oranžovo-růžovým kyberpunkovým šmrncem.">
+    <meta name="keywords" content="AI, kyberpunk, obraz, video, zvuk, segmentace, deepfake, lipsync, faceswap, Flux.1, wAllICzech">
+    <meta name="author" content="wAllICzech AI Studio">
+    <meta property="og:title" content="wAllICzech AI Studio 2025">
+    <meta property="og:description" content="Hackuj realitu s naší AI platformou – od neonových videí po synchronizaci rtů, vše od jednoho vývojáře!">
+    <meta property="og:image" content="https://your-site.com/images/Title.png">
+    <meta property="og:url" content="https://your-site.com">
+    <meta property="og:type" content="website">
+    <title>wAllICzech AI Studio 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Strukturovaná data pro SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "wAllICzech AI Studio 2025",
+        "url": "https://your-site.com",
+        "description": "AI platforma pro zpracování obrazu, videa a zvuku s kyberpunkovým designem.",
+        "creator": {
+            "@type": "Person",
+            "name": "wAllICzech Developer"
+        },
+        "sameAs": [
+            "https://tiktok.com/@walli.czech"
+        ]
+    }
+    </script>
 </head>
-<body>
-  <header>
-    <h1>wAllICzech<span class="neon">.AI</span></h1>
-    <p>Kyberpunková AI dílna pro obličeje, výrazy, lipsync a sny ve 4K.</p>
-    <a href="#download" class="btn">📦 Stáhnout aplikaci</a>
-    <a href="#support" class="btn ghost">☕ Podpoř vývoj</a>
-  </header>
+<body class="bg-gray-900 text-white font-neuropol">
+    <!-- Header s logem -->
+    <header class="relative min-h-screen flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('images/Title.png');">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="relative max-w-4xl mx-auto px-4 z-10">
+            <img src="images/Logo.png" alt="wAllICzech Logo" class="absolute top-4 left-4 h-12 md:h-16">
+            <h1 class="text-5xl md:text-7xl font-bold neon-text glitch" data-text="wAllICzech AI Studio">
+                wAllICzech AI Studio
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-orange-400">
+                Jednočlověk-projekt, co rozpálí pixely!!! 😈⚡
+            </p>
+            <a href="#features" class="mt-8 inline-block px-8 py-4 bg-pink-600 text-white rounded-lg hover:bg-pink-700 neon-button pulse">
+                Hacknout realitu
+            </a>
+        </div>
+    </header>
 
-  <section class="features">
-    <h2>🧠 Co umí wAllICzech?</h2>
-    <ul>
-      <li>🎥 Generování lipsync videí z audia</li>
-      <li>🖼️ Upscale obličejů s GFPGAN & RealESRGAN</li>
-      <li>🎭 Výměna obličejů pomocí AI modelů</li>
-      <li>🎨 Animace obrázků na videa (Flux, WAN)</li>
-      <li>🔍 Forenzní analýza obrazových manipulací</li>
-    </ul>
-  </section>
+    <!-- O aplikaci -->
+    <section id="about" class="py-16 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center neon-text">O wAllICzech AI Studiu</h2>
+            <p class="mt-6 text-lg text-gray-300 text-center font-roboto-mono">
+                wAllICzech AI Studio 2025 je čistá kyberpunková jízda jednoho vývojáře. 
+                Od segmentace zvuku přes generování videí až po výměnu obličejů – tady se rodí budoucnost pixelů! 
+                Každý modul je nabitý AI a oranžovo-růžovým šmrncem, co roztřese kyberprostor. 🚀
+            </p>
+        </div>
+    </section>
 
-  <section class="gallery">
-    <h2>📸 Ukázky</h2>
-    <div class="screenshots">
-      <img src="images/screenshot1.png" alt="Ukázka 1">
-      <img src="images/screenshot2.png" alt="Ukázka 2">
-    </div>
-  </section>
+    <!-- O tvůrci -->
+    <section id="creator" class="py-16 bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold neon-text">Kdo za tím stojí?</h2>
+            <p class="mt-6 text-lg text-gray-300 font-roboto-mono">
+                🧑‍💻 Jeden člověk, jeden monitor, nekonečno kofeinu. 
+                wAllICzech je můj výsledek stovek hodin kódování, debugování a kyberpunkových snů. 
+                Žádné korporace, jen čistá vášeň pro AI a neonový design. 
+                Podpoř mě a pomoz mi rozsvítit další pixely! ❤️
+            </p>
+        </div>
+    </section>
 
-  <section class="cta" id="download">
-    <h2>🚀 Připraven vstoupit do neonového světa?</h2>
-    <a href="https://example.com/wallICzech_setup.exe" class="btn large">Stáhnout teď</a>
-  </section>
+    <!-- Moduly -->
+    <section id="features" class="py-16 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center neon-text">Naše moduly</h2>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">ForensicTools</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Odhal deepfaky a manipulace. Tvůj kyberdetektiv, co prořízne lži jako neonový blesk! 🕵️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">Segmenter</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Rozsekej objekty od reality! SAM a GroundingDINO řežou přesněji než kyberkatana. ✂️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">ExpressionEditor</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Proměň obličeje – od kyberúsměvu po neonový vztek. Pixely tvé tváře ožívají! 😄
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">WanRunner</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Obrázky v neonových videích! Wan model roztančí tvé pixely v kyberprostoru. 📽️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">VideoExporter</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Stříhej filmy s neonovými přechody. Tvůj střih je ostřejší než kybermeč! 🎥
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">SDXLRunner</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Text v neonové umění! Stable Diffusion XL promění tvá slova v pixely. 🖌️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">AudioSegmenter</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Rozsekej zvuk jako kyberkatana! Odděl hlas od šumu a ovládni audio kyberprostor. 🎙️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">FluxRunner</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Generuj obsah s Flux.1! Rychlejší, ostřejší, neonovější než cokoli předtím. 🌌
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">Lipsync</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Synchronizuj rty s audiem! Tvoje postavy mluví, jako by žily v kyberprostoru. 🗣️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">FaceSwapper</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Vyměň obličeje ve videích! Tvoje tvář v novém kyberprostoru, instantně! 😎
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section class="support" id="support">
-    <h2>❤️ Podpoř wAllICzech</h2>
-    <p>Tahle aplikace vzniká po nocích mezi kávou a kódem. Pokud se ti líbí, můžeš mě podpořit:</p>
-    <a href="https://buymeacoffee.com/tomas" class="btn ghost">☕ Koupit kafe</a>
-  </section>
+    <!-- Roadmapa -->
+    <section id="roadmap" class="py-16 bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center neon-text">Kam míříme?</h2>
+            <div class="mt-12 space-y-8">
+                <div class="flex items-center p-4 bg-gray-800 rounded-lg neon-border">
+                    <span class="text-2xl text-orange-500 mr-4">✔️</span>
+                    <p class="text-gray-300 font-roboto-mono">Offline režim – AI běží i na tvém starém kybernetu.</p>
+                </div>
+                <div class="flex items-center p-4 bg-gray-800 rounded-lg neon-border">
+                    <span class="text-2xl text-orange-500 mr-4">✔️</span>
+                    <p class="text-gray-300 font-roboto-mono">Realistický lipsync – postavy mluví jako živé!</p>
+                </div>
+                <div class="flex items-center p-4 bg-gray-800 rounded-lg neon-border">
+                    <span class="text-2xl text-orange-500 mr-4">✔️</span>
+                    <p class="text-gray-300 font-roboto-mono">Audio upload z mikrofonu – rovnou do webu!</p>
+                </div>
+                <div class="flex items-center p-4 bg-gray-800 rounded-lg neon-border">
+                    <span class="text-2xl text-orange-500 mr-4">✔️</span>
+                    <p class="text-gray-300 font-roboto-mono">Přednastavené emoce – radost, vztek, kyber-smutek.</p>
+                </div>
+                <div class="flex items-center p-4 bg-gray-800 rounded-lg neon-border">
+                    <span class="text-2xl text-pink-500 mr-4">🧪</span>
+                    <p class="text-gray-300 font-roboto-mono">Webový editor s realtime náhledem – edituj naživo!</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>© 2025 Tomáš Valíček · <a href="https://discord.gg/example">Přidej se na Discord</a></p>
-  </footer>
+    <!-- Ukázky -->
+    <section id="showcase" class="py-16 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center neon-text">Co dokážeme?</h2>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="relative rounded-lg overflow-hidden neon-border">
+                    <img src="https://via.placeholder.com/400x300?text=SDXL+Art" alt="SDXL Artwork" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 p-4 bg-gradient-to-t from-gray-900 to-transparent">
+                        <p class="text-gray-300 font-roboto-mono">Neonové umění z SDXLRunneru</p>
+                    </div>
+                </div>
+                <div class="relative rounded-lg overflow-hidden neon-border">
+                    <img src="https://via.placeholder.com/400x300?text=Wan+Video" alt="Wan Video" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 p-4 bg-gradient-to-t from-gray-900 to-transparent">
+                        <p class="text-gray-300 font-roboto-mono">Kyber-video z WanRunneru</p>
+                    </div>
+                </div>
+                <div class="relative rounded-lg overflow-hidden neon-border">
+                    <img src="https://via.placeholder.com/400x300?text=Face+Swap" alt="Face Swap" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 p-4 bg-gradient-to-t from-gray-900 to-transparent">
+                        <p class="text-gray-300 font-roboto-mono">Výměna obličeje z FaceSwapperu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Výzva k podpoře -->
+    <section id="support" class="py-16 bg-gradient-to-b from-gray-800 to-gray-900 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-4xl font-bold neon-text">Rozsviť kyberpunkovou revoluci!</h2>
+            <p class="mt-6 text-lg text-gray-300 font-roboto-mono">
+                Dík, že jsi tady! Tento projekt je moje srdcovka – stovky hodin bez spánku, jen já, kód a neonové sny. 
+                Bez grantů, bez týmu, ale s vizí změnit hru. Podpoř mě kávou ☕ nebo sdílením – ať rozsvítíme další pixely!
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="https://buymeacoffee.com/wallczech" class="px-8 py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 neon-button pulse">
+                    Kup mi kávu ☕
+                </a>
+                <a href="https://tiktok.com/@walli.czech" class="px-8 py-4 bg-pink-600 text-white rounded-lg hover:bg-pink-700 neon-button pulse">
+                    Sleduj na TikToku
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Komunita -->
+    <section id="community" class="py-16 bg-gray-800 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-4xl font-bold neon-text">Připoj se na TikToku</h2>
+            <p class="mt-6 text-lg text-gray-300 font-roboto-mono">
+                📣 Sleduj vývoj, bugfixy a moje kyberpunkové výlevy v reálném čase!
+            </p>
+            <div class="mt-8">
+                <a href="https://tiktok.com/@walli.czech" class="text-orange-500 hover:text-orange-400 text-2xl">TikTok @walli.czech</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-900 text-center">
+        <img src="images/Logo.png" alt="wAllICzech Logo" class="mx-auto h-12 md:h-16 mb-4">
+        <p class="text-gray-400 font-roboto-mono">© 2025 wAllICzech AI Studio. Vytvořeno s ❤️ jedním vývojářem.</p>
+    </footer>
+
+    <!-- Smooth Scroll a Scroll Animace -->
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade-in animace při scrollování
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('fade-out');
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
