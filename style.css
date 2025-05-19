@@ -38,7 +38,7 @@ body.neon-alt .neon-text {
 /* Agresivní glitch efekt */
 .glitch {
     position: relative;
-    animation: glitch 3.1s linear infinite;
+    animation: glitch 5.1s linear infinite;
 }
 
 @keyframes glitch {
@@ -71,10 +71,10 @@ body.neon-alt .neon-text {
 
 .glitch:before {
     color: #ff4500;
-    animation: glitchTop 2.5s linear infinite;
+    animation: glitchTop 3.5s linear infinite;
     clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
     top: -8px;
-    animation-delay: 0.2s;
+    animation-delay: 0.7s;
 }
 
 body.neon-alt .glitch:before {
@@ -83,10 +83,10 @@ body.neon-alt .glitch:before {
 
 .glitch:after {
     color: #ff007a;
-    animation: glitchBottom 2.6s linear infinite;
+    animation: glitchBottom 3.6s linear infinite;
     clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
     top: 8px;
-    animation-delay: 0.4s;
+    animation-delay: 0.8s;
 }
 
 body.neon-alt .glitch:after {
