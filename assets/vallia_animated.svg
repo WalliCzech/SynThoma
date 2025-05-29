@@ -1,18 +1,7 @@
-<?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 512 512" width="512" height="512"><style>
-    @keyframes glowPulse {
-        0%, 100% { filter: drop-shadow(0 0 8px #ff7f00); opacity: 1; }
-        50% { filter: drop-shadow(0 0 12px #ffb84d); opacity: 0.9; }
-    }
-
+<?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 512 512" width="256" height="256" id="vallia" class="neon-logo"><style>
     @keyframes dissolve {
-        0% { opacity: 1; transform: translate(0, 0) scale(1); }
-        100% { opacity: 0; transform: translate(10px, -10px) scale(0.5); }
-    }
-
-    svg * {
-        animation: glowPulse 4s ease-in-out infinite;
-        transform-box: fill-box;
-        transform-origin: center;
+        0% { opacity: 1; transform: scale(1) translate(0, 0); }
+        100% { opacity: 0; transform: scale(0.4) translate(20px, -20px); }
     }
 
     .dissolve {
@@ -34,17 +23,11 @@
 	</g>
 <script type="application/ecmascript">
 &lt;![CDATA[
-    function dissolveRandomly() {
-        const elements = document.querySelectorAll('path');
-        elements.forEach(el =&gt; {
-            el.classList.remove('dissolve');
-        });
-        const randomEl = elements[Math.floor(Math.random() * elements.length)];
-        if (randomEl) {
-            randomEl.classList.add('dissolve');
-        }
-    }
-
-    setInterval(dissolveRandomly, 15000);
+    setInterval(() =&gt; {
+        const paths = document.querySelectorAll('#vallia path');
+        paths.forEach(p =&gt; p.classList.remove('dissolve'));
+        const r = paths[Math.floor(Math.random() * paths.length)];
+        r.classList.add('dissolve');
+    }, 15000);
 ]]&gt;
 </script></svg>
