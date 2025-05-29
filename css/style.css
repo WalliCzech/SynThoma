@@ -1,97 +1,161 @@
-/* Kyberpunkový styl pro wAllICzech AI Studio 2025 – Neon, glitch a sarkasmus! 😈 */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+/* Kyberpunkový styl pro wAllICzech AI Studio 2025 – Oranžový a růžový neon! */
+@font-face {
+    font-family: 'Neuropol';
+    src: url('https://db.onlinewebfonts.com/c/7d3b7e7fdda78e84183e9d33671d4823?family=Neuropol');
+}
+
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+}
 
 body {
-    font-family: 'Orbitron', sans-serif;
-    background-color: #000;
-    color: #fff;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-family: 'Neuropol', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
 }
 
 /* Neonový text */
 .neon-text {
-    color: #fff;
-    text-shadow: 0 0 5px #ff4500, 0 0 10px #ff4500, 0 0 20px #ff007a, 0 0 40px #ff007a;
+    color: #ffffff;
+    text-shadow:
+        0 0 5px #ff4500,
+        0 0 10px #ff4500,
+        0 0 20px #ff007a,
+        0 0 40px #ff007a;
 }
 
 body.neon-alt .neon-text {
-    text-shadow: 0 0 5px #00ddeb, 0 0 10px #00ddeb, 0 0 20px #8a2be2, 0 0 40px #8a2be2;
+    text-shadow:
+        0 0 5px #00ddeb,
+        0 0 10px #00ddeb,
+        0 0 20px #8a2be2,
+        0 0 40px #8a2be2;
 }
 
-/* Glitch efekt */
+/* Agresivní glitch efekt */
 .glitch {
     position: relative;
-    animation: glitch 5s linear infinite;
+    animation: glitch 5.4s linear infinite;
 }
 
 @keyframes glitch {
-    0%, 100% { transform: translate(0, 0); }
-    20% { transform: translate(5px, -3px) skew(6deg); }
-    40% { transform: translate(-5px, 3px) skew(-6deg); }
-    60% { transform: translate(3px, -2px) skew(4deg); }
-    80% { transform: translate(-3px, 2px) skew(-4deg); }
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    20% {
+        transform: translate(5px, -3px) skew(6deg);
+    }
+    40% {
+        transform: translate(-5px, 3px) skew(-6deg);
+    }
+    60% {
+        transform: translate(3px, -2px) skew(4deg);
+    }
+    80% {
+        transform: translate(-3px, 2px) skew(-4deg);
+    }
 }
 
-.glitch:before, .glitch:after {
+.glitch:before,
+.glitch:after {
     content: attr(data-text);
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .glitch:before {
     color: #ff4500;
     animation: glitchTop 3.5s linear infinite;
     clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    top: -8px;
+    animation-delay: 1.2s;
 }
 
-body.neon-alt .glitch:before { color: #00ddeb; }
+body.neon-alt .glitch:before {
+    color: #00ddeb;
+}
 
 .glitch:after {
     color: #ff007a;
     animation: glitchBottom 4.6s linear infinite;
     clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+    top: 8px;
+    animation-delay: 1.4s;
 }
 
-body.neon-alt .glitch:after { color: #8a2be2; }
+body.neon-alt .glitch:after {
+    color: #8a2be2;
+}
 
 @keyframes glitchTop {
-    0%, 100% { transform: translate(0, 0); }
-    20% { transform: translate(4px, -4px); }
-    40% { transform: translate(-4px, 4px); }
-    60% { transform: translate(3px, -3px); }
-    80% { transform: translate(-3px, 3px); }
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    20% {
+        transform: translate(4px, -4px);
+    }
+    40% {
+        transform: translate(-4px, 4px);
+    }
+    60% {
+        transform: translate(3px, -3px);
+    }
+    80% {
+        transform: translate(-3px, 3px);
+    }
 }
 
 @keyframes glitchBottom {
-    0%, 100% { transform: translate(0, 0); }
-    20% { transform: translate(-4px, 0); }
-    40% { transform: translate(4px, 0); }
-    60% { transform: translate(-3px, 0); }
-    80% { transform: translate(3px, 0); }
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    20% {
+        transform: translate(-4px, 0);
+    }
+    40% {
+        transform: translate(4px, 0);
+    }
+    60% {
+        transform: translate(-3px, 0);
+    }
+    80% {
+        transform: translate(3px, 0);
+    }
 }
 
 /* Neonový obrys */
 .neon-border {
     border: 2px solid #ff4500;
-    box-shadow: 0 0 10px #ff4500, 0 0 20px #ff007a;
+    box-shadow:
+        0 0 10px #ff4500,
+        0 0 20px #ff007a;
 }
 
 body.neon-alt .neon-border {
     border: 2px solid #00ddeb;
-    box-shadow: 0 0 10px #00ddeb, 0 0 20px #8a2be2;
+    box-shadow:
+        0 0 10px #00ddeb,
+        0 0 20px #8a2be2;
 }
 
-/* Neonové tlačítko */
+/* Neonové tlačítko s pulzováním */
 .neon-button {
-    @apply transition-all duration-300 px-6 py-3 rounded-full bg-transparent border-2 border-orange-500 text-white;
-    box-shadow: 0 0 5px #ff4500, 0 0 10px #ff007a;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 0 5px #ff4500,
+        0 0 10px #ff007a;
 }
 
 body.neon-alt .neon-button {
-    @apply border-cyan-400;
-    box-shadow: 0 0 5px #00ddeb, 0 0 10px #8a2be2;
+    box-shadow:
+        0 0 5px #00ddeb,
+        0 0 10px #8a2be2;
 }
 
 .neon-button.pulse {
@@ -99,9 +163,22 @@ body.neon-alt .neon-button {
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 5px #ff4500, 0 0 10px #ff007a; }
-    50% { box-shadow: 0 0 20px #ff4500, 0 0 40px #ff007a, 0 0 60px #ff007a; }
-    100% { box-shadow: 0 0 5px #ff4500, 0 0 10px #ff007a; }
+    0% {
+        box-shadow:
+            0 0 5px #ff4500,
+            0 0 10px #ff007a;
+    }
+    50% {
+        box-shadow:
+            0 0 20px #ff4500,
+            0 0 40px #ff007a,
+            0 0 60px #ff007a;
+    }
+    100% {
+        box-shadow:
+            0 0 5px #ff4500,
+            0 0 10px #ff007a;
+    }
 }
 
 body.neon-alt .neon-button.pulse {
@@ -109,35 +186,56 @@ body.neon-alt .neon-button.pulse {
 }
 
 @keyframes pulse-alt {
-    0% { box-shadow: 0 0 5px #00ddeb, 0 0 10px #8a2be2; }
-    50% { box-shadow: 0 0 20px #00ddeb, 0 0 40px #8a2be2, 0 0 60px #8a2be2; }
-    100% { box-shadow: 0 0 5px #00ddeb, 0 0 10px #8a2be2; }
+    0% {
+        box-shadow:
+            0 0 5px #00ddeb,
+            0 0 10px #8a2be2;
+    }
+    50% {
+        box-shadow:
+            0 0 20px #00ddeb,
+            0 0 40px #8a2be2,
+            0 0 60px #8a2be2;
+    }
+    100% {
+        box-shadow:
+            0 0 5px #00ddeb,
+            0 0 10px #8a2be2;
+    }
 }
 
 .neon-button:hover {
-    @apply scale-105;
-    box-shadow: 0 0 25px #ff4500, 0 0 50px #ff007a;
+    box-shadow:
+        0 0 25px #ff4500,
+        0 0 50px #ff007a;
+    transform: scale(1.05);
 }
 
 body.neon-alt .neon-button:hover {
-    box-shadow: 0 0 25px #00ddeb, 0 0 50px #8a2be2;
+    box-shadow:
+        0 0 25px #00ddeb,
+        0 0 50px #8a2be2;
 }
 
-/* Card hover efekt */
+/* Animace karet */
 .card-hover {
-    @apply transition-all duration-300 p-6 rounded-lg;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-hover:hover {
-    @apply translate-y-[-10px] rotate-3;
-    box-shadow: 0 0 25px #ff4500, 0 0 50px #ff007a;
+    transform: translateY(-10px) rotate(3deg);
+    box-shadow:
+        0 0 25px #ff4500,
+        0 0 50px #ff007a;
 }
 
 body.neon-alt .card-hover:hover {
-    box-shadow: 0 0 25px #00ddeb, 0 0 50px #8a2be2;
+    box-shadow:
+        0 0 25px #00ddeb,
+        0 0 50px #8a2be2;
 }
 
-/* Neonový logo efekt */
+/* Neonový stín pro logo */
 .neon-logo {
     filter: drop-shadow(0 0 10px #ff4500) drop-shadow(0 0 20px #ff007a);
 }
@@ -146,10 +244,23 @@ body.neon-alt .neon-logo {
     filter: drop-shadow(0 0 10px #00ddeb) drop-shadow(0 0 20px #8a2be2);
 }
 
-/* Timeline */
+/* Časová osa pro roadmapu */
+.timeline {
+    position: relative;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
 .timeline-item:not(:last-child):after {
     content: '';
-    @apply absolute top-full left-8 w-1 h-12;
+    position: absolute;
+    top: 100%;
+    left: 2rem;
+    width: 4px;
+    height: 3rem;
     background: linear-gradient(to bottom, #ff4500, #ff007a);
 }
 
@@ -157,40 +268,112 @@ body.neon-alt .timeline-item:not(:last-child):after {
     background: linear-gradient(to bottom, #00ddeb, #8a2be2);
 }
 
-/* Fade-in animace */
+/* Tabulka milníků */
+.milestone-table {
+    overflow-x: auto;
+}
+
+.milestone-row {
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.milestone-row:hover {
+    background: rgba(255, 69, 0, 0.1);
+}
+
+body.neon-alt .milestone-row:hover {
+    background: rgba(0, 221, 235, 0.1);
+}
+
+/* Fade-in animace při scrollování */
 .fade-out {
     opacity: 0;
     transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .fade-in {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* Responzivita */
+/* Responsivita */
 @media (max-width: 1024px) {
-    .neon-text { @apply text-4xl; }
-    .glitch { @apply text-5xl; }
-    section { @apply px-6 py-12; }
-    .grid-cols-3 { @apply grid-cols-2; }
-    .milestone-row { @apply flex-col items-start p-4; }
-    .milestone-row > div { @apply w-full mb-2; }
+    .neon-text {
+        font-size: 2.5rem;
+    }
+
+    .glitch {
+        font-size: 3rem;
+    }
+
+    section {
+        padding: 3rem 1.5rem;
+    }
+
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .milestone-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    .milestone-row > div {
+        width: 100% !important;
+        margin-bottom: 0.5rem;
+    }
 }
 
 @media (max-width: 768px) {
-    .neon-text { @apply text-3xl; }
-    .glitch { @apply text-4xl; }
-    section { @apply px-4 py-8; }
-    .grid-cols-2, .grid-cols-3 { @apply grid-cols-1; }
-    .timeline-item:after { @apply left-6 w-1 h-8; }
+    .neon-text {
+        font-size: 2rem;
+    }
+
+    .glitch {
+        font-size: 2.5rem;
+    }
+
+    section {
+        padding: 2rem 1rem;
+    }
+
+    .grid-cols-4, .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-item:after {
+        left: 1.5rem;
+        width: 3px;
+        height: 2rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .neon-text { @apply text-2xl; }
-    .glitch { @apply text-3xl; }
-    .neon-button { @apply px-4 py-2 text-sm; }
-    .neon-logo { @apply h-40; }
-    .timeline-item:after { @apply left-4 w-0.5 h-6; }
+    .neon-text {
+        font-size: 1.5rem;
+    }
+
+    .glitch {
+        font-size: 2rem;
+    }
+
+    .neon-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .neon-logo {
+        height: 14rem;
+    }
+
+    .timeline-item:after {
+        left: 1rem;
+        width: 2px;
+        height: 1.5rem;
+    }
 }
