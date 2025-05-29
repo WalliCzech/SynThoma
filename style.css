@@ -9,6 +9,13 @@
     src: url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 }
 
+:root {
+    --neon-orange: #ff4500;
+    --neon-pink: #ff007a;
+    --crt-green: #00ff00;
+    --crt-black: #1a2a1a;
+}
+
 body {
     background-color: #0a0a0a;
     color: #ffffff;
@@ -17,23 +24,27 @@ body {
     overflow-x: hidden;
 }
 
-/* Neonový text */
+body[data-theme="crt"] {
+    background-color: var(--crt-black);
+}
+
 .neon-text {
     color: #ffffff;
     text-shadow:
-        0 0 5px #ff4500,
-        0 0 10px #ff4500,
-        0 0 20px #ff007a,
-        0 0 40px #ff007a;
+        0 0 5px var(--neon-orange),
+        0 0 10px var(--neon-orange),
+        0 0 20px var(--neon-pink),
+        0 0 40px var(--neon-pink);
 }
 
-body.neon-alt .neon-text {
+body[data-theme="crt"] .neon-text {
     text-shadow:
-        0 0 5px #00ddeb,
-        0 0 10px #00ddeb,
-        0 0 20px #8a2be2,
-        0 0 40px #8a2be2;
+        0 0 5px var(--crt-green),
+        0 0 10px var(--crt-green),
+        0 0 20px var(--crt-green),
+        0 0 40px var(--crt-green);
 }
+
 
 /* Agresivní glitch efekt */
 .glitch {
