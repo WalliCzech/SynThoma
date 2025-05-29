@@ -1,62 +1,71 @@
-/* Kyberpunkový styl pro wAllICzech AI Studio 2025 – Oranžový a růžový neon! */
+/* Kyberpunkový styl pro wAllICzech AI Studio 2025 – Neon, sarkasmus a barvy, co tě praští do očí 😈 */
 @font-face {
     font-family: 'Neuropol';
-    src: url('https://db.onlinewebfonts.com/c/7d3b7e7fdda78e84183e9d33671d4823?family=Neuropol');
+    src: url('https://db.onlinewebfonts.com/c/7d3b7e7fdda78e84183e9d33671d4823?family=Neuropol') format('woff2');
+    font-display: swap; /* Načítání rychlejší než tvůj starý modem */
 }
 
-@font-face {
-    font-family: 'Roboto Mono';
-    src: url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
 body {
     background-color: #0a0a0a;
     color: #ffffff;
-    font-family: 'Neuropol', sans-serif;
+    font-family: 'Neuropol', 'Roboto Mono', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
+    scroll-behavior: smooth; /* Scroll jako z kyberfilmu, ne jako z 90s webu */
 }
 
-/* Neonový text */
+/* Neonový text – svítí jako tvůj sen o slávě */
 .neon-text {
     color: #ffffff;
     text-shadow:
-        0 0 5px #ff4500,
-        0 0 10px #ff4500,
-        0 0 20px #ff007a,
-        0 0 40px #ff007a;
+        0 0 2px #ff4500,
+        0 0 6px #ff4500,
+        0 0 12px #ff007a,
+        0 0 15px #ff007a;
+    transition: text-shadow 0.3s ease;
 }
 
 body.neon-alt .neon-text {
     text-shadow:
-        0 0 5px #00ddeb,
-        0 0 10px #00ddeb,
-        0 0 20px #8a2be2,
-        0 0 40px #8a2be2;
+        0 0 2px #00ddeb,
+        0 0 6px #00ddeb,
+        0 0 12px #8a2be2,
+        0 0 15px #8a2be2;
 }
 
-/* Agresivní glitch efekt */
+/* Nový hybridní neon – mix teplých a studených barev, protože kompromisy jsou pro slabochy */
+.neon-hybrid {
+    color: #ffffff;
+    text-shadow:
+        0 0 2px #ff4500,
+        0 0 6px #ff007a,
+        0 0 12px #00ddeb,
+        0 0 15px #8a2be2;
+    transition: text-shadow 0.3s ease;
+}
+
+body.neon-alt .neon-hybrid {
+    text-shadow:
+        0 0 2px #00ddeb,
+        0 0 6px #8a2be2,
+        0 0 12px #ff4500,
+        0 0 15px #ff007a;
+}
+
+/* Glitch efekt – stabilita je pro korporáty */
 .glitch {
     position: relative;
-    animation: glitch 5.4s linear infinite;
+    animation: glitch 4s linear infinite;
 }
 
 @keyframes glitch {
-    0%, 100% {
-        transform: translate(0, 0);
-    }
-    20% {
-        transform: translate(5px, -3px) skew(6deg);
-    }
-    40% {
-        transform: translate(-5px, 3px) skew(-6deg);
-    }
-    60% {
-        transform: translate(3px, -2px) skew(4deg);
-    }
-    80% {
-        transform: translate(-3px, 2px) skew(-4deg);
-    }
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(5px, -3px) skew(6deg); }
+    40% { transform: translate(-5px, 3px) skew(-6deg); }
+    60% { transform: translate(3px, -2px) skew(4deg); }
+    80% { transform: translate(-3px, 2px) skew(-4deg); }
 }
 
 .glitch:before,
@@ -70,11 +79,10 @@ body.neon-alt .neon-text {
 }
 
 .glitch:before {
-    color: #ff4500;
-    animation: glitchTop 3.5s linear infinite;
-    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-    top: -8px;
-    animation-delay: 1.2s;
+    color: #ff4500; /* Změna na novou barvu pro konzistenci */
+    animation: glitchTop 3s linear infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 27%, 0 27%);
+    top: -9px;
 }
 
 body.neon-alt .glitch:before {
@@ -82,11 +90,10 @@ body.neon-alt .glitch:before {
 }
 
 .glitch:after {
-    color: #ff007a;
-    animation: glitchBottom 4.6s linear infinite;
-    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-    top: 8px;
-    animation-delay: 1.4s;
+    color: #ff007a; /* Druhá teplá barva pro glitch */
+    animation: glitchBottom 3.5s linear infinite;
+    clip-path: polygon(0 73%, 100% 73%, 100% 100%, 0 100%);
+    top: 9px;
 }
 
 body.neon-alt .glitch:after {
@@ -94,47 +101,28 @@ body.neon-alt .glitch:after {
 }
 
 @keyframes glitchTop {
-    0%, 100% {
-        transform: translate(0, 0);
-    }
-    20% {
-        transform: translate(4px, -4px);
-    }
-    40% {
-        transform: translate(-4px, 4px);
-    }
-    60% {
-        transform: translate(3px, -3px);
-    }
-    80% {
-        transform: translate(-3px, 3px);
-    }
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(4px, -4px); }
+    40% { transform: translate(-4px, 4px); }
+    60% { transform: translate(3px, -3px); }
+    80% { transform: translate(-3px, 3px); }
 }
 
 @keyframes glitchBottom {
-    0%, 100% {
-        transform: translate(0, 0);
-    }
-    20% {
-        transform: translate(-4px, 0);
-    }
-    40% {
-        transform: translate(4px, 0);
-    }
-    60% {
-        transform: translate(-3px, 0);
-    }
-    80% {
-        transform: translate(3px, 0);
-    }
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-4px, 0); }
+    40% { transform: translate(4px, 0); }
+    60% { transform: translate(-3px, 0); }
+    80% { transform: translate(3px, 0); }
 }
 
-/* Neonový obrys */
+/* Neonový obrys – hranice, co svítí jako tvůj kód po páté kávě */
 .neon-border {
     border: 2px solid #ff4500;
     box-shadow:
         0 0 10px #ff4500,
         0 0 20px #ff007a;
+    transition: all 0.3s ease;
 }
 
 body.neon-alt .neon-border {
@@ -144,18 +132,43 @@ body.neon-alt .neon-border {
         0 0 20px #8a2be2;
 }
 
-/* Neonové tlačítko s pulzováním */
-.neon-button {
-    transition: all 0.3s ease;
+/* Hybridní neonový obrys – mix barev, co tě donutí mrkat */
+.neon-hybrid-border {
+    border: 2px solid #ff4500;
+    background: linear-gradient(45deg, #ff4500, #ff007a, #00ddeb, #8a2be2);
+    background-size: 400%;
+    animation: gradientShift 8s ease infinite;
     box-shadow:
-        0 0 5px #ff4500,
-        0 0 10px #ff007a;
+        0 0 10px #ff007a,
+        0 0 20px #00ddeb;
+    transition: all 0.3s ease;
+}
+
+body.neon-alt .neon-hybrid-border {
+    border: 2px solid #00ddeb;
+    box-shadow:
+        0 0 10px #8a2be2,
+        0 0 20px #ff4500;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Neonové tlačítko – pulzuje jako tvůj kofeinový příjem */
+.neon-button {
+    background: linear-gradient(45deg, #ff4500, #ff007a);
+    border: none;
+    color: #ffffff;
+    text-shadow: 0 0 5px #000;
+    transition: all 0.3s ease;
+    border-radius: 8px;
 }
 
 body.neon-alt .neon-button {
-    box-shadow:
-        0 0 5px #00ddeb,
-        0 0 10px #8a2be2;
+    background: linear-gradient(45deg, #00ddeb, #8a2be2);
 }
 
 .neon-button.pulse {
@@ -163,58 +176,144 @@ body.neon-alt .neon-button {
 }
 
 @keyframes pulse {
-    0% {
-        box-shadow:
-            0 0 5px #ff4500,
-            0 0 10px #ff007a;
-    }
-    50% {
-        box-shadow:
-            0 0 20px #ff4500,
-            0 0 40px #ff007a,
-            0 0 60px #ff007a;
-    }
-    100% {
-        box-shadow:
-            0 0 5px #ff4500,
-            0 0 10px #ff007a;
-    }
+    0% { box-shadow: 0 0 5px #ff4500, 0 0 10px #ff007a; }
+    50% { box-shadow: 0 0 15px #ff4500, 0 0 25px #ff007a, 0 0 35px #ff007a; }
+    100% { box-shadow: 0 0 5px #ff4500, 0 0 10px #ff007a; }
 }
 
 body.neon-alt .neon-button.pulse {
-    animation: pulse-alt 1.2s infinite;
+    animation: pulse-alt 1.6s infinite;
 }
 
 @keyframes pulse-alt {
-    0% {
-        box-shadow:
-            0 0 5px #00ddeb,
-            0 0 10px #8a2be2;
-    }
-    50% {
-        box-shadow:
-            0 0 20px #00ddeb,
-            0 0 40px #8a2be2,
-            0 0 60px #8a2be2;
-    }
-    100% {
-        box-shadow:
-            0 0 5px #00ddeb,
-            0 0 10px #8a2be2;
-    }
+    0% { box-shadow: 0 0 5px #00ddeb, 0 0 10px #8a2be2; }
+    50% { box-shadow: 0 0 20px #00ddeb, 0 0 40px #8a2be2, 0 0 60px #8a2be2; }
+    100% { box-shadow: 0 0 5px #00ddeb, 0 0 10px #8a2be2; }
 }
 
 .neon-button:hover {
-    box-shadow:
-        0 0 25px #ff4500,
-        0 0 50px #ff007a;
+    box-shadow: 0 0 25px #ff4500, 0 0 50px #ff007a;
     transform: scale(1.05);
 }
 
 body.neon-alt .neon-button:hover {
-    box-shadow:
-        0 0 25px #00ddeb,
-        0 0 50px #8a2be2;
+    box-shadow: 0 0 25px #00ddeb, 0 0 50px #8a2be2;
+}
+
+/* Hybridní tlačítko – všechny barvy najednou, protože proč ne? */
+.neon-hybrid-button {
+    background: linear-gradient(45deg, #ff4500, #ff007a, #00ddeb, #8a2be2);
+    background-size: 400%;
+    animation: gradientShift 6s ease infinite;
+    border: none;
+    color: #ffffff;
+    text-shadow: 0 0 5px #000;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.neon-hybrid-button.pulse {
+    animation: hybrid-pulse 1.4s infinite, gradientShift 6s ease infinite;
+}
+
+@keyframes hybrid-pulse {
+    0% { box-shadow: 0 0 5px #ff4500, 0 0 10px #00ddeb; }
+    50% { box-shadow: 0 0 20px #ff007a, 0 0 30px #8a2be2, 0 0 40px #00ddeb; }
+    100% { box-shadow: 0 0 5px #ff4500, 0 0 10px #00ddeb; }
+}
+
+.neon-hybrid-button:hover {
+    box-shadow: 0 0 25px #ff007a, 0 0 50px #8a2be2;
+    transform: scale(1.05);
+}
+
+/* Module card – protože moduly si zaslouží svítit */
+.module-card {
+    border: 2px solid #ff4500;
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 12px;
+    background: rgba(255, 85, 0, 0.15);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 15px rgba(255, 85, 0, 0.7);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+body.neon-alt .module-card {
+    border: 2px solid #00ddeb;
+    background: rgba(0, 221, 235, 0.15);
+    box-shadow: 0 0 15px rgba(0, 221, 235, 0.7);
+}
+
+.module-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 0 30px rgba(255, 128, 0, 0.9);
+}
+
+body.neon-alt .module-card:hover {
+    box-shadow: 0 0 30px rgba(0, 221, 235, 0.9);
+}
+
+/* Hybridní karta – pro ty, co chtějí všechno */
+.neon-hybrid-card {
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, #ff4500, #ff007a, #00ddeb, #8a2be2) 1;
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 12px;
+    background: rgba(255, 119, 51, 0.1);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 15px rgba(0, 221, 235, 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+body.neon-alt .neon-hybrid-card {
+    background: rgba(0, 221, 235, 0.1);
+    box-shadow: 0 0 15px rgba(255, 119, 51, 0.5);
+}
+
+.neon-hybrid-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 0 30px rgba(0, 221, 235, 0.9), 0 0 50px rgba(255, 119, 51, 0.7);
+}
+
+.neon-hybrid-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 221, 235, 0.2), rgba(255, 119, 51, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.neon-hybrid-card:hover::before {
+    left: 100%;
+}
+
+/* Přidáme jemné blikání pro karty */
+.module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 85, 0, 0.3), transparent);
+    transition: 0.5s;
+}
+
+.module-card:hover::before {
+    left: 100%;
+}
+
+body.neon-alt .module-card::before {
+    background: linear-gradient(90deg, transparent, rgba(0, 221, 235, 0.3), transparent);
 }
 
 /* Animace karet */
@@ -223,16 +322,12 @@ body.neon-alt .neon-button:hover {
 }
 
 .card-hover:hover {
-    transform: translateY(-10px) rotate(3deg);
-    box-shadow:
-        0 0 25px #ff4500,
-        0 0 50px #ff007a;
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 0 25px #ff4500, 0 0 50px #ff007a;
 }
 
 body.neon-alt .card-hover:hover {
-    box-shadow:
-        0 0 25px #00ddeb,
-        0 0 50px #8a2be2;
+    box-shadow: 0 0 25px #00ddeb, 0 0 50px #8a2be2;
 }
 
 /* Neonový stín pro logo */
@@ -244,27 +339,47 @@ body.neon-alt .neon-logo {
     filter: drop-shadow(0 0 10px #00ddeb) drop-shadow(0 0 20px #8a2be2);
 }
 
-/* Časová osa pro roadmapu */
+/* Časová osa pro roadmapu – svítí jako tvůj plán na světovou dominanci */
 .timeline {
     position: relative;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .timeline-item {
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    padding-left: 3rem;
 }
 
-.timeline-item:not(:last-child):after {
+.timeline-item::before {
     content: '';
     position: absolute;
-    top: 100%;
-    left: 2rem;
+    left: 1rem;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background: #ff4500;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff007a;
+}
+
+body.neon-alt .timeline-item::before {
+    background: #00ddeb;
+    box-shadow: 0 0 10px #8a2be2;
+}
+
+.timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 1.5rem;
     width: 4px;
-    height: 3rem;
+    height: calc(100% - 16px);
     background: linear-gradient(to bottom, #ff4500, #ff007a);
 }
 
-body.neon-alt .timeline-item:not(:last-child):after {
+body.neon-alt .timeline-item:not(:last-child)::after {
     background: linear-gradient(to bottom, #00ddeb, #8a2be2);
 }
 
@@ -280,18 +395,18 @@ body.neon-alt .timeline-item:not(:last-child):after {
 }
 
 .milestone-row:hover {
-    background: rgba(255, 69, 0, 0.1);
+    background: rgba(255, 119, 51, 0.15);
 }
 
 body.neon-alt .milestone-row:hover {
-    background: rgba(0, 221, 235, 0.1);
+    background: rgba(0, 221, 235, 0.15);
 }
 
 /* Fade-in animace při scrollování */
 .fade-out {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .fade-in {
@@ -299,81 +414,149 @@ body.neon-alt .milestone-row:hover {
     transform: translateY(0);
 }
 
-/* Responsivita */
+/* Styl pro header */
+header {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 119, 51, 0.2), transparent);
+    opacity: 0.5;
+}
+
+body.neon-alt header::before {
+    background: radial-gradient(circle, rgba(0, 221, 235, 0.2), transparent);
+}
+
+/* Styl pro main kontejner */
+.module-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Styl pro footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: #0a0a0a;
+    border-top: 2px solid #ff4500;
+}
+
+body.neon-alt footer {
+    border-top: 2px solid #00ddeb;
+}
+
+/* Animace pro pozadí */
+.animate-slow-scroll {
+    animation: scroll-bg 50s linear infinite;
+}
+
+@keyframes scroll-bg {
+    from { background-position: 0 0; }
+    to { background-position: 0 100%; }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.animate-particles {
+    animation: particles 20s linear infinite;
+}
+
+@keyframes particles {
+    from { transform: translateY(0); }
+    to { transform: translateY(-1000px); }
+}
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('assets/particles.png') repeat;
+    opacity: 0.3;
+}
+
+.drop-shadow-neon {
+    filter: drop-shadow(0 0 15px rgba(255, 119, 51, 0.7));
+}
+
+body.neon-alt .drop-shadow-neon {
+    filter: drop-shadow(0 0 15px rgba(0, 221, 235, 0.7));
+}
+
+/* Responsivita – protože mobily jsou digitální peklo */
 @media (max-width: 1024px) {
-    .neon-text {
-        font-size: 2.5rem;
-    }
-
-    .glitch {
-        font-size: 3rem;
-    }
-
-    section {
-        padding: 3rem 1.5rem;
-    }
-
-    .grid-cols-4 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .milestone-row {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem;
-    }
-
-    .milestone-row > div {
-        width: 100% !important;
-        margin-bottom: 0.5rem;
-    }
+    .neon-text, .neon-hybrid { font-size: 2.5rem; }
+    .glitch { font-size: 3rem; }
+    header { padding: 3rem 1.5rem; }
+    .module-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .milestone-row { flex-direction: column; align-items: flex-start; padding: 1rem; }
+    .milestone-row > div { width: 100% !important; margin-bottom: 0.5rem; }
+    .timeline-item { padding-left: 2rem; }
+    .timeline-item::before { left: 0.5rem; }
+    .timeline-item::after { left: 1rem; }
 }
 
 @media (max-width: 768px) {
-    .neon-text {
-        font-size: 2rem;
-    }
-
-    .glitch {
-        font-size: 2.5rem;
-    }
-
-    section {
-        padding: 2rem 1rem;
-    }
-
-    .grid-cols-4, .grid-cols-2 {
-        grid-template-columns: 1fr;
-    }
-
-    .timeline-item:after {
-        left: 1.5rem;
-        width: 3px;
-        height: 2rem;
-    }
+    .neon-text, .neon-hybrid { font-size: 2rem; }
+    .glitch { font-size: 2.5rem; }
+    header { padding: 2rem 1rem; }
+    .module-container { grid-template-columns: 1fr; padding: 1rem; }
+    .timeline-item::after { left: 0.75rem; width: 3px; height: 2rem; }
 }
 
 @media (max-width: 480px) {
-    .neon-text {
-        font-size: 1.5rem;
-    }
+    .neon-text, .neon-hybrid { font-size: 1.5rem; }
+    .glitch { font-size: 2rem; }
+    .neon-button, .neon-hybrid-button { padding: 0.75rem 1.5rem; font-size: 0.9rem; }
+    .neon-logo { height: 14rem; }
+    .module-card, .neon-hybrid-card { padding: 1.5rem; margin: 0.5rem; }
+    .timeline-item::after { left: 0.5rem; width: 2px; height: 1.5rem; }
+}
 
-    .glitch {
-        font-size: 2rem;
-    }
+.neon-button-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid #ff4500;
+  text-decoration: none;
+  box-shadow: 0 0 20px #ff007a;
+  transition: all 0.3s ease;
+}
 
-    .neon-button {
-        padding: 0.75rem 1.5rem;
-        font-size: 0.9rem;
-    }
+.neon-button-outline:hover {
+  color: #ffffff;
+  border-color: #00ddeb;
+  box-shadow: 0 0 15px #00ddeb, 0 0 25px #8a2be2;
+}
 
-    .neon-logo {
-        height: 14rem;
-    }
+body.neon-alt .neon-button-outline {
+  border-color: #00ddeb;
+  color: #ffffff;
+  box-shadow: 0 0 10px #8a2be2;
+}
 
-    .timeline-item:after {
-        left: 1rem;
-        width: 2px;
-        height: 1.5rem;
-    }
+body.neon-alt .neon-button-outline:hover {
+  color: #ffffff;
+  border-color: #ff4500;
+  box-shadow: 0 0 15px #ff4500, 0 0 25px #ff007a;
 }
