@@ -1,0 +1,50 @@
+[
+    {
+        "id": "faceswap",
+        "name": "FaceSwap",
+        "icon": "😎",
+        "description": "Vyměň obličeje ve videích! Tvoje tvář v novém kyberprostoru, instantně!"
+    },
+    {
+        "id": "dubbing",
+        "name": "Dubbing (LipSync)",
+        "icon": "🗣️",
+        "description": "Synchronizuj rty s audiem! Tvoje postavy mluví, jako by žily v kyberprostoru."
+    },
+    {
+        "id": "tts",
+        "name": "Text-to-Speech",
+        "icon": "🎙️",
+        "description": "Převeď text na hlas! Od kybermonologů po neonové výkřiky."
+    },
+    {
+        "id": "upscale",
+        "name": "Upscale",
+        "icon": "🔼",
+        "description": "Zlepši rozlišení obrázků! Real-ESRGAN a GFPGAN dělají pixely ostřejší než kyberkatana."
+    },
+    {
+        "id": "sam",
+        "name": "Segmentace",
+        "icon": "✂️",
+        "description": "Rozsekej objekty od pozadí! SAM a GroundingDINO řežou přesněji než laser."
+    },
+    {
+        "id": "sdxl",
+        "name": "SDXL Runner",
+        "icon": "🖌️",
+        "description": "Text v neonové umění! Stable Diffusion XL promění tvá slova v pixely."
+    },
+    {
+        "id": "flux",
+        "name": "Flux Runner",
+        "icon": "🌌",
+        "description": "Generuj obsah s Flux.1! Rychlejší, ostřejší, neonovější než cokoli předtím."
+    },
+    {
+        "id": "wan",
+        "name": "Wan Runner",
+        "icon": "📽️",
+        "description": "Obrázky v neonových videích! Wan model roztančí tvé pixely v kyberprostoru."
+    }
+]
