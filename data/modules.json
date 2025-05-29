@@ -46,5 +46,35 @@
         "name": "Wan Runner",
         "icon": "📽️",
         "description": "Obrázky v neonových videích! Wan model roztančí tvé pixely v kyberprostoru."
+    },
+    {
+        "id": "clip_interrogator",
+        "name": "Clip Interrogator",
+        "icon": "📷",
+        "description": "Automatický popis obrázků a tagování – pro lenochy i géniusy. 🧠"
+    },
+    {
+        "id": "face_detector",
+        "name": "Face Detector",
+        "icon": "👁️",
+        "description": "Čistá detekce obličejů bez výměny – YOLOv8 to zvládne i ve tmě. 🕵️"
+    },
+    {
+        "id": "pose_estimation",
+        "name": "Pose Estimation",
+        "icon": "🕴️",
+        "description": "Odhad pozic těla – OpenPose ti ukáže, kdo tancuje v kyberklubu. 💃"
+    },
+    {
+        "id": "forensic",
+        "name": "Forensic Tools",
+        "icon": "🔍",
+        "description": "Odhal deepfaky a manipulace! Tvůj kyberdetektiv prořízne lži. 🕵️‍♂️"
+    },
+    {
+        "id": "ocr",
+        "name": "OCR",
+        "icon": "✍️",
+        "description": "Čti text z obrázků! Tesseract a EasyOCR ti zachrání oči. 📖"
     }
 ]
