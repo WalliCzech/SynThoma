@@ -3,198 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="wAllICzech AI Studio 2025 – Kyberpunkový jednočlověk-projekt pro manipulaci s obrazy, zvuky a videi. Rozsekej realitu! 😈">
-    <meta name="keywords" content="AI, kyberpunk, faceswap, lipsync, text-to-speech, segmentace, Flux.1Dev, upscale, Vallia AI">
-    <meta name="author" content="wAllICzech">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.walli-czech.ai/">
-    <link rel="icon" type="image/png" href="/favicon.png" alt="Neonové logo wAllICzech AI Studio">
-    <link rel="manifest" href="/manifest.json">
-    <meta property="og:title" content="wAllICzech AI Studio 2025">
-    <meta property="og:description" content="Jednočlověk-projekt plný neonů a AI! Generuj videa, vyměň obličeje, odhal deepfaky! 😈⚡">
-    <meta property="og:image" content="/og-image.jpg" alt="Kyberpunkový náhled wAllICzech AI Studio">
-    <meta property="og:url" content="https://www.walli-czech.ai/">
+    <title>wAllICzech AI Studio - Kyberpunková revoluce</title>
+    <meta name="description" content="wAllICzech AI Studio - Jednočlověk-projekt pro generování, manipulaci a analýzu obrazů, videí a zvuku s kyberpunkovým šmrncem! 😈">
+    <meta name="keywords" content="AI, kyberpunk, faceswap, lipsync, upscale, segmentace, deepfake, forenzní analýza">
+    <meta name="author" content="WalliCzech">
+    <!-- OpenGraph -->
+    <meta property="og:title" content="wAllICzech AI Studio">
+    <meta property="og:description" content="Kyberpunková AI platforma pro manipulaci s obrazy, videi a zvukem. Ponoř se do neonové budoucnosti!">
+    <meta property="og:image" content="https://walliczech.ai/assets/og-image.jpg">
+    <meta property="og:url" content="https://walliczech.ai">
     <meta property="og:type" content="website">
-    <title>wAllICzech AI Studio 2025 – Rozsekej realitu! 😈</title>
-    <link rel="stylesheet" href="/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="/main.js" defer></script>
-    <!-- Tohle je tak nadupané, že by to mohlo napájet celý Night City! ⚡ -->
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "wAllICzech AI Studio",
+        "operatingSystem": "Windows, Linux, Android",
+        "applicationCategory": "Multimedia",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Person",
+            "name": "WalliCzech"
+        }
+    }
+    </script>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
-<body class="bg-black text-white font-neuropol" data-theme="neon">
-    <!-- Sticky Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent" id="navbar">
-        <div class="container mx-auto px-4 flex justify-between items-center py-4">
-            <a href="/" class="neon-text text-2xl md:text-3xl">wAllICzech AI Studio</a>
-            <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="neon-button p-2" title="Přepnout téma (Neon/CRT)">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                </button>
-                <button id="lang-toggle" class="neon-button p-2" title="Přepnout jazyk (CZ/EN)">CZ</button>
-                <button class="md:hidden neon-button p-2" id="hamburger">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-            <ul class="hidden md:flex space-x-4" id="nav-links">
-                <li><a href="#home" class="neon-text hover:neon-button">Domů</a></li>
-                <li><a href="#vallia" class="neon-text hover:neon-button">Vallia AI</a></li>
-                <li><a href="#modules" class="neon-text hover:neon-button">Moduly</a></li>
-                <li><a href="#b2b" class="neon-text hover:neon-button">Pro firmy</a></li>
-                <li><a href="/roadmap.html" class="neon-text hover:neon-button">Roadmapa</a></li>
-            </ul>
+<body class="bg-black text-white font-orbitron">
+    <!-- Dark/Neon Mode Toggle -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 neon-button px-4 py-2 rounded-full">Přepnout Neon 🌌</button>
+
+    <!-- Header -->
+    <header class="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-900">
+        <div class="text-center">
+            <img src="assets/vallia.svg" alt="Vallia AI Avatar" class="neon-logo h-64 mx-auto mb-8">
+            <h1 class="neon-text glitch text-6xl md:text-8xl" data-text="wAllICzech AI Studio">wAllICzech AI Studio</h1>
+            <p class="text-xl md:text-2xl mt-4 max-w-2xl mx-auto">Rozsekej realitu s mou AI! Jednočlověk-projekt plný neonů a sarkasmu. 😈⚡</p>
+            <a href="#modules" class="neon-button pulse mt-8 inline-block px-6 py-3 text-lg rounded-full">Hacknout pixely</a>
         </div>
-        <ul class="hidden md:hidden flex-col space-y-2 bg-gray-900 p-4" id="mobile-menu">
-            <li><a href="#home" class="neon-text hover:neon-button">Domů</a></li>
-            <li><a href="#vallia" class="neon-text hover:neon-button">Vallia AI</a></li>
-            <li><a href="#modules" class="neon-text hover:neon-button">Moduly</a></li>
-            <li><a href="#b2b" class="neon-text hover:neon-button">Pro firmy</a></li>
-            <li><a href="/roadmap.html" class="neon-text hover:neon-button">Roadmapa</a></li>
-            <!-- Hamburger menu tak cool, že by mohlo mít vlastní TikTok! 😎 -->
-        </ul>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center flex-col text-center pt-20 bg-gradient-to-b from-black to-gray-900">
-        <img src="/logo.png" alt="Neonové logo wAllICzech AI Studio" class="neon-logo h-32 mb-6">
-        <h1 class="neon-text text-3xl sm:text-5xl lg:text-7xl glitch" data-text="wAllICzech AI Studio">
-            wAllICzech AI Studio
-        </h1>
-        <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto">
-            Jednočlověk-projekt plný neonů a AI! Generuj videa, vyměň obličeje, odhal deepfaky! 😈⚡
-        </p>
-        <a href="#modules" class="mt-6 neon-button pulse bg-gray-900 px-6 py-3 md:px-8 md:py-4 rounded-lg text-lg">
-            Rozsekat realitu
-        </a>
-        <!-- Tohle tlačítko je tak sexy, že by mohlo hrát v kyberpunkovém blockbusteru! 🎬 -->
-    </section>
-
-    <!-- Vallia AI Section -->
-    <section id="vallia" class="py-20 fade-out">
-        <div class="container mx-auto px-4">
-            <h2 class="neon-text text-3xl md:text-4xl text-center mb-12">Vallia – Tvůj AI mozek budoucnosti 🧠</h2>
-            <div class="flex flex-col md:flex-row gap-8">
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold mb-4">Chytrá asistentka</h3>
-                    <p>Vallia chápe příkazy typu „Vygeneruj neonové fantasy video s ženským dabingem v 4K“ a propojuje moduly jako Flux, LipSync nebo Upscale. 😎</p>
+    <!-- AI Vallia Section -->
+    <section id="vallia" class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="neon-text glitch text-4xl md:text-5xl text-center mb-12" data-text="Seznam se s Vallií">Seznam se s Vallií</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="flex justify-center">
+                    <img src="assets/vallia.svg" alt="Vallia" class="neon-logo h-48 md:h-64">
                 </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold mb-4">Autonomní hackerka</h3>
-                    <p>Vallia píše vlastní moduly v Pythonu a TSX, testuje je v sandboxu a učí se. To je AI, co hackne i sebe samo! 🚀</p>
+                <div>
+                    <p class="text-lg md:text-xl">Vallia je tvoje kyberpunková průvodkyně! 🧠 Rozumí tvým příkazům, propojuje moduly a hází hlášky rychleji, než tvůj GPU stíhá rendrovat. Zadej příkaz typu „Vygeneruj neonový portrét“ a sleduj, jak se magie děje. 😎</p>
+                    <button class="neon-button mt-6 px-6 py-3 rounded-full" onclick="openModal('vallia')">Vyzkoušet Vallii</button>
                 </div>
-            </div>
-            <div class="mt-12 text-center">
-                <p class="text-lg">Zkus: <code class="bg-gray-800 p-2 rounded">"Vytvoř neonový obrázek a přidej dabing."</code></p>
-                <a href="#modules" class="mt-6 neon-button pulse bg-gray-900 px-6 py-3 rounded-lg">Vyzkoušet Vallii</a>
-                <!-- Vallia je tak chytrá, že by mohla napsat tenhle web místo mě. Ale já jsem levnější! 😈 -->
             </div>
         </div>
     </section>
 
     <!-- Modules Section -->
-    <section id="modules" class="py-20 fade-out">
-        <div class="container mx-auto px-4">
-            <h2 class="neon-text text-3xl md:text-4xl text-center mb-12">Moduly – Rozsekej pixely! ⚡</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold">FaceSwap 🎭</h3>
-                    <p>Vyměň obličeje rychleji, než hacker prolomí firewall! 😎</p>
-                </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold">LipSync 🗣️</h3>
-                    <p>Synchronizuj rty s audiem – tvé postavy mluví jako z kyberfilmu! 🎙️</p>
-                </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold">Text-to-Speech 🔈</h3>
-                    <p>Převeď text na hlas, co zní jako z neonové budoucnosti! 🗣️</p>
-                </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold">Segmentace 🧼</h3>
-                    <p>Odděl objekty od pozadí přesněji než chirurg s kyberkatanou! ✂️</p>
-                </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold">Flux.1Dev 🎨</h3>
-                    <p>Generuj obrázky tak rychle, že tvé GPU bude prosit o milost! 🌌</p>
-                </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold">Upscale 🔼</h3>
-                    <p>Zvětši rozlišení do 4K – každý pixel svítí jako neon! 📷</p>
-                </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold">ForensicTools 🕵️</h3>
-                    <p>Odhal deepfaky jako kyberdetektiv s rentgenovým zrakem! 🔍</p>
-                </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold">OCR 📝</h3>
-                    <p>Přečti text z obrázků rychleji, než Matrix dekóduje realitu! ✍️</p>
-                </div>
-                <!-- Tyhle moduly jsou tak sexy, že by mohly mít vlastní kyberpunkový OnlyFans! 😈 -->
-            </div>
+    <section id="modules" class="py-16 px-4 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="neon-text glitch text-4xl md:text-5xl text-center mb-12" data-text="Naše moduly">Naše moduly</h2>
+            <div id="module-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </div>
     </section>
 
-    <!-- B2B Section -->
-    <section id="b2b" class="py-20 bg-gray-900 fade-out">
-        <div class="container mx-auto px-4">
-            <h2 class="neon-text text-3xl md:text-4xl text-center mb-12">Pro firmy – Nechte AI pracovat za vás! 💼</h2>
+    <!-- System Requirements -->
+    <section id="requirements" class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="neon-text glitch text-4xl md:text-5xl text-center mb-12" data-text="Požadavky na systém">Požadavky na systém</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold mb-4">Marketingové kampaně</h3>
-                    <p>Neonová videa a obrázky s Flux.1Dev a WanRunnerem rozsvítí vaše sociální sítě! 📽️</p>
+                <div class="card-hover p-6 neon-border rounded-lg">
+                    <h3 class="text-xl">Minimální</h3>
+                    <ul class="list-disc list-inside mt-2">
+                        <li>CPU: Intel i5 nebo AMD Ryzen 5</li>
+                        <li>RAM: 16 GB</li>
+                        <li>GPU: NVIDIA RTX 2060 (6+ GB VRAM)</li>
+                        <li>OS: Windows 10/11, Linux (Ubuntu)</li>
+                    </ul>
                 </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold mb-4">Forenzní analýza</h3>
-                    <p>Odhalujte deepfaky a manipulace – ideální pro média, právníky a kyberdetektivy! 🕵️</p>
-                </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold mb-4">Personalizovaný obsah</h3>
-                    <p>Vytvářejte videa a obrázky na míru s FaceSwapperem a ExpressionEditorem! 😄</p>
-                </div>
-                <div class="neon-border p-6 rounded-lg card-hover">
-                    <h3 class="text-xl font-bold mb-4">Automatizace</h3>
-                    <p>Tagujte obrázky, přepisujte audio a segmentujte objekty pro rychlý workflow! 🛠️</p>
+                <div class="card-hover p-6 neon-border rounded-lg">
+                    <h3 class="text-xl">Doporučené</h3>
+                    <ul class="list-disc list-inside mt-2">
+                        <li>CPU: Intel i7 (8+ vláken)</li>
+                        <li>RAM: 32 GB</li>
+                        <li>GPU: NVIDIA RTX 4060 Ti/4070 (12–16 GB VRAM)</li>
+                        <li>SSD disk pro rychlý I/O</li>
+                    </ul>
                 </div>
             </div>
-            <div class="mt-12 text-center">
-                <h3 class="text-xl font-bold mb-4">Chcete vědět víc?</h3>
-                <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                    <input type="email" placeholder="Váš e-mail" class="neon-border bg-gray-800 p-3 rounded-lg w-full">
-                    <button type="submit" class="neon-button pulse bg-gray-900 px-6 py-3 rounded-lg">Kontaktujte mě!</button>
-                </form>
-                <p class="mt-4 text-sm">Zadejte e-mail a Vallia vám pošle předběžný přístup! 📧</p>
-                <!-- Formulář tak jednoduchý, že by ho zvládl i tvůj starý Commodore 64! 😅 -->
-            </div>
+            <p class="text-center mt-4 text-lg">⚠️ Poznámka: Aplikace využívá CUDA a GPU akceleraci – integrovaná grafika nepostačí!</p>
         </div>
     </section>
 
-    <!-- Community Creations Section -->
-    <section id="community" class="py-20 fade-out">
-        <div class="container mx-auto px-4">
-            <h2 class="neon-text text-3xl md:text-4xl text-center mb-12">Výtvory komunity – Ukaž, co umíš! 🎨</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="neon-border p-4 rounded-lg card-hover">
-                    <img src="/placeholder.jpg" alt="Neonový výtvor vytvořený Flux.1Dev modulem" class="w-full h-48 object-cover rounded-lg lazy-load">
-                    <p class="mt-2 text-sm">Kyberpunkový obrázek od @NeonHacker123</p>
-                </div>
-                <!-- Čekám na tvůj JSON, šéfe, pak to rozjedu s lazy-load galerií! 😜 -->
+    <!-- CTA Section -->
+    <section id="cta" class="py-16 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="neon-text glitch text-4xl md:text-5xl mb-8" data-text="Přidej se k revoluci!">Přidej se k revoluci!</h2>
+            <p class="text-lg md:text-xl mb-8">wAllICzech je jednočlověk-projekt poháněný kávou a vášní. Podpoř mě, přidej se na Discord nebo sleduj na TikToku! ☕</p>
+            <div class="flex justify-center gap-4">
+                <a href="https://buymeacoffee.com/walliczech" class="neon-button pulse px-6 py-3 rounded-full">Kup mi kávu ☕</a>
+                <a href="https://tiktok.com/@walli.czech" class="neon-button px-6 py-3 rounded-full">Sleduj na TikToku</a>
+                <a href="https://discord.gg/walliczech" class="neon-button px-6 py-3 rounded-full">Přidej se na Discord</a>
             </div>
-            <a href="#community" class="mt-6 neon-button pulse bg-gray-900 px-6 py-3 block mx-auto text-center">Přidat svůj výtvor</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 text-center bg-gray-900">
-        <div class="container mx-auto px-4">
-            <p class="text-lg">© 2025 wAllICzech AI Studio. Vytvořeno s ❤️ a kódem jedním vývojářem.</p>
-            <div class="mt-4 flex justify-center space-x-4">
-                <a href="https://buymeacoffee.com/wallicz" class="neon-button pulse px-4 py-2 rounded-lg">Kup mi kávu ☕</a>
-                <a href="https://tiktok.com/@walli.czech" class="neon-button pulse px-4 py-2 rounded-lg">Sleduj na TikToku</a>
-            </div>
-            <!-- Bez kávy by tenhle web nevznikl. Fakt. 😴 -->
+    <footer class="py-8 text-center bg-gray-900">
+        <p>© 2025 wAllICzech AI Studio. Vytvořeno s ❤️ jedním vývojářem.</p>
+        <div class="mt-4">
+            <a href="https://github.com/walliczech" class="text-gray-400 hover:text-white mx-2">GitHub</a>
+            <a href="https://walliczech.ai/docs" class="text-gray-400 hover:text-white mx-2">Dokumentace</a>
+            <a href="roadmap.html" class="text-gray-400 hover:text-white mx-2">Roadmapa</a>
         </div>
     </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center z-50">
+        <div class="bg-gray-900 p-8 rounded-lg max-w-lg w-full neon-border">
+            <h3 id="modal-title" class="neon-text text-2xl mb-4"></h3>
+            <p id="modal-content" class="text-lg"></p>
+            <button class="neon-button mt-6 px-6 py-3 rounded-full" onclick="closeModal()">Zavřít</button>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
 </body>
 </html>
