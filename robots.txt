@@ -1,5 +1,0 @@
-User-agent: * Allow: /
-
-Sitemap: https://www.walli-czech.ai/sitemap.xml
-
-Google, prosím, najdi nás, nebo budeme muset hacknout tvůj algoritmus! 😈
