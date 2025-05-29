@@ -37,157 +37,47 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+	
 </head>
-<body class="bg-black text-white font-orbitron">
-    <button id="theme-toggle" class="fixed top-4 right-4 z-50 neon-button px-4 py-2 rounded-full">Přepnout Neon 🌌</button>
+<body class="bg-black text-white font-orbitron overflow-x-hidden">
+    <!-- Theme toggle button s extra švihem -->
+	<button id="theme-toggle" 
+			class="fixed top-4 right-4 z-50 neon-button-outline px-5 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-neon animate-pulse">
+	  Přepnout Neon 🌌
+	</button>
 
-    <!-- Header -->
-    <header class="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-900">
-        <div class="text-center">
-          <!-- INLINE SVG VALLIA -->
-            <div class="mx-auto neon-logo w-[200px] sm:w-[300px] md:w-[400px] lg:w-[512px]">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" class="w-full h-auto">
-			  <title>Vallia Glitch Pulse</title>
-			  <style>
-				.s0 { fill: #000000; } 
-				.s1 { fill: #ff7800; } 
-				#vallia-glitch {
-				  filter: drop-shadow(0 0 10px #ff7f00);
-				  transform-origin: center;
-				}
-			  </style>
+    <!-- Header: Cyberpunk level 9000 -->
+    <header class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-indigo-950 overflow-hidden">
+        <!-- Pozadí s jemným glitch efektem -->
+        <div class="absolute inset-0 bg-[url('assets/cyber-grid.png')] opacity-10 animate-slow-scroll"></div>
 
-			  <g id="vallia-glitch" >
-
-				<!-- Jemné pulsování (dýchání Vallie) -->
-				<animateTransform
-				  attributeName="transform"
-				  type="scale"
-				  values="0.97;1.03;0.97"
-				  dur="6s"
-				  repeatCount="indefinite"
-				  additive="sum"
-				/>
-
-				<!-- Mini-glitch každých 15s (posun a rotace) -->
-				<animateTransform
-				  attributeName="transform"
-				  type="translate"
-				  values="0 0;8 -6;-10 4;6 -8;-3 6;0 0"
-				  keyTimes="0;0.1;0.2;0.3;0.4;1"
-				  dur="0.3s"
-				  begin="15s;30s;45s"
-				  repeatCount="1"
-				  additive="sum"
-				/>
-				<animateTransform
-				  attributeName="transform"
-				  type="rotate"
-				  values="0;4;-3;5;-2;0"
-				  keyTimes="0;0.1;0.2;0.3;0.4;1"
-				  dur="0.3s"
-				  begin="15s;30s;45s"
-				  repeatCount="1"
-				  additive="sum"
-				/>
-
-				<!-- Glitch: odlet (rozpad) -->
-				<animate
-				  attributeName="opacity"
-				  values="1;1;0"
-				  keyTimes="0;0.5;1"
-				  dur="0.9s"
-				  begin="15.3s;30.3s;45.3s"
-				  repeatCount="1"
-				/>
-				<animateTransform
-				  attributeName="transform"
-				  type="scale"
-				  values="1;1;0.3"
-				  keyTimes="0;0.5;1"
-				  dur="0.9s"
-				  begin="15.3s;30.3s;45.3s"
-				  repeatCount="1"
-				  additive="sum"
-				/>
-				<animateTransform
-				  attributeName="transform"
-				  type="translate"
-				  values="0 0;0 0;100 -70"
-				  keyTimes="0;0.5;1"
-				  dur="0.9s"
-				  begin="15.3s;30.3s;45.3s"
-				  repeatCount="1"
-				  additive="sum"
-				/>
-				<animateTransform
-				  attributeName="transform"
-				  type="rotate"
-				  values="0;0;180"
-				  keyTimes="0;0.5;1"
-				  dur="0.9s"
-				  begin="15.3s;30.3s;45.3s"
-				  repeatCount="1"
-				  additive="sum"
-				/>
-
-				<!-- Návrat zpět (jemný easing) -->
-				<animate
-				  attributeName="opacity"
-				  values="0;1"
-				  dur="0.6s"
-				  begin="16.2s;31.2s;46.2s"
-				  repeatCount="1"
-				  calcMode="spline"
-				  keySplines="0.2 0 0.4 1"
-				/>
-				<animateTransform
-				  attributeName="transform"
-				  type="scale"
-				  values="0.3;1"
-				  dur="0.6s"
-				  begin="16.2s;31.2s;46.2s"
-				  repeatCount="1"
-				  calcMode="spline"
-				  keySplines="0.2 0 0.4 1"
-				  additive="sum"
-				/>
-				<animateTransform
-				  attributeName="transform"
-				  type="translate"
-				  values="100 -70;0 0"
-				  dur="0.6s"
-				  begin="16.2s;31.2s;46.2s"
-				  repeatCount="1"
-				  calcMode="spline"
-				  keySplines="0.2 0 0.4 1"
-				  additive="sum"
-				/>
-				<animateTransform
-				  attributeName="transform"
-				  type="rotate"
-				  values="180;0"
-				  dur="0.6s"
-				  begin="16.2s;31.2s;46.2s"
-				  repeatCount="1"
-				  calcMode="spline"
-				  keySplines="0.2 0 0.4 1"
-				  additive="sum"
-				/>
-
-					<!-- Původní cesty z tvého SVG -->
-					<path class="s0" d="m844.5 256.5c2.4 2.3 2.5 2.9 2.5 16.8 0 13.1-0.2 14.7-2.1 17.1-2.6 3.3-7.9 3.6-10.9 0.6-1.8-1.8-2-3.3-2-17.4v-15.5l2.6-2c3.5-2.8 6.9-2.6 9.9 0.4zm44.8 53.7c1.6 1.9 1.7 9 1.7 118.5v116.4l-2.5 2.4c-3.1 3.2-6.9 3.2-10 0l-2.5-2.4v-116c0-63.8 0.3-116.7 0.6-117.6 0.9-2.2 6.3-4.6 8.9-3.9 1.1 0.3 2.8 1.5 3.8 2.6zm-44.4 30.7c1.2 1.2 2.2 4 2.6 7.3 0.3 2.9 0.5 36.2 0.3 73.9-0.3 73.9-0.1 70.9-5.5 73-2.8 1-8-0.7-9.3-3.1-0.6-1.2-1-29.4-1-75.4 0-72.3 0-73.6 2-75.6 2.6-2.6 8.3-2.7 10.9-0.1zm-43.8 62.4c0.9 0.7 2.1 2.2 2.7 3.4 1.6 3 1.7 48.2 0.1 51.7-2.6 5.5-10.7 5.7-14 0.2-1.7-2.8-1.9-5.1-1.8-22.1 0.1-24.2 0.8-30.2 3.8-32.6 2.6-2.2 6.8-2.4 9.2-0.6zm25.3 190.8c2.4 1.9 2.6 2.6 2.6 10.3 0 12.2 0.2 12.1-21.5 12.1-21.7 0-21.5 0.1-21.5-12.1 0-7.7 0.2-8.4 2.6-10.3 2.5-1.9 4-2.1 18.9-2.1 14.9 0 16.4 0.2 18.9 2.1zm-37.3 90.8c2.6 2.7 2.9 3.6 2.9 9.6 0 5.7-0.3 6.9-2.5 9-2.4 2.5-2.7 2.5-19.2 2.5-17.5-0.1-18.8-0.3-21.1-4.7-1.8-3.2-1.5-12.4 0.4-15.1 2.5-3.6 4.8-4.1 21.2-4.1l15.4-0.1z"/>
-					<path id="Layer copy 2" class="s0" d="m507 764.4l6.1-1.3c22.3-4.6 43-18 54.5-35.2 2.4-3.7 4.4-7.2 4.4-7.8 0-0.6-2.4 0.8-5.3 3.2-7.3 6-16.3 11.3-23.8 14.1-7.4 2.8-28.2 7.6-32.8 7.6h-3.1m1.9-42c1 0 6.1-1.5 11.2-3.2l9.4-3.3 28.5-0.1c19.1 0 30.8-0.4 35.3-1.3 3.8-0.7 8.9-1.1 11.3-0.8 2.6 0.2 5 0 6-0.7 1.5-1.1 1.5-1.5 0-5.1-3.1-7.3-3.6-7.5-15-6.9-11.7 0.7-16-0.4-37.6-10-21.3-9.4-30.8-10.6-42.4-5.3-3.1 1.4-5.6 2.3-5.6 1.9 0.1-0.4 0.7-3.4 1.5-6.7 0.9-3.8 1.5-11.4 1.5-20.8 0-15.9 0.9-19.6 6.2-24.3 5.2-4.8 8.7-5.8 23.3-6.3 11.7-0.5 14.6-0.9 17.5-2.7 10.7-6.2 11.9-25.8 2.4-40.2-4-6.1-5.1-6.7-2.8-1.5 6.1 13.7 4.6 29-3.2 35.2-3.4 2.7-4.8 2.7-4.1-0.1 2.2-8.3-11.8-10.3-27.8-3.9-4.4 1.8-10.1 3.5-12.7 3.8l-4.8 0.6"/>
-					<path id="Layer copy" class="s1" d="m544 98.6c46.1 6 90.7 21.6 124.5 43.5 57.5 37.4 92.7 96.5 98.4 165.2 3 35.7-0.4 184.2-4.3 190.6-1.4 2.2-12.2 6.9-18.2 8-3.2 0.6-15.8 1.3-27.9 1.7-24.5 0.7-27.3 1.4-29.9 6.9-2 4.1-2.2 20.8-0.3 24.4 0.6 1.3 2.5 3.4 4 4.5 2.7 2 3.9 2.1 19 1.8 19.2-0.3 29-1.5 40-4.7 4.5-1.3 8.3-2.3 8.4-2.2 0.1 0.2-0.5 5-1.4 10.7-1.7 11.6-3 13.7-9.6 17.2-6 3-17.7 5.6-28.9 6.4-9.4 0.7-10.5 0.9-13 3.5-2.6 2.6-2.8 3.3-2.8 11.4 0 12.7 2 15.4 11.3 15.5 5.9 0 21.7-3 28.9-5.6 2.3-0.8 4.3-1.3 4.5-1.1 0.1 0.2-1.5 6.9-3.7 14.8-18.8 68.8-50.9 126.6-96 173.3-17.9 18.5-46.5 41.3-68.5 54.6-21.6 13-38.4 18.3-67.2 21.4l-4.3 0.4v-48.2-48.2l6.1-1.3c22.3-4.6 43-18 54.5-35.2 2.4-3.7 4.4-7.2 4.4-7.8 0-0.6-2.4 0.8-5.3 3.2-7.3 6-16.3 11.3-23.8 14.1-7.4 2.8-28.2 7.6-32.8 7.6h-3.1v-21c0-19.8 0.1-21 1.9-21 1 0 6.1-1.5 11.2-3.2l9.4-3.3 28.5-0.1c19.1 0 30.8-0.4 35.3-1.3 3.8-0.7 8.9-1.1 11.3-0.8 2.6 0.2 5 0 6-0.7 1.5-1.1 1.5-1.5 0-5.1-3.1-7.3-3.6-7.5-15-6.9-11.7 0.7-16-0.4-37.6-10-21.3-9.4-30.8-10.6-42.4-5.3-3.1 1.4-5.6 2.3-5.6 1.9 0.1-0.4 0.7-3.4 1.5-6.7 0.9-3.8 1.5-11.4 1.5-20.8 0-15.9 0.9-19.6 6.2-24.3 5.2-4.8 8.7-5.8 23.3-6.3 11.7-0.5 14.6-0.9 17.5-2.7 10.7-6.2 11.9-25.8 2.4-40.2-4-6.1-5.1-6.7-2.8-1.5 6.1 13.7 4.6 29-3.2 35.2-3.4 2.7-4.8 2.7-4.1-0.1 2.2-8.3-11.8-10.3-27.8-3.9-4.4 1.8-10.1 3.5-12.7 3.8l-4.8 0.6v-252.8-252.8l12.8 0.7c7 0.4 17.9 1.4 24.2 2.2z"/>
-					<path class="s0" d="m638 329.7c-41.9 4.5-77.4 26.8-93.2 58.8-5.3 10.6-8.2 20.6-10.2 34.7-0.2 2.1-0.3 3.8-0.1 3.8 0.2 0 1.5-2.5 2.9-5.5 12.8-27.9 42.6-53.1 76.4-64.4 19.6-6.5 45.2-9.9 62.8-8.2 23.4 2.3 47.9 13.4 65.2 29.5l6.5 6.1-2.3-4.5c-8.2-16.2-23.2-30.5-41.5-39.7-17.3-8.8-44.1-13-66.5-10.6z"/>
-					<path class="s0" d="m628.4 394c-17.3 4.5-34.6 17.5-46.1 34.5-4.2 6.3-8.3 13.8-8.3 15.3 0 0.5 2.6 0 5.8-1.1 7.5-2.5 18.8-1.9 29.3 1.6 14.8 5 23 6.2 41.9 6.1 14.8 0 19-0.4 27-2.4 16.6-4 29.3-10.4 40.4-20.1 2.5-2.2 4.6-4.5 4.6-5.1 0-2.3-18.5-15.1-29.4-20.2-21.1-9.9-47.1-13.4-65.2-8.6z"/>
-					<path class="s0" d="m652.5 575.5c-2.3 2.2-2.5 3.1-2.5 12.5 0 10 0.1 10.2 3 13.2l3 3 12.1-0.4c11.8-0.3 12.1-0.4 14.5-3.1 2.2-2.5 2.4-3.7 2.4-12.3 0-9.2-0.1-9.7-2.9-12.5-2.9-2.9-3-2.9-15.1-2.9-11.5 0-12.2 0.1-14.5 2.5z"/>
-				</g>
-			</svg>
-            <h1 class="neon-text glitch text-6xl md:text-8xl" data-text="wAllICzech AI Studio">wAllICzech AI Studio</h1>
-            <p class="text-xl md:text-2xl mt-4 max-w-2xl mx-auto">Rozsekej realitu s mou AI! Jednočlověk-projekt plný neonů a sarkasmu. 😈⚡</p>
-            <a href="#modules" class="neon-button pulse mt-8 inline-block px-6 py-3 text-lg rounded-full">Hacknout pixely</a>
+        <div class="text-center relative z-10">
+            <!-- SVG logo s optimalizací a animací -->
+            <div class="mx-auto neon-logo w-[200px] sm:w-[300px] md:w-[400px] lg:w-[1024px] animate-float">
+                <object data="assets/vallia_animated.svg" type="image/svg+xml" class="mx-auto h-64 md:h-96 w-auto drop-shadow-neon" alt="wAllICzech AI Studio Logo"></object>
             </div>
+
+            <!-- Nadpis s vylepšeným glitch efektem -->
+            <h1 class="neon-text glitch text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight" data-text="wAllICzech AI Studio">
+                wAllICzech AI Studio
+            </h1>
+
+            <!-- Podnadpis s ironickým twistem -->
+            <p class="text-lg sm:text-xl md:text-2xl mt-6 max-w-3xl mx-auto opacity-90 animate-fade-in">
+                Rozsekej realitu s AI! 😈⚡
+            </p>
+
+            <!-- Call-to-action button s pulse efektem -->
+            <div class="mt-12 neon-hybrid">
+                <a href="#modules" class="neon-button pulse px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-110 hover:shadow-neon">
+                    Hacknout pixely 🚀
+                </a>
+            </div>
+        </div>
+
+        <!-- Přidáme jemné částicové pozadí pro ten sci-fi vibe -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="particles animate-particles"></div>
         </div>
     </header>
 
@@ -208,15 +98,97 @@
     </section>
 
     <!-- Modules Section -->
-    <section id="modules" class="py-16 px-4 bg-gray-900">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="neon-text glitch text-4xl md:text-5xl text-center mb-12" data-text="Moduly">Moduly</h2>
-            <div id="module-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+ <!-- Moduly -->
+    <section id="features" class="py-16 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center neon-text">Moduly</h2>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">ForensicTools</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Odhal deepfaky a manipulace. Tvůj kyberdetektiv, co prořízne lži jako neonový blesk! 🕵️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">Segmenter</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Rozsekej objekty od reality! SAM a GroundingDINO řežou přesněji než kyberkatana. ✂️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">ExpressionEditor</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Proměň obličeje – od kyberúsměvu po neonový vztek. Pixely tvé tváře ožívají! 😄
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">WanRunner</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Obrázky v neonových videích! Wan model roztančí tvé pixely v kyberprostoru. 📽️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">VideoExporter</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Stříhej filmy s neonovými přechody. Tvůj střih je ostřejší než kybermeč! 🎥
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">SDXLRunner</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Text v neonové umění! Stable Diffusion XL promění tvá slova v pixely. 🖌️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">AudioSegmenter</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Rozsekej zvuk jako kyberkatana! Odděl hlas od šumu a ovládni audio kyberprostor. 🎙️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">FluxRunner</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Generuj obsah s Flux.1! Rychlejší, ostřejší, neonovější než cokoli předtím. 🌌
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">Lipsync</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Synchronizuj rty s audiem! Tvoje postavy mluví, jako by žily v kyberprostoru. 🗣️
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">FaceSwapper</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Vyměň obličeje ve videích! Tvoje tvář v novém kyberprostoru, instantně! 😎
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-orange-500">DeepDanbooru</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Textový popis obrázků! Automatické tagování pro generátory, katalogy... 📷
+                    </p>
+                </div>
+                <div class="p-6 bg-gray-900 rounded-lg neon-border card-hover">
+                    <h3 class="text-2xl font-bold text-pink-500">AudioTranscriber</h3>
+                    <p class="mt-4 text-gray-300 font-roboto-mono">
+                        Přepis audia na text! Přepis rozhovorů, podcastů i výkřiků do digitálního záznamu.✍️
+                    </p>
+				</div>
+			</div>
+
+		<div class="neon-hybrid flex justify-center mt-7">
+			<a href="roadmap.html" 
+				class="neon-button-outline neon-text pulse px-8 py-2 rounded-full text-4xl font-semibold transition-all duration-300 hover:scale-110 hover:shadow-neon">
+				Roadmap 🛣️
+			</a>
+		</div>	
+
         </div>
     </section>
-
+	
     <!-- System Requirements -->
-    <section id="requirements" class="py-16 px-4">
+    <section id="requirements" class="py-16 px-4 mb-1">
         <div class="max-w-6xl mx-auto">
             <h2 class="neon-text glitch text-4xl md:text-5xl text-center mb-12" data-text="Požadavky na systém">Požadavky na systém</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -244,17 +216,20 @@
     </section>
 
     <!-- CTA Section -->
-    <section id="cta" class="py-16 px-4 text-center">
+    <section id="cta" class="py-14 px-2 text-center relative mt-1">
         <div class="max-w-4xl mx-auto">
             <h2 class="neon-text glitch text-4xl md:text-5xl mb-8" data-text="Přidej se k revoluci!">Přidej se k revoluci!</h2>
             <p class="text-lg md:text-xl mb-8">wAllICzech je jednočlověk-projekt poháněný kávou a vášní. Podpoř mě, přidej se na Discord nebo sleduj na TikToku! ☕</p>
-            <div class="flex justify-center gap-4">
+            <div class="flex justify-center gap-5">
                 <a href="https://buymeacoffee.com/walliczech" class="neon-button pulse px-6 py-3 rounded-full">Kup mi kávu ☕</a>
                 <a href="https://tiktok.com/@walli.czech" class="neon-button px-6 py-3 rounded-full">Sleduj na TikToku</a>
                 <a href="https://discord.gg/walliczech" class="neon-button px-6 py-3 rounded-full">Přidej se na Discord</a>
             </div>
         </div>
+		
     </section>
+
+
 
     <!-- Footer -->
     <footer class="py-8 text-center bg-gray-900">
@@ -265,6 +240,7 @@
             <a href="roadmap.html" class="text-gray-400 hover:text-white mx-2">Roadmapa</a>
         </div>
     </footer>
+
 
     <!-- Modal -->
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center z-50">
