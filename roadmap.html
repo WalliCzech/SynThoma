@@ -3,328 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Roadmapa wAllICzech AI Studio 2025 – Podrobný plán vývoje kyberpunkové AI platformy pro obraz, video a zvuk.">
-    <meta name="keywords" content="AI, kyberpunk, roadmap, wAllICzech, lipsync, faceswap, Flux.1, cloud rendering, desktop app, FastAPI, GUI">
-    <meta name="author" content="wAllICzech AI Studio">
-    <meta property="og:title" content="Roadmapa wAllICzech AI Studio 2025">
-    <meta property="og:description" content="Objev budoucnost wAllICzech – od desktop app po cloud rendering, vše v neonovém stylu!">
-    <meta property="og:image" content="https://your-site.com/images/Logo.png">
-    <meta property="og:url" content="https://your-site.com/roadmap.html">
+    <title>Roadmapa - wAllICzech AI Studio</title>
+    <meta name="description" content="Roadmapa wAllICzech AI Studio – plán kyberpunkové budoucnosti pro AI manipulaci s obrazy, videi a zvukem.">
+    <meta name="keywords" content="AI, kyberpunk, roadmapa, faceswap, lipsync, upscale, segmentace">
+    <meta name="author" content="WalliCzech">
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Roadmapa wAllICzech AI Studio">
+    <meta property="og:description" content="Podívej se, kam míří wAllICzech AI Studio – od desktopu po cloud!">
+    <meta property="og:image" content="https://walliczech.ai/assets/og-image.jpg">
+    <meta property="og:url" content="https://walliczech.ai/roadmap">
     <meta property="og:type" content="website">
-    <title>Roadmapa wAllICzech AI Studio 2025</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <!-- Strukturovaná data pro SEO -->
+    <!-- JSON-LD -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Roadmapa wAllICzech AI Studio 2025",
-        "url": "https://your-site.com/roadmap.html",
-        "description": "Podrobná roadmapa vývoje wAllICzech AI Studio, jednočlověk-projektu pro AI zpracování obrazu, videa a zvuku.",
-        "creator": {
+        "name": "Roadmapa wAllICzech AI Studio",
+        "description": "Plán vývoje kyberpunkové AI platformy wAllICzech.",
+        "publisher": {
             "@type": "Person",
-            "name": "wAllICzech Developer"
-        },
-        "sameAs": [
-            "https://tiktok.com/@walli.czech"
-        ]
+            "name": "WalliCzech"
+        }
     }
     </script>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
-<body class="bg-gray-900 text-white font-neuropol">
-    <!-- Hero Sekce -->
-    <header class="relative min-h-screen flex items-center justify-center text-center bg-gradient-to-b from-gray-900 to-gray-800">
-        <div class="max-w-4xl mx-auto px-4 z-10">
-            <h1 class="text-5xl md:text-7xl font-bold neon-text glitch" data-text="Roadmapa wAllICzech">
-                Roadmapa wAllICzech
-            </h1>
-            <p class="mt-4 text-xl md:text-2xl text-orange-400">
-                Hackuj budoucnost s mou AI! Ponoř se do kybertemnoty! 😈⚡
-            </p>
-            <a href="#timeline" class="mt-8 inline-block px-8 py-4 bg-pink-600 text-white rounded-lg hover:bg-pink-700 neon-button pulse">
-                Prozkoumat plán
-            </a>
+<body class="bg-black text-white font-orbitron">
+    <!-- Dark/Neon Mode Toggle -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 neon-button px-4 py-2 rounded-full">Přepnout Neon 🌌</button>
+
+    <!-- Header -->
+    <header class="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-900">
+        <div class="text-center">
+            <h1 class="neon-text glitch text-6xl md:text-8xl" data-text="Roadmapa wAllICzech">Roadmapa wAllICzech</h1>
+            <p class="text-xl md:text-2xl mt-4 max-w-2xl mx-auto">Hackuj budoucnost s mou AI! Ponoř se do kybertemnoty! 😈⚡</p>
+            <a href="#timeline" class="neon-button pulse mt-8 inline-block px-6 py-3 text-lg rounded-full">Prozkoumat plán</a>
         </div>
     </header>
 
-    <!-- Roadmapa -->
-    <section id="timeline" class="py-16 bg-gray-800">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center neon-text">Kyberpunkový plán</h2>
-            <p class="mt-6 text-lg text-gray-300 text-center font-roboto-mono">
-                wAllICzech AI Studio je na cestě přepsat pravidla! Od desktopu po cloud, od neonových výrazů po komunitní revoluci – tady je plán. 🚀
-            </p>
-
-            <!-- Hotovo / Stabilní -->
-            <div class="mt-12">
-                <h3 class="text-3xl font-bold text-orange-500 mb-6">✅ Hotovo / Stabilní</h3>
-                <div class="timeline space-y-12">
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-orange-500 mr-4">🎛️</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-orange-500">Základní architektura</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                FastAPI backend s endpointy pro generování, lipsync, upscale a analýzu. Desktop GUI (Py + CustomTkinter). 
-                                Statická neonová HTML stránka. Konfigurovatelný config.yaml, podpora presetů, logování a automatická detekce GPU/CUDA. 🛠️
-                                - Ano, všechno je propojené. Ano, funguje to. Ne, nechci to vysvětlovat znova.
-                            </p>
+    <!-- Timeline Section -->
+    <section id="timeline" class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="neon-text glitch text-4xl md:text-5xl text-center mb-12" data-text="Kyberpunkový plán">Kyberpunkový plán</h2>
+            <div class="timeline">
+                <!-- Hotovo -->
+                <div class="timeline-item fade-out">
+                    <h3 class="neon-text text-2xl mb-4">✅ Hotovo / Stabilní</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="card-hover p-6 neon-border rounded-lg">
+                            <h4 class="text-xl">🎛️ Základní architektura</h4>
+                            <p>FastAPI backend, desktop GUI (Py + CustomTkinter), neonová HTML stránka. GPU detekce a logování. 🛠️</p>
                         </div>
-                    </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-orange-500 mr-4">🧠</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-orange-500">Lokální inference modelů</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Plně funkční modely: Flux.1Dev, SDXL (UNet + VAE), WAN 2.1 i2v, GFPGAN, RealESRGAN, CodeFormer, 
-                                Wav2Lip, RetinaFace, YOLOv5, S3FD, Dlib landmarks, GroundingDINO, SAM, ParseNet. Pixely pod kontrolou! 🌌
-                                - Ne, nepotřebuješ internet. Jen pořádný železo. A klid v duši.
-                            </p>
+                        <div class="card-hover p-6 neon-border rounded-lg">
+                            <h4 class="text-xl">🧠 Lokální inference modelů</h4>
+                            <p>Flux.1Dev, SDXL, WAN 2.1 i2v, GFPGAN, Wav2Lip, a další. Pixely pod kontrolou! 🌌</p>
                         </div>
+                        <!-- Další položky... -->
                     </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-orange-500 mr-4">🧠</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-orange-500">FluxPipeline – Vlastní generátor budoucnosti</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Vlastnoručně vytvořený inference engine bez použití Diffusers: ručně stavěný Flux UNet (transformerový), CLIP/T5 encodery, VAE dekodér a DDIM scheduler. Optimalizace pro bfloat16, vlastní guidance, checkpointování a extrémní modularita.
-                                Slouží jako základ pro FluxRunner modul i budoucí generování stylových výstupů v reálném čase.
-                                Žádné knihovny, jen čistý výkon a vize. 🚀
-                                - Nezkompiloval jsem si to z GitHubu. Napsal jsem si to sám. A funguje to líp.
-                            </p>
+                </div>
+                <!-- Ve vývoji -->
+                <div class="timeline-item fade-out">
+                    <h3 class="neon-text text-2xl mb-4">🧪 Právě ve vývoji</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="card-hover p-6 neon-border rounded-lg">
+                            <h4 class="text-xl">🖼️ GUI / UX</h4>
+                            <p>Drag & drop, split view preview, synchronizace presetů. Hladší než kyberkatana! 🎮</p>
                         </div>
-                    </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-orange-500 mr-4">🧪</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-orange-500">Specialitky</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Facial expression editor s warp netem, segmentace pozadí/objektů, lipsync z audia/textu, 
-                                forenzní moduly (deeDet + metadata), FaceSwap (InSwapper ONNX), 4x AI upscaling s real-time náhledem. 😎
-                                - Když to pustíš, tvoje GPU začne sténat slastí.
-                            </p>
+                        <div class="card-hover p-6 neon-border rounded-lg">
+                            <h4 class="text-xl">📤 Webové rozhraní</h4>
+                            <p>Minimalistické UI, BuyMeACoffee API, realtime generování. 🌐</p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Právě ve vývoji -->
-            <div class="mt-12">
-                <h3 class="text-3xl font-bold text-pink-500 mb-6">🧪 Právě ve vývoji</h3>
-                <div class="timeline space-y-12">
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-pink-500 mr-4">🖼️</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-pink-500">GUI / UX</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Nový intuitivní layout GUI, drag & drop pro média, automatická synchronizace presetů, 
-                                split view preview (původní vs. výstup). Ovládání hladší než kyberkatana! 🎮
-                                - Už to nebude vypadat jako tabulka v Excelu. Bude to hezký. Fakt.
-                            </p>
+                <!-- Plány -->
+                <div class="timeline-item fade-out">
+                    <h3 class="neon-text text-2xl mb-4">🔮 Plány do budoucna</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="card-hover p-6 neon-border rounded-lg">
+                            <h4 class="text-xl">☁️ Cloudová inference</h4>
+                            <p>RunPod integrace, hybridní režim, automatická fronta. 🌩️</p>
+                        </div>
+                        <div class="card-hover p-6 neon-border rounded-lg">
+                            <h4 class="text-xl">🌐 Komunita</h4>
+                            <p>Discord, galerie výstupů, soutěže o kybervidea. 🤝</p>
                         </div>
                     </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-pink-500 mr-4">🧠</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-pink-500">Backend & optimalizace</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Docker image pro cloud API, oddělené task runnery, refaktor core komponent, 
-                                asynchronní fronta požadavků. Backend rychlejší než neonový blesk! ⚡
-                                - Až to spadne, nebude to moje chyba. Bude to elegantní pád.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-pink-500 mr-4">📤</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-pink-500">Webové rozhraní</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Minimalistické UI s drag & drop, limity bez registrace (3 výstupy/den), 
-                                BuyMeACoffee API pro donor funkce, realtime generování, sdílení přes URL. 🌐
-                                - Nechceš platit? Tři výstupy a čus. Chceš víc? Kup mi kafe.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-pink-500 mr-4">📱</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-pink-500">Mobilní výhled</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                MVP mobilní appky (Flutter/React Native): upload, lipsync, preview, notifikace. 
-                                HTTP API komunikace, příprava .apk pro Android. Kyberpunk v kapse! 📲
-                                - Jo, bude appka. Jo, poběží na Androidu. iOS? Nejspíš ne, nechce se mi.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-pink-500 mr-4">🕹️</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-pink-500">Fun features</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                „Kyberpunkové výrazy“ – náhodné neonové presety. Automatický výběr snímků, 
-                                „Cybersoul“ režim (video + lipsync + glitch), OBS plugin pro live výrazy. 😈
-                                - Pro ty, co se nudí rychle. Neonové výrazy místo osobnosti.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Plány do budoucna -->
-            <div class="mt-12">
-                <h3 class="text-3xl font-bold text-orange-500 mb-6">🔮 Plány do budoucna / Vize</h3>
-                <div class="timeline space-y-12">
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-orange-500 mr-4">☁️</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-orange-500">Cloudová inference</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Napojení na RunPod (GPU inference přes REST), správa API klíčů, hybridní režim 
-                                (lokální + cloud), automatická fronta při přetížení. AI bez limitů! 🌩️
-                                - Chceš to pustit i na šunce? Pošli to do cloudu. Tam se to vypaří.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-orange-500 mr-4">🧩</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-orange-500">Modulární systém</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Pluginová architektura pro třetí strany, profilování výkonu, GUI builder 
-                                pro pipeline editor. Tvoř si vlastní kyberpunkový workflow! 🛠️
-                                - Když ti to nebude stačit, naprogramuj si vlastní. Ale hezky bokem.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-orange-500 mr-4">📚</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-orange-500">AI školení / tutor</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Režim „uč se s AI“ – vizuální kroky generace, interaktivní popisy, 
-                                podcast/video série o architektuře. Uč se hackovat realitu! 🎓
-                                - Konečně ti AI vysvětlí, co vlastně dělá. A nebude přitom zívat.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="timeline-item flex items-start p-6 bg-gray-900 rounded-lg neon-border">
-                        <span class="text-2xl text-orange-500 mr-4">🌐</span>
-                        <div>
-                            <h4 class="text-xl font-bold text-orange-500">Komunita</h4>
-                            <p class="mt-2 text-gray-300 font-roboto-mono">
-                                Veřejný Discord, galerie uživatelských výstupů, soutěže o kybervidea, 
-                                badge systém pro přispěvatele. Společně rozsvítíme kyberprostor! 🤝
-                                - Nejsi sám. Je nás víc. A máme neonové výrazy. Přidej se, nebo zůstaň v šedi.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Milníky a verze -->
-            <div class="mt-12">
-                <h3 class="text-3xl font-bold text-pink-500 mb-6">🧭 Milníky a verze</h3>
-                <div class="milestone-table bg-gray-900 rounded-lg neon-border p-6">
-                    <div class="milestone-row flex font-roboto-mono text-gray-300 border-b border-gray-700 py-4">
-                        <div class="w-1/4 font-bold text-orange-500">Verze</div>
-                        <div class="w-2/4 font-bold text-orange-500">Obsah</div>
-                        <div class="w-1/4 font-bold text-orange-500">Stav</div>
-                    </div>
-                    <div class="milestone-row flex font-roboto-mono text-gray-300 border-b border-gray-700 py-4">
-                        <div class="w-1/4">v0.8</div>
-                        <div class="w-2/4">Funkčnost a spolupráce modelů</div>
-                        <div class="w-1/4 text-orange-500">✅ Vydáno</div>
-                    </div>
-                    <div class="milestone-row flex font-roboto-mono text-gray-300 border-b border-gray-700 py-4">
-                        <div class="w-1/4">v1.0</div>
-                        <div class="w-2/4">Desktop GUI + základní inference lokálně</div>
-                        <div class="w-1/4 text-pink-500">🔜 Q3 2025</div>
-                    </div>
-                    <div class="milestone-row flex font-roboto-mono text-gray-300 border-b border-gray-700 py-4">
-                        <div class="w-1/4">v1.1</div>
-                        <div class="w-2/4">Vylepšené GUI, sdílení výstupů, export projekce</div>
-                        <div class="w-1/4 text-pink-500">🧪 Vývoj</div>
-                    </div>
-                    <div class="milestone-row flex font-roboto-mono text-gray-300 border-b border-gray-700 py-4">
-                        <div class="w-1/4">v1.5</div>
-                        <div class="w-2/4">Online API, veřejné UI, limity, podpora</div>
-                        <div class="w-1/4 text-pink-500">🔜 Q4 2025</div>
-                    </div>
-                    <div class="milestone-row flex font-roboto-mono text-gray-300 py-4">
-                        <div class="w-1/4">v2.0</div>
-                        <div class="w-2/4">Cloud + mobilní verze, vlastní editor + real-time náhled</div>
-                        <div class="w-1/4 text-orange-500">🌌 2025–2026</div>
-                    </div>
-                </div>
-                <div class="mt-8 text-center">
-                    <a href="index.html" class="inline-block px-8 py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 neon-button pulse">
-                    Zpět na hlavní stránku </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Přidej se k revoluci -->
-    <section id="join" class="py-16 bg-gradient-to-b from-gray-800 to-gray-900 text-center">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-4xl font-bold neon-text">Přidej se k revoluci!</h2>
-            <p class="mt-6 text-lg text-gray-300 font-roboto-mono">
-                wAllICzech je jednočlověk-projekt na hraně technologie a vášně. 
-                Podpoř ho kávou nebo sleduj vývoj na TikToku – ať rozsvítíme kyberprostor! ☕
-            </p>
-            <div class="mt-8 flex justify-center space-x-4">
-                <a href="https://buymeacoffee.com/wallczech" class="px-8 py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 neon-button pulse">
-                    Kup mi kávu ☕
-                </a>
-                <a href="https://tiktok.com/@walli.czech" class="px-8 py-4 bg-pink-600 text-white rounded-lg hover:bg-pink-700 neon-button pulse">
-                    Sleduj na TikToku
-                </a>
+    <!-- Milestones Table -->
+    <section id="milestones" class="py-16 px-4 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="neon-text glitch text-4xl md:text-5xl text-center mb-12" data-text="Milníky a verze">Milníky a verze</h2>
+            <div class="milestone-table">
+                <div class="milestone-row p-4 neon-border rounded-lg mb-4">
+                    <div class="w-1/3">v0.8</div>
+                    <div class="w-1/3">Funkčnost a spolupráce modelů</div>
+                    <div class="w-1/3">✅ Vydáno</div>
+                </div>
+                <div class="milestone-row p-4 neon-border rounded-lg mb-4">
+                    <div class="w-1/3">v1.0</div>
+                    <div class="w-1/3">Desktop GUI + základní inference</div>
+                    <div class="w-1/3">🔜 Q3 2025</div>
+                </div>
+                <!-- Další milníky... -->
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 bg-gray-900 text-center">
-        <img src="images/Logo.png" alt="wAllICzech Logo" class="mx-auto h-16 md:h-20 mb-4 neon-logo">
-        <p class="text-gray-400 font-roboto-mono">© 2025 wAllICzech AI Studio. Vytvořeno s ❤️ jedním vývojářem.</p>
+    <footer class="py-8 text-center bg-gray-900">
+        <p>&copy; 2025 wAllICzech AI Studio. Vytvořeno s ❤️ jedním vývojářem.</p>
+        <div class="mt-4">
+            <a href="index.html" class="text-gray-400 hover:text-white mx-2">Zpět na hlavní stránku</a>
+            <a href="https://github.com/walliczech" class="text-gray-400 hover:text-white mx-2">GitHub</a>
+            <a href="https://walliczech.ai/docs" class="text-gray-400 hover:text-white mx-2">Dokumentace</a>
+        </div>
     </footer>
 
-    <!-- Smooth Scroll, Scroll Animace a Neon Přepínač -->
-    <script>
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Fade-in animace při scrollování
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('section, .timeline-item, .milestone-table').forEach(item => {
-            item.classList.add('fade-out');
-            observer.observe(item);
-        });
-
-        // Neonový přepínač
-        function toggleNeonTheme() {
-            const body = document.body;
-            if (body.classList.contains('neon-alt')) {
-                body.classList.remove('neon-alt');
-            } else {
-                body.classList.add('neon-alt');
-            }
-        }
-    </script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
