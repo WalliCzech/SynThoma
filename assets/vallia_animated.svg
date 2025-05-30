@@ -2,8 +2,8 @@
 			  <title>Vallia Glitch Pulse</title>
 
 			  <style>
-				.s0 { fill: #000000; } 
-				.s1 { fill: currentColor; } 
+				.s0 { fill: #ff7800; } 
+				.s1 { fill: #000000; } 
 				#vallia-glitch {
 
 				  transform-origin: center;
