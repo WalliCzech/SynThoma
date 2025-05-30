@@ -39,12 +39,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 	
 </head>
-<body class="bg-black text-white font-orbitron overflow-x-hidden">
-    <!-- Theme toggle button s extra švihem -->
-	<button id="theme-toggle" 
-			class="fixed top-4 right-4 z-50 neon-button-outline px-5 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-neon animate-pulse">
-	  Přepnout Neon 🌌
-	</button>
+<body class="font-orbitron overflow-x-hidden theme-bg">
+    <!-- Ovládací tlačítka -->
+    <div class="fixed top-4 right-4 z-50 flex gap-3">
+        <button id="theme-toggle" 
+                class="neon-button-invert px-5 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 animate-pulse">
+            Přepnout Neon 🌌
+        </button>
+    </div>
+	
 
     <!-- Header: Cyberpunk level 9000 -->
     <header class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-indigo-950 overflow-hidden">
@@ -69,7 +72,7 @@
 
             <!-- Call-to-action button s pulse efektem -->
             <div class="mt-12 neon-hybrid">
-                <a href="#modules" class="neon-button pulse px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-110 hover:shadow-neon">
+                <a href="#modules" class="neon-button-outline pulse px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-110 hover:shadow-neon">
                     Hacknout pixely 🚀
                 </a>
             </div>
@@ -242,15 +245,13 @@
     </footer>
 
 
-    <!-- Modal -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center z-50">
-        <div class="bg-gray-900 p-8 rounded-lg max-w-lg w-full neon-border">
             <h3 id="modal-title" class="neon-text text-2xl mb-4"></h3>
             <p id="modal-content" class="text-lg"></p>
             <button class="neon-button mt-6 px-6 py-3 rounded-full" onclick="closeModal()">Zavřít</button>
         </div>
     </div>
 
+    <!-- Načtení JavaScriptu -->
     <script src="js/scripts.js"></script>
 </body>
 </html>
