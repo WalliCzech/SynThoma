@@ -1,511 +1,1218 @@
 /* Kyberpunkový styl pro wAllICzech AI Studio 2025 – Neon, sarkasmus a barvy, co tě praští do očí 😈 */
+
+/* Načtení lokálního písma – protože defaultní fonty jsou pro normies */
 @font-face {
+    font-family: 'Orbitron';
+    src: url('../fonts/Orbitron-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Rychlejší načítání než tvůj starý 56k modem */
+  }
+  
+  @font-face {
     font-family: 'Neuropol';
     src: url('https://db.onlinewebfonts.com/c/7d3b7e7fdda78e84183e9d33671d4823?family=Neuropol') format('woff2');
-    font-display: swap; /* Načítání rychlejší než tvůj starý modem */
+    font-display: swap;
+  }
+  
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+  
+  /* ===========================================
+   KONFIGURACE PROMĚNNÝCH
+   =========================================== */
+
+:root {
+  /* ===== ZÁKLADNÍ BARVY ===== */
+  --color-primary: #ff4500;        /* Hlavní barva - oranžová */
+  --color-primary-invert: #000000;  /* Invertovaná hlavní barva */
+  --color-accent: #ff007a;         /* Akcent - růžová */
+  --color-accent-invert: #ffffff;  /* Invertovaný akcent */
+  --color-glow: #ff007a;           /* Barva záře */
+  --color-bg: #0a0a0a;             /* Barva pozadí */
+  --color-text: #ffffff;           /* Barva textu */
+  --color-text-invert: #000000;    /* Invertovaná barva textu */
+  --color-success: #39ff14;        /* Úspěch - zelená */
+  --color-warning: #ffcc00;        /* Varování - žlutá */
+  --color-error: #ff1a1a;          /* Chyba - červená */
+  --color-info: #00a8ff;           /* Informace - modrá */
+
+  /* ===== EFEKTY ===== */
+  /* Stíny */
+  --neon-shadow: 0 0 5px var(--color-accent), 0 0 10px var(--color-glow);
+  --neon-glow: 0 0 5px #fff, 0 0 10px var(--color-accent), 0 0 20px var(--color-glow), 0 0 40px var(--color-glow);
+  --neon-strong-glow: 0 0 10px var(--color-accent), 0 0 20px var(--color-glow), 0 0 30px var(--color-glow), 0 0 50px var(--color-glow);
+  --neon-text-glow: 0 0 2px var(--color-glow), 0 0 6px var(--color-glow);
+  --neon-box-shadow: 0 0 10px var(--color-glow), 0 0 20px var(--color-glow);
+  
+  /* Ohraničení */
+  --neon-border: 2px solid var(--color-primary);
+  --neon-border-thin: 1px solid var(--color-primary);
+  --neon-border-thick: 3px solid var(--color-primary);
+  --neon-border-inset: inset 0 0 10px var(--color-glow), inset 0 0 20px var(--color-glow);
+  
+  /* Přechody */
+  --neon-gradient: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+  --neon-gradient-horizontal: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  --neon-gradient-vertical: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+  
+  /* Průhlednosti */
+  --bg-opacity: 0.9;
+  --text-opacity: 0.9;
+  
+  /* Rozmístění */
+  --header-height: 70px;
+  --footer-height: 60px;
+  --sidebar-width: 250px;
+  --border-radius-sm: 4px;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 20px;
+  
+  /* Zvýraznění */
+  --focus-ring: 0 0 0 3px rgba(255, 115, 0, 0.5);
+  --focus-ring-thin: 0 0 0 2px rgba(255, 115, 0, 0.3);
+  
+  /* Animace */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+  
+  /* Vrstvy */
+  --z-index-modal: 1000;
+  --z-index-dropdown: 500;
+  --z-index-header: 100;
+  --z-index-default: 1;
+  --z-index-below: -1;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
-
-body {
-    background-color: #0a0a0a;
-    color: #ffffff;
-    font-family: 'Neuropol', 'Roboto Mono', sans-serif;
+  
+  /* ===========================================
+   TÉMATA
+   =========================================== */
+  
+  /* Výchozí motiv - Cyber Orange */
+  body.style-default {
+    --color-primary: #ff4500;
+    --color-accent: #ff5500;
+    --color-glow: #ff007a;
+    --color-bg: #0a0a0a;
+    --color-text: #ffffff;
+  }
+  
+  /* Cyber Weed */
+  body.style-cyberweed {
+    --color-primary: #39ff14;
+    --color-accent: #b300ff;
+    --color-glow: #39ff14;
+    --color-bg: #041f14;
+    --color-text: #d8ffd8;
+  }
+  
+  /* Cyber Pink */
+  body.style-cyberpink {
+    --color-primary: #ff77ff;
+    --color-accent: #ff99ff;
+    --color-glow: #ff77ff;
+    --color-bg: #2b002b;
+    --color-text: #ffffff;
+  }
+  
+  /* Cyber Blue */
+  body.style-cyberblue {
+    --color-primary: #00a8ff;
+    --color-accent: #00f7ff;
+    --color-glow: #00a8ff;
+    --color-bg: #000a1a;
+    --color-text: #e6f7ff;
+  }
+  
+  /* Cyber Orange */
+  body.style-cyberorange {
+    --color-primary: #ff8c00;
+    --color-accent: #ffbb33;
+    --color-glow: #ff8c00;
+    --color-bg: #1a0a00;
+    --color-text: #fff0e6;
+  }
+  
+  /* Cyber Purple */
+  body.style-cyberpurple {
+    --color-primary: #b300ff;
+    --color-accent: #cc66ff;
+    --color-glow: #b300ff;
+    --color-bg: #0a001a;
+    --color-text: #f2e6ff;
+  }
+  
+  /* ===========================================
+   ZÁKLADNÍ STYLY
+   =========================================== */
+  
+  /* Základní reset a typografie */
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Neuropol', 'Orbitron', 'Roboto Mono', sans-serif;
+    font-size: 1rem;
     line-height: 1.6;
+    font-weight: 400;
     overflow-x: hidden;
-    scroll-behavior: smooth; /* Scroll jako z kyberfilmu, ne jako z 90s webu */
-}
-
-/* Neonový text – svítí jako tvůj sen o slávě */
-.neon-text {
-    color: #ffffff;
-    text-shadow:
-        0 0 2px #ff4500,
-        0 0 6px #ff4500,
-        0 0 12px #ff007a,
-        0 0 15px #ff007a;
-    transition: text-shadow 0.3s ease;
-}
-
-body.neon-alt .neon-text {
-    text-shadow:
-        0 0 2px #00ddeb,
-        0 0 6px #00ddeb,
-        0 0 12px #8a2be2,
-        0 0 15px #8a2be2;
-}
-
-/* Nový hybridní neon – mix teplých a studených barev, protože kompromisy jsou pro slabochy */
-.neon-hybrid {
-    color: #ffffff;
-    text-shadow:
-        0 0 2px #ff4500,
-        0 0 6px #ff007a,
-        0 0 12px #00ddeb,
-        0 0 15px #8a2be2;
-    transition: text-shadow 0.3s ease;
-}
-
-body.neon-alt .neon-hybrid {
-    text-shadow:
-        0 0 2px #00ddeb,
-        0 0 6px #8a2be2,
-        0 0 12px #ff4500,
-        0 0 15px #ff007a;
-}
-
-/* Glitch efekt – stabilita je pro korporáty */
-.glitch {
+    min-height: 100vh;
+    transition: var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Typografie */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', 'Neuropol', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+    text-shadow: var(--neon-text-glow);
+  }
+  
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.5rem; }
+  h3 { font-size: 2rem; }
+  h4 { font-size: 1.75rem; }
+  h5 { font-size: 1.5rem; }
+  h6 { font-size: 1.25rem; }
+  
+  p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: var(--transition-fast);
     position: relative;
-    animation: glitch 4s linear infinite;
-}
+  }
+  
+  a:hover {
+    color: var(--color-primary);
+    text-shadow: var(--neon-text-glow);
+  }
+  
+  /* Obrázky */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Seznamy */
+  ul, ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Tabulky */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    border: var(--neon-border-thin);
+  }
+  
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: var(--neon-border-thin);
+  }
+  
+  th {
+    background-color: rgba(255, 255, 255, 0.05);
+    font-weight: 700;
+  }
+  
+  /* Kód */
+  code, pre {
+    font-family: 'Roboto Mono', monospace;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: var(--neon-border-thin);
+    border-radius: var(--border-radius-sm);
+    padding: 0.2rem 0.4rem;
+    font-size: 0.9em;
+  }
+  
+  pre {
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    border-radius: var(--border-radius);
+  }
+  
+  /* Pomocné třídy */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  .text-left { text-align: left; }
+  
+  .mt-1 { margin-top: 0.5rem; }
+  .mt-2 { margin-top: 1rem; }
+  .mt-3 { margin-top: 1.5rem; }
+  .mt-4 { margin-top: 2rem; }
+  .mt-5 { margin-top: 3rem; }
+  
+  .mb-1 { margin-bottom: 0.5rem; }
+  .mb-2 { margin-bottom: 1rem; }
+  .mb-3 { margin-bottom: 1.5rem; }
+  .mb-4 { margin-bottom: 2rem; }
+  .mb-5 { margin-bottom: 3rem; }
+  
+  .pt-1 { padding-top: 0.5rem; }
+  .pt-2 { padding-top: 1rem; }
+  .pt-3 { padding-top: 1.5rem; }
+  .pt-4 { padding-top: 2rem; }
+  .pt-5 { padding-top: 3rem; }
+  
+  .pb-1 { padding-bottom: 0.5rem; }
+  .pb-2 { padding-bottom: 1rem; }
+  .pb-3 { padding-bottom: 1.5rem; }
+  .pb-4 { padding-bottom: 2rem; }
+  .pb-5 { padding-bottom: 3rem; }
+  
+  /* ===========================================
+   TLAČÍTKA A FORMULÁŘOVÉ PRVKY
+   =========================================== */
+  
+  /* Základní tlačítko */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: transparent;
+    color: var(--color-primary);
+    border: var(--neon-border);
+    box-shadow: var(--neon-shadow);
+  }
+  
+  .btn:hover {
+    color: var(--color-primary-invert);
+    background: var(--color-primary);
+    box-shadow: var(--neon-strong-glow);
+    transform: translateY(-2px);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+  }
+  
+  .btn:focus {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+  
+  /* Primární tlačítko */
+  .btn-primary {
+    background: var(--neon-gradient);
+    color: var(--color-text-invert);
+    border: none;
+    box-shadow: var(--neon-glow);
+  }
+  
+  .btn-primary:hover {
+    background: var(--color-primary);
+    box-shadow: var(--neon-strong-glow);
+  }
+  
+  /* Sekundární tlačítko */
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: var(--color-text);
+    border: var(--neon-border-thin);
+  }
+  
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--color-primary);
+  }
+  
+  /* Outlined tlačítko */
+  .btn-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: var(--neon-border);
+  }
+  
+  .btn-outline:hover {
+    background: var(--color-primary);
+    color: var(--color-primary-invert);
+  }
+  
+  /* Ghost tlačítko */
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid transparent;
+    box-shadow: none;
+  }
+  
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: var(--neon-shadow);
+  }
+  
+  /* Velikosti tlačítek */
+  .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+  }
+  
+  /* Zakázané tlačítko */
+  .btn:disabled,
+  .btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Skupina tlačítek */
+  .btn-group {
+    display: inline-flex;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--neon-shadow);
+  }
+  
+  .btn-group .btn {
+    border-radius: 0;
+    margin: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .btn-group .btn:first-child {
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+  }
+  
+  .btn-group .btn:last-child {
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    border-right: none;
+  }
+  
+  /* ===========================================
+   FORMULÁŘOVÉ PRVKY
+   =========================================== */
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-shadow: var(--neon-text-glow);
+  }
+  
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: rgba(255, 255, 255, 0.05);
+    background-clip: padding-box;
+    border: var(--neon-border-thin);
+    border-radius: var(--border-radius);
+    transition: var(--transition-normal);
+    backdrop-filter: blur(5px);
+  }
+  
+  .vallia-logo {
+    transition: color 0.3s ease-in-out;
+    color: var(--color-primary);
+  }
 
-@keyframes glitch {
-    0%, 100% { transform: translate(0, 0); }
-    20% { transform: translate(5px, -3px) skew(6deg); }
-    40% { transform: translate(-5px, 3px) skew(-6deg); }
-    60% { transform: translate(3px, -2px) skew(4deg); }
-    80% { transform: translate(-3px, 2px) skew(-4deg); }
-}
+  .vallia-logo:hover {
+    color: var(--color-glow);
+  }
 
-.glitch:before,
-.glitch:after {
+  .form-control:focus {
+    color: var(--color-text);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-primary);
+    outline: 0;
+    box-shadow: var(--focus-ring);
+  }
+  
+  .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+  }
+  
+  textarea.form-control {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ff4500' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+  }
+  
+  /* Checkbox a Radio */
+  .form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-check-input {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: var(--neon-border-thin);
+    border-radius: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: var(--transition-normal);
+  }
+  
+  .form-check-input:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+  
+  .form-check-input:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.75rem;
+    height: 0.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  
+  .form-check-input[type="radio"] {
+    border-radius: 50%;
+  }
+  
+  .form-check-label {
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  /* Range input */
+  .form-range {
+    width: 100%;
+    height: 0.5rem;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    outline: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  
+  .form-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--color-glow);
+    transition: var(--transition-normal);
+  }
+  
+  .form-range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px var(--color-glow);
+  }
+  
+  .form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px rgba(255, 115, 0, 0.5);
+  }
+  
+  /* Tooltip */
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+  }
+  
+  .tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-0.5rem);
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    border-radius: var(--border-radius);
+    border: var(--neon-border-thin);
+    box-shadow: var(--neon-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-normal);
+    z-index: 1000;
+    min-width: 200px;
+    text-align: center;
+    pointer-events: none;
+  }
+  
+  .tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-1rem);
+  }
+  
+  /* Glitch efekt – dynamické barvy, stabilita je nuda */
+  .glitch {
+    position: relative;
+    color: #ffffff;
+    text-shadow:
+      0.05em 0 0 var(--color-primary),
+      -0.05em 0 0 var(--color-accent);
+    animation: glitch 2s infinite;
+    will-change: transform; /* Plynulost, nebo se to rozsype jako tvůj kód o půlnoci */
+  }
+  
+  @keyframes glitch {
+    0% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-accent); }
+    25% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-accent); }
+    26% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-accent); }
+    99% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-accent); }
+    100% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-accent); }
+  }
+  
+  .glitch:before,
+  .glitch:after {
     content: attr(data-text);
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-}
-
-.glitch:before {
-    color: #ff4500; /* Změna na novou barvu pro konzistenci */
+  }
+  
+  .glitch:before {
+    color: var(--color-primary);
     animation: glitchTop 3s linear infinite;
     clip-path: polygon(0 0, 100% 0, 100% 27%, 0 27%);
     top: -9px;
-}
-
-body.neon-alt .glitch:before {
-    color: #00ddeb;
-}
-
-.glitch:after {
-    color: #ff007a; /* Druhá teplá barva pro glitch */
+  }
+  
+  .glitch:after {
+    color: var(--color-accent-invert);
     animation: glitchBottom 3.5s linear infinite;
     clip-path: polygon(0 73%, 100% 73%, 100% 100%, 0 100%);
     top: 9px;
-}
-
-body.neon-alt .glitch:after {
-    color: #8a2be2;
-}
-
-@keyframes glitchTop {
+  }
+  
+  @keyframes glitchTop {
     0%, 100% { transform: translate(0, 0); }
     20% { transform: translate(4px, -4px); }
     40% { transform: translate(-4px, 4px); }
     60% { transform: translate(3px, -3px); }
     80% { transform: translate(-3px, 3px); }
-}
-
-@keyframes glitchBottom {
+  }
+  
+  @keyframes glitchBottom {
     0%, 100% { transform: translate(0, 0); }
     20% { transform: translate(-4px, 0); }
     40% { transform: translate(4px, 0); }
     60% { transform: translate(-3px, 0); }
     80% { transform: translate(3px, 0); }
-}
-
-/* Neonový obrys – hranice, co svítí jako tvůj kód po páté kávě */
-.neon-border {
-    border: 2px solid #ff4500;
-    box-shadow:
-        0 0 10px #ff4500,
-        0 0 20px #ff007a;
+  }
+  
+  /* Neonový obrys – hranice, co svítí jako tvůj kód po páté kávě */
+  .neon-border {
+    border: var(--neon-border);
+    box-shadow: var(--neon-box-shadow);
     transition: all 0.3s ease;
-}
-
-body.neon-alt .neon-border {
-    border: 2px solid #00ddeb;
-    box-shadow:
-        0 0 10px #00ddeb,
-        0 0 20px #8a2be2;
-}
-
-/* Hybridní neonový obrys – mix barev, co tě donutí mrkat */
-.neon-hybrid-border {
-    border: 2px solid #ff4500;
-    background: linear-gradient(45deg, #ff4500, #ff007a, #00ddeb, #8a2be2);
+  }
+  
+  /* Hybridní neonový obrys – mix barev, co tě donutí mrkat */
+  .neon-hybrid-border {
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-glow)) 1;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-glow));
     background-size: 400%;
     animation: gradientShift 8s ease infinite;
-    box-shadow:
-        0 0 10px #ff007a,
-        0 0 20px #00ddeb;
+    box-shadow: var(--neon-box-shadow);
     transition: all 0.3s ease;
-}
-
-body.neon-alt .neon-hybrid-border {
-    border: 2px solid #00ddeb;
-    box-shadow:
-        0 0 10px #8a2be2,
-        0 0 20px #ff4500;
-}
-
-@keyframes gradientShift {
+  }
+  
+  @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
-}
-
-/* Neonové tlačítko – pulzuje jako tvůj kofeinový příjem */
-.neon-button {
-    background: linear-gradient(45deg, #ff4500, #ff007a);
+  }
+  
+  /* Neonové tlačítko – pulzuje jako tvůj kofeinový příjem */
+  .neon-button {
+    background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
     border: none;
-    color: #ffffff;
-    text-shadow: 0 0 5px #000;
-    transition: all 0.3s ease;
+    color: var(--color-text);
+    text-shadow: var(--neon-text-glow);
+    padding: 0.5rem 1.5rem;
     border-radius: 8px;
-}
-
-body.neon-alt .neon-button {
-    background: linear-gradient(45deg, #00ddeb, #8a2be2);
-}
-
-.neon-button.pulse {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: var(--neon-shadow);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    will-change: transform, box-shadow;
+  }
+  
+  .neon-button.pulse {
     animation: pulse 1.2s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 5px #ff4500, 0 0 10px #ff007a; }
-    50% { box-shadow: 0 0 15px #ff4500, 0 0 25px #ff007a, 0 0 35px #ff007a; }
-    100% { box-shadow: 0 0 5px #ff4500, 0 0 10px #ff007a; }
-}
-
-body.neon-alt .neon-button.pulse {
-    animation: pulse-alt 1.6s infinite;
-}
-
-@keyframes pulse-alt {
-    0% { box-shadow: 0 0 5px #00ddeb, 0 0 10px #8a2be2; }
-    50% { box-shadow: 0 0 20px #00ddeb, 0 0 40px #8a2be2, 0 0 60px #8a2be2; }
-    100% { box-shadow: 0 0 5px #00ddeb, 0 0 10px #8a2be2; }
-}
-
-.neon-button:hover {
-    box-shadow: 0 0 25px #ff4500, 0 0 50px #ff007a;
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: var(--neon-shadow); }
+    50% { box-shadow: var(--neon-strong-glow); }
+    100% { box-shadow: var(--neon-shadow); }
+  }
+  
+  .neon-button:hover {
+    box-shadow: var(--neon-strong-glow);
     transform: scale(1.05);
-}
-
-body.neon-alt .neon-button:hover {
-    box-shadow: 0 0 25px #00ddeb, 0 0 50px #8a2be2;
-}
-
-/* Hybridní tlačítko – všechny barvy najednou, protože proč ne? */
-.neon-hybrid-button {
-    background: linear-gradient(45deg, #ff4500, #ff007a, #00ddeb, #8a2be2);
+  }
+  
+  /* Neonové obrysové tlačítko */
+  .neon-button-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: var(--neon-border);
+    text-shadow: var(--neon-text-glow);
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: var(--neon-shadow);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  .neon-button-outline:hover {
+    background: var(--color-primary);
+    color: var(--color-primary-invert);
+    box-shadow: var(--neon-strong-glow);
+    transform: translateY(-2px);
+  }
+  
+  /* Invertované tlačítko */
+  .neon-button-invert {
+    background: var(--color-primary);
+    color: var(--color-primary-invert);
+    border: none;
+    box-shadow: var(--neon-strong-glow);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  .neon-button-invert:hover {
+    background: var(--color-primary-invert);
+    color: var(--color-primary);
+    box-shadow: 0 0 25px var(--color-glow), 0 0 50px var(--color-glow);
+    transform: translateY(-2px) scale(1.02);
+  }
+  
+  /* Hackni Pixely tlačítko */
+  .btn-hack {
+    background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+    color: var(--color-text-invert);
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: var(--neon-box-shadow);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .btn-hack::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    z-index: -1;
+  }
+  
+  .btn-hack:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--neon-strong-glow);
+  }
+  
+  .btn-hack:hover::before {
+    left: 100%;
+  }
+  
+  /* Hybridní tlačítko – všechny barvy, protože proč ne? */
+  .neon-hybrid-button {
+    background: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-glow));
     background-size: 400%;
     animation: gradientShift 6s ease infinite;
     border: none;
-    color: #ffffff;
-    text-shadow: 0 0 5px #000;
-    transition: all 0.3s ease;
+    color: var(--color-text);
+    text-shadow: var(--neon-text-glow);
+    padding: 0.5rem 1.5rem;
     border-radius: 8px;
-}
-
-.neon-hybrid-button.pulse {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: var(--neon-shadow);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  .neon-hybrid-button.pulse {
     animation: hybrid-pulse 1.4s infinite, gradientShift 6s ease infinite;
-}
-
-@keyframes hybrid-pulse {
-    0% { box-shadow: 0 0 5px #ff4500, 0 0 10px #00ddeb; }
-    50% { box-shadow: 0 0 20px #ff007a, 0 0 30px #8a2be2, 0 0 40px #00ddeb; }
-    100% { box-shadow: 0 0 5px #ff4500, 0 0 10px #00ddeb; }
-}
-
-.neon-hybrid-button:hover {
-    box-shadow: 0 0 25px #ff007a, 0 0 50px #8a2be2;
+  }
+  
+  @keyframes hybrid-pulse {
+    0% { box-shadow: var(--neon-shadow); }
+    50% { box-shadow: var(--neon-strong-glow); }
+    100% { box-shadow: var(--neon-shadow); }
+  }
+  
+  .neon-hybrid-button:hover {
+    box-shadow: var(--neon-strong-glow);
     transform: scale(1.05);
-}
-
-/* Module card – protože moduly si zaslouží svítit */
-.module-card {
-    border: 2px solid #ff4500;
+  }
+  
+  /* Module card – moduly, co svítí jako kyberklub */
+  .module-card {
+    border: var(--neon-border);
     padding: 2rem;
     margin: 1rem;
     border-radius: 12px;
-    background: rgba(255, 85, 0, 0.15);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(3px);
-    box-shadow: 0 0 15px rgba(255, 85, 0, 0.7);
+    box-shadow: var(--neon-box-shadow);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-}
-
-body.neon-alt .module-card {
-    border: 2px solid #00ddeb;
-    background: rgba(0, 221, 235, 0.15);
-    box-shadow: 0 0 15px rgba(0, 221, 235, 0.7);
-}
-
-.module-card:hover {
+  }
+  
+  .module-card:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 0 30px rgba(255, 128, 0, 0.9);
-}
-
-body.neon-alt .module-card:hover {
-    box-shadow: 0 0 30px rgba(0, 221, 235, 0.9);
-}
-
-/* Hybridní karta – pro ty, co chtějí všechno */
-.neon-hybrid-card {
+    box-shadow: var(--neon-strong-glow);
+  }
+  
+  .module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+  }
+  
+  .module-card:hover::before {
+    left: 100%;
+  }
+  
+  /* Hybridní karta – pro ty, co chtějí všechno */
+  .neon-hybrid-card {
     border: 2px solid transparent;
-    border-image: linear-gradient(45deg, #ff4500, #ff007a, #00ddeb, #8a2be2) 1;
+    border-image: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-glow)) 1;
     padding: 2rem;
     margin: 1rem;
     border-radius: 12px;
-    background: rgba(255, 119, 51, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(3px);
-    box-shadow: 0 0 15px rgba(0, 221, 235, 0.5);
+    box-shadow: var(--neon-box-shadow);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-}
-
-body.neon-alt .neon-hybrid-card {
-    background: rgba(0, 221, 235, 0.1);
-    box-shadow: 0 0 15px rgba(255, 119, 51, 0.5);
-}
-
-.neon-hybrid-card:hover {
+  }
+  
+  .neon-hybrid-card:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 0 30px rgba(0, 221, 235, 0.9), 0 0 50px rgba(255, 119, 51, 0.7);
-}
-
-.neon-hybrid-card::before {
+    box-shadow: var(--neon-strong-glow);
+  }
+  
+  .neon-hybrid-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 221, 235, 0.2), rgba(255, 119, 51, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: 0.5s;
-}
-
-.neon-hybrid-card:hover::before {
+  }
+  
+  .neon-hybrid-card:hover::before {
     left: 100%;
-}
-
-/* Přidáme jemné blikání pro karty */
-.module-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 85, 0, 0.3), transparent);
-    transition: 0.5s;
-}
-
-.module-card:hover::before {
-    left: 100%;
-}
-
-body.neon-alt .module-card::before {
-    background: linear-gradient(90deg, transparent, rgba(0, 221, 235, 0.3), transparent);
-}
-
-/* Animace karet */
-.card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-hover:hover {
-    transform: translateY(-10px) rotate(2deg);
-    box-shadow: 0 0 25px #ff4500, 0 0 50px #ff007a;
-}
-
-body.neon-alt .card-hover:hover {
-    box-shadow: 0 0 25px #00ddeb, 0 0 50px #8a2be2;
-}
-
-/* Neonový stín pro logo */
-.neon-logo {
-    filter: drop-shadow(0 0 10px #ff4500) drop-shadow(0 0 20px #ff007a);
-}
-
-body.neon-alt .neon-logo {
-    filter: drop-shadow(0 0 10px #00ddeb) drop-shadow(0 0 20px #8a2be2);
-}
-
-/* Časová osa pro roadmapu – svítí jako tvůj plán na světovou dominanci */
-.timeline {
+  }
+  
+  /* Neonový stín pro logo */
+  .neon-logo {
+    filter: drop-shadow(0 0 10px var(--color-glow));
+    transition: all 0.3s ease;
+  }
+  
+  .neon-logo:hover {
+    filter: drop-shadow(0 0 20px var(--color-glow));
+  }
+  
+  /* Časová osa pro roadmapu – svítí jako plán na světovou dominanci */
+  .timeline {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
-}
-
-.timeline-item {
+  }
+  
+  .timeline-item {
     position: relative;
     margin-bottom: 3rem;
     padding-left: 3rem;
-}
-
-.timeline-item::before {
+  }
+  
+  .timeline-item::before {
     content: '';
     position: absolute;
     left: 1rem;
     top: 0;
     width: 16px;
     height: 16px;
-    background: #ff4500;
+    background: var(--color-primary);
     border-radius: 50%;
-    box-shadow: 0 0 10px #ff007a;
-}
-
-body.neon-alt .timeline-item::before {
-    background: #00ddeb;
-    box-shadow: 0 0 10px #8a2be2;
-}
-
-.timeline-item:not(:last-child)::after {
+    box-shadow: var(--neon-shadow);
+  }
+  
+  .timeline-item:not(:last-child)::after {
     content: '';
     position: absolute;
     top: 16px;
     left: 1.5rem;
     width: 4px;
     height: calc(100% - 16px);
-    background: linear-gradient(to bottom, #ff4500, #ff007a);
-}
-
-body.neon-alt .timeline-item:not(:last-child)::after {
-    background: linear-gradient(to bottom, #00ddeb, #8a2be2);
-}
-
-/* Tabulka milníků */
-.milestone-table {
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
+  }
+  
+  /* Tabulka milníků */
+  .milestone-table {
     overflow-x: auto;
-}
-
-.milestone-row {
+  }
+  
+  .milestone-row {
     display: flex;
     align-items: center;
     transition: background 0.3s ease;
-}
-
-.milestone-row:hover {
-    background: rgba(255, 119, 51, 0.15);
-}
-
-body.neon-alt .milestone-row:hover {
-    background: rgba(0, 221, 235, 0.15);
-}
-
-/* Fade-in animace při scrollování */
-.fade-out {
+  }
+  
+  .milestone-row:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Fade-in animace při scrollování */
+  .fade-out {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in {
+  }
+  
+  .fade-in {
     opacity: 1;
     transform: translateY(0);
-}
-
-/* Styl pro header */
-header {
+  }
+  
+  /* Styl pro header */
+  header {
     text-align: center;
     padding: 4rem 2rem;
-    background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+    background: linear-gradient(to bottom, var(--color-bg), rgba(255, 255, 255, 0.05));
     position: relative;
     overflow: hidden;
-}
-
-header::before {
+  }
+  
+  header::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255, 119, 51, 0.2), transparent);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
     opacity: 0.5;
-}
-
-body.neon-alt header::before {
-    background: radial-gradient(circle, rgba(0, 221, 235, 0.2), transparent);
-}
-
-/* Styl pro main kontejner */
-.module-container {
+  }
+  
+  /* Styl pro main kontejner */
+  .module-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-}
-
-/* Styl pro footer */
-footer {
+  }
+  
+  /* Styl pro footer */
+  footer {
     text-align: center;
     padding: 2rem;
-    background: #0a0a0a;
-    border-top: 2px solid #ff4500;
-}
-
-body.neon-alt footer {
-    border-top: 2px solid #00ddeb;
-}
-
-/* Animace pro pozadí */
-.animate-slow-scroll {
+    background: var(--color-bg);
+    border-top: var(--neon-border);
+  }
+  
+  /* Animace pro pozadí */
+  .animate-slow-scroll {
     animation: scroll-bg 50s linear infinite;
-}
-
-@keyframes scroll-bg {
+  }
+  
+  @keyframes scroll-bg {
     from { background-position: 0 0; }
     to { background-position: 0 100%; }
-}
-
-.animate-float {
+  }
+  
+  .animate-float {
     animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
+  }
+  
+  @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
-}
-
-.animate-particles {
+  }
+  
+  .animate-particles {
     animation: particles 20s linear infinite;
-}
-
-@keyframes particles {
+  }
+  
+  @keyframes particles {
     from { transform: translateY(0); }
     to { transform: translateY(-1000px); }
-}
-
-.particles {
+  }
+  
+  .particles {
     position: absolute;
     width: 100%;
     height: 100%;
     background: url('assets/particles.png') repeat;
     opacity: 0.3;
-}
-
-.drop-shadow-neon {
-    filter: drop-shadow(0 0 15px rgba(255, 119, 51, 0.7));
-}
-
-body.neon-alt .drop-shadow-neon {
-    filter: drop-shadow(0 0 15px rgba(0, 221, 235, 0.7));
-}
-
-/* Responsivita – protože mobily jsou digitální peklo */
-@media (max-width: 1024px) {
+  }
+  
+  .drop-shadow-neon {
+    filter: drop-shadow(0 0 15px var(--color-glow));
+  }
+  
+  /* Neonový modul – svítí jako kyberpunkový billboard */
+  .neon-module {
+    position: relative;
+    border: var(--neon-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--neon-box-shadow);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .neon-module:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--neon-strong-glow);
+  }
+  
+  .neon-module::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid transparent;
+    border-image: linear-gradient(45deg, var(--color-primary), var(--color-accent)) 1;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0.7;
+    z-index: 2;
+  }
+  
+  .neon-module:hover::after {
+    opacity: 1;
+    animation: border-glow 2s infinite alternate;
+  }
+  
+  @keyframes border-glow {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+  
+  /* Hlavní moduly – výraznější efekt */
+  .main-module {
+    border-width: 2px;
+    box-shadow: var(--neon-strong-glow);
+  }
+  
+  .main-module:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px var(--color-glow), 0 0 60px var(--color-glow);
+  }
+  
+  /* Vnitřní stín pro hloubku */
+  .module-inner-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+    box-shadow: var(--neon-border-inset);
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* SVG efekty */
+  svg {
+    filter: drop-shadow(0 0 5px var(--color-glow));
+    transition: all 0.3s ease;
+    background: transparent !important;
+  }
+  
+  svg:hover {
+    filter: drop-shadow(0 0 10px var(--color-glow));
+  }
+  
+  /* Inputy a formuláře */
+  input, textarea, select {
+    background: rgba(0, 0, 0, 0.5);
+    border: var(--neon-border);
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    box-shadow: var(--neon-border-inset);
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 10px var(--color-glow), var(--neon-border-inset);
+  }
+  
+  /* Scrollbar – protože i posuvník musí být kyber */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+    box-shadow: var(--neon-shadow);
+  }
+  
+  /* Responsivita – mobily jsou digitální peklo */
+  @media (max-width: 1024px) {
     .neon-text, .neon-hybrid { font-size: 2.5rem; }
     .glitch { font-size: 3rem; }
     header { padding: 3rem 1.5rem; }
@@ -515,48 +1222,24 @@ body.neon-alt .drop-shadow-neon {
     .timeline-item { padding-left: 2rem; }
     .timeline-item::before { left: 0.5rem; }
     .timeline-item::after { left: 1rem; }
-}
-
-@media (max-width: 768px) {
+  }
+  
+  @media (max-width: 768px) {
     .neon-text, .neon-hybrid { font-size: 2rem; }
     .glitch { font-size: 2.5rem; }
     header { padding: 2rem 1rem; }
     .module-container { grid-template-columns: 1fr; padding: 1rem; }
     .timeline-item::after { left: 0.75rem; width: 3px; height: 2rem; }
-}
-
-@media (max-width: 480px) {
+  }
+  
+  @media (max-width: 480px) {
     .neon-text, .neon-hybrid { font-size: 1.5rem; }
     .glitch { font-size: 2rem; }
-    .neon-button, .neon-hybrid-button { padding: 0.75rem 1.5rem; font-size: 0.9rem; }
+    .neon-button, .neon-hybrid-button, .neon-button-outline, .neon-button-invert, .btn-hack {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+    }
     .neon-logo { height: 14rem; }
-    .module-card, .neon-hybrid-card { padding: 1.5rem; margin: 0.5rem; }
+    .module-card, .neon-hybrid-card, .neon-module { padding: 1.5rem; margin: 0.5rem; }
     .timeline-item::after { left: 0.5rem; width: 2px; height: 1.5rem; }
-}
-
-.neon-button-outline {
-  background: transparent;
-  color: #ffffff;
-  border: 2px solid #ff4500;
-  text-decoration: none;
-  box-shadow: 0 0 20px #ff007a;
-  transition: all 0.3s ease;
-}
-
-.neon-button-outline:hover {
-  color: #ffffff;
-  border-color: #00ddeb;
-  box-shadow: 0 0 15px #00ddeb, 0 0 25px #8a2be2;
-}
-
-body.neon-alt .neon-button-outline {
-  border-color: #00ddeb;
-  color: #ffffff;
-  box-shadow: 0 0 10px #8a2be2;
-}
-
-body.neon-alt .neon-button-outline:hover {
-  color: #ffffff;
-  border-color: #ff4500;
-  box-shadow: 0 0 15px #ff4500, 0 0 25px #ff007a;
-}
+  }
