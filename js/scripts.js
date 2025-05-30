@@ -28,11 +28,11 @@ const styleThemes = [
 const themeColors = {
     default: {
         primary: "#ff4500",
-        primaryInvert: "#000000",
+        primaryInvert: "#ba1787",
         accent: "#ff5500",
         accentInvert: "#ba1787",
         glow: "#ff007a",
-        bg: "#0a0a0a",
+        bg: "#000000",
         text: "#eaffea",
         textInvert: "#000000"
     },
@@ -42,7 +42,7 @@ const themeColors = {
         accent: "#33ffaa",
         accentInvert: "#000000",
         glow: "#00ffcc",
-        bg: "#001f1a",
+        bg: "#000000",
         text: "#eaffea",
         textInvert: "#000000"
     },
@@ -52,7 +52,7 @@ const themeColors = {
         accent: "#ff99ff",
         accentInvert: "#000000",
         glow: "#ffaaee",
-        bg: "#2b002b",
+        bg: "#000000",
         text: "#ffffff",
         textInvert: "#000000"
     },
@@ -62,7 +62,7 @@ const themeColors = {
         accent: "#00f7ff",
         accentInvert: "#000000",
         glow: "#00e5ff",
-        bg: "#000a1a",
+        bg: "#000000",
         text: "#e6f7ff",
         textInvert: "#000000"
     },
@@ -72,7 +72,7 @@ const themeColors = {
         accent: "#ffbb33",
         accentInvert: "#9b2525",
         glow: "#ffaa33",
-        bg: "#1a0a00",
+        bg: "#000000",
         text: "#fff0e6",
         textInvert: "#000000"
     },
@@ -82,7 +82,7 @@ const themeColors = {
         accent: "#cc66ff",
         accentInvert: "#000000",
         glow: "#cc99ff",
-        bg: "#0a001a",
+        bg: "#000000",
         text: "#f2e6ff",
         textInvert: "#000000"
     }
