@@ -28,7 +28,7 @@
   --color-accent: #ff007a;         /* Akcent - růžová */
   --color-accent-invert: #ffffff;  /* Invertovaný akcent */
   --color-glow: #ff007a;           /* Barva záře */
-  --color-bg: #0a0a0a;             /* Barva pozadí */
+  --color-bg: #000000;             /* Barva pozadí */
   --color-text: #ffffff;           /* Barva textu */
   --color-text-invert: #000000;    /* Invertovaná barva textu */
   --color-success: #39ff14;        /* Úspěch - zelená */
@@ -56,7 +56,7 @@
   --neon-gradient-vertical: linear-gradient(180deg, var(--color-primary), var(--color-accent));
   
   /* Průhlednosti */
-  --bg-opacity: 0.9;
+  --bg-opacity: 0.6;
   --text-opacity: 0.9;
   
   /* Rozmístění */
@@ -83,6 +83,7 @@
   --z-index-header: 100;
   --z-index-default: 1;
   --z-index-below: -1;
+
 }
   
   /* ===========================================
@@ -187,6 +188,8 @@
     text-shadow: var(--neon-text-glow);
   }
   
+
+  /* Velikost písma */
   h1 { font-size: 3rem; }
   h2 { font-size: 2.5rem; }
   h3 { font-size: 2rem; }
@@ -250,7 +253,7 @@
   /* Kód */
   code, pre {
     font-family: 'Roboto Mono', monospace;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgb(0, 0, 0);
     border: var(--neon-border-thin);
     border-radius: var(--border-radius-sm);
     padding: 0.2rem 0.4rem;
@@ -281,6 +284,7 @@
   .mt-3 { margin-top: 1.5rem; }
   .mt-4 { margin-top: 2rem; }
   .mt-5 { margin-top: 3rem; }
+  .mt-6 { margin-top: 20rem; }
   
   .mb-1 { margin-bottom: 0.5rem; }
   .mb-2 { margin-bottom: 1rem; }
@@ -632,62 +636,83 @@
   }
   
   /* Glitch efekt – dynamické barvy, stabilita je nuda */
+  .glitch-wrapper {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+  }
+  
   .glitch {
     position: relative;
+    z-index: 5;
     color: #ffffff;
     text-shadow:
-      0.05em 0 0 var(--color-primary),
-      -0.05em 0 0 var(--color-accent);
+      0.02em 0 0 var(--color-primary),
+      -0.02em 0 0 var(--color-primary-invert);
     animation: glitch 2s infinite;
-    will-change: transform; /* Plynulost, nebo se to rozsype jako tvůj kód o půlnoci */
+    will-change: transform;
   }
   
-  @keyframes glitch {
-    0% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-accent); }
-    25% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-accent); }
-    26% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-accent); }
-    99% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-accent); }
-    100% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-accent); }
-  }
-  
-  .glitch:before,
-  .glitch:after {
-    content: attr(data-text);
+  .glitch-top,
+  .glitch-bottom {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    font-weight: bold;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0.9;
+    z-index: 0;
   }
   
-  .glitch:before {
+  /* Glitch vrstva nahoře */
+  .glitch-top {
     color: var(--color-primary);
     animation: glitchTop 3s linear infinite;
-    clip-path: polygon(0 0, 100% 0, 100% 27%, 0 27%);
-    top: -9px;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+    text-shadow:
+      0 0 1px var(--color-accent),
+      0 0 5px var(--color-primary-invert),
+      0 0 12px var(--color-primary-invert);
   }
   
-  .glitch:after {
+  /* Glitch vrstva dole */
+  .glitch-bottom {
     color: var(--color-accent-invert);
     animation: glitchBottom 3.5s linear infinite;
-    clip-path: polygon(0 73%, 100% 73%, 100% 100%, 0 100%);
-    top: 9px;
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+    text-shadow:
+      0 0 1px var(--color-accent),
+      0 0 5px var(--color-accent),
+      0 0 12px var(--color-primary);
   }
   
+  /* Animace hlavního textu */
+  @keyframes glitch {
+    0% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-primary-invert); }
+    25% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-primary-invert); }
+    26% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-primary-invert); }
+    99% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-primary-invert); }
+    100% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-primary-invert); }
+  }
+  
+  /* Animace top vrstvy */
   @keyframes glitchTop {
-    0%, 100% { transform: translate(0, 0); }
-    20% { transform: translate(4px, -4px); }
-    40% { transform: translate(-4px, 4px); }
-    60% { transform: translate(3px, -3px); }
-    80% { transform: translate(-3px, 3px); }
+    0%, 100% { transform: translate(0, -9px); }
+    20% { transform: translate(4px, -13px); }
+    40% { transform: translate(-4px, -5px); }
+    60% { transform: translate(3px, -12px); }
+    80% { transform: translate(-3px, -6px); }
   }
   
+  /* Animace bottom vrstvy */
   @keyframes glitchBottom {
-    0%, 100% { transform: translate(0, 0); }
-    20% { transform: translate(-4px, 0); }
-    40% { transform: translate(4px, 0); }
-    60% { transform: translate(-3px, 0); }
-    80% { transform: translate(3px, 0); }
+    0%, 100% { transform: translate(0, 9px); }
+    20% { transform: translate(-4px, 9px); }
+    40% { transform: translate(4px, 9px); }
+    60% { transform: translate(-3px, 9px); }
+    80% { transform: translate(3px, 9px); }
   }
   
   /* Neonový obrys – hranice, co svítí jako tvůj kód po páté kávě */
@@ -754,7 +779,7 @@
     background: transparent;
     color: var(--color-primary);
     border: var(--neon-border);
-    text-shadow: var(--neon-text-glow);
+    text-shadow: 0 0 10px var(--neon-text-glow);
     padding: 0.5rem 1.5rem;
     border-radius: 9999px;
     font-weight: bold;
@@ -781,7 +806,7 @@
     color: var(--color-primary-invert);
     border: none;
     box-shadow: var(--neon-strong-glow);
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 0 2px var(--color-primary-invert);
     padding: 0.5rem 1.5rem;
     border-radius: 8px;
     font-weight: bold;
@@ -1021,7 +1046,7 @@
   header {
     text-align: center;
     padding: 4rem 2rem;
-    background: linear-gradient(to bottom, var(--color-bg), rgba(255, 255, 255, 0.05));
+    background: var(--color-bg) var(--bg-opacity);
     position: relative;
     overflow: hidden;
   }
@@ -1033,7 +1058,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+    background: var(--color-bg);
     opacity: 0.5;
   }
   
