@@ -2,7 +2,7 @@
 			  <title>Vallia Glitch Pulse</title>
 
 			  <style>
-				.s0 { fill: #ff7800; } 
+				.s0 { fill: #000000; } 
 				.s1 { fill: currentColor; } 
 				#vallia-glitch {
 
