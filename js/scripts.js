@@ -530,8 +530,8 @@ function spawnLogoCard() {
         card.style.zIndex = '5'; // Vyšší z-index pro novou kartu
         const randomCard = moduleCardsData[Math.floor(Math.random() * moduleCardsData.length)];
         card.innerHTML = `
-            <h3 style="font-size: clamp(0.9rem, 3vw, 1.8rem); color: var(--color-primary); text-shadow: var(--neon-text-glow);">${randomCard.title}</h3>
-            <p style="font-size: clamp(0.7rem, 2.5vw, 1.6rem);">${randomCard.description}</p>
+            <h3 style="font-size: clamp(0.7rem, 3vw, 2.4rem); color: var(--color-primary); text-shadow: var(--neon-text-glow);">${randomCard.title}</h3>
+            <p style="font-size: clamp(0.6rem, 2.5vw, 2rem);">${randomCard.description}</p>
         `;
 
         container.appendChild(card);
