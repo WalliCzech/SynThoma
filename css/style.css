@@ -927,37 +927,37 @@ footer {
   .logo-card-overlay {
     position: static;
     left: unset;
-    width: 98vw;
+    right: unset;
+    width: 100vw;
     max-width: 98vw;
     min-width: 0;
     height: auto;
-    margin: 0 auto 1em auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.7em 0.5em;
+    margin: 1.2em auto 1em auto;
+    display: block; /* POZOR! flex NE! */
+    padding: 0.7em 0.7em;
     box-sizing: border-box;
     z-index: 10;
-    font-size: 1.1rem; /* zvětšit font pro mobily */
+    font-size: 1.1rem;
   }
   .floating-card {
     width: 100%;
     min-width: 0;
-    max-width: 100vw;
+    max-width: 420px;   /* NE větší – ať to vypadá jako karta! */
+    margin: 0 auto;
     box-sizing: border-box;
     left: 0 !important;
     top: 0 !important;
     position: static !important;
     font-size: 1.1rem;
     padding: 1em 0.8em;
+    border-radius: 0.7em;
+    background: rgba(0,0,0,0.80); /* pro lepší čitelnost */
+    box-shadow: 0 4px 40px var(--color-glow);
   }
-  .floating-card h3 {
-    font-size: 1.15rem;
-    word-break: break-word;
-  }
+  .floating-card h3,
   .floating-card p {
-    font-size: 0.98rem;
     word-break: break-word;
+    text-align: center;    /* Pokud chceš zarovnat na střed */
   }
 }
 
