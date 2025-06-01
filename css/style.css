@@ -104,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
   text-shadow: 0 0 8px var(--color-glow);
 }
 
-h1 { font-size: 3rem; }
+h1 { font-size: clamp(4rem, 10vw, 6rem); }
 h2 { font-size: 2.5rem; }
 h3 { font-size: 2rem; font-family: 'BungeeHairline', sans-serif; margin-top: 1rem;}
 h4 { font-size: 1.75rem; }
@@ -463,7 +463,7 @@ footer {
 /* Logovací konzole */
 .log-console {
   position: fixed;
-  bottom: 160px;
+  bottom: 120px;
   left: 5%;
   width: 90%;
   max-height: 35%;
@@ -504,7 +504,7 @@ footer {
 
 .log-toggle {
   position: fixed;
-  bottom: 90px;
+  bottom: 60px;
   left: 50%;
   background: transparent;
   border: none;
@@ -636,7 +636,7 @@ footer {
   width: clamp(8rem, 35vw, 35rem);
   height: clamp(8rem, 35vw, 35rem);
   position: relative;
-  top: 3rem;
+  top: auto;
   left: auto;
   z-index: 1;
   overflow: visible;
@@ -651,10 +651,10 @@ footer {
 
 .logo-card-overlay {
   position: relative;
-  top: 5rem;
+  top: auto;
   left: auto;
-  width: clamp(8rem, 35vw, 15rem);
-  height: clamp(8rem, 40vw, 30rem);
+  width: clamp(7rem, 35vw, 20rem);
+  height: clamp(7rem, 40vw, 30rem);
   pointer-events: none;
   animation: pulseAni 6s ease-in-out infinite;
   pointer-events: auto;
@@ -663,8 +663,8 @@ footer {
 }
 
 .floating-card {
-  width: clamp(8rem, 35vw, 15rem);
-  height: clamp(8rem, 40vw, 30rem);
+  width: clamp(7rem, 35vw, 20rem);
+  height: clamp(7rem, 40vw, 30rem);
   background: rgba(0, 0, 0, 0.0);
   padding: 1.4rem 1.2rem;
   position: absolute;
