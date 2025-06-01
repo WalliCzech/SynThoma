@@ -2,20 +2,28 @@
 
 /* Načtení písem – protože defaultní fonty jsou pro lamy */
 @font-face {
-  font-family: 'Orbitron';
-  src: url('../fonts/Orbitron-VariableFont_wght.ttf') format('truetype');
+  font-family: 'BungeeHairline';
+  src: url('../fonts/BungeeHairline-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap; /* Rychlejší než tvůj starý 56k modem */
 }
 
 @font-face {
-  font-family: 'Neuropol';
-  src: url('https://db.onlinewebfonts.com/c/7d3b7e7fdda78e84183e9d33671d4823?family=Neuropol') format('woff2');
+  font-family: 'Handjet';
+  src: url('../fonts/Handjet.ttf') format('truetype');
+  font-weight: normal;
+  font-style: bold;
   font-display: swap;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+@font-face {
+  font-family: 'CyberWall';
+  src: url('../fonts/CyberWall.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ===========================================
  KONFIGURACE PROMĚNNÝCH
@@ -35,7 +43,7 @@
   --neon-glow: 0 0 5px #fff, 0 0 10px var(--color-accent), 0 0 20px var(--color-glow), 0 0 40px var(--color-glow);
   --neon-strong-glow: 0 0 10px var(--color-accent), 0 0 20px var(--color-glow), 0 0 30px var(--color-glow), 0 0 50px var(--color-glow);
   --neon-text-glow: 0 0 2px var(--color-glow), 0 0 6px var(--color-glow);
-  --neon-box-shadow: 0 0 10px var(--color-glow), 0 0 20px var(--color-glow);
+  --neon-box-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-glow);
   --neon-border: 2px solid var(--color-primary);
   --neon-border-thin: 1px solid var(--color-primary);
 
@@ -51,17 +59,7 @@
 
   /* ===== VRSTVY ===== */
   --z-index-header: 100;
-}
-
-/* ===========================================
- TÉMATA
- =========================================== */
-body.style-cyberweed {
-  --color-primary: #39ff14;
-  --color-accent: #b300ff;
-  --color-glow: #39ff14;
-  --color-bg: #041f14;
-  --color-text: #d8ffd8;
+  --z-index-console: 1000;
 }
 
 /* ===========================================
@@ -85,7 +83,7 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: 'Neuropol', 'Orbitron', 'Roboto Mono', sans-serif;
+  font-family: 'BungeeHairline', 'Handjet', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   font-weight: 400;
@@ -98,8 +96,8 @@ body {
 
 /* Typografie */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Orbitron', 'Neuropol', sans-serif;
-  font-weight: 700;
+  font-family: 'BungeeHairline', 'Handjet', 'CyberWall', sans-serif;
+  font-weight: bold;
   line-height: 1.2;
   margin-bottom: 1rem;
   color: var(--color-text);
@@ -108,7 +106,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 { font-size: 3rem; }
 h2 { font-size: 2.5rem; }
-h3 { font-size: 2rem; }
+h3 { font-size: 2rem; font-family: 'BungeeHairline', sans-serif;}
 h4 { font-size: 1.75rem; }
 h5 { font-size: 1.5rem; }
 h6 { font-size: 1.25rem; }
@@ -116,6 +114,8 @@ h6 { font-size: 1.25rem; }
 p {
   margin-bottom: 1.5rem;
   line-height: 1.7;
+  font-size: 1.25rem;
+  font-family: 'Handjet', sans-serif;
 }
 
 a {
@@ -128,6 +128,13 @@ a:hover {
   color: var(--color-primary);
   text-shadow: var(--neon-text-glow);
 }
+
+.neon-text-nadpis {
+  font-family: 'CyberWall', sans-serif;
+  font-size: 2rem;
+  text-shadow: 0 0 12px var(--color-glow); 
+  color: var(--color-text);
+} 
 
 /* Obrázky */
 img {
@@ -175,7 +182,7 @@ code, pre {
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1.5rem;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'BungeeHairline', sans-serif;
   font-weight: 700;
   font-size: 1rem;
   text-transform: uppercase;
@@ -247,57 +254,57 @@ code, pre {
   100% { background-position: 0% 50%; }
 }
 
-  /* Neonové obrysové tlačítko */
-  .neon-button-outline {
-    background: transparent;
-    color: var(--color-primary);
-    border: var(--neon-border);
-    text-shadow: 0 0 10px var(--neon-text-glow);
-    padding: 0.5rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    box-shadow: var(--neon-shadow);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    cursor: pointer;
-  }
-  
-  .neon-button-outline:hover {
-    background: var(--color-primary);
-    color: var(--color-primary-invert);
-    box-shadow: var(--neon-strong-glow);
-    transform: translateY(-2px);
-  }
-  
-  /* Invertované tlačítko */
-  .neon-button-invert {
-    background: var(--color-primary);
-    color: var(--color-primary-invert);
-    border: none;
-    box-shadow: var(--neon-strong-glow);
-    text-shadow: 0 0 2px var(--color-primary-invert);
-    padding: 0.5rem 1.5rem;
-    border-radius: var(--border-radius);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    cursor: pointer;
-  }
-  
-  .neon-button-invert:hover {
-    background: var(--color-primary-invert);
-    color: var(--color-primary);
-    box-shadow: 0 0 25px var(--color-glow), 0 0 50px var(--color-glow);
-    transform: translateY(-2px) scale(1.02);
-  }
+.neon-button-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: var(--neon-border);
+  font-family: 'Handjet';
+  text-shadow: 0 0 10px var(--neon-text-glow);
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: var(--neon-shadow);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.neon-button-outline:hover {
+  background: var(--color-primary);
+  color: var(--color-primary-invert);
+  box-shadow: var(--neon-strong-glow);
+  transform: translateY(-2px);
+}
+
+/* Invertované tlačítko */
+.neon-button-invert {
+  background: var(--color-primary-invert);
+  color: var(--color-primary);
+  border: none;
+  box-shadow: var(--neon-strong-glow);
+  text-shadow: 0 0 2px var(--color-primary-invert);
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.neon-button-invert:hover {
+  background: var(--color-primary-invert);
+  color: var(--color-primary);
+  box-shadow: 0 0 25px var(--color-glow), 0 0 50px var(--color-glow);
+  transform: translateY(-2px) scale(1.02);
+}
 
 /* Glitch efekt */
 .glitch-wrapper {
@@ -383,6 +390,9 @@ code, pre {
 
 .module-card {
   border: var(--neon-border);
+  font-family: 'Handjet';
+  font-weight: bold;
+  font-size: 1.5rem;
   padding: 2rem;
   margin: 1rem;
   border-radius: var(--border-radius);
@@ -430,10 +440,17 @@ code, pre {
 .neon-logo {
   filter: drop-shadow(0 0 10px var(--color-glow));
   transition: var(--transition-normal);
+  width: 50px;
+  height: 50px;
+  position: static !important;
+  z-index: auto !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .neon-logo:hover {
-  filter: drop-shadow(0 0 50px var(--color-glow));
+  filter: drop-shadow(0 0 20px var(--color-glow));
 }
 
 /* Header a Footer */
@@ -459,15 +476,124 @@ footer {
   border-top: var(--neon-border);
 }
 
+/* Logovací konzole */
+.log-console {
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  width: 350px;
+  max-height: 300px;
+  background: rgba(0, 0, 0, 0.8);
+  border: var(--neon-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--neon-box-shadow);
+  z-index: 100;
+  font-family: 'handjet', sans-serif;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+}
+
+.log-console--visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.log-console__header {
+  padding: 0.5rem 1rem;
+  background: var(--neon-gradient);
+  color: var(--color-text);
+  text-shadow: var(--neon-text-glow);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.log-console__messages {
+  padding: 0.5rem 1rem;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.log-console__message {
+  padding: 0.3rem 0;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.log-console__message--error {
+  color: var(--color-warning);
+  text-shadow: 0 0 5px var(--color-warning);
+}
+
+.log-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: calc(var(--z-index-console) + 1);
+  transition: var(--transition-normal);
+}
+
+.log-toggle:hover {
+  transform: scale(1.1);
+  transform: translateX(-15px) translateY(-3px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.log-toggle--active {
+  transform: scale(1.2);
+  filter: drop-shadow(0 15px 20px var(--color-accent));
+  transform: translateX(-15px) translateY(-3px);
+}
+
+.log-console__input {
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.9);
+  border-top: var(--neon-border-thin);
+}
+
+#console-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--color-success);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  text-shadow: var(--neon-text-glow);
+  outline: none;
+}
+
+#console-input::placeholder {
+  color: var(--color-text);
+  opacity: 0.6;
+}
+
+
 /* Responsivita */
 @media (max-width: 1024px) {
   .module-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
   header { padding: 3rem 1.5rem; }
+  .log-console { width: 300px; }
+  .log-toggle { bottom: 15px; right: 15px; }
 }
 
 @media (max-width: 768px) {
   .module-container { grid-template-columns: 1fr; padding: 1rem; }
   header { padding: 2rem 1rem; }
+  .log-console { width: 250px; max-height: 200px; }
+  .neon-logo { width: 40px; height: 40px; }
 }
 
 @media (max-width: 480px) {
@@ -479,4 +605,370 @@ footer {
   h1 { font-size: 2rem; }
   h2 { font-size: 1.75rem; }
   h3 { font-size: 1.5rem; }
+  .log-console { width: 90%; right: 5%; bottom: 70px; }
+  .log-toggle { bottom: 10px; right: 5%; }
+  .neon-logo { width: 35px; height: 35px; }
+}
+
+
+
+
+.rain-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.rain-drop {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: var(--color-glow);
+  box-shadow: var(--neon-shadow);
+  animation: fall 1s linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100vh); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0.2; }
+}
+
+
+
+.glitch-storm::before, .glitch-storm::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #ff00ff, #00ffff);
+  animation: glitch-lines 2s infinite ease-in-out;
+  opacity: 0.05;
+}
+
+.glitch-storm::after {
+  top: 30%;
+  animation-delay: 0.5s;
+}
+
+.glitch-storm::before {
+  top: 70%;
+  animation-delay: 1.2s;
+}
+
+@keyframes glitch-lines {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: scale(0.95); }
+  10% { opacity: 1; transform: scale(1); }
+  90% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.95); }
+}
+
+/* Karty tak epické, že by je chtěl hacknout i Case z Neuromancera! 🌌 */
+
+
+.logo-card-overlay {
+  position: absolute;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 13em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.floating-card {
+  width: 200px;
+  height: 300px;
+  top: 130px;
+  background: rgba(10, 10, 30, 0.2);
+  border-radius: 0.6em;
+  border: 0.18em solid var(--color-primary);
+  box-shadow: 
+    0 0 30px var(--color-primary),
+    0 0 60px var(--color-glow),
+    inset 0 0 15px var(--color-accent);
+  padding: 1.4rem 1.2rem;
+  margin-bottom: 0.4rem;
+  pointer-events: auto;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  animation: pulse-card 6s ease-in-out infinite, neonFlicker 3s infinite alternate;
+  font-size: 1rem;
+}
+
+.floating-card:hover {
+  transform: scale(1.12) translateY(-10px);
+  box-shadow: 
+    0 0 40px var(--color-primary),
+    0 0 80px var(--color-glow),
+    0 0 100px var(--color-primary);
+  border-color: var(--color-accent);
+  z-index: 30;
+}
+
+/* NeonFlicker – čistý kyberchaos s náhodnými záblesky */
+@keyframes neonFlicker {
+  0% {
+    transform: translate(0);
+    filter: brightness(1);
+  }
+  2% {
+    transform: translate(-6px, 6px);
+    box-shadow: 0 0 25px var(--color-glow), 4px 0 20px var(--color-primary);
+    filter: brightness(1.3);
+  }
+  4% {
+    transform: translate(6px, -6px);
+    filter: brightness(0.7);
+  }
+  6% {
+    transform: translate(-5px, 5px);
+    filter: brightness(1.4);
+  }
+  8% {
+    transform: translate(0);
+    filter: brightness(1);
+  }
+  100% {
+    transform: translate(0);
+    filter: brightness(1);
+  }
+}
+
+.floating-card h3 {
+  font-size: 1.5rem;
+  font-family: 'BungeeHairline', sans-serif;
+  font-weight: bold;
+  color: var(--color-primary);
+  text-shadow: 
+    0 0 15px var(--color-accent),
+    0 0 30px var(--color-glow),
+    0 0 40px var(--color-primary);
+  margin-bottom: 0.7rem;
+  position: relative;
+  z-index: 2;
+  word-break: break-word;
+}
+
+.floating-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-family: 'handjet', sans-serif;
+  color: #e0e0e0;
+  text-shadow: 0 0 8px var(--color-primary);
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  word-break: break-word;
+}
+
+/* Holografický scanline efekt */
+.floating-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 45%,
+    var(--color-primary) 50%,
+    transparent 55%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  animation: scanline 6s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Pseudo-částice pro depixelizaci */
+.floating-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      var(--color-glow) 0,
+      var(--color-primary) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 0.25s ease-in-out;
+}
+
+/* Depixelizace – karta se rozpadá na pixely */
+.card-exit {
+  opacity: 0;
+  transform: translateY(50px) scale(0.4);
+  z-index: 5; /* Nižší z-index pro odchozí kartu */
+  transition: 
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+  animation: depixelize 0.3s ease-in-out forwards;
+}
+
+.card-exit::after {
+  opacity: 1; /* Zobrazí částicový efekt při odchodu */
+  animation: pixelScatter 0.3s ease-in-out forwards;
+}
+
+@keyframes depixelize {
+  0% {
+    opacity: 1;
+    filter: brightness(1) blur(0);
+    clip-path: inset(0 0 0 0);
+  }
+  50% {
+    opacity: 0.5;
+    filter: brightness(1.6) blur(2px);
+    clip-path: polygon(
+      0% 0%, 20% 10%, 40% 0%, 60% 10%, 80% 0%, 100% 10%,
+      100% 90%, 80% 100%, 60% 90%, 40% 100%, 20% 90%, 0% 100%
+    );
+    transform: translateY(25px) scale(0.7);
+  }
+  100% {
+    opacity: 0;
+    filter: brightness(0) blur(5px);
+    clip-path: polygon(
+      0% 0%, 20% 20%, 40% 0%, 60% 20%, 80% 0%, 100% 20%,
+      100% 80%, 80% 100%, 60% 80%, 40% 100%, 20% 80%, 0% 100%
+    );
+    transform: translateY(50px) scale(0.4);
+  }
+}
+
+@keyframes pixelScatter {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(10px, -10px) scale(1.5);
+  }
+}
+
+/* Skládání karty – pixely se spojují */
+.card-enter {
+  opacity: 0;
+  transform: translateY(-50px) scale(0.4);
+  filter: blur(5px);
+  z-index: 15; /* Vyšší z-index pro novou kartu */
+  clip-path: polygon(
+    0% 0%, 20% 20%, 40% 0%, 60% 20%, 80% 0%, 100% 20%,
+    100% 80%, 80% 100%, 60% 80%, 40% 100%, 20% 80%, 0% 100%
+  );
+}
+
+.card-enter::after {
+  opacity: 1; /* Zobrazí částicový efekt při příchodu */
+  animation: pixelAssemble 0.3s ease-in-out forwards;
+}
+
+.card-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  z-index: 15;
+  clip-path: inset(0 0 0 0);
+  transition: 
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out,
+    filter 0.3s ease-in-out,
+    clip-path 0.3s ease-in-out;
+}
+
+@keyframes pixelAssemble {
+  0% {
+    opacity: 1;
+    transform: translate(-10px, 10px) scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.pulse-card {
+  animation: pulse-card 6s ease-in-out infinite;
+}
+
+@keyframes pulse-card {
+  0% {
+    transform: scale(0.92);
+    box-shadow: 0 0 20px var(--color-primary);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 50px var(--color-glow), 0 0 70px var(--color-primary);
+  }
+  100% {
+    transform: scale(0.92);
+    box-shadow: 0 0 20px var(--color-primary);
+  }
+}
+
+/* Mobily – kyberpunk i na malé obrazovce */
+@media (max-width: 600px) {
+  .logo-row-resp {
+    font-size: clamp(0.7rem, 6vw, 1.3rem);
+    gap: 0.8em;
+    min-height: 6em;
+  }
+  .logo-svg-wrap { min-width: 5em; max-width: 11em; }
+  .logo-card-overlay, .floating-card {
+    min-width: 6em;
+    max-width: 98vw;
+    padding: 0.7em 0.5em;
+    font-size: 0.93em;
+  }
+}
+
+
+
+.theme-toggle--active {
+  transform: scale(1.2);
+  box-shadow: var(--neon-strong-glow);
+}
+
+.logo-row-resp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2em;
+  /* Tady magic! Font-size podle šířky stránky, plynule mezi 1rem až 2.2rem */
+  font-size: clamp(1rem, 4vw, 2.2rem);
+  min-height: 10em;
+  width: 100%;
 }
