@@ -922,19 +922,22 @@ footer {
   width: 100%;
 }
 
-/* Mobily – kyberpunk i na malé obrazovce */
+/* OPRAVA pro mobily */
 @media (max-width: 600px) {
-  .logo-row-resp {
-    font-size: clamp(0.7rem, 6vw, 1.3rem);
-    gap: 0.8em;
-    min-height: 6em;
-  }
-  .logo-svg-wrap { min-width: 5em; max-width: 11em; }
-  .logo-card-overlay, .floating-card {
-    min-width: 6em;
+  .logo-card-overlay {
+    position: static;    /* Už NE absolute, aby karta nebyla mimo! */
+    left: unset;
+    width: 98vw;         /* Ať je na celou šířku displeje s mírnou rezervou */
     max-width: 98vw;
+    height: auto;        /* Výšku nechej automatickou */
+    min-width: unset;
+    margin: 0 auto 1em auto; /* Zarovnat na střed pod logo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.7em 0.5em;
-    font-size: 0.93em;
+    box-sizing: border-box;
+    z-index: 10;
   }
 }
 
