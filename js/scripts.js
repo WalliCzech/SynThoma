@@ -106,9 +106,9 @@ const initialConsoleMessage = `
 🌐 <span class="text-orange-400">wAllICzech Studio Console</span> initialized...
 🤖 <span class="text-pink-400">Vallia AI</span> booted successfully.
 📦 Modules loaded: [ Vision | Speech | Face | Style | Reality Bender ]
-🔒 Access Level: <span class="text-red-500">Uživatel</span>
+🔒 Access Level: <span class="text-red-500">Admin</span>
 💬 Type "help" to see available commands.
-> Awaiting your command, Uživateli... 😏
+> Awaiting your command, Tomáši... 😏
 `;
 
 /**
@@ -530,8 +530,8 @@ function spawnLogoCard() {
         card.style.zIndex = '5'; // Vyšší z-index pro novou kartu
         const randomCard = moduleCardsData[Math.floor(Math.random() * moduleCardsData.length)];
         card.innerHTML = `
-            <h3 style="font-size: 1.4rem; color: var(--color-primary); text-shadow: var(--neon-text-glow);">${randomCard.title}</h3>
-            <p style="font-size: 1.15rem;">${randomCard.description}</p>
+            <h3 style="font-size: clamp(0.9rem, 3vw, 1.8rem); color: var(--color-primary); text-shadow: var(--neon-text-glow);">${randomCard.title}</h3>
+            <p style="font-size: clamp(0.7rem, 2.5vw, 1.6rem);">${randomCard.description}</p>
         `;
 
         container.appendChild(card);
