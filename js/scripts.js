@@ -106,9 +106,9 @@ const initialConsoleMessage = `
 🌐 <span class="text-orange-400">wAllICzech Studio Console</span> initialized...
 🤖 <span class="text-pink-400">Vallia AI</span> booted successfully.
 📦 Modules loaded: [ Vision | Speech | Face | Style | Reality Bender ]
-🔒 Access Level: <span class="text-red-500">Admin</span>
+🔒 Access Level: <span class="text-red-500">Uživatel</span>
 💬 Type "help" to see available commands.
-> Awaiting your command, Tomáši... 😏
+> Awaiting your command, Uživateli... 😏
 `;
 
 /**
