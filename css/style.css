@@ -112,8 +112,8 @@ h5 { font-size: 1.5rem; }
 h6 { font-size: 1.25rem; }
 
 p {
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
+  margin-bottom: 1.4rem;
+  line-height: 1.5;
   font-size: 1.25rem;
   font-family: 'Handjet', sans-serif;
 }
@@ -489,7 +489,7 @@ footer {
   box-shadow: var(--neon-box-shadow);
   z-index: 100;
   font-family: 'handjet', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--color-text);
   overflow: hidden;
   opacity: 0;
@@ -505,7 +505,7 @@ footer {
 }
 
 .log-console__header {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   background: var(--neon-gradient);
   color: var(--color-text);
   text-shadow: var(--neon-text-glow);
@@ -706,7 +706,7 @@ footer {
   overflow: hidden;
   z-index: 10;
   animation: pulse-card 6s ease-in-out infinite, neonFlicker 3s infinite alternate;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 .floating-card:hover {
@@ -787,7 +787,7 @@ footer {
     to bottom,
     transparent 0%,
     transparent 45%,
-    var(--color-primary) 50%,
+    var(--color-glow) 50%,
     transparent 55%,
     transparent 100%
   );
