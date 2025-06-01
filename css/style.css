@@ -925,19 +925,39 @@ footer {
 /* OPRAVA pro mobily */
 @media (max-width: 600px) {
   .logo-card-overlay {
-    position: static;    /* Už NE absolute, aby karta nebyla mimo! */
+    position: static;
     left: unset;
-    width: 98vw;         /* Ať je na celou šířku displeje s mírnou rezervou */
+    width: 98vw;
     max-width: 98vw;
-    height: auto;        /* Výšku nechej automatickou */
-    min-width: unset;
-    margin: 0 auto 1em auto; /* Zarovnat na střed pod logo */
+    min-width: 0;
+    height: auto;
+    margin: 0 auto 1em auto;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.7em 0.5em;
     box-sizing: border-box;
     z-index: 10;
+    font-size: 1.1rem; /* zvětšit font pro mobily */
+  }
+  .floating-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+    box-sizing: border-box;
+    left: 0 !important;
+    top: 0 !important;
+    position: static !important;
+    font-size: 1.1rem;
+    padding: 1em 0.8em;
+  }
+  .floating-card h3 {
+    font-size: 1.15rem;
+    word-break: break-word;
+  }
+  .floating-card p {
+    font-size: 0.98rem;
+    word-break: break-word;
   }
 }
 
