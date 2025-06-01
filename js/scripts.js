@@ -526,8 +526,8 @@ function spawnLogoCard() {
 
         // Nová karta – skládá se z pixelů jako z datového proudu
         const card = document.createElement('div');
-        card.className = 'floating-card card-enter pulse-card';
-        card.style.zIndex = '15'; // Vyšší z-index pro novou kartu
+        card.className = 'floating-card card-enter';
+        card.style.zIndex = '5'; // Vyšší z-index pro novou kartu
         const randomCard = moduleCardsData[Math.floor(Math.random() * moduleCardsData.length)];
         card.innerHTML = `
             <h3 style="font-size: 1.4rem; color: var(--color-primary); text-shadow: var(--neon-text-glow);">${randomCard.title}</h3>
