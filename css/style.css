@@ -463,21 +463,17 @@ footer {
 /* Logovací konzole */
 .log-console {
   position: fixed;
-  bottom: 80px;
-  left: 20px;
-  width: 350px;
-  max-height: 300px;
-  background: rgba(0, 0, 0, 0.8);
-  border: var(--neon-border);
-  border-radius: var(--border-radius);
-  box-shadow: var(--neon-box-shadow);
+  bottom: 160px;
+  left: 5%;
+  width: 90%;
+  max-height: 35%;
+  background: rgba(0, 0, 0, 0);
   z-index: 100;
   font-family: 'handjet', sans-serif;
   font-size: 0.95rem;
   color: var(--color-text);
   overflow: visible;
   opacity: 0;
-  transform: translateY(20px);
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
 }
@@ -488,20 +484,11 @@ footer {
   visibility: visible;
 }
 
-.log-console__header {
-  padding: 0.5rem 0.5rem;
-  background: var(--neon-gradient);
-  color: var(--color-text);
-  text-shadow: var(--neon-text-glow);
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
 .log-console__messages {
   padding: 0.5rem 1rem;
   max-height: 250px;
   overflow-y: auto;
+  text-align: center;
 }
 
 .log-console__message {
@@ -517,8 +504,8 @@ footer {
 
 .log-toggle {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 90px;
+  left: 50%;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -527,8 +514,7 @@ footer {
 }
 
 .log-toggle:hover {
-  transform: scale(1.1);
-  transform: translateX(-15px) translateY(-3px);
+  transform: translateX(0) translateY(-8px) scale(1.1);
 }
 
 @keyframes fadeIn {
@@ -537,9 +523,8 @@ footer {
 }
 
 .log-toggle--active {
-  transform: scale(1.2);
   filter: drop-shadow(0 15px 20px var(--color-accent));
-  transform: translateX(-15px) translateY(-3px);
+  transform: translateX(0) translateY(-8px) scale(1.25);
 }
 
 .log-console__input {
@@ -562,36 +547,6 @@ footer {
 #console-input::placeholder {
   color: var(--color-text);
   opacity: 0.6;
-}
-
-
-/* Responsivita */
-@media (max-width: 1024px) {
-  .module-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-  header { padding: 3rem 1.5rem; }
-  .log-console { width: 300px; }
-  .log-toggle { bottom: 15px; right: 15px; }
-}
-
-@media (max-width: 768px) {
-  .module-container { grid-template-columns: 1fr; padding: 1rem; }
-  header { padding: 2rem 1rem; }
-  .log-console { width: 250px; max-height: 200px; }
-  .neon-logo { width: 40px; height: 40px; }
-}
-
-@media (max-width: 480px) {
-  .neon-button, .btn, .neon-hybrid-button {
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9rem;
-  }
-  .module-card { padding: 1.5rem; margin: 0.5rem; }
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.5rem; }
-  .log-console { width: 90%; right: 5%; bottom: 70px; }
-  .log-toggle { bottom: 10px; right: 5%; }
-  .neon-logo { width: 35px; height: 35px; }
 }
 
 
@@ -678,9 +633,11 @@ footer {
 .neon-logo {
   filter: drop-shadow(0 0 14px var(--color-glow));
   transform-origin: right;
-  width: clamp(10rem, 35vw, 35rem);
-  height: clamp(10rem, 35vw, 35rem);
-  position: static;
+  width: clamp(8rem, 35vw, 35rem);
+  height: clamp(8rem, 35vw, 35rem);
+  position: relative;
+  top: 3rem;
+  left: auto;
   z-index: 1;
   overflow: visible;
   animation: pulseAni 6s ease-in-out infinite;
@@ -694,10 +651,10 @@ footer {
 
 .logo-card-overlay {
   position: relative;
-  top: 3rem;
-  left: 5rem;
+  top: 5rem;
+  left: auto;
   width: clamp(8rem, 35vw, 15rem);
-  height: clamp(10rem, 40vw, 30rem);
+  height: clamp(8rem, 40vw, 30rem);
   pointer-events: none;
   animation: pulseAni 6s ease-in-out infinite;
   pointer-events: auto;
@@ -707,7 +664,7 @@ footer {
 
 .floating-card {
   width: clamp(8rem, 35vw, 15rem);
-  height: clamp(10rem, 40vw, 30rem);
+  height: clamp(8rem, 40vw, 30rem);
   background: rgba(0, 0, 0, 0.0);
   padding: 1.4rem 1.2rem;
   position: absolute;
