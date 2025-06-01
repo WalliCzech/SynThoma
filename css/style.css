@@ -436,23 +436,6 @@ code, pre {
   transition: var(--transition-normal);
 }
 
-/* Neonový stín pro logo */
-.neon-logo {
-  filter: drop-shadow(0 0 10px var(--color-glow));
-  transition: var(--transition-normal);
-  width: 50px;
-  height: 50px;
-  position: static !important;
-  z-index: auto !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: visible;
-}
-
-.neon-logo:hover {
-  filter: drop-shadow(0 0 20px var(--color-glow));
-}
 
 /* Header a Footer */
 header {
@@ -675,52 +658,69 @@ footer {
   100% { opacity: 0; transform: scale(0.95); }
 }
 
+/* Neonový stín pro logo */
+.neon-logoVal {
+  filter: drop-shadow(0 0 14px var(--color-glow));
+  transition: var(--transition-normal);
+  width: 50px;
+  height: 50px;
+  position: static;
+  z-index: 1;
+  overflow: visible;
+}
+
+.neon-logoVal:hover {
+  filter: drop-shadow(0 0 20px var(--color-glow));
+}
+
+
+/* Neonový stín pro logo */
+.neon-logo {
+  filter: drop-shadow(0 0 14px var(--color-glow));
+  transform-origin: right;
+  width: clamp(10rem, 35vw, 35rem);
+  height: clamp(10rem, 35vw, 35rem);
+  position: static;
+  z-index: 1;
+  overflow: visible;
+  animation: pulseAni 6s ease-in-out infinite;
+ 
+}
+
+.neon-logo:hover {
+  filter: drop-shadow(0 0 20px var(--color-glow));
+}
 /* Karty tak epické, že by je chtěl hacknout i Case z Neuromancera! 🌌 */
 
-
 .logo-card-overlay {
-  position: absolute;
-  left: 360px;
-  width: 200px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  position: relative;
+  top: 3rem;
+  left: 5rem;
+  width: clamp(8rem, 35vw, 15rem);
+  height: clamp(10rem, 40vw, 30rem);
   pointer-events: none;
-  animation: pulse-card 6s ease-in-out infinite;
-  border-radius: 0.3em;
-  border: 0.12em solid var(--color-primary);
-  box-shadow: 
-    0 0 0 10px var(--color-glow),
-    0 0 15px var(--color-glow);
+  animation: pulseAni 6s ease-in-out infinite;
   pointer-events: auto;
   z-index: 15;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .floating-card {
-  width: auto;
-  height: auto;
-  top: 0px;
+  width: clamp(8rem, 35vw, 15rem);
+  height: clamp(10rem, 40vw, 30rem);
   background: rgba(0, 0, 0, 0.0);
   padding: 1.4rem 1.2rem;
   position: absolute;
   overflow: hidden;
-  font-size: 2rem;
+  font-size: clamp(0.7rem, 5vw, 2.2rem);
 }
 
 .logo-card-overlay:hover {
   transform: scale(1.12) translateY(-10px);
-  box-shadow: 
-    0 0 40px var(--color-primary),
-    0 0 80px var(--color-glow),
-    0 0 100px var(--color-primary);
-  border-color: var(--color-accent);
   z-index: 30;
 }
 
 .floating-card h3 {
-  font-size: 1.5rem;
   font-family: 'BungeeHairline', sans-serif;
   font-weight: bold;
   color: var(--color-primary);
@@ -735,8 +735,7 @@ footer {
 }
 
 .floating-card p {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: auto;
   font-family: 'handjet', sans-serif;
   color: #e0e0e0;
   text-shadow: 0 0 8px var(--color-primary);
@@ -890,75 +889,25 @@ footer {
   }
 }
 
-.pulse-card {
-  animation: pulse-card 6s ease-in-out infinite;
+.pulse {
+  animation: pulseAni 6s ease-in-out infinite;
 }
 
-@keyframes pulse-card {
+@keyframes pulseAni {
   0% {
     transform: scale(0.92);
-    box-shadow: 0 0 10px var(--color-glow);
   }
   50% {
     transform: scale(1.08);
-    box-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-glow);
   }
   100% {
     transform: scale(0.92);
-    box-shadow: 0 0 10px var(--color-glow);
   }
 }
 
 .logo-row-resp {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
   gap: 1.2em;
   overflow: visible;
-  /* Tady magic! Font-size podle šířky stránky, plynule mezi 1rem až 2.2rem */
-  font-size: clamp(1rem, 4vw, 2.2rem);
-  min-height: 10em;
-  width: 100%;
-}
-
-/* OPRAVA pro mobily */
-@media (max-width: 600px) {
-  .logo-card-overlay {
-    position: static;
-    left: unset;
-    right: unset;
-    width: 100vw;
-    max-width: 98vw;
-    min-width: 0;
-    height: auto;
-    margin: 1.2em auto 1em auto;
-    display: block; /* POZOR! flex NE! */
-    padding: 0.7em 0.7em;
-    box-sizing: border-box;
-    z-index: 10;
-    font-size: 1.1rem;
-  }
-  .floating-card {
-    width: 100%;
-    min-width: 0;
-    max-width: 420px;   /* NE větší – ať to vypadá jako karta! */
-    margin: 0 auto;
-    box-sizing: border-box;
-    left: 0 !important;
-    top: 0 !important;
-    position: static !important;
-    font-size: 1.1rem;
-    padding: 1em 0.8em;
-    border-radius: 0.7em;
-    background: rgba(0,0,0,0.80); /* pro lepší čitelnost */
-    box-shadow: 0 4px 40px var(--color-glow);
-  }
-  .floating-card h3,
-  .floating-card p {
-    word-break: break-word;
-    text-align: center;    /* Pokud chceš zarovnat na střed */
-  }
 }
 
 
