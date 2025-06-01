@@ -1,258 +1,598 @@
 /**
  * wAllICzech Studio - Hlavní JavaScriptový soubor
  * 
- * Tento soubor obsahuje veškerou funkcionalitu pro správu témat a uživatelského rozhraní.
+ * Tento soubor je tvůj neonový pas do Matrixu! 🖥️ Karty teď sedí vedle loga
+ * a střídají se jako reklamy na kyberpunkovém billboardu. 😎
  */
 
 // ===========================================
 // KONFIGURACE TÉMAT
 // ===========================================
+if (typeof themeColors === 'undefined') {
+    console.error('❌ Téma nebylo načteno! Zkontroluj, jestli je themeColors.js načtený, nebo Matrix zhasne! 😱');
+}
 
 /**
- * Seznam dostupných témat
+ * Seznam dostupných témat – vyber si svůj jed! 🐍
  * @type {string[]}
  */
 const styleThemes = [
-    'default',      // Výchozí styl
-    'cyberWeed',    // Zelené téma
-    'cyberPink',    // Růžové téma
-    'cyberBlue',    // Modré téma
-    'cyberOrange',  // Oranžové téma
-    'cyberPurple'   // Fialové téma
+    'default', 'cyberWeed', 'cyberPink', 'cyberBlue', 'cyberOrange', 'cyberPurple', 'neonGrave', 'bloodRust',
+    'toxicSlime', 'midnightOil', 'glitchRed', 'voidPurple', 'acidLemon', 'burntChrome', 'frostByte', 'plasmaPulse',
+    'shadowLime', 'crimsonGlitch', 'electricAbyss', 'venomGreen', 'obsidianGlow', 'hellfireOrange', 'neonViper',
+    'darkSakura', 'ghostCircuit', 'moltenCore', 'cyberAsh', 'toxicFuchsia', 'steelFrost', 'neonBlood', 'voidCyan',
+    'radioactiveMint', 'duskEmber', 'cyberCrimson', 'phantomGreen', 'twilightNeon'
 ];
 
+// ===========================================
+// LOGOVACÍ KONZOLE
+// ===========================================
 /**
- * Definice barev pro různá témata
- * @type {Object.<string, {primary: string, primaryInvert: string, accent: string, accentInvert: string, glow: string, bg: string, text: string, textInvert: string}>}
+ * Pole pro ukládání zpráv konzole – jako logy z hacknutého serveru 🖥️
+ * @type {string[]}
  */
-const themeColors = {
-    default: {
-        primary: "#ff4500",
-        primaryInvert: "#ba1787",
-        accent: "#ff5500",
-        accentInvert: "#ba1787",
-        glow: "#ff007a",
-        bg: "#000000",
-        text: "#eaffea",
-        textInvert: "#000000"
-    },
-    cyberWeed: {
-        primary: "#00ff88",
-        primaryInvert: "#000000",
-        accent: "#33ffaa",
-        accentInvert: "#000000",
-        glow: "#00ffcc",
-        bg: "#000000",
-        text: "#eaffea",
-        textInvert: "#000000"
-    },
-    cyberPink: {
-        primary: "#ff77ff",
-        primaryInvert: "#000000",
-        accent: "#ff99ff",
-        accentInvert: "#000000",
-        glow: "#ffaaee",
-        bg: "#000000",
-        text: "#ffffff",
-        textInvert: "#000000"
-    },
-    cyberBlue: {
-        primary: "#00a8ff",
-        primaryInvert: "#000000",
-        accent: "#00f7ff",
-        accentInvert: "#000000",
-        glow: "#00e5ff",
-        bg: "#000000",
-        text: "#e6f7ff",
-        textInvert: "#000000"
-    },
-    cyberOrange: {
-        primary: "#ff8c00",
-        primaryInvert: "#9b2525",
-        accent: "#ffbb33",
-        accentInvert: "#9b2525",
-        glow: "#ffaa33",
-        bg: "#000000",
-        text: "#fff0e6",
-        textInvert: "#000000"
-    },
-    cyberPurple: {
-        primary: "#b300ff",
-        primaryInvert: "#000000",
-        accent: "#cc66ff",
-        accentInvert: "#000000",
-        glow: "#cc99ff",
-        bg: "#000000",
-        text: "#f2e6ff",
-        textInvert: "#000000"
-    }
+const logMessages = [];
+
+// Uložení původních metod konzole
+const originalConsole = {
+    log: console.log.bind(console),
+    error: console.error.bind(console)
 };
+
+/**
+ * Přepisuje console.log a console.error, aby to svítilo v UI jako neon! 😎
+ */
+function overrideConsole() {
+    if (typeof console === 'undefined') {
+        originalConsole.error('❌ Konzole není dostupná! Matrix je v háji! 😵');
+        return;
+    }
+
+    console.log = function(...args) {
+        try {
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            logMessages.push({ text: message, type: 'log' });
+            updateConsoleDisplay();
+            originalConsole.log(...args);
+        } catch (e) {
+            originalConsole.error('💥 Chyba v console.log: ', e);
+        }
+    };
+
+    console.error = function(...args) {
+        try {
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            logMessages.push({ text: message, type: 'error' });
+            updateConsoleDisplay();
+            originalConsole.error(...args);
+        } catch (e) {
+            originalConsole.error('💥 Chyba v console.error: ', e);
+        }
+    };
+
+    originalConsole.log('✅ Konzole přepsána, připrav se na neonový výstup! 😎');
+}
+
+/**
+ * Aktualizuje konzoli na stránce – ať to vypadá jako terminál z Matrixu! 📺
+ * @returns {void}
+ */
+function updateConsoleDisplay() {
+    const messagesContainer = document.getElementById('log-messages');
+    if (!messagesContainer) {
+        originalConsole.error('❌ Kontejner log-messages nenalezen! Zkontroluj HTML! 🌋');
+        return;
+    }
+
+    while (logMessages.length > 7) {
+        logMessages.shift();
+    }
+
+    messagesContainer.innerHTML = logMessages
+        .map(msg => `<div class="log-console__message${msg.type === 'error' ? ' log-console__message--error' : ''}">${msg.text}</div>`)
+        .join('');
+
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+/**
+ * Úvodní zpráva konzole – jako bys nabootoval AI z budoucnosti! 🤖
+ */
+const initialConsoleMessage = `
+🌐 <span class="text-orange-400">wAllICzech Studio Console</span> initialized...
+🤖 <span class="text-pink-400">Vallia AI</span> booted successfully.
+📦 Modules loaded: [ Vision | Speech | Face | Style | Reality Bender ]
+🔒 Access Level: <span class="text-red-500">Admin</span>
+💬 Type "help" to see available commands.
+> Awaiting your command, Tomáši... 😏
+`;
+
+/**
+ * Inicializuje přepínání konzole – otevře portál do kyberprostoru! 🌌
+ * @returns {void}
+ */
+function initConsoleToggle() {
+    try {
+        const toggleBtn = document.getElementById('log-toggle');
+        const console = document.getElementById('log-console');
+        const consoleInput = document.getElementById('console-input');
+        if (!toggleBtn || !console || !consoleInput) {
+            originalConsole.error('❌ Chybí DOM prvky pro konzoli! Zkontroluj HTML! 😱');
+            return;
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const isVisible = console.classList.toggle('log-console--visible');
+            toggleBtn.classList.toggle('log-toggle--active', isVisible);
+
+            if (isVisible && !console.dataset.initialized) {
+                const logArea = document.getElementById('log-messages');
+                logArea.innerHTML = initialConsoleMessage;
+                console.dataset.initialized = 'true';
+            }
+
+            if (isVisible) consoleInput.focus();
+        });
+
+        consoleInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && consoleInput.value.trim()) {
+                processConsoleCommand(consoleInput.value.trim());
+                consoleInput.value = '';
+            }
+        });
+
+        originalConsole.log('✅ Konzole inicializována, připrav se na Matrix! 😎');
+    } catch (e) {
+        originalConsole.error('💥 Chyba při inicializaci konzole:', e);
+    }
+}
+
+/**
+ * Zpracuje příkazy z konzole – jako bys hackoval Pentagon! 😈
+ * @param {string} command - Zadaný příkaz
+ */
+function processConsoleCommand(command) {
+    const messagesContainer = document.getElementById('log-messages');
+    const normalizedCommand = command.toLowerCase();
+
+    logMessages.push({ text: `> ${command}`, type: 'log' });
+
+    if (normalizedCommand === 'help') {
+        logMessages.push({
+            text: `
+📜 Dostupné příkazy:
+- help: Zobrazí tuto nápovědu
+- theme [název]: Přepne téma (např. theme cyberPink)
+- clear: Vyčistí konzoli
+- easteregg: Spustí glitch efekt
+- rain: Spustí neonový déšť 🌧️
+- card: Vynutí novou kartu vedle loga
+            `,
+            type: 'log'
+        });
+    } else if (normalizedCommand.startsWith('theme ')) {
+        const themeName = normalizedCommand.split(' ')[1];
+        if (styleThemes.includes(themeName)) {
+            applyTheme(themeName);
+            logMessages.push({ text: `🎨 Téma "${themeName}" aktivováno!`, type: 'log' });
+        } else {
+            logMessages.push({ text: `❌ Neznámé téma: ${themeName}. Zkus 'help'.`, type: 'error' });
+        }
+    } else if (normalizedCommand === 'clear') {
+        logMessages.length = 0;
+        messagesContainer.innerHTML = initialConsoleMessage;
+    } else if (normalizedCommand === 'easteregg') {
+        logMessages.push({ text: '🥚 Spouštím velikonoční vajíčko...', type: 'log' });
+        triggerEasterEgg();
+    } else if (normalizedCommand === 'rain') {
+        logMessages.push({ text: '🌧️ Spouštím neonový déšť...', type: 'log' });
+        triggerRainEffect();
+    } else if (normalizedCommand === 'card') {
+        logMessages.push({ text: '🃏 Vynucuji novou kartu vedle loga...', type: 'log' });
+        spawnLogoCard();
+    } else {
+        logMessages.push({ text: `❌ Neznámý příkaz: ${command}. Zkus 'help'.`, type: 'error' });
+    }
+
+    updateConsoleDisplay();
+}
+
+/**
+ * Spustí neonový déšť – jako scéna z Blade Runnera! 🌧️
+ */
+function triggerRainEffect() {
+    try {
+        const rainContainer = document.createElement('div');
+        rainContainer.className = 'rain-effect';
+        document.body.appendChild(rainContainer);
+
+        for (let i = 0; i < 50; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'rain-drop';
+            drop.style.left = `${Math.random() * 100}vw`;
+            drop.style.animationDelay = `${Math.random() * 2}s`;
+            rainContainer.appendChild(drop);
+        }
+
+        setTimeout(() => rainContainer.remove(), 5000);
+        originalConsole.log('🌧️ Neonový déšť spuštěn na 5 sekund!');
+    } catch (e) {
+        originalConsole.error('💥 Chyba při spuštění deště:', e);
+    }
+}
+
+/**
+ * Spustí velikonoční vajíčko – glitch efekt, co tě hodí do rozbitého CRT monitoru! 📺
+ */
+function triggerEasterEgg() {
+    try {
+        document.body.classList.add('glitch-storm');
+        setTimeout(() => document.body.classList.remove('glitch-storm'), 2000);
+        originalConsole.log('🥚 Glitch efekt aktivován! Drž se, Matrix se třese!');
+    } catch (e) {
+        originalConsole.error('💥 Chyba při spuštění easter egg:', e);
+    }
+}
 
 // ===========================================
 // SPRÁVA TÉMAT
 // ===========================================
 
 /**
- * Aplikuje zvolené téma na stránku
+ * Aplikuje téma na stránku – ať to svítí jako Tokijská ulice v noci! 🌆
  * @param {string} themeName - Název tématu z themeColors
  * @returns {void}
  */
 function applyTheme(themeName) {
-    console.log('🔄 Aplikuji barevné schéma:', themeName);
-    
-    // Získání barev pro zvolené téma nebo výchozího tématu
-    const colors = themeColors[themeName] || themeColors.default;
-    const root = document.documentElement;
-    
-    // Nastavení základních barevných proměnných
-    root.style.setProperty('--color-primary', colors.primary);
-    root.style.setProperty('--color-primary-invert', colors.primaryInvert);
-    root.style.setProperty('--color-accent', colors.accent);
-    root.style.setProperty('--color-accent-invert', colors.accentInvert);
-    root.style.setProperty('--color-glow', colors.glow);
-    root.style.setProperty('--color-bg', colors.bg);
-    root.style.setProperty('--color-text', colors.text);
-    root.style.setProperty('--color-text-invert', colors.textInvert);
-    
-    // Definice efektů
-    const effects = {
-        shadow: `0 0 5px ${colors.accent}, 0 0 10px ${colors.glow}`,
-        glow: `0 0 5px #fff, 0 0 10px #fff, 0 0 20px ${colors.glow}, 0 0 40px ${colors.glow}`,
-        strongGlow: `0 0 10px ${colors.accent}, 0 0 20px ${colors.glow}, 0 0 30px ${colors.glow}, 0 0 50px ${colors.glow}`,
-        textGlow: `0 0 2px ${colors.accent}, 0 0 6px ${colors.glow}`,
-        boxShadow: `0 0 10px ${colors.accent}, 0 0 20px ${colors.glow}`,
-        border: `2px solid ${colors.primary}`,
-        borderThin: `1px solid ${colors.primary}`,
-        borderThick: `3px solid ${colors.primary}`,
-        borderInset: `inset 0 0 10px ${colors.glow}, inset 0 0 20px ${colors.glow}`,
-        gradient: `linear-gradient(45deg, ${colors.primary}, ${colors.accent})`,
-        gradientHorizontal: `linear-gradient(90deg, ${colors.primary}, ${colors.accent})`,
-        gradientVertical: `linear-gradient(180deg, ${colors.primary}, ${colors.accent})`
-    };
-    
-    // Aplikování efektů jako CSS proměnných
-    Object.entries(effects).forEach(([key, value]) => {
-        root.style.setProperty(`--neon-${key.toLowerCase()}`, value);
-    });
-    
-    // Aktualizace metatagu pro barvu adresního řádku
-    updateThemeColor(colors.primary);
-    
-    // Uložení aktuálního tématu
-    saveTheme(themeName);
-    
-    // Oznámení o změně tématu
-    document.dispatchEvent(new CustomEvent('themeChanged', { 
-        detail: { 
-            theme: themeName,
-            colors: colors
-        } 
-    }));
-    
-    // Přidání třídy na tělo pro aktuální téma
-    document.body.className = '';
-    document.body.classList.add(`theme-${themeName}`);
-    
-    console.log('✅ Téma úspěšně aplikováno:', themeName);
+    try {
+        originalConsole.log(`🔄 Aplikuji téma: ${themeName}`);
+        
+        if (!themeColors[themeName]) {
+            originalConsole.warn(`⚠️ Téma "${themeName}" nebylo nalezeno, vracím se k výchozímu.`);
+            themeName = 'default';
+        }
+        
+        const colors = themeColors[themeName];
+        const root = document.documentElement;
+
+        root.style.setProperty('--color-primary', colors.primary);
+        root.style.setProperty('--color-primary-invert', colors.primaryInvert);
+        root.style.setProperty('--color-accent', colors.accent);
+        root.style.setProperty('--color-accent-invert', colors.accentInvert);
+        root.style.setProperty('--color-glow', colors.glow);
+        root.style.setProperty('--color-bg', colors.bg);
+        root.style.setProperty('--color-text', colors.text);
+        root.style.setProperty('--color-text-invert', colors.textInvert);
+
+        const effects = {
+            shadow: `0 0 5px ${colors.accent}, 0 0 10px ${colors.glow}`,
+            glow: `0 0 5px #fff, 0 0 10px #fff, 0 0 20px ${colors.glow}, 0 0 40px ${colors.glow}`,
+            strongGlow: `0 0 10px ${colors.accent}, 0 0 20px ${colors.glow}, 0 0 30px ${colors.glow}, 0 0 50px ${colors.glow}`,
+            textGlow: `0 0 2px ${colors.accent}, 0 0 6px ${colors.glow}`,
+            boxShadow: `0 0 10px ${colors.accent}, 0 0 20px ${colors.glow}`,
+            border: `2px solid ${colors.primary}`,
+            borderThin: `1px solid ${colors.primary}`,
+            borderThick: `3px solid ${colors.primary}`,
+            borderInset: `inset 0 0 10px ${colors.glow}, inset 0 0 20px ${colors.glow}`,
+            gradient: `linear-gradient(45deg, ${colors.primary}, ${colors.accent})`,
+            gradientHorizontal: `linear-gradient(90deg, ${colors.primary}, ${colors.accent})`,
+            gradientVertical: `linear-gradient(180deg, ${colors.primary}, ${colors.accent})`
+        };
+
+        Object.entries(effects).forEach(([key, value]) => {
+            root.style.setProperty(`--neon-${key.toLowerCase()}`, value);
+        });
+
+        updateThemeColor(colors.primary);
+        saveTheme(themeName);
+
+        document.dispatchEvent(new CustomEvent('themeChanged', { 
+            detail: { theme: themeName, colors: colors } 
+        }));
+
+        document.body.className = `theme-${themeName}`;
+        originalConsole.log(`✅ Téma ${themeName} úspěšně aplikováno!`);
+    } catch (e) {
+        originalConsole.error('💥 Chyba při aplikaci tématu:', e);
+    }
 }
 
 /**
- * Uloží vybrané téma do localStorage
+ * Uloží téma do localStorage – ať si Matrix pamatuje tvůj styl! 💾
  * @param {string} theme - Název tématu
- * @returns {void}
  */
 function saveTheme(theme) {
     try {
         localStorage.setItem('walliczech-theme', theme);
-        console.log('💾 Ukládám téma do localStorage:', theme);
+        originalConsole.log(`💾 Téma ${theme} uloženo do localStorage.`);
     } catch (e) {
-        console.error('❌ Nepodařilo se uložit téma do localStorage:', e);
+        originalConsole.error('❌ Chyba při ukládání tématu:', e);
     }
 }
 
 /**
- * Načte uložené téma z localStorage
- * @returns {string} Název tématu nebo null, pokud není uloženo
+ * Načte uložené téma – nebo default, když si Matrix dělá, co chce! 😒
+ * @returns {string} Název tématu
  */
 function loadTheme() {
     try {
         const theme = localStorage.getItem('walliczech-theme');
-        if (theme) {
-            console.log('📖 Načítám uložené téma:', theme);
-            return theme;
-        }
-        return null;
+        if (theme) originalConsole.log(`📖 Načteno téma: ${theme}`);
+        return theme || 'default';
     } catch (e) {
-        console.error('❌ Nepodařilo se načíst téma z localStorage:', e);
-        return null;
+        originalConsole.error('❌ Chyba při načítání tématu:', e);
+        return 'default';
     }
 }
 
 /**
- * Aktualizuje barvu adresního řádku v prohlížeči
+ * Aktualizuje barvu adresního řádku – ať to ladí s tvým neonem! 🎨
  * @param {string} color - Barva v hex formátu
- * @returns {void}
  */
 function updateThemeColor(color) {
-    const themeColor = document.querySelector('meta[name="theme-color"]');
-    if (themeColor) {
-        themeColor.setAttribute('content', color);
-        console.log('🎨 Aktualizuji barvu adresního řádku na:', color);
+    try {
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+        if (themeColor) {
+            themeColor.setAttribute('content', color);
+            originalConsole.log(`🎨 Barva adresního řádku aktualizována na: ${color}`);
+        }
+    } catch (e) {
+        originalConsole.error('❌ Chyba při aktualizaci barvy adresního řádku:', e);
     }
 }
 
 /**
- * Vrátí název aktuálního tématu
- * @returns {string} Název aktuálního tématu
+ * Vrátí aktuální téma – nebo default, když se něco pokazí! 😅
+ * @returns {string} Název tématu
  */
 function getCurrentTheme() {
-    const savedTheme = loadTheme();
-    return savedTheme || 'default';
+    return loadTheme();
 }
 
 /**
- * Vrátí index aktuálního tématu v poli styleThemes
+ * Vrátí index aktuálního tématu – pro snadné přepínání! 🔢
  * @returns {number} Index tématu
  */
 function getCurrentThemeIndex() {
-    const currentTheme = getCurrentTheme();
-    return styleThemes.indexOf(currentTheme);
+    return styleThemes.indexOf(getCurrentTheme());
 }
 
 /**
- * Přepne na další téma v pořadí
+ * Přepne na další téma – jako když přepínáš kanály na starém CRT! 📺
  * @returns {string} Název nového tématu
  */
 function cycleToNextTheme() {
-    const currentIndex = getCurrentThemeIndex();
-    const nextIndex = (currentIndex + 1) % styleThemes.length;
-    const nextTheme = styleThemes[nextIndex];
-    applyTheme(nextTheme);
-    return nextTheme;
+    try {
+        const currentIndex = getCurrentThemeIndex();
+        const nextIndex = (currentIndex + 1) % styleThemes.length;
+        const nextTheme = styleThemes[nextIndex];
+        applyTheme(nextTheme);
+        return nextTheme;
+    } catch (e) {
+        originalConsole.error('❌ Chyba při přepínání tématu:', e);
+        return 'default';
+    }
 }
 
 /**
- * Inicializuje tlačítko pro přepínání témat
- * @returns {void}
+ * Inicializuje tlačítko pro přepínání témat – ať to svítí! 💡
  */
 function initThemeToggle() {
-    const toggleBtn = document.getElementById('theme-toggle');
-    if (!toggleBtn) return;
-    
-    toggleBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const newTheme = cycleToNextTheme();
-        
-        // Animace tlačítka
-        toggleBtn.classList.add('theme-toggle--active');
+    try {
+        const toggleBtn = document.getElementById('theme-toggle');
+        if (!toggleBtn) {
+            originalConsole.error('❌ Tlačítko #theme-toggle nenalezeno! Zkontroluj HTML! 😵');
+            return;
+        }
+
+        toggleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const newTheme = cycleToNextTheme();
+            toggleBtn.classList.add('theme-toggle--active');
+            setTimeout(() => toggleBtn.classList.remove('theme-toggle--active'), 300);
+            originalConsole.log(`🔄 Přepnuto na téma: ${newTheme}`);
+        });
+
+        originalConsole.log('✅ Tlačítko pro přepínání témat inicializováno.');
+    } catch (e) {
+        originalConsole.error('❌ Chyba při inicializaci přepínání témat:', e);
+    }
+}
+
+// ===========================================
+// KARTY VEDLE LOGA
+// ===========================================
+const moduleCardsData = [
+    {
+        title: "FluxRunner",
+        description: "Generuj obsah s Flux.1! Rychlejší, ostřejší, neonovější než cokoli předtím. 🌌",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Lipsync",
+        description: "Synchronizuj rty s audiem! Tvoje postavy mluví, jako by žily v kyberprostoru. 🗣️",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Dubbing Master",
+        description: "Předabuj videa rychleji, než Švejk vypije pivo! Automatický dabing s překladem do libovolného jazyka. 🎙️",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "FaceSwap Ninja",
+        description: "Vyměň obličeje jako pravý kyberpunkový špion! Fotky i videa, vše v bulvární kvalitě. 🧬",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Face Detector",
+        description: "Najdi každý ksicht v obraze rychleji, než YOLO v pasáži. Detekce obličejů na steroidech! 🕵️",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "SDXL Wizard",
+        description: "Kouzli s obrázky jako AI Picasso! Generuj kyberpunkové scény z tvých snů. 🎨",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "SAM Segmenter",
+        description: "Řež obrázky na pixely jako nindža! Segmentace s přesností laserového meče. ✂️",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "TTS Bard",
+        description: "Proměň text na řeč, co zní jako Švejk nebo kyber Karel Gott. Hlasy, co tě dostanou! 🔊",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Upscale King",
+        description: "Zmrkni na rozmazaný obrázek a udělej z něj 8K klenot. Pixely jako diamanty! 🔍",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Neon Progress",
+        description: "Sleduj průběh tvých AI kouzel v real-time přes WebSocket. Žádné čekání v Matrixu! 📊",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "OCRNinja",
+        description: "Rozluští text z obrázku rychleji, než hacker PIN kód! OCR, co čte i tvůj rukopis. 📝🔍",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Depth Mapper",
+        description: "Promění 2D obrázek na 3D hloubkovou mapu. Ideální pro virtuální realitu nebo jen tak na frajeřinu. 🕶️🌐",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Audio Slicer",
+        description: "Rozseká audio na kousky jako kybernetický kuchař. Perfektní pro remixy nebo analýzu beatů! 🎵🔪",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Motion Tracker",
+        description: "Sleduje pohyb ve videu jako stalker z pasáže. Detekce pohybu s přesností lasera! 📍🚨",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Chroma Keyer",
+        description: "Vymění pozadí videa, jako bys měl zelené plátno v kapse. Hollywood v tvém notebooku! 🎬🟢",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Voice Cloner",
+        description: "Naklonuje hlas, že by i Švejk záviděl. Vytvoří tvůj hlasový deepfake za pár kliků! 🎙️😈",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Text2Scene",
+        description: "Z tvého textu vykouzlí celou scénu, jako bys byl scénárista kyberpunkovýho trháku! 📜🎥",
+        colorClass: "color-primary"
+    }
+];
+
+/**
+ * Vytvoří kartu vedle loga – jako neonový billboard v Matrixu! 🖼️
+ * @returns {HTMLElement|null} Vytvořená karta nebo null při chybě
+ */
+function spawnLogoCard() {
+    try {
+        if (document.hidden) {
+            console.warn('🕵️‍♂️ Uživatel se loudá v offline světě, karta čeká v digitálním éteru!');
+            return null;
+        }
+        if (!moduleCardsData.length) {
+            console.error('💥 Žádná data karet? To je jako matrix bez zelených čísel!');
+            return null;
+        }
+
+        const container = document.querySelector('.logo-card-overlay');
+        if (!container) {
+            console.error('🛑 Kontejner .logo-card-overlay se vypařil do kybermlhy!');
+            return null;
+        }
+
+        // Vymažeme všechny staré karty, aby nezůstávaly v DOMu
+        const oldCards = container.querySelectorAll('.floating-card');
+        oldCards.forEach(oldCard => {
+            oldCard.style.zIndex = '5'; // Nižší z-index pro odchozí kartu
+            oldCard.classList.add('card-exit');
+            setTimeout(() => oldCard.remove(), 300); // Synchronizováno s CSS
+            console.log('💨 Stará karta se rozpadla na kyberpixely!');
+        });
+
+        // Nová karta – skládá se z pixelů jako z datového proudu
+        const card = document.createElement('div');
+        card.className = 'floating-card card-enter pulse-card';
+        card.style.zIndex = '15'; // Vyšší z-index pro novou kartu
+        const randomCard = moduleCardsData[Math.floor(Math.random() * moduleCardsData.length)];
+        card.innerHTML = `
+            <h3 style="color: var(--color-primary); text-shadow: var(--neon-text-glow);">${randomCard.title}</h3>
+            <p>${randomCard.description}</p>
+        `;
+
+        container.appendChild(card);
+
+        // Skládací animace – pixely se spojují
         setTimeout(() => {
-            toggleBtn.classList.remove('theme-toggle--active');
-        }, 300);
-        
-        console.log('🔄 Přepínám na téma:', newTheme);
-    });
-    
-    console.log('✅ Inicializováno tlačítko pro přepínání témat');
+            card.classList.remove('card-enter');
+            card.classList.add('card-enter-active');
+        }, 20);
+
+        // Kliknutí = karta se depixelizuje
+        card.addEventListener('click', function onClick() {
+            card.removeEventListener('click', onClick);
+            card.style.zIndex = '5'; // Snížíme z-index při odchodu
+            card.classList.add('card-exit');
+            setTimeout(() => card.remove(), 300);
+            setTimeout(() => spawnLogoCard(), 320); // Rychlý respawn
+            console.log('💥 Karta explodovala do kyberčástic! *bzzz*');
+        });
+
+        // Automatické přepnutí po 5 sekundách
+        setTimeout(() => {
+            if (card.isConnected) { // Ověříme, že karta je stále v DOMu
+                card.style.zIndex = '5'; // Snížíme z-index
+                card.classList.add('card-exit');
+                setTimeout(() => card.remove(), 300);
+                setTimeout(() => spawnLogoCard(), 320);
+                console.log('🔄 Karta se automaticky depixelizovala do datového proudu! *vrrrr*');
+            }
+        }, 5000);
+
+        return card;
+    } catch (error) {
+        console.error('🔥 Systémový crash v kyberprostoru! Chyba při vytváření karty:', error);
+        return null;
+    }
+}
+
+/**
+ * Spustí cyklus střídání karet vedle loga – jako kyberpunkový slideshow! 📽️
+ */
+function startLogoCardCycle() {
+    try {
+        originalConsole.log('🃏 Inicializace cyklu karet vedle loga...');
+
+        if (window.cardCycleInterval) {
+            clearInterval(window.cardCycleInterval);
+        }
+
+        spawnLogoCard();
+        window.cardCycleInterval = setInterval(() => {
+            if (!document.hidden) {
+                originalConsole.log('🃏 Střídám kartu vedle loga...');
+                spawnLogoCard();
+            }
+        }, 10000);
+
+        originalConsole.log('🃏 Cyklus karet nastaven na 10 sekund.');
+    } catch (e) {
+        originalConsole.error('❌ Chyba při inicializaci cyklu karet:', e);
+    }
 }
 
 // ===========================================
@@ -260,278 +600,134 @@ function initThemeToggle() {
 // ===========================================
 
 /**
- * Hlavní funkce pro inicializaci aplikace
- * @returns {void}
+ * Hlavní inicializace – jako bootování AI v kyberprostoru! 🚀
  */
 function initApp() {
-    // Načtení uloženého tématu
-    const savedTheme = loadTheme() || 'default';
-    applyTheme(savedTheme);
-    
-    // Inicializace komponent
-    initThemeToggle();
-    initInteractiveElements();
-    
-    console.log('🚀 Aplikace inicializována s tématem:', savedTheme);
-}
-
-/**
- * Inicializuje interaktivní prvky na stránce
- * @returns {void}
- */
-function initInteractiveElements() {
-    // Inicializace tooltipů
-    initTooltips();
-    
-    // Inicializace formulářů
-    initForms();
-    
-    // Inicializace tlačítek s efekty
-    initButtonEffects();
-    
-    console.log('✅ Inicializovány interaktivní prvky');
-}
-
-/**
- * Inicializuje tooltipy
- * @returns {void}
- */
-function initTooltips() {
-    const tooltips = document.querySelectorAll('[data-tooltip]');
-    
-    tooltips.forEach(tooltip => {
-        tooltip.addEventListener('mouseenter', showTooltip);
-        tooltip.addEventListener('mouseleave', hideTooltip);
-    });
-    
-    console.log('✅ Inicializovány tooltipy');
-}
-
-/**
- * Zobrazí tooltip
- * @param {MouseEvent} e - Událost myši
- * @returns {void}
- */
-function showTooltip(e) {
-    const tooltip = e.currentTarget;
-    const tooltipText = tooltip.getAttribute('data-tooltip');
-    if (!tooltipText) return;
-    
-    const tooltipElement = document.createElement('div');
-    tooltipElement.className = 'tooltip';
-    tooltipElement.textContent = tooltipText;
-    
-    document.body.appendChild(tooltipElement);
-    
-    const rect = tooltip.getBoundingClientRect();
-    const tooltipRect = tooltipElement.getBoundingClientRect();
-    
-    // Pozicování tooltipu
-    const top = rect.top - tooltipRect.height - 10;
-    const left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-    
-    tooltipElement.style.top = `${Math.max(10, top)}px`;
-    tooltipElement.style.left = `${Math.max(10, Math.min(window.innerWidth - tooltipRect.width - 10, left))}px`;
-    tooltipElement.classList.add('show');
-    
-    // Uložení reference pro pozdější odstranění
-    tooltip._tooltipElement = tooltipElement;
-}
-
-/**
- * Skryje tooltip
- * @param {MouseEvent} e - Událost myši
- * @returns {void}
- */
-function hideTooltip(e) {
-    const tooltip = e.currentTarget;
-    if (tooltip._tooltipElement) {
-        tooltip._tooltipElement.remove();
-        delete tooltip._tooltipElement;
-    }
-}
-
-/**
- * Inicializuje formuláře
- * @returns {void}
- */
-function initForms() {
-    const forms = document.querySelectorAll('form');
-    
-    forms.forEach(form => {
-        form.addEventListener('submit', handleFormSubmit);
-    });
-    
-    console.log('✅ Inicializovány formuláře');
-}
-
-/**
- * Zpracuje odeslání formuláře
- * @param {Event} e - Událost odeslání formuláře
- * @returns {Promise<void>}
- */
-async function handleFormSubmit(e) {
-    e.preventDefault();
-    
-    const form = e.currentTarget;
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalText = submitButton ? submitButton.innerHTML : '';
-    
-    // Zobrazení načítání
-    if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.innerHTML = '<span class="spinner"></span> Odesílám...';
-    }
-    
     try {
-        // Zde by bylo odeslání formuláře
-        // const formData = new FormData(form);
-        // const response = await fetch(form.action, {
-        //     method: form.method,
-        //     body: formData
-        // });
-        // const result = await response.json();
-        
-        // Simulace zpoždění
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // Zobrazení úspěchu
-        showNotification('Hotovo!', 'Formulář byl úspěšně odeslán.', 'success');
-    } catch (error) {
-        console.error('Chyba při odesílání formuláře:', error);
-        showNotification('Chyba', 'Něco se pokazilo při odesílání formuláře.', 'error');
-    } finally {
-        // Obnovení tlačítka
-        if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalText;
+        if (!document.getElementById('log-console') || !document.getElementById('log-toggle')) {
+            originalConsole.warn('❌ DOM prvky nejsou připraveny, čekám na Matrix...');
+            setTimeout(initApp, 100);
+            return;
         }
+
+        originalConsole.log('🧠 Inicializace aplikace...');
+
+        // Přepsat konzoli
+        overrideConsole();
+
+        // Aplikovat téma
+        const savedTheme = loadTheme();
+        applyTheme(savedTheme);
+
+        // Inicializovat komponenty
+        initThemeToggle();
+        initConsoleToggle();
+        startLogoCardCycle();
+        startRandomRainLoop();
+
+        // Ukázkový déšť
+        setTimeout(() => {
+            originalConsole.log('🌧️ Spouštím ukázkový déšť...');
+            triggerRainEffect();
+        }, 2000);
+
+        originalConsole.log('🚀 Aplikace inicializována! Zadej "help" pro příkazy.');
+    } catch (error) {
+        originalConsole.error('💥 Chyba při inicializaci:', error);
+        showNotification('Chyba', `Inicializace selhala: ${error.message}`, 'error');
     }
 }
 
 /**
- * Inicializuje efekty tlačítek
- * @returns {void}
- */
-function initButtonEffects() {
-    const buttons = document.querySelectorAll('.btn, button, [role="button"]');
-    
-    buttons.forEach(button => {
-        // Efekt při najetí myší
-        button.addEventListener('mouseenter', createRippleEffect);
-        
-        // Efekt při stisknutí
-        button.addEventListener('mousedown', (e) => {
-            button.style.transform = 'scale(0.98)';
-        });
-        
-        button.addEventListener('mouseup', () => {
-            button.style.transform = '';
-        });
-        
-        button.addEventListener('mouseleave', () => {
-            button.style.transform = '';
-        });
-    });
-    
-    console.log('✅ Inicializovány efekty tlačítek');
-}
-
-/**
- * Vytvoří efekt vlnky při najetí myší na tlačítko
- * @param {MouseEvent} e - Událost myši
- * @returns {void}
- */
-function createRippleEffect(e) {
-    const button = e.currentTarget;
-    const rect = button.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const ripple = document.createElement('span');
-    ripple.className = 'ripple';
-    ripple.style.left = `${x}px`;
-    ripple.style.top = `${y}px`;
-    
-    button.appendChild(ripple);
-    
-    // Odstranění efektu po dokončení animace
-    ripple.addEventListener('animationend', () => {
-        ripple.remove();
-    });
-}
-
-/**
- * Zobrazí notifikaci
- * @param {string} title - Nadpis notifikace
+ * Zobrazí notifikaci – jako by Matrix poslal zprávu! 📢
+ * @param {string} title - Nadpis
  * @param {string} message - Zpráva
- * @param {string} type - Typ notifikace (success, error, warning, info)
- * @returns {void}
+ * @param {string} type - Typ (success, error, warning, info)
  */
 function showNotification(title, message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification--${type}`;
-    
-    const iconMap = {
-        success: '✓',
-        error: '✗',
-        warning: '⚠',
-        info: 'ℹ'
-    };
-    
-    notification.innerHTML = `
-        <div class="notification__icon">${iconMap[type] || 'ℹ'}</div>
-        <div class="notification__content">
-            <div class="notification__title">${title}</div>
-            <div class="notification__message">${message}</div>
-        </div>
-        <button class="notification__close">×</button>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Přidání třídy pro animaci zobrazení
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 10);
-    
-    // Nastavení časovače pro automatické skrytí
-    const timeout = setTimeout(() => {
-        hideNotification(notification);
-    }, 5000);
-    
-    // Tlačítko pro zavření
-    const closeButton = notification.querySelector('.notification__close');
-    closeButton.addEventListener('click', () => {
-        clearTimeout(timeout);
-        hideNotification(notification);
-    });
-    
-    // Kliknutí mimo notifikaci ji také zavře
-    notification.addEventListener('click', (e) => {
-        if (e.target === notification) {
+    try {
+        const notification = document.createElement('div');
+        notification.className = `notification notification--${type}`;
+
+        const iconMap = {
+            success: '✓',
+            error: '✗',
+            warning: '⚠',
+            info: 'ℹ'
+        };
+
+        notification.innerHTML = `
+            <div class="notification__icon">${iconMap[type]}</div>
+            <div class="notification__content">
+                <div class="notification__title">${title}</div>
+                <div class="notification__message">${message}</div>
+            </div>
+            <button class="notification__close">×</button>
+        `;
+
+        document.body.appendChild(notification);
+        setTimeout(() => notification.classList.add('show'), 10);
+
+        const timeout = setTimeout(() => hideNotification(notification), 5000);
+        notification.querySelector('.notification__close').addEventListener('click', () => {
             clearTimeout(timeout);
             hideNotification(notification);
-        }
-    });
-    
-    console.log(`📢 Zobrazena notifikace: ${title} - ${message}`);
+        });
+
+        originalConsole.log(`📢 Notifikace: ${title} - ${message}`);
+    } catch (e) {
+        originalConsole.error('❌ Chyba při zobrazení notifikace:', e);
+    }
 }
 
 /**
- * Skryje notifikaci
+ * Skryje notifikaci – ať nezaclání v Matrixu! 🙈
  * @param {HTMLElement} notification - Element notifikace
- * @returns {void}
  */
 function hideNotification(notification) {
-    notification.classList.remove('show');
-    notification.classList.add('hide');
-    
-    // Odstranění z DOMu po skončení animace
-    notification.addEventListener('transitionend', () => {
-        notification.remove();
-    }, { once: true });
+    try {
+        notification.classList.remove('show');
+        notification.classList.add('hide');
+        notification.addEventListener('transitionend', () => notification.remove(), { once: true });
+    } catch (e) {
+        originalConsole.error('❌ Chyba při skrývání notifikace:', e);
+    }
 }
 
-// Spuštění aplikace po načtení DOMu
+/**
+ * Spustí cyklus náhodného deště – ať to prší jako v Blade Runnerovi! 🌧️
+ */
+function startRandomRainLoop() {
+    try {
+        originalConsole.log('🌧️ Inicializace náhodného deště...');
+
+        if (window.rainInterval) {
+            clearInterval(window.rainInterval);
+        }
+
+        triggerRainEffect();
+        window.rainInterval = setInterval(() => {
+            if (!document.hidden) {
+                originalConsole.log('🌧️ Spouštím náhodný déšť...');
+                triggerRainEffect();
+            }
+        }, 15000 + Math.random() * 15000);
+        originalConsole.log('🌧️ Interval deště nastaven.');
+    } catch (e) {
+        originalConsole.error('❌ Chyba při inicializaci deště:', e);
+    }
+}
+
+// Spuštění po načtení DOMu
 document.addEventListener('DOMContentLoaded', initApp);
+
+// Globální funkce pro konzoli
+window.wallICzech = {
+    spawnLogoCard,
+    startLogoCardCycle,
+    triggerRainEffect,
+    startRandomRainLoop,
+    initApp
+};
+
+originalConsole.log('ℹ️ wAllICzech Studio připraveno! Použij wallICzech.funkce() v konzoli.');
