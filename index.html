@@ -1,381 +1,733 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wAllICzech AI Studio - Kyberpunková revoluce</title>
-    <meta name="description" content="wAllICzech AI Studio - Jednočlověk-projekt pro generování, manipulaci a analýzu obrazů, videí a zvuku s kyberpunkovým šmrncem! 😈">
-    <meta name="keywords" content="AI, kyberpunk, faceswap, lipsync, upscale, segmentace, deepfake, forenzní analýza">
-    <meta name="author" content="WalliCzech">
-    <!-- OpenGraph -->
-    <meta property="og:title" content="wAllICzech AI Studio">
-    <meta property="og:description" content="Kyberpunková AI platforma pro manipulaci s obrazy, videi a zvukem. Ponoř se do neonové budoucnosti!">
-    <meta property="og:image" content="https://walliczech.ai/assets/og-image.jpg">
-    <meta property="og:url" content="https://walliczech.ai">
-    <meta property="og:type" content="website">
-    <!-- JSON-LD -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "wAllICzech AI Studio",
-        "operatingSystem": "Windows, Linux, Android",
-        "applicationCategory": "Multimedia",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "creator": {
-            "@type": "Person",
-            "name": "WalliCzech"
+/**
+ * wAllICzech Studio - Hlavní JavaScriptový soubor
+ * 
+ * Tento soubor je tvůj neonový pas do Matrixu! 🖥️ Karty teď sedí vedle loga
+ * a střídají se jako reklamy na kyberpunkovém billboardu. 😎
+ */
+
+// ===========================================
+// KONFIGURACE TÉMAT
+// ===========================================
+if (typeof themeColors === 'undefined') {
+    console.error('❌ Téma nebylo načteno! Zkontroluj, jestli je themeColors.js načtený, nebo Matrix zhasne! 😱');
+}
+
+/**
+ * Seznam dostupných témat – vyber si svůj jed! 🐍
+ * @type {string[]}
+ */
+const styleThemes = [
+    'default', 'cyberWeed', 'cyberPink', 'cyberBlue', 'cyberOrange', 'cyberPurple', 'neonGrave', 'bloodRust',
+    'toxicSlime', 'midnightOil', 'glitchRed', 'voidPurple', 'acidLemon', 'burntChrome', 'frostByte', 'plasmaPulse',
+    'shadowLime', 'crimsonGlitch', 'electricAbyss', 'venomGreen', 'obsidianGlow', 'hellfireOrange', 'neonViper',
+    'darkSakura', 'ghostCircuit', 'moltenCore', 'cyberAsh', 'toxicFuchsia', 'steelFrost', 'neonBlood', 'voidCyan',
+    'radioactiveMint', 'duskEmber', 'cyberCrimson', 'phantomGreen', 'twilightNeon'
+];
+
+// ===========================================
+// LOGOVACÍ KONZOLE
+// ===========================================
+/**
+ * Pole pro ukládání zpráv konzole – jako logy z hacknutého serveru 🖥️
+ * @type {string[]}
+ */
+const logMessages = [];
+
+// Uložení původních metod konzole
+const originalConsole = {
+    log: console.log.bind(console),
+    error: console.error.bind(console)
+};
+
+/**
+ * Přepisuje console.log a console.error, aby to svítilo v UI jako neon! 😎
+ */
+function overrideConsole() {
+    if (typeof console === 'undefined') {
+        originalConsole.error('❌ Konzole není dostupná! Matrix je v háji! 😵');
+        return;
+    }
+
+    console.log = function(...args) {
+        try {
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            logMessages.push({ text: message, type: 'log' });
+            updateConsoleDisplay();
+            originalConsole.log(...args);
+        } catch (e) {
+            originalConsole.error('💥 Chyba v console.log: ', e);
+        }
+    };
+
+    console.error = function(...args) {
+        try {
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            logMessages.push({ text: message, type: 'error' });
+            updateConsoleDisplay();
+            originalConsole.error(...args);
+        } catch (e) {
+            originalConsole.error('💥 Chyba v console.error: ', e);
+        }
+    };
+
+    originalConsole.log('✅ Konzole přepsána, připrav se na neonový výstup! 😎');
+}
+
+/**
+ * Aktualizuje konzoli na stránce – ať to vypadá jako terminál z Matrixu! 📺
+ * @returns {void}
+ */
+function updateConsoleDisplay() {
+    const messagesContainer = document.getElementById('log-messages');
+    if (!messagesContainer) {
+        originalConsole.error('❌ Kontejner log-messages nenalezen! Zkontroluj HTML! 🌋');
+        return;
+    }
+
+    while (logMessages.length > 7) {
+        logMessages.shift();
+    }
+
+    messagesContainer.innerHTML = logMessages
+        .map(msg => `<div class="log-console__message${msg.type === 'error' ? ' log-console__message--error' : ''}">${msg.text}</div>`)
+        .join('');
+
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+/**
+ * Úvodní zpráva konzole – jako bys nabootoval AI z budoucnosti! 🤖
+ */
+const initialConsoleMessage = `
+🌐 <span class="text-orange-400">wAllICzech Studio Console</span> initialized...
+🤖 <span class="text-pink-400">Vallia AI</span> booted successfully.
+📦 Modules loaded: [ Vision | Speech | Face | Style | Reality Bender ]
+🔒 Access Level: <span class="text-red-500">Admin</span>
+💬 Type "help" to see available commands.
+> Awaiting your command, Tomáši... 😏
+`;
+
+/**
+ * Inicializuje přepínání konzole – otevře portál do kyberprostoru! 🌌
+ * @returns {void}
+ */
+function initConsoleToggle() {
+    try {
+        const toggleBtn = document.getElementById('log-toggle');
+        const console = document.getElementById('log-console');
+        const consoleInput = document.getElementById('console-input');
+        if (!toggleBtn || !console || !consoleInput) {
+            originalConsole.error('❌ Chybí DOM prvky pro konzoli! Zkontroluj HTML! 😱');
+            return;
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const isVisible = console.classList.toggle('log-console--visible');
+            toggleBtn.classList.toggle('log-toggle--active', isVisible);
+
+            if (isVisible && !console.dataset.initialized) {
+                const logArea = document.getElementById('log-messages');
+                logArea.innerHTML = initialConsoleMessage;
+                console.dataset.initialized = 'true';
+            }
+
+            if (isVisible) consoleInput.focus();
+        });
+
+        consoleInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && consoleInput.value.trim()) {
+                processConsoleCommand(consoleInput.value.trim());
+                consoleInput.value = '';
+            }
+        });
+
+        originalConsole.log('✅ Konzole inicializována, připrav se na Matrix! 😎');
+    } catch (e) {
+        originalConsole.error('💥 Chyba při inicializaci konzole:', e);
+    }
+}
+
+/**
+ * Zpracuje příkazy z konzole – jako bys hackoval Pentagon! 😈
+ * @param {string} command - Zadaný příkaz
+ */
+function processConsoleCommand(command) {
+    const messagesContainer = document.getElementById('log-messages');
+    const normalizedCommand = command.toLowerCase();
+
+    logMessages.push({ text: `> ${command}`, type: 'log' });
+
+    if (normalizedCommand === 'help') {
+        logMessages.push({
+            text: `
+📜 Dostupné příkazy:
+- help: Zobrazí tuto nápovědu
+- theme [název]: Přepne téma (např. theme cyberPink)
+- clear: Vyčistí konzoli
+- easteregg: Spustí glitch efekt
+- rain: Spustí neonový déšť 🌧️
+- card: Vynutí novou kartu vedle loga
+            `,
+            type: 'log'
+        });
+    } else if (normalizedCommand.startsWith('theme ')) {
+        const themeName = normalizedCommand.split(' ')[1];
+        if (styleThemes.includes(themeName)) {
+            applyTheme(themeName);
+            logMessages.push({ text: `🎨 Téma "${themeName}" aktivováno!`, type: 'log' });
+        } else {
+            logMessages.push({ text: `❌ Neznámé téma: ${themeName}. Zkus 'help'.`, type: 'error' });
+        }
+    } else if (normalizedCommand === 'clear') {
+        logMessages.length = 0;
+        messagesContainer.innerHTML = initialConsoleMessage;
+    } else if (normalizedCommand === 'easteregg') {
+        logMessages.push({ text: '🥚 Spouštím velikonoční vajíčko...', type: 'log' });
+        triggerEasterEgg();
+    } else if (normalizedCommand === 'rain') {
+        logMessages.push({ text: '🌧️ Spouštím neonový déšť...', type: 'log' });
+        triggerRainEffect();
+    } else if (normalizedCommand === 'card') {
+        logMessages.push({ text: '🃏 Vynucuji novou kartu vedle loga...', type: 'log' });
+        spawnLogoCard();
+    } else {
+        logMessages.push({ text: `❌ Neznámý příkaz: ${command}. Zkus 'help'.`, type: 'error' });
+    }
+
+    updateConsoleDisplay();
+}
+
+/**
+ * Spustí neonový déšť – jako scéna z Blade Runnera! 🌧️
+ */
+function triggerRainEffect() {
+    try {
+        const rainContainer = document.createElement('div');
+        rainContainer.className = 'rain-effect';
+        document.body.appendChild(rainContainer);
+
+        for (let i = 0; i < 50; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'rain-drop';
+            drop.style.left = `${Math.random() * 100}vw`;
+            drop.style.animationDelay = `${Math.random() * 2}s`;
+            rainContainer.appendChild(drop);
+        }
+
+        setTimeout(() => rainContainer.remove(), 5000);
+        originalConsole.log('🌧️ Neonový déšť spuštěn na 5 sekund!');
+    } catch (e) {
+        originalConsole.error('💥 Chyba při spuštění deště:', e);
+    }
+}
+
+/**
+ * Spustí velikonoční vajíčko – glitch efekt, co tě hodí do rozbitého CRT monitoru! 📺
+ */
+function triggerEasterEgg() {
+    try {
+        document.body.classList.add('glitch-storm');
+        setTimeout(() => document.body.classList.remove('glitch-storm'), 2000);
+        originalConsole.log('🥚 Glitch efekt aktivován! Drž se, Matrix se třese!');
+    } catch (e) {
+        originalConsole.error('💥 Chyba při spuštění easter egg:', e);
+    }
+}
+
+// ===========================================
+// SPRÁVA TÉMAT
+// ===========================================
+
+/**
+ * Aplikuje téma na stránku – ať to svítí jako Tokijská ulice v noci! 🌆
+ * @param {string} themeName - Název tématu z themeColors
+ * @returns {void}
+ */
+function applyTheme(themeName) {
+    try {
+        originalConsole.log(`🔄 Aplikuji téma: ${themeName}`);
+        
+        if (!themeColors[themeName]) {
+            originalConsole.warn(`⚠️ Téma "${themeName}" nebylo nalezeno, vracím se k výchozímu.`);
+            themeName = 'default';
         }
         
+        const colors = themeColors[themeName];
+        const root = document.documentElement;
+
+        root.style.setProperty('--color-primary', colors.primary);
+        root.style.setProperty('--color-primary-invert', colors.primaryInvert);
+        root.style.setProperty('--color-accent', colors.accent);
+        root.style.setProperty('--color-accent-invert', colors.accentInvert);
+        root.style.setProperty('--color-glow', colors.glow);
+        root.style.setProperty('--color-bg', colors.bg);
+        root.style.setProperty('--color-text', colors.text);
+        root.style.setProperty('--color-text-invert', colors.textInvert);
+
+        const effects = {
+            shadow: `0 0 5px ${colors.accent}, 0 0 10px ${colors.glow}`,
+            glow: `0 0 5px #fff, 0 0 10px #fff, 0 0 20px ${colors.glow}, 0 0 40px ${colors.glow}`,
+            strongGlow: `0 0 10px ${colors.accent}, 0 0 20px ${colors.glow}, 0 0 30px ${colors.glow}, 0 0 50px ${colors.glow}`,
+            textGlow: `0 0 2px ${colors.accent}, 0 0 6px ${colors.glow}`,
+            boxShadow: `0 0 10px ${colors.accent}, 0 0 20px ${colors.glow}`,
+            border: `2px solid ${colors.primary}`,
+            borderThin: `1px solid ${colors.primary}`,
+            borderThick: `3px solid ${colors.primary}`,
+            borderInset: `inset 0 0 10px ${colors.glow}, inset 0 0 20px ${colors.glow}`,
+            gradient: `linear-gradient(45deg, ${colors.primary}, ${colors.accent})`,
+            gradientHorizontal: `linear-gradient(90deg, ${colors.primary}, ${colors.accent})`,
+            gradientVertical: `linear-gradient(180deg, ${colors.primary}, ${colors.accent})`
+        };
+
+        Object.entries(effects).forEach(([key, value]) => {
+            root.style.setProperty(`--neon-${key.toLowerCase()}`, value);
+        });
+
+        updateThemeColor(colors.primary);
+        saveTheme(themeName);
+
+        document.dispatchEvent(new CustomEvent('themeChanged', { 
+            detail: { theme: themeName, colors: colors } 
+        }));
+
+        document.body.className = `theme-${themeName}`;
+        originalConsole.log(`✅ Téma ${themeName} úspěšně aplikováno!`);
+    } catch (e) {
+        originalConsole.error('💥 Chyba při aplikaci tématu:', e);
     }
-    </script>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-	
-</head>
-<body class="font-orbitron">
-    <!-- Ovládací tlačítka -->
-    <div class="fixed top-4 right-4 z-50 flex gap-3 opacity-50">
-        <button id="theme-toggle" 
-                class="neon-button-invert px-2 py-1 rounded-full text-[8px] font-semibold transition-all duration-300 hover:scale-105 animate-pulse">
-            Přepnout Neon 🌌
-        </button>
-    </div>
-	
+}
 
-    <!-- Header: Cyberpunk level 9000 -->
-    <header class="relative min-h-screen flex items-center justify-center ">
+/**
+ * Uloží téma do localStorage – ať si Matrix pamatuje tvůj styl! 💾
+ * @param {string} theme - Název tématu
+ */
+function saveTheme(theme) {
+    try {
+        localStorage.setItem('walliczech-theme', theme);
+        originalConsole.log(`💾 Téma ${theme} uloženo do localStorage.`);
+    } catch (e) {
+        originalConsole.error('❌ Chyba při ukládání tématu:', e);
+    }
+}
 
-        <div class="text-center relative z-10">
-            <!-- SVG logo s optimalizací a animací -->
-            <div class="mx-auto neon-logo w-[256px] sm:w-[420px] md:w-[640px] lg:w-[2048px] logo-floating">
-                <object data="assets/vallia_animated.svg" type="image/svg+xml"
-                        class="mx-auto h-64 md:h-96 w-auto drop-shadow-neon mb-2"
-                        alt="wAllICzech AI Studio Logo"></object>
+/**
+ * Načte uložené téma – nebo default, když si Matrix dělá, co chce! 😒
+ * @returns {string} Název tématu
+ */
+function loadTheme() {
+    try {
+        const theme = localStorage.getItem('walliczech-theme');
+        if (theme) originalConsole.log(`📖 Načteno téma: ${theme}`);
+        return theme || 'default';
+    } catch (e) {
+        originalConsole.error('❌ Chyba při načítání tématu:', e);
+        return 'default';
+    }
+}
+
+/**
+ * Aktualizuje barvu adresního řádku – ať to ladí s tvým neonem! 🎨
+ * @param {string} color - Barva v hex formátu
+ */
+function updateThemeColor(color) {
+    try {
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+        if (themeColor) {
+            themeColor.setAttribute('content', color);
+            originalConsole.log(`🎨 Barva adresního řádku aktualizována na: ${color}`);
+        }
+    } catch (e) {
+        originalConsole.error('❌ Chyba při aktualizaci barvy adresního řádku:', e);
+    }
+}
+
+/**
+ * Vrátí aktuální téma – nebo default, když se něco pokazí! 😅
+ * @returns {string} Název tématu
+ */
+function getCurrentTheme() {
+    return loadTheme();
+}
+
+/**
+ * Vrátí index aktuálního tématu – pro snadné přepínání! 🔢
+ * @returns {number} Index tématu
+ */
+function getCurrentThemeIndex() {
+    return styleThemes.indexOf(getCurrentTheme());
+}
+
+/**
+ * Přepne na další téma – jako když přepínáš kanály na starém CRT! 📺
+ * @returns {string} Název nového tématu
+ */
+function cycleToNextTheme() {
+    try {
+        const currentIndex = getCurrentThemeIndex();
+        const nextIndex = (currentIndex + 1) % styleThemes.length;
+        const nextTheme = styleThemes[nextIndex];
+        applyTheme(nextTheme);
+        return nextTheme;
+    } catch (e) {
+        originalConsole.error('❌ Chyba při přepínání tématu:', e);
+        return 'default';
+    }
+}
+
+/**
+ * Inicializuje tlačítko pro přepínání témat – ať to svítí! 💡
+ */
+function initThemeToggle() {
+    try {
+        const toggleBtn = document.getElementById('theme-toggle');
+        if (!toggleBtn) {
+            originalConsole.error('❌ Tlačítko #theme-toggle nenalezeno! Zkontroluj HTML! 😵');
+            return;
+        }
+
+        toggleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const newTheme = cycleToNextTheme();
+            toggleBtn.classList.add('theme-toggle--active');
+            setTimeout(() => toggleBtn.classList.remove('theme-toggle--active'), 300);
+            originalConsole.log(`🔄 Přepnuto na téma: ${newTheme}`);
+        });
+
+        originalConsole.log('✅ Tlačítko pro přepínání témat inicializováno.');
+    } catch (e) {
+        originalConsole.error('❌ Chyba při inicializaci přepínání témat:', e);
+    }
+}
+
+// ===========================================
+// KARTY VEDLE LOGA
+// ===========================================
+const moduleCardsData = [
+    {
+        title: "FluxRunner",
+        description: "Generuj obsah s Flux.1! Rychlejší, ostřejší, neonovější než cokoli předtím. 🌌",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Lipsync",
+        description: "Synchronizuj rty s audiem! Tvoje postavy mluví, jako by žily v kyberprostoru. 🗣️",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Dubbing Master",
+        description: "Předabuj videa rychleji, než Švejk vypije pivo! Automatický dabing s překladem do libovolného jazyka. 🎙️",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "FaceSwap Ninja",
+        description: "Vyměň obličeje jako pravý kyberpunkový špion! Fotky i videa, vše v bulvární kvalitě. 🧬",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Face Detector",
+        description: "Najdi každý ksicht v obraze rychleji, než YOLO v pasáži. Detekce obličejů na steroidech! 🕵️",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "SDXL Wizard",
+        description: "Kouzli s obrázky jako AI Picasso! Generuj kyberpunkové scény z tvých snů. 🎨",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "SAM Segmenter",
+        description: "Řež obrázky na pixely jako nindža! Segmentace s přesností laserového meče. ✂️",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "TTS Bard",
+        description: "Proměň text na řeč, co zní jako Švejk nebo kyber Karel Gott. Hlasy, co tě dostanou! 🔊",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Upscale King",
+        description: "Zmrkni na rozmazaný obrázek a udělej z něj 8K klenot. Pixely jako diamanty! 🔍",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Neon Progress",
+        description: "Sleduj průběh tvých AI kouzel v real-time přes WebSocket. Žádné čekání v Matrixu! 📊",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "OCRNinja",
+        description: "Rozluští text z obrázku rychleji, než hacker PIN kód! OCR, co čte i tvůj rukopis. 📝🔍",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Depth Mapper",
+        description: "Promění 2D obrázek na 3D hloubkovou mapu. Ideální pro virtuální realitu nebo jen tak na frajeřinu. 🕶️🌐",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Audio Slicer",
+        description: "Rozseká audio na kousky jako kybernetický kuchař. Perfektní pro remixy nebo analýzu beatů! 🎵🔪",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Motion Tracker",
+        description: "Sleduje pohyb ve videu jako stalker z pasáže. Detekce pohybu s přesností lasera! 📍🚨",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Chroma Keyer",
+        description: "Vymění pozadí videa, jako bys měl zelené plátno v kapse. Hollywood v tvém notebooku! 🎬🟢",
+        colorClass: "color-primary neon-text-glow"
+    },
+    {
+        title: "Voice Cloner",
+        description: "Naklonuje hlas, že by i Švejk záviděl. Vytvoří tvůj hlasový deepfake za pár kliků! 🎙️😈",
+        colorClass: "color-accent neon-text-glow"
+    },
+    {
+        title: "Text2Scene",
+        description: "Z tvého textu vykouzlí celou scénu, jako bys byl scénárista kyberpunkovýho trháku! 📜🎥",
+        colorClass: "color-primary"
+    }
+];
+
+/**
+ * Vytvoří kartu vedle loga – jako neonový billboard v Matrixu! 🖼️
+ * @returns {HTMLElement|null} Vytvořená karta nebo null při chybě
+ */
+function spawnLogoCard() {
+    try {
+        if (document.hidden) {
+            console.warn('🕵️‍♂️ Uživatel se loudá v offline světě, karta čeká v digitálním éteru!');
+            return null;
+        }
+        if (!moduleCardsData.length) {
+            console.error('💥 Žádná data karet? To je jako matrix bez zelených čísel!');
+            return null;
+        }
+
+        const container = document.querySelector('.logo-card-overlay');
+        if (!container) {
+            console.error('🛑 Kontejner .logo-card-overlay se vypařil do kybermlhy!');
+            return null;
+        }
+
+        // Vymažeme všechny staré karty, aby nezůstávaly v DOMu
+        const oldCards = container.querySelectorAll('.floating-card');
+        oldCards.forEach(oldCard => {
+            oldCard.style.zIndex = '5'; // Nižší z-index pro odchozí kartu
+            oldCard.classList.add('card-exit');
+            setTimeout(() => oldCard.remove(), 300); // Synchronizováno s CSS
+            console.log('💨 Stará karta se rozpadla na kyberpixely!');
+        });
+
+        // Nová karta – skládá se z pixelů jako z datového proudu
+        const card = document.createElement('div');
+        card.className = 'floating-card card-enter pulse-card';
+        card.style.zIndex = '15'; // Vyšší z-index pro novou kartu
+        const randomCard = moduleCardsData[Math.floor(Math.random() * moduleCardsData.length)];
+        card.innerHTML = `
+            <h3 style="color: var(--color-primary); text-shadow: var(--neon-text-glow);">${randomCard.title}</h3>
+            <p>${randomCard.description}</p>
+        `;
+
+        container.appendChild(card);
+
+        // Skládací animace – pixely se spojují
+        setTimeout(() => {
+            card.classList.remove('card-enter');
+            card.classList.add('card-enter-active');
+        }, 20);
+
+        // Kliknutí = karta se depixelizuje
+        card.addEventListener('click', function onClick() {
+            card.removeEventListener('click', onClick);
+            card.style.zIndex = '5'; // Snížíme z-index při odchodu
+            card.classList.add('card-exit');
+            setTimeout(() => card.remove(), 300);
+            setTimeout(() => spawnLogoCard(), 320); // Rychlý respawn
+            console.log('💥 Karta explodovala do kyberčástic! *bzzz*');
+        });
+
+        // Automatické přepnutí po 5 sekundách
+        setTimeout(() => {
+            if (card.isConnected) { // Ověříme, že karta je stále v DOMu
+                card.style.zIndex = '5'; // Snížíme z-index
+                card.classList.add('card-exit');
+                setTimeout(() => card.remove(), 300);
+                setTimeout(() => spawnLogoCard(), 320);
+                console.log('🔄 Karta se automaticky depixelizovala do datového proudu! *vrrrr*');
+            }
+        }, 5000);
+
+        return card;
+    } catch (error) {
+        console.error('🔥 Systémový crash v kyberprostoru! Chyba při vytváření karty:', error);
+        return null;
+    }
+}
+
+/**
+ * Spustí cyklus střídání karet vedle loga – jako kyberpunkový slideshow! 📽️
+ */
+function startLogoCardCycle() {
+    try {
+        originalConsole.log('🃏 Inicializace cyklu karet vedle loga...');
+
+        if (window.cardCycleInterval) {
+            clearInterval(window.cardCycleInterval);
+        }
+
+        spawnLogoCard();
+        window.cardCycleInterval = setInterval(() => {
+            if (!document.hidden) {
+                originalConsole.log('🃏 Střídám kartu vedle loga...');
+                spawnLogoCard();
+            }
+        }, 10000);
+
+        originalConsole.log('🃏 Cyklus karet nastaven na 10 sekund.');
+    } catch (e) {
+        originalConsole.error('❌ Chyba při inicializaci cyklu karet:', e);
+    }
+}
+
+// ===========================================
+// INICIALIZACE APLIKACE
+// ===========================================
+
+/**
+ * Hlavní inicializace – jako bootování AI v kyberprostoru! 🚀
+ */
+function initApp() {
+    try {
+        if (!document.getElementById('log-console') || !document.getElementById('log-toggle')) {
+            originalConsole.warn('❌ DOM prvky nejsou připraveny, čekám na Matrix...');
+            setTimeout(initApp, 100);
+            return;
+        }
+
+        originalConsole.log('🧠 Inicializace aplikace...');
+
+        // Přepsat konzoli
+        overrideConsole();
+
+        // Aplikovat téma
+        const savedTheme = loadTheme();
+        applyTheme(savedTheme);
+
+        // Inicializovat komponenty
+        initThemeToggle();
+        initConsoleToggle();
+        startLogoCardCycle();
+        startRandomRainLoop();
+
+        // Ukázkový déšť
+        setTimeout(() => {
+            originalConsole.log('🌧️ Spouštím ukázkový déšť...');
+            triggerRainEffect();
+        }, 2000);
+
+        originalConsole.log('🚀 Aplikace inicializována! Zadej "help" pro příkazy.');
+    } catch (error) {
+        originalConsole.error('💥 Chyba při inicializaci:', error);
+        showNotification('Chyba', `Inicializace selhala: ${error.message}`, 'error');
+    }
+}
+
+/**
+ * Zobrazí notifikaci – jako by Matrix poslal zprávu! 📢
+ * @param {string} title - Nadpis
+ * @param {string} message - Zpráva
+ * @param {string} type - Typ (success, error, warning, info)
+ */
+function showNotification(title, message, type = 'info') {
+    try {
+        const notification = document.createElement('div');
+        notification.className = `notification notification--${type}`;
+
+        const iconMap = {
+            success: '✓',
+            error: '✗',
+            warning: '⚠',
+            info: 'ℹ'
+        };
+
+        notification.innerHTML = `
+            <div class="notification__icon">${iconMap[type]}</div>
+            <div class="notification__content">
+                <div class="notification__title">${title}</div>
+                <div class="notification__message">${message}</div>
             </div>
+            <button class="notification__close">×</button>
+        `;
 
+        document.body.appendChild(notification);
+        setTimeout(() => notification.classList.add('show'), 10);
 
-            <div class="glitch-wrapper">
-                <!-- Glitch vrstvy -->
-                <span class="glitch-top text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-                  wAllICzech
-                </span>
-                <span class="glitch-bottom text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-                  wAllICzech
-                </span>
-              
-                <!-- Hlavní text -->
-                <h1 class="glitch text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-                    w<span class="text-[color:#ff7800]">A</span>ll<span class="text-[color:#ff7800]">I</span>Czech
-                  </h1>
-            </div>
+        const timeout = setTimeout(() => hideNotification(notification), 5000);
+        notification.querySelector('.notification__close').addEventListener('click', () => {
+            clearTimeout(timeout);
+            hideNotification(notification);
+        });
 
+        originalConsole.log(`📢 Notifikace: ${title} - ${message}`);
+    } catch (e) {
+        originalConsole.error('❌ Chyba při zobrazení notifikace:', e);
+    }
+}
 
-            <div class="glitch-wrapper2 relative mt-[2.5em]">
-                <!-- Glitch vrstvy -->
-                <span class="glitch-top absolute inset-0 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-                  Studio
-                </span>
-                
-                <span class="glitch-bottom absolute inset-0 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-                  Studio
-                </span>
-              
-                <!-- Hlavní text -->
-                <h1 class="glitch relative text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-                  Studio
-                </h1>
-              </div>
+/**
+ * Skryje notifikaci – ať nezaclání v Matrixu! 🙈
+ * @param {HTMLElement} notification - Element notifikace
+ */
+function hideNotification(notification) {
+    try {
+        notification.classList.remove('show');
+        notification.classList.add('hide');
+        notification.addEventListener('transitionend', () => notification.remove(), { once: true });
+    } catch (e) {
+        originalConsole.error('❌ Chyba při skrývání notifikace:', e);
+    }
+}
 
-            <!-- Call-to-action button s pulse efektem -->
-            <div class="mt-20 neon-hybrid">
-                <a href="#modules"
-                class="neon-button-outline pulse 
-                       text-base sm:text-lg md:text-xl
-                       px-4 sm:px-6 md:px-8 
-                       py-2 sm:py-3 md:py-4
-                       rounded-xl sm:rounded-full
-                       font-semibold transition-all duration-300 hover:scale-110 hover:shadow-neon whitespace-nowrap">
-                ⚡ ROZSEKEJ REALITU S AI! 😈
-             </a>
-            </div>
-			            <div class="mt-20 neon-hybrid">
-                <a href= workstation.html
-                class="neon-button-outline pulse 
-                       text-base sm:text-lg md:text-xl
-                       px-4 sm:px-6 md:px-8 
-                       py-2 sm:py-3 md:py-4
-                       rounded-xl sm:rounded-full
-                       font-semibold transition-all duration-300 hover:scale-110 hover:shadow-neon whitespace-nowrap">
-                ⚡ Otevři Appku 😈
-             </a>
-            </div>
-        </div>
+/**
+ * Spustí cyklus náhodného deště – ať to prší jako v Blade Runnerovi! 🌧️
+ */
+function startRandomRainLoop() {
+    try {
+        originalConsole.log('🌧️ Inicializace náhodného deště...');
 
-    </header>
+        if (window.rainInterval) {
+            clearInterval(window.rainInterval);
+        }
 
+        triggerRainEffect();
+        window.rainInterval = setInterval(() => {
+            if (!document.hidden) {
+                originalConsole.log('🌧️ Spouštím náhodný déšť...');
+                triggerRainEffect();
+            }
+        }, 15000 + Math.random() * 15000);
+        originalConsole.log('🌧️ Interval deště nastaven.');
+    } catch (e) {
+        originalConsole.error('❌ Chyba při inicializaci deště:', e);
+    }
+}
 
+// Spuštění po načtení DOMu
+document.addEventListener('DOMContentLoaded', initApp);
 
-    <!-- Modules Section -->
- <!-- Moduly -->
-    <section id="modules" class="mt-6 py-16 min-h-screen animate-slow-scroll">
-        <div class="text-center mt-6 mx-auto px-4">
-            <div class="glitch-wrapper mt-6 inline-block overflow-visible">
-                <!-- Glitch vrstvy -->
-                <span class="glitch-top text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                  AI Moduly
-                </span>
-                <span class="glitch-bottom text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                  AI Moduly
-                </span>    
-                <!-- Hlavní text -->
-                <h1 class="neon-text glitch text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                    <span class="text-[color:#ff7800]">A</span><span class="text-[color:#ff7800]">I</span> Moduly
-                  </h1>
-            </div>
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-orange-500">ForensicTools</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Odhal deepfaky a manipulace. Tvůj kyberdetektiv, co prořízne lži jako neonový blesk! 🕵️
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-pink-500">Segmenter</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Rozsekej objekty od reality! SAM a GroundingDINO řežou přesněji než kyberkatana. ✂️
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-orange-500">ExpressionEditor</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Proměň obličeje – od kyberúsměvu po neonový vztek. Pixely tvé tváře ožívají! 😄
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-pink-500">WanRunner</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Obrázky v neonových videích! Wan model roztančí tvé pixely v kyberprostoru. 📽️
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-orange-500">VideoExporter</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Stříhej filmy s neonovými přechody. Tvůj střih je ostřejší než kybermeč! 🎥
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-pink-500">SDXLRunner</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Text v neonové umění! Stable Diffusion XL promění tvá slova v pixely. 🖌️
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-orange-500">AudioSegmenter</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Rozsekej zvuk jako kyberkatana! Odděl hlas od šumu a ovládni audio kyberprostor. 🎙️
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-pink-500">FluxRunner</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Generuj obsah s Flux.1! Rychlejší, ostřejší, neonovější než cokoli předtím. 🌌
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-orange-500">Lipsync</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Synchronizuj rty s audiem! Tvoje postavy mluví, jako by žily v kyberprostoru. 🗣️
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-pink-500">FaceSwapper</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Vyměň obličeje ve videích! Tvoje tvář v novém kyberprostoru, instantně! 😎
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-orange-500">DeepDanbooru</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Textový popis obrázků! Automatické tagování pro generátory, katalogy... 📷
-                    </p>
-                </div>
-                <div class="p-6 bg-gray-900 rounded-lg neon-border module-card">
-                    <h3 class="text-2xl font-bold text-pink-500">AudioTranscriber</h3>
-                    <p class="mt-4 text-gray-300 font-roboto-mono">
-                        Přepis audia na text! Přepis rozhovorů, podcastů i výkřiků do digitálního záznamu.✍️
-                    </p>
-				</div>
-			</div>
-            <div class="mt-20 neon-hybrid ">
-                <a href="#requirements"
-                class="neon-hybrid-button pulse
-                       text-base sm:text-sm md:text-md
-                       px-2 sm:px-4 md:px-6 
-                       py-1 sm:py-2 md:py-3 mt-5
-                       rounded-xl sm:rounded-full
-                       font-semibold transition-all duration-300 hover:scale-110 hover:shadow-neon whitespace-nowrap">
-                😱hmmmm... Jak?🧐
-             </a>
-            </div>
-        </div>
-    </section>
-	
-<!-- System Requirements -->
-<section id="requirements" class="mt-6 py-16 min-h-screen animate-slow-scroll select-none">
-    <div class="mt-6 mx-auto text-center">
-        <div class="glitch-wrapper mt-6">
-            <!-- Glitch vrstvy -->
-            <span class="glitch-top text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              AI Požadavky
-            </span>
-            <span class="glitch-bottom text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              AI Požadavky
-            </span>    
-            <!-- Hlavní text -->
-            <h1 class="neon-text glitch text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                <span class="text-[color:#ff7800]">A</span><span class="text-[color:#ff7800]">I</span> Požadavky
-              </h1>
-        </div>
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="card-hover p-5 neon-border rounded-lg">
-                <h3 class="text-xl">Minimální</h3>
-                <ul class="list-disc list-inside mt-2">
-                    <li>CPU: Intel i5 nebo AMD Ryzen 5</li>
-                    <li>RAM: 16 GB</li>
-                    <li>GPU: NVIDIA RTX 2060 (6+ GB VRAM)</li>
-                    <li>OS: Windows 10/11, Linux (Ubuntu)</li>
-                </ul>
-            </div>
-            <div class="card-hover p-5 neon-border rounded-lg">
-                <h3 class="text-xl">Doporučené</h3>
-                <ul class="list-disc list-inside mt-2">
-                    <li>CPU: Intel i7 (8+ vláken)</li>
-                    <li>RAM: 32 GB</li>
-                    <li>GPU: NVIDIA RTX 4060 Ti/4070 (12–16 GB VRAM)</li>
-                    <li>SSD disk pro rychlý I/O</li>
-                </ul>
-            </div>
-        </div>
+// Globální funkce pro konzoli
+window.wallICzech = {
+    spawnLogoCard,
+    startLogoCardCycle,
+    triggerRainEffect,
+    startRandomRainLoop,
+    initApp
+};
 
-        <p class="text-center mt-6 text-lg text-pink-400 font-semibold animate-pulse">
-            ⚠️ Aplikace využívá CUDA a GPU akceleraci – integrovaná grafika ti tu akorát tak uvaří čaj!
-        </p>
-
-        <!-- Další požadavky -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-            <div class="card-hover p-5 neon-border rounded-lg">
-              <h3 class="text-xl">Základní knihovny a závislosti</h3>
-              <ul class="list-disc list-inside mt-2 text-sm leading-relaxed">
-                <li><strong>FastAPI</strong> pro backend (verze 0.115.12)</li>
-                <li><strong>Uvicorn</strong> jako ASGI server</li>
-                <li><strong>OpenCV</strong>, <strong>Numpy</strong> a <strong>ONNXRuntime</strong> pro zpracování obrazu</li>
-                <li><strong>InsightFace</strong> pro FaceSwap modul</li>
-                <li><strong>Diffusers, Transformers</strong> – AI generování</li>
-                <li><strong>PyTorch, TensorFlow</strong> – modely a inference</li>
-                <li><strong>FFmpeg, MoviePy</strong> – práce s videem</li>
-                <li><strong>GFPGAN, RealESRGAN</strong> – zkrášlování obličejů</li>
-              </ul>
-            </div>
-          
-            <div class="card-hover p-5 neon-border rounded-lg">
-              <h3 class="text-xl">Poznámky pro power usery</h3>
-              <ul class="list-disc list-inside mt-2 text-sm leading-relaxed">
-                <li>Podpora CUDA (11.x) a Torch CUDA build (cu118)</li>
-                <li>Modely jsou načítány přímo z <code>.safetensors</code> nebo <code>.pth</code></li>
-                <li>Možnost lokální konfigurace přes <code>config.yaml</code></li>
-                <li>Offline režim s cachí modelů v <code>/.cache</code></li>
-                <li>Všechny moduly kompatibilní s Windows 10/11 i moderními distribucemi Linuxu</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="mt-8 text-center">
-            <p class="text-base text-gray-400 italic">🧪 Tato aplikace byla testována s více než 200 knihovnami. Pokud Ti připadá, že je to moc, nejsi jediný. Ale věř – každá z nich dělá něco, co jsem raději přenechal strojům… 😉</p>
-          </div>
-          <div class="mx-auto neon-logo w-[128px] sm:w-[256px] md:w-[512px] lg:w-[1024px] logo-floating items-center">
-            <object data="assets/vallia_animated.svg" type="image/svg+xml"
-                    class="mx-auto h-64 md:h-96 w-auto drop-shadow-neon mb-2"
-                    alt="wAllICzech AI Studio Logo"></object>
-        </div>
-    </div>
-</section>
-
-<!-- AI Vallia Section -->
-<section id="vallia" class="py-16 px-4">
-    <div class="mx-auto max-w-4xl">
-        <h2 class="neon-text glitch text-3xl sm:text-4xl md:text-5xl text-center mb-8" data-text="Seznam se s Vallií">
-            Seznam se s Vallií
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-			<div class="flex justify-center">
-			    <div class="neon-logo w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg animate-float">
-			        <img src="assets/vallia.svg" alt="Vallia" class="w-full h-auto">
-			    </div>
-			</div>
-            <div class="flex justify-center">
-                <p class="text-base sm:text-base md:text-lg leading-relaxed text-justify mt-7">
-                    Vallia je tvoje kyberpunková průvodkyně! 🧠 Rozumí tvým příkazům, propojuje moduly a hází hlášky rychleji, než tvá GPU stíhá rendrovat. Zadej příkaz typu „Vygeneruj neonový portrét“ a sleduj, jak se magie děje. 😎
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- CTA Section -->
-    <section id="cta" class="py-14 px-2 text-center relative mt-1">
-        <div class="max-w-4xl mx-auto">
-          <h2 class="neon-text glitch text-4xl md:text-5xl mb-8" data-text="Přidej se k revoluci!">
-            Přidej se k revoluci!
-          </h2>
-          <p class="text-lg md:text-xl mb-10">
-            wAllICzech je jednočlověk-projekt poháněný kávou a vášní. Podpoř mě, nebo sleduj na TikToku! ☕
-          </p>
-          <div class="flex flex-col sm:flex-row justify-center items-center gap-5 flex-wrap">
-            <a href="https://buymeacoffee.com/walliczech"
-               class="neon-button flex items-center justify-center px-6 py-3 rounded-full leading-none text-base sm:text-lg font-semibold text-center whitespace-nowrap">
-               Kup mi kávu ☕ nebo trávu 😜
-            </a>
-            <a href="https://tiktok.com/@walli.czech"
-               class="neon-button flex items-center justify-center px-6 py-3 rounded-full leading-none text-base sm:text-lg font-semibold text-center whitespace-nowrap">
-               Sleduj na TikToku
-            </a>
-          </div>
-          <div class="neon-hybrid flex justify-center mt-12">
-			<a href="roadmap.html" 
-				class="neon-button-outline neon-text pulse px-4 py-1 rounded-full text-2xl font-semibold transition-all duration-300 hover:scale-110 hover:shadow-neon">
-				Roadmap 🛣️
-			</a>
-		</div>	
-        </div>
-      </section>
-
-
-
-    <!-- Footer -->
-    <footer class="py-8 text-center">
-        <p>© 2025 wAllICzech AI Studio. Vytvořeno s ❤️ jedním vývojářem.</p>
-        <div class="mt-4">
-            <a href="https://github.com/walliczech" class="text-gray-400 hover:text-white mx-2">GitHub</a>
-            <a href="https://walliczech.ai/docs" class="text-gray-400 hover:text-white mx-2">Dokumentace</a>
-            <a href="roadmap.html" class="text-gray-400 hover:text-white mx-2">Roadmapa</a>
-        </div>
-    </footer>
-
-
-        </div>
-    </div>
-
-    <!-- Načtení JavaScriptu -->
-    <script src="js/scripts.js"></script>
-</body>
-</html>
+originalConsole.log('ℹ️ wAllICzech Studio připraveno! Použij wallICzech.funkce() v konzoli.');
