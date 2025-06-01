@@ -52,29 +52,25 @@
 	
 
 
-    <header class="bg-black min-h-screen flex flex-col items-center justify-center px-8 py-12 ">
+    <header class="bg-black min-h-screen ">
 
 
         <!-- Řádek: Karta + Logo -->
-        <div class="logo-row-resp">
-      
-          <!-- KARTA -->
+        <div class="logo-row-resp flex justify-center items-center mt-12 mb-12">
+
+            <!-- KARTA -->
             <div class="logo-card-overlay"></div>
-      
-          <!-- SVG LOGO -->
-          <div class="relative h-64 sm:h-84 md:h-[24rem] lg:h-[30rem]">
+
             <object 
-              data="assets/vallia_animated.svg" 
-              type="image/svg+xml" 
-              class="h-full w-auto neon-logo drop-shadow-neon">
-              <img src="assets/vallia_animated.svg" alt="wAllICzech Logo" />
+             data="assets/vallia_animated.svg" 
+             type="image/svg+xml" 
+             class="neon-logo drop-shadow-neon">
+             <img src="assets/vallia_animated.svg" alt="wAllICzech Logo" />
             </object>
-          </div>
-      
         </div>
       
         <!-- NADPISY – centrované jen pod logem -->
-        <div class="text-center mt-4">
+        <div class="text-center justify-center mt-24">
           <div class="glitch-wrapper">
             <span class="glitch-top text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
               wAllICzech
@@ -115,7 +111,7 @@
         </div>
     </div>
     <button class="log-toggle" id="log-toggle">
-        <img src="assets/vallia_animated.svg" alt="wAllICzech Logo" class="neon-logo">
+        <img src="assets/vallia_animated.svg" alt="wAllICzech Logo" class="neon-logoVal">
     </button>
 
 
