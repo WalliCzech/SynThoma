@@ -408,89 +408,89 @@ function initThemeToggle() {
 // ===========================================
 const moduleCardsData = [
     {
-        title: "FluxRunner",
-        description: "Generuj obsah s Flux.1! Rychlejší, ostřejší, neonovější než cokoli předtím. 🌌",
-        colorClass: "color-primary neon-text-glow"
+        "title": "FluxRunner",
+        "description": "Flux.1 generuje obsah rychleji, než hacker crackne heslo! 🌌 Text nebo obrázek? Vytvoří neonové vizuály, co tě teleportují do kyberprostoru. Rychlé, ostré, epické. 😎",
+        "colorClass": "color-primary neon-text-glow"
     },
     {
-        title: "Lipsync",
-        description: "Synchronizuj rty s audiem! Tvoje postavy mluví, jako by žily v kyberprostoru. 🗣️",
-        colorClass: "color-accent neon-text-glow"
+        "title": "Lipsync",
+        "description": "Rty v syncu s audiem jako v pasážním kině! 🗣️ Nahraj video, přihoď zvuk a tvé postavy mluví, jako by žily v Matrixu. Hollywood bez rozpočtu. 💋",
+        "colorClass": "color-accent neon-text-glow"
     },
     {
-        title: "Dubbing Master",
-        description: "Předabuj videa rychleji, než Švejk vypije pivo! Automatický dabing s překladem do libovolného jazyka. 🎙️",
-        colorClass: "color-primary neon-text-glow"
+        "title": "Dubbing Master",
+        "description": "Předabuj videa rychleji, než se Matrix rebootne! 🎙️ Automatický dabing s překladem do jakéhokoli jazyka. Hlasy, co zní jako AI rockstar. 😜",
+        "colorClass": "color-primary neon-text-glow"
     },
     {
-        title: "FaceSwap Ninja",
-        description: "Vyměň obličeje jako pravý kyberpunkový špion! Fotky i videa, vše v bulvární kvalitě. 🧬",
-        colorClass: "color-accent neon-text-glow"
+        "title": "FaceSwap Ninja",
+        "description": "Vyměň obličeje jako kyberšpion! 🧬 Fotky, videa – vše v bulvární kvalitě. Proměň kámoše v Elona nebo psa v kyberhrdinu. 😈",
+        "colorClass": "color-accent neon-text-glow"
     },
     {
-        title: "Face Detector",
-        description: "Najdi každý ksicht v obraze rychleji, než YOLO v pasáži. Detekce obličejů na steroidech! 🕵️",
-        colorClass: "color-primary neon-text-glow"
+        "title": "Face Detector",
+        "description": "Najde každý ksicht v obraze rychleji, než FBI! 🕵️ Používá YOLOv5 nebo ResNet50. Ideální pro analýzu davů nebo špehování v pasáži. 🍺",
+        "colorClass": "color-primary neon-text-glow"
     },
     {
-        title: "SDXL Wizard",
-        description: "Kouzli s obrázky jako AI Picasso! Generuj kyberpunkové scény z tvých snů. 🎨",
-        colorClass: "color-accent neon-text-glow"
+        "title": "SDXL Wizard",
+        "description": "Kouzli kyberpunkové obrázky jako AI Picasso! 🎨 Text2img, img2img, inpainting – tvůj prompt se mění v neonový sen. 🌌",
+        "colorClass": "color-accent neon-text-glow"
     },
     {
-        title: "SAM Segmenter",
-        description: "Řež obrázky na pixely jako nindža! Segmentace s přesností laserového meče. ✂️",
-        colorClass: "color-primary neon-text-glow"
+        "title": "SAM Segmenter",
+        "description": "Řež pixely jako nindža s laserem! ✂️ Segmentace obrázků s přesností skalpelu. Klikni body nebo nech AI sekat automaticky. 😈",
+        "colorClass": "color-primary neon-text-glow"
     },
     {
-        title: "TTS Bard",
-        description: "Proměň text na řeč, co zní jako Švejk nebo kyber Karel Gott. Hlasy, co tě dostanou! 🔊",
-        colorClass: "color-accent neon-text-glow"
+        "title": "TTS Bard",
+        "description": "Text v řeč, co zní jako kybernetický bard! 🔊 Zadej text, vyber hlas a jazyk – audioknihy, pranky nebo dabing? Vše zvládne! 😎",
+        "colorClass": "color-accent neon-text-glow"
     },
     {
-        title: "Upscale King",
-        description: "Zmrkni na rozmazaný obrázek a udělej z něj 8K klenot. Pixely jako diamanty! 🔍",
-        colorClass: "color-primary neon-text-glow"
+        "title": "Upscale King",
+        "description": "Z rozmazanýho obrázku udělá 8K klenot! 🔍 Zachraň staré fotky nebo vytvoř billboard z náčrtku. Pixely, co svítí jako diamanty. 😜",
+        "colorClass": "color-primary neon-text-glow"
     },
     {
-        title: "Neon Progress",
-        description: "Sleduj průběh tvých AI kouzel v real-time přes WebSocket. Žádné čekání v Matrixu! 📊",
-        colorClass: "color-accent neon-text-glow"
+        "title": "Neon Progress",
+        "description": "Sleduj AI kouzla v reálném čase přes WebSocket! 📊 Progress bar svítí jako neon a chyby ti vyplivne rovnou do ksichtu. 😈",
+        "colorClass": "color-accent neon-text-glow"
     },
     {
-        title: "OCRNinja",
-        description: "Rozluští text z obrázku rychleji, než hacker PIN kód! OCR, co čte i tvůj rukopis. 📝🔍",
-        colorClass: "color-primary neon-text-glow"
+        "title": "OCRNinja",
+        "description": "Rozluští text z obrázku rychleji, než hacker PIN! 📝🔍 Rukopisy, billboardy, cokoli – OCR, co čte vše. Perfektní pro digitalizaci. 😎",
+        "colorClass": "color-primary neon-text-glow"
     },
     {
-        title: "Depth Mapper",
-        description: "Promění 2D obrázek na 3D hloubkovou mapu. Ideální pro virtuální realitu nebo jen tak na frajeřinu. 🕶️🌐",
-        colorClass: "color-accent neon-text-glow"
+        "title": "Depth Mapper",
+        "description": "Z 2D obrázku udělá 3D hloubkovou mapu! 🕶️🌐 Ideální pro VR nebo frajeřinu. Tvoje fotky dostanou kyberprostorový rozměr! 🚀",
+        "colorClass": "color-accent neon-text-glow"
     },
     {
-        title: "Audio Slicer",
-        description: "Rozseká audio na kousky jako kybernetický kuchař. Perfektní pro remixy nebo analýzu beatů! 🎵🔪",
-        colorClass: "color-primary neon-text-glow"
+        "title": "Audio Slicer",
+        "description": "Rozseká audio jako kyberkuchař! 🎵🔪 Tracky, podcasty, beaty – vše na kousky s přesností. Perfektní pro remixy nebo analýzu. 😈",
+        "colorClass": "color-primary neon-text-glow"
     },
     {
-        title: "Motion Tracker",
-        description: "Sleduje pohyb ve videu jako stalker z pasáže. Detekce pohybu s přesností lasera! 📍🚨",
-        colorClass: "color-accent neon-text-glow"
+        "title": "Motion Tracker",
+        "description": "Sleduje pohyb ve videu jako kyberstalker! 📍🚨 Detekce s laserovou přesností – ideální pro analýzu nebo špehování v pasáži. 😜",
+        "colorClass": "color-accent neon-text-glow"
     },
     {
-        title: "Chroma Keyer",
-        description: "Vymění pozadí videa, jako bys měl zelené plátno v kapse. Hollywood v tvém notebooku! 🎬🟢",
-        colorClass: "color-primary neon-text-glow"
+        "title": "Chroma Keyer",
+        "description": "Vymění pozadí videa jako v Hollywoodu! 🎬🟢 Nahraj video, přihoď neonovou pasáž nebo Mars. Magie bez zelenýho plátna! 😎",
+        "colorClass": "color-primary neon-text-glow"
     },
     {
-        title: "Voice Cloner",
-        description: "Naklonuje hlas, že by i Švejk záviděl. Vytvoří tvůj hlasový deepfake za pár kliků! 🎙️😈",
-        colorClass: "color-accent neon-text-glow"
+        "title": "Voice Cloner",
+        "description": "Naklonuj hlas jako pravý kyberpadouch! 🎙️😈 Z referenčního audia vytvoří deepfake hlas. Pranky nebo AI herec? Tady to máš! 🚀",
+        "colorClass": "color-accent neon-text-glow"
     },
     {
-        title: "Text2Scene",
-        description: "Z tvého textu vykouzlí celou scénu, jako bys byl scénárista kyberpunkovýho trháku! 📜🎥",
-        colorClass: "color-primary"
+        "title": "Text2Scene",
+        "description": "Text promění v kyberpunkovou scénu! 📜🎥 Zadej popis a sleduj, jak vzniká animace nebo 3D svět. Jsi scénárista Matrixu! 🌌",
+        "colorClass": "color-primary neon-text-glow"
     }
 ];
 
@@ -530,8 +530,8 @@ function spawnLogoCard() {
         card.style.zIndex = '15'; // Vyšší z-index pro novou kartu
         const randomCard = moduleCardsData[Math.floor(Math.random() * moduleCardsData.length)];
         card.innerHTML = `
-            <h3 style="color: var(--color-primary); text-shadow: var(--neon-text-glow);">${randomCard.title}</h3>
-            <p>${randomCard.description}</p>
+            <h3 style="font-size: 1.4rem; color: var(--color-primary); text-shadow: var(--neon-text-glow);">${randomCard.title}</h3>
+            <p style="font-size: 1.15rem;">${randomCard.description}</p>
         `;
 
         container.appendChild(card);
@@ -561,7 +561,7 @@ function spawnLogoCard() {
                 setTimeout(() => spawnLogoCard(), 320);
                 console.log('🔄 Karta se automaticky depixelizovala do datového proudu! *vrrrr*');
             }
-        }, 5000);
+        }, 10000);
 
         return card;
     } catch (error) {
