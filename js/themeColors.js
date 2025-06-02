@@ -1,365 +1,505 @@
-// themeColors.js
-// Vítej v barevným pekle, žádný ES moduly, jen stará dobrá CommonJS klasika! 😈
+/* ===== THEME COLORS - BAREVNÝ MASAKR S PRAVÝMI INVERZEMI! ===== */
 
-window.themeColors = {
-    default: {
-        primary: "#ff4500",
-        primaryInvert: "#000000",
-        accent: "#ff5500",
-        accentInvert: "#ba1787",
-        glow: "#ff007a",
-        bg: "#000000",
-        text: "#eaffea",
-        textInvert: "#000000"
-    },
-    cyberWeed: {
-        primary: "#00ff88",
-        primaryInvert: "#000000",
-        accent: "#33ffaa",
-        accentInvert: "#000000",
-        glow: "#00ffcc",
-        bg: "#001f1a",
-        text: "#eaffea",
-        textInvert: "#000000"
-    },
-    cyberPink: {
-        primary: "#ff77ff",
-        primaryInvert: "#000000",
-        accent: "#ff99ff",
-        accentInvert: "#000000",
-        glow: "#ffaaee",
-        bg: "#2b002b",
-        text: "#ffffff",
-        textInvert: "#000000"
-    },
-    cyberBlue: {
-        primary: "#00a8ff",
-        primaryInvert: "#000000",
-        accent: "#00f7ff",
-        accentInvert: "#000000",
-        glow: "#00e5ff",
-        bg: "#000a1a",
-        text: "#e6f7ff",
-        textInvert: "#000000"
-    },
-    cyberOrange: {
-        primary: "#ff8c00",
-        primaryInvert: "#9b2525",
-        accent: "#ffbb33",
-        accentInvert: "#9b2525",
-        glow: "#ffaa33",
-        bg: "#1a0a00",
-        text: "#fff0e6",
-        textInvert: "#000000"
-    },
-    cyberPurple: {
-        primary: "#b300ff",
-        primaryInvert: "#000000",
-        accent: "#cc66ff",
-        accentInvert: "#000000",
-        glow: "#cc99ff",
-        bg: "#0a001a",
-        text: "#f2e6ff",
-        textInvert: "#000000"
-    },
-    neonGrave: {
-        primary: "#00ff33",
-        primaryInvert: "#1a1a1a",
-        accent: "#66ff99",
-        accentInvert: "#333333",
-        glow: "#33ff66",
-        bg: "#001a00",
-        text: "#ccffcc",
-        textInvert: "#000000"
-    },
-    bloodRust: {
-        primary: "#8b0000",
-        primaryInvert: "#ffffff",
-        accent: "#a11212",
-        accentInvert: "#4a4a4a",
-        glow: "#ff4040",
-        bg: "#1c0000",
-        text: "#ffcccc",
-        textInvert: "#000000"
-    },
-    toxicSlime: {
-        primary: "#39ff14",
-        primaryInvert: "#000000",
-        accent: "#66ff33",
-        accentInvert: "#1a1a1a",
-        glow: "#99ff66",
-        bg: "#001a00",
-        text: "#ccffcc",
-        textInvert: "#000000"
-    },
-    midnightOil: {
-        primary: "#1e90ff",
-        primaryInvert: "#000000",
-        accent: "#4682b4",
-        accentInvert: "#ffffff",
-        glow: "#87cefa",
-        bg: "#000022",
-        text: "#b0e0e6",
-        textInvert: "#000000"
-    },
-    glitchRed: {
-        primary: "#ff0000",
-        primaryInvert: "#000000",
-        accent: "#ff3333",
-        accentInvert: "#4a4a4a",
-        glow: "#ff6666",
-        bg: "#1a0000",
-        text: "#ff9999",
-        textInvert: "#000000"
-    },
-    voidPurple: {
-        primary: "#800080",
-        primaryInvert: "#ffffff",
-        accent: "#9933cc",
-        accentInvert: "#000000",
-        glow: "#cc66ff",
-        bg: "#0f001a",
-        text: "#e6ccff",
-        textInvert: "#000000"
-    },
-    acidLemon: {
-        primary: "#ccff00",
-        primaryInvert: "#000000",
-        accent: "#e6ff33",
-        accentInvert: "#333333",
-        glow: "#ffff66",
-        bg: "#1a1a00",
-        text: "#ffffcc",
-        textInvert: "#000000"
-    },
-    burntChrome: {
-        primary: "#ff4500",
-        primaryInvert: "#000000",
-        accent: "#ff6347",
-        accentInvert: "#4a4a4a",
-        glow: "#ff7f50",
-        bg: "#2a0f00",
-        text: "#ffcc99",
-        textInvert: "#000000"
-    },
-    frostByte: {
-        primary: "#00ccff",
-        primaryInvert: "#000000",
-        accent: "#33e6ff",
-        accentInvert: "#1a1a1a",
-        glow: "#66ffff",
-        bg: "#001a2a",
-        text: "#ccffff",
-        textInvert: "#000000"
-    },
-    plasmaPulse: {
-        primary: "#ff00ff",
-        primaryInvert: "#000000",
-        accent: "#ff33ff",
-        accentInvert: "#333333",
-        glow: "#ff66ff",
-        bg: "#2a002a",
-        text: "#ffccff",
-        textInvert: "#000000"
-    },
-    shadowLime: {
-        primary: "#32cd32",
-        primaryInvert: "#000000",
-        accent: "#66ff66",
-        accentInvert: "#1a1a1a",
-        glow: "#99ff99",
-        bg: "#001a00",
-        text: "#ccffcc",
-        textInvert: "#000000"
-    },
-    crimsonGlitch: {
-        primary: "#dc143c",
-        primaryInvert: "#000000",
-        accent: "#ff4040",
-        accentInvert: "#4a4a4a",
-        glow: "#ff6666",
-        bg: "#1a0000",
-        text: "#ff9999",
-        textInvert: "#000000"
-    },
-    electricAbyss: {
-        primary: "#00b7eb",
-        primaryInvert: "#000000",
-        accent: "#33ccff",
-        accentInvert: "#1a1a1a",
-        glow: "#66e6ff",
-        bg: "#001a2a",
-        text: "#ccffff",
-        textInvert: "#000000"
-    },
-    venomGreen: {
-        primary: "#00ff00",
-        primaryInvert: "#000000",
-        accent: "#33ff33",
-        accentInvert: "#333333",
-        glow: "#66ff66",
-        bg: "#001a00",
-        text: "#ccffcc",
-        textInvert: "#000000"
-    },
-    obsidianGlow: {
-        primary: "#4b0082",
-        primaryInvert: "#ffffff",
-        accent: "#7b00cc",
-        accentInvert: "#000000",
-        glow: "#b266ff",
-        bg: "#0a001a",
-        text: "#e6ccff",
-        textInvert: "#000000"
-    },
-    hellfireOrange: {
-        primary: "#ff4d00",
-        primaryInvert: "#000000",
-        accent: "#ff7700",
-        accentInvert: "#4a4a4a",
-        glow: "#ff9933",
-        bg: "#2a0f00",
-        text: "#ffcc99",
-        textInvert: "#000000"
-    },
-    neonViper: {
-        primary: "#39ff14",
-        primaryInvert: "#000000",
-        accent: "#66ff33",
-        accentInvert: "#1a1a1a",
-        glow: "#99ff66",
-        bg: "#001a00",
-        text: "#ccffcc",
-        textInvert: "#000000"
-    },
-    darkSakura: {
-        primary: "#ff69b4",
-        primaryInvert: "#000000",
-        accent: "#ff8cc1",
-        accentInvert: "#333333",
-        glow: "#ffadd8",
-        bg: "#2a002a",
-        text: "#ffccff",
-        textInvert: "#000000"
-    },
-    ghostCircuit: {
-        primary: "#00ced1",
-        primaryInvert: "#000000",
-        accent: "#33e6e6",
-        accentInvert: "#1a1a1a",
-        glow: "#66ffff",
-        bg: "#001a2a",
-        text: "#ccffff",
-        textInvert: "#000000"
-    },
-    moltenCore: {
-        primary: "#ff4500",
-        primaryInvert: "#000000",
-        accent: "#ff6347",
-        accentInvert: "#4a4a4a",
-        glow: "#ff7f50",
-        bg: "#2a0f00",
-        text: "#ffcc99",
-        textInvert: "#000000"
-    },
-    cyberAsh: {
-        primary: "#696969",
-        primaryInvert: "#ffffff",
-        accent: "#a9a9a9",
-        accentInvert: "#000000",
-        glow: "#c0c0c0",
-        bg: "#1a1a1a",
-        text: "#e0e0e0",
-        textInvert: "#000000"
-    },
-    toxicFuchsia: {
-        primary: "#ff00cc",
-        primaryInvert: "#000000",
-        accent: "#ff33e6",
-        accentInvert: "#333333",
-        glow: "#ff66ff",
-        bg: "#2a002a",
-        text: "#ffccff",
-        textInvert: "#000000"
-    },
-    steelFrost: {
-        primary: "#4682b4",
-        primaryInvert: "#ffffff",
-        accent: "#6495ed",
-        accentInvert: "#000000",
-        glow: "#87cefa",
-        bg: "#001a2a",
-        text: "#b0e0e6",
-        textInvert: "#000000"
-    },
-    neonBlood: {
-        primary: "#b22222",
-        primaryInvert: "#ffffff",
-        accent: "#dc143c",
-        accentInvert: "#4a4a4a",
-        glow: "#ff4040",
-        bg: "#1a0000",
-        text: "#ff9999",
-        textInvert: "#000000"
-    },
-    voidCyan: {
-        primary: "#00cccc",
-        primaryInvert: "#000000",
-        accent: "#33e6e6",
-        accentInvert: "#1a1a1a",
-        glow: "#66ffff",
-        bg: "#001a2a",
-        text: "#ccffff",
-        textInvert: "#000000"
-    },
-    radioactiveMint: {
-        primary: "#00fa9a",
-        primaryInvert: "#000000",
-        accent: "#33ffcc",
-        accentInvert: "#333333",
-        glow: "#66ffcc",
-        bg: "#001a1a",
-        text: "#ccffcc",
-        textInvert: "#000000"
-    },
-    duskEmber: {
-        primary: "#ff4500",
-        primaryInvert: "#000000",
-        accent: "#ff6347",
-        accentInvert: "#4a4a4a",
-        glow: "#ff7f50",
-        bg: "#2a0f00",
-        text: "#ffcc99",
-        textInvert: "#000000"
-    },
-    cyberCrimson: {
-        primary: "#dc143c",
-        primaryInvert: "#000000",
-        accent: "#ff4040",
-        accentInvert: "#4a4a4a",
-        glow: "#ff6666",
-        bg: "#1a0000",
-        text: "#ff9999",
-        textInvert: "#000000"
-    },
-    phantomGreen: {
-        primary: "#00ff7f",
-        primaryInvert: "#000000",
-        accent: "#33ff99",
-        accentInvert: "#1a1a1a",
-        glow: "#66ff99",
-        bg: "#001a00",
-        text: "#ccffcc",
-        textInvert: "#000000"
-    },
-    twilightNeon: {
-        primary: "#9932cc",
-        primaryInvert: "#ffffff",
-        accent: "#cc66ff",
-        accentInvert: "#000000",
-        glow: "#cc99ff",
-        bg: "#0a001a",
-        text: "#f2e6ff",
-        textInvert: "#000000"
-    }
-};
+/* Defaultní motiv - klasika, co tě nezklame, ale stejně tě bude štvát */
+:root[data-theme="default"] {
+    --color-primary: #ff4500;        /* Oranžová, co tě praští do očí jako bug v produkci */
+    --color-primary-invert: #00baff; /* Modrá, co tě utopí v opačném spektru */
+    --color-accent: #ff5500;         /* Lehce jiná oranžová, protože proč ne */
+    --color-accent-invert: #00aaff;  /* Modrá, co křičí "proč jsi to nezkontroloval?" */
+    --color-glow: #ff007a;           /* Záře, co svítí jako tvůj kód po páté kávě */
+    --color-glow-invert: #00ff85;    /* Zelená, co tě slepí na opačné straně */
+    --color-bg: #000000;             /* Černá jako tvá duše po debugování */
+    --color-bg-invert: #ffffff;      /* Bílá, protože i tma má svůj protipól */
+    --color-text: #eaffea;           /* Světlá, aby to bylo čitelné, i když nechceš */
+    --color-text-invert: #150015;    /* Tmavá, co tě vrátí do reality */
+}
+
+/* CyberWeed - zelená, co tě uklidní... nebo taky ne */
+:root[data-theme="cyberWeed"] {
+    --color-primary: #00ff88;        /* Zelená, co vypadá jako radioaktivní limonáda */
+    --color-primary-invert: #ff0077; /* Růžová, co tě spálí na opačném konci */
+    --color-accent: #33ffaa;         /* Zelená, ale ještě trochu víc do očí */
+    --color-accent-invert: #cc0055;  /* Růžová, co ti připomene tvůj fail */
+    --color-glow: #00ffcc;           /* Záře, co vypadá jako tvůj kód po refactoringu */
+    --color-glow-invert: #ff0033;    /* Červená, co tě vrátí do pekla */
+    --color-bg: #001f1a;             /* Tmavá jako tvůj život po deadline */
+    --color-bg-invert: #ffe0e5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #eaffea;           /* Světlá, abys viděl chyby v logu */
+    --color-text-invert: #150015;    /* Tmavá, co tě pohltí */
+}
+
+/* CyberPink - růžová, co tě donutí přemýšlet o životních rozhodnutích */
+:root[data-theme="cyberPink"] {
+    --color-primary: #ff77ff;        /* Růžová, co křičí "proč jsem to kódil?" */
+    --color-primary-invert: #008800; /* Zelená, co tě vrátí na zem */
+    --color-accent: #ff99ff;         /* Ještě víc růžová, protože proč ne */
+    --color-accent-invert: #006600;  /* Zelená, co tě uklidní... nebo ne */
+    --color-glow: #ffaaee;           /* Záře, co svítí jako tvůj kód po páté kávě */
+    --color-glow-invert: #005511;    /* Zelená, co tě pohřbí */
+    --color-bg: #2b002b;             /* Tmavá jako tvůj humor po code review */
+    --color-bg-invert: #d4ffd4;      /* Světlá, co tě slepí */
+    --color-text: #ffffff;           /* Bílá, protože jinak bys to nečetl */
+    --color-text-invert: #000000;    /* Černá, protože... no, prostě proto */
+}
+
+/* CyberBlue - modrá, co tě uvrhne do digitální deprese */
+:root[data-theme="cyberBlue"] {
+    --color-primary: #00a8ff;        /* Modrá, co tě nutí googlet "jak přežít IT" */
+    --color-primary-invert: #ff5700; /* Oranžová, co tě spálí na opačném konci */
+    --color-accent: #00f7ff;         /* Světlejší modrá, abys nezapomněl na bugy */
+    --color-accent-invert: #ff0800;  /* Červená, co tě vrátí do reality */
+    --color-glow: #00e5ff;           /* Záře, co tě slepí jako chybný regex */
+    --color-glow-invert: #ff1a00;    /* Červená, co tě donutí restartovat */
+    --color-bg: #000a1a;             /* Tmavá jako tvůj vývojářský osud */
+    --color-bg-invert: #fff5e5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #e6f7ff;           /* Světlá, abys viděl warningy v konzoli */
+    --color-text-invert: #190800;    /* Tmavá, co tě pohltí */
+}
+
+/* CyberOrange - oranžová, co tě probudí ze zimního spánku */
+:root[data-theme="cyberOrange"] {
+    --color-primary: #ff8c00;        /* Oranžová, co tě nakopne jako energy drink */
+    --color-primary-invert: #0073ff; /* Modrá, co tě utopí v opačném spektru */
+    --color-accent: #ffbb33;         /* Světlejší oranžová, protože víc je víc */
+    --color-accent-invert: #0044cc;  /* Modrá, co ti připomene tvůj fail */
+    --color-glow: #ffaa33;           /* Záře, co svítí jako tvůj kód po merge */
+    --color-glow-invert: #0055cc;    /* Modrá, co tě vrátí do pekla */
+    --color-bg: #1a0a00;             /* Tmavá jako tvůj život po code review */
+    --color-bg-invert: #e5f5ff;      /* Světlá, co tě donutí mžourat */
+    --color-text: #fff0e6;           /* Světlá, abys viděl warningy v logu */
+    --color-text-invert: #000f19;    /* Tmavá, co tě pohltí */
+}
+
+/* CyberPurple - fialová, co tě pošle do paralelního vesmíru */
+:root[data-theme="cyberPurple"] {
+    --color-primary: #b300ff;        /* Fialová, co křičí "jsem umělecký kód!" */
+    --color-primary-invert: #4cff00; /* Zelená, co tě vrátí na zem */
+    --color-accent: #cc66ff;         /* Světlejší fialová, protože víc je lepší */
+    --color-accent-invert: #339900;  /* Zelená, co tě uklidní... nebo ne */
+    --color-glow: #cc99ff;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #336600;    /* Zelená, co tě pohřbí */
+    --color-bg: #0a001a;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #f5ffe5;      /* Světlá, co tě slepí */
+    --color-text: #f2e6ff;           /* Světlá, abys viděl error v konzoli */
+    --color-text-invert: #0d1900;    /* Tmavá, co tě pohltí */
+}
+
+/* NeonGrave - zelená, co tě pohřbí v kyberhřbitově */
+:root[data-theme="neonGrave"] {
+    --color-primary: #00ff33;        /* Zelená, co svítí jako tvůj kód v noci */
+    --color-primary-invert: #ff00cc; /* Růžová, co tě spálí na opačném konci */
+    --color-accent: #66ff99;         /* Světlejší zelená, protože proč ne */
+    --color-accent-invert: #990066;  /* Růžová, co ti připomene tvůj fail */
+    --color-glow: #33ff66;           /* Záře, co tě slepí jako bug v logu */
+    --color-glow-invert: #cc0099;    /* Růžová, co tě vrátí do pekla */
+    --color-bg: #001a00;             /* Tmavá jako tvůj osud po deadline */
+    --color-bg-invert: #ffe5ff;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffcc;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330033;    /* Tmavá, co tě pohltí */
+}
+
+/* BloodRust - červená, co tě pošle do hororu */
+:root[data-theme="bloodRust"] {
+    --color-primary: #8b0000;        /* Červená, co vypadá jako krev z tvého kódu */
+    --color-primary-invert: #00ffff; /* Tyrkysová, co tě utopí v opačném spektru */
+    --color-accent: #a11212;         /* Tmavší červená, protože drama */
+    --color-accent-invert: #00eded;  /* Tyrkysová, co ti připomene tvůj fail */
+    --color-glow: #ff4040;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #00bfbf;    /* Tyrkysová, co tě vrátí do pekla */
+    --color-bg: #1c0000;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #e3ffff;      /* Světlá, co tě slepí */
+    --color-text: #ffcccc;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #003333;    /* Tmavá, co tě pohltí */
+}
+
+/* ToxicSlime - zelená, co tě otráví */
+:root[data-theme="toxicSlime"] {
+    --color-primary: #39ff14;        /* Zelená, co tě spálí jako kyselina */
+    --color-primary-invert: #c600eb; /* Fialová, co tě spálí na opačném konci */
+    --color-accent: #66ff33;         /* Světlejší zelená, protože proč ne */
+    --color-accent-invert: #9900cc;  /* Fialová, co ti připomene tvůj fail */
+    --color-glow: #99ff66;           /* Záře, co svítí jako tvůj kód po páté kávě */
+    --color-glow-invert: #660099;    /* Fialová, co tě vrátí do pekla */
+    --color-bg: #001a00;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5ff;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffcc;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330033;    /* Tmavá, co tě pohltí */
+}
+
+/* MidnightOil - modrá, co tě udrží vzhůru do rána */
+:root[data-theme="midnightOil"] {
+    --color-primary: #1e90ff;        /* Modrá, co tě nutí psát kód do svítání */
+    --color-primary-invert: #ff6f00; /* Oranžová, co tě spálí na opačném konci */
+    --color-accent: #4682b4;         /* Tmavší modrá, protože styl */
+    --color-accent-invert: #b97d4b;  /* Oranžová, co ti připomene tvůj fail */
+    --color-glow: #87cefa;           /* Záře, co svítí jako tvůj monitor */
+    --color-glow-invert: #783105;    /* Oranžová, co tě vrátí do pekla */
+    --color-bg: #000022;             /* Tmavá jako tvůj život po deadline */
+    --color-bg-invert: #ffddff;      /* Světlá, co tě slepí */
+    --color-text: #b0e0e6;           /* Světlá, abys viděl error v konzoli */
+    --color-text-invert: #4f1f19;    /* Tmavá, co tě pohltí */
+}
+
+/* GlitchRed - červená, co tě donutí restartovat */
+:root[data-theme="glitchRed"] {
+    --color-primary: #ff0000;        /* Červená, co křičí "kód se zasekl!" */
+    --color-primary-invert: #00ffff; /* Tyrkysová, co tě utopí v opačném spektru */
+    --color-accent: #ff3333;         /* Světlejší červená, protože drama */
+    --color-accent-invert: #00cccc;  /* Tyrkysová, co ti připomene tvůj fail */
+    --color-glow: #ff6666;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #009999;    /* Tyrkysová, co tě vrátí do pekla */
+    --color-bg: #1a0000;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #e5ffff;      /* Světlá, co tě slepí */
+    --color-text: #ff9999;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #006666;    /* Tmavá, co tě pohltí */
+}
+
+/* VoidPurple - fialová, co tě pohltí do prázdnoty */
+:root[data-theme="voidPurple"] {
+    --color-primary: #800080;        /* Fialová, co tě pošle do jiné dimenze */
+    --color-primary-invert: #7fff7f; /* Zelená, co tě vrátí na zem */
+    --color-accent: #9933cc;         /* Světlejší fialová, protože styl */
+    --color-accent-invert: #66cc33;  /* Zelená, co tě uklidní... nebo ne */
+    --color-glow: #cc66ff;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #339900;    /* Zelená, co tě pohřbí */
+    --color-bg: #0f001a;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #f0ffe5;      /* Světlá, co tě slepí */
+    --color-text: #e6ccff;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #193300;    /* Tmavá, co tě pohltí */
+}
+
+/* AcidLemon - žlutá, co tě spálí oči */
+:root[data-theme="acidLemon"] {
+    --color-primary: #ccff00;        /* Žlutá, co tě slepí jako špatný regex */
+    --color-primary-invert: #3300ff; /* Fialová, co tě spálí na opačném konci */
+    --color-accent: #e6ff33;         /* Světlejší žlutá, protože víc je víc */
+    --color-accent-invert: #1900cc;  /* Fialová, co ti připomene tvůj fail */
+    --color-glow: #ffff66;           /* Záře, co svítí jako tvůj kód po merge */
+    --color-glow-invert: #000099;    /* Fialová, co tě vrátí do pekla */
+    --color-bg: #1a1a00;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #e5e5ff;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ffffcc;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #000033;    /* Tmavá, co tě pohltí */
+}
+
+/* BurntChrome - oranžová, co tě spálí na popel */
+:root[data-theme="burntChrome"] {
+    --color-primary: #ff4500;        /* Oranžová, co tě praští jako bug v produkci */
+    --color-primary-invert: #00baff; /* Modrá, co tě utopí v opačném spektru */
+    --color-accent: #ff6347;         /* Světlejší oranžová, protože drama */
+    --color-accent-invert: #009cb8;  /* Modrá, co ti připomene tvůj fail */
+    --color-glow: #ff7f50;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #0080af;    /* Modrá, co tě vrátí do pekla */
+    --color-bg: #2a0f00;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #d5f0ff;      /* Světlá, co tě slepí */
+    --color-text: #ffcc99;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #003366;    /* Tmavá, co tě pohltí */
+}
+
+/* FrostByte - modrá, co tě zmrazí */
+:root[data-theme="frostByte"] {
+    --color-primary: #00ccff;        /* Modrá, co tě zamrazí jako špatný build */
+    --color-primary-invert: #ff3300; /* Oranžová, co tě spálí na opačném konci */
+    --color-accent: #33e6ff;         /* Světlejší modrá, protože styl */
+    --color-accent-invert: #cc1900;  /* Oranžová, co ti připomene tvůj fail */
+    --color-glow: #66ffff;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #990000;    /* Červená, co tě vrátí do pekla */
+    --color-bg: #001a2a;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5d5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffff;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330000;    /* Tmavá, co tě pohltí */
+}
+
+/* PlasmaPulse - růžová, co tě elektrizuje */
+:root[data-theme="plasmaPulse"] {
+    --color-primary: #ff00ff;        /* Růžová, co tě šokuje jako bug v produkci */
+    --color-primary-invert: #00ff00; /* Zelená, co tě vrátí na zem */
+    --color-accent: #ff33ff;         /* Světlejší růžová, protože drama */
+    --color-accent-invert: #00cc00;  /* Zelená, co ti připomene tvůj fail */
+    --color-glow: #ff66ff;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #009900;    /* Zelená, co tě vrátí do pekla */
+    --color-bg: #2a002a;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #d5ffd5;      /* Světlá, co tě slepí */
+    --color-text: #ffccff;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #003300;    /* Tmavá, co tě pohltí */
+}
+
+/* ShadowLime - zelená, co tě pohltí do stínu */
+:root[data-theme="shadowLime"] {
+    --color-primary: #32cd32;        /* Zelená, co tě pohltí jako špatný merge */
+    --color-primary-invert: #cd32cd; /* Fialová, co tě spálí na opačném konci */
+    --color-accent: #66ff66;         /* Světlejší zelená, protože styl */
+    --color-accent-invert: #990099;  /* Fialová, co ti připomene tvůj fail */
+    --color-glow: #99ff99;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #660066;    /* Fialová, co tě vrátí do pekla */
+    --color-bg: #001a00;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5ff;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffcc;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330033;    /* Tmavá, co tě pohltí */
+}
+
+/* CrimsonGlitch - červená, co tě donutí restartovat */
+:root[data-theme="crimsonGlitch"] {
+    --color-primary: #dc143c;        /* Červená, co křičí "kód se zasekl!" */
+    --color-primary-invert: #23ebff; /* Tyrkysová, co tě utopí v opačném spektru */
+    --color-accent: #ff4040;         /* Světlejší červená, protože drama */
+    --color-accent-invert: #00bfbf;  /* Tyrkysová, co ti připomene tvůj fail */
+    --color-glow: #ff6666;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #009999;    /* Tyrkysová, co tě vrátí do pekla */
+    --color-bg: #1a0000;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #e5ffff;      /* Světlá, co tě slepí */
+    --color-text: #ff9999;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #006666;    /* Tmavá, co tě pohltí */
+}
+
+/* ElectricAbyss - modrá, co tě pohltí do hlubin */
+:root[data-theme="electricAbyss"] {
+    --color-primary: #00b7eb;        /* Modrá, co tě utopí v kyberprostoru */
+    --color-primary-invert: #ff4814; /* Oranžová, co tě spálí na opačném konci */
+    --color-accent: #33ccff;         /* Světlejší modrá, protože styl */
+    --color-accent-invert: #cc3300;  /* Oranžová, co ti připomene tvůj fail */
+    --color-glow: #66e6ff;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #991900;    /* Oranžová, co tě vrátí do pekla */
+    --color-bg: #001a2a;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5d5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffff;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330000;    /* Tmavá, co tě pohltí */
+}
+
+/* VenomGreen - zelená, co tě otráví */
+:root[data-theme="venomGreen"] {
+    --color-primary: #00ff00;        /* Zelená, co tě spálí jako kyselina */
+    --color-primary-invert: #ff00ff; /* Růžová, co tě spálí na opačném konci */
+    --color-accent: #33ff33;         /* Světlejší zelená, protože styl */
+    --color-accent-invert: #cc00cc;  /* Růžová, co ti připomene tvůj fail */
+    --color-glow: #66ff66;           /* Záře, co svítí jako tvůj kód po páté kávě */
+    --color-glow-invert: #990099;    /* Růžová, co tě vrátí do pekla */
+    --color-bg: #001a00;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5ff;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffcc;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330033;    /* Tmavá, co tě pohltí */
+}
+
+/* ObsidianGlow - fialová, co tě pohltí do tmy */
+:root[data-theme="obsidianGlow"] {
+    --color-primary: #4b0082;        /* Fialová, co tě pošle do jiné dimenze */
+    --color-primary-invert: #b4ff7d; /* Zelená, co tě vrátí na zem */
+    --color-accent: #7b00cc;         /* Světlejší fialová, protože styl */
+    --color-accent-invert: #84ff33;  /* Zelená, co tě uklidní... nebo ne */
+    --color-glow: #b266ff;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #4d9900;    /* Zelená, co tě pohřbí */
+    --color-bg: #0a001a;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #f5ffe5;      /* Světlá, co tě slepí */
+    --color-text: #e6ccff;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #193300;    /* Tmavá, co tě pohltí */
+}
+
+/* HellfireOrange - oranžová, co tě spálí na popel */
+:root[data-theme="hellfireOrange"] {
+    --color-primary: #ff4d00;        /* Oranžová, co tě praští jako bug v produkci */
+    --color-primary-invert: #00b2ff; /* Modrá, co tě utopí v opačném spektru */
+    --color-accent: #ff7700;         /* Světlejší oranžová, protože drama */
+    --color-accent-invert: #0088ff;  /* Modrá, co ti připomene tvůj fail */
+    --color-glow: #ff9933;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #0066cc;    /* Modrá, co tě vrátí do pekla */
+    --color-bg: #2a0f00;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #d5f0ff;      /* Světlá, co tě slepí */
+    --color-text: #ffcc99;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #003366;    /* Tmavá, co tě pohltí */
+}
+
+/* NeonViper - zelená, co tě uštkne */
+:root[data-theme="neonViper"] {
+    --color-primary: #39ff14;        /* Zelená, co tě spálí jako kyselina */
+    --color-primary-invert: #c600eb; /* Fialová, co tě spálí na opačném konci */
+    --color-accent: #66ff33;         /* Světlejší zelená, protože styl */
+    --color-accent-invert: #9900cc;  /* Fialová, co ti připomene tvůj fail */
+    --color-glow: #99ff66;           /* Záře, co svítí jako tvůj kód po páté kávě */
+    --color-glow-invert: #660099;    /* Fialová, co tě vrátí do pekla */
+    --color-bg: #001a00;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5ff;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffcc;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330033;    /* Tmavá, co tě pohltí */
+}
+
+/* DarkSakura - růžová, co tě pošle do anime světa */
+:root[data-theme="darkSakura"] {
+    --color-primary: #ff69b4;        /* Růžová, co křičí "jsem kawaii, ale temná!" */
+    --color-primary-invert: #00964b; /* Zelená, co tě vrátí na zem */
+    --color-accent: #ff8cc1;         /* Světlejší růžová, protože styl */
+    --color-accent-invert: #00733e;  /* Zelená, co tě uklidní... nebo ne */
+    --color-glow: #ffadd8;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #005227;    /* Zelená, co tě pohřbí */
+    --color-bg: #2a002a;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #d5ffd5;      /* Světlá, co tě slepí */
+    --color-text: #ffccff;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #003300;    /* Tmavá, co tě pohltí */
+}
+
+/* GhostCircuit - modrá, co tě straší */
+:root[data-theme="ghostCircuit"] {
+    --color-primary: #00ced1;        /* Modrá, co tě sleduje jako bug v produkci */
+    --color-primary-invert: #ff312e; /* Červená, co tě spálí na opačném konci */
+    --color-accent: #33e6e6;         /* Světlejší modrá, protože styl */
+    --color-accent-invert: #cc1919;  /* Červená, co ti připomene tvůj fail */
+    --color-glow: #66ffff;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #990000;    /* Červená, co tě vrátí do pekla */
+    --color-bg: #001a2a;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5d5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffff;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330000;    /* Tmavá, co tě pohltí */
+}
+
+/* MoltenCore - oranžová, co tě roztaví */
+:root[data-theme="moltenCore"] {
+    --color-primary: #ff4500;        /* Oranžová, co tě praští jako bug v produkci */
+    --color-primary-invert: #00baff; /* Modrá, co tě utopí v opačném spektru */
+    --color-accent: #ff6347;         /* Světlejší oranžová, protože drama */
+    --color-accent-invert: #009cb8;  /* Modrá, co ti připomene tvůj fail */
+    --color-glow: #ff7f50;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #0080af;    /* Modrá, co tě vrátí do pekla */
+    --color-bg: #2a0f00;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #d5f0ff;      /* Světlá, co tě slepí */
+    --color-text: #ffcc99;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #003366;    /* Tmavá, co tě pohltí */
+}
+
+/* CyberAsh - šedá, co tě pohřbí v popelu */
+:root[data-theme="cyberAsh"] {
+    --color-primary: #696969;        /* Šedá, co tě nudí k smrti */
+    --color-primary-invert: #969696; /* Šedá, co tě nudí ještě víc */
+    --color-accent: #a9a9a9;         /* Světlejší šedá, protože styl */
+    --color-accent-invert: #565656;  /* Tmavší šedá, protože proč ne */
+    --color-glow: #c0c0c0;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #3f3f3f;    /* Šedá, co tě pohřbí */
+    --color-bg: #1a1a1a;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #e5e5e5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #e0e0e0;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #1f1f1f;    /* Tmavá, co tě pohltí */
+}
+
+/* ToxicFuchsia - růžová, co tě otráví */
+:root[data-theme="toxicFuchsia"] {
+    --color-primary: #ff00cc;        /* Růžová, co tě spálí jako kyselina */
+    --color-primary-invert: #00ff33; /* Zelená, co tě spálí na opačném konci */
+    --color-accent: #ff33e6;         /* Světlejší růžová, protože styl */
+    --color-accent-invert: #00cc19;  /* Zelená, co ti připomene tvůj fail */
+    --color-glow: #ff66ff;           /* Záře, co svítí jako tvůj kód po páté kávě */
+    --color-glow-invert: #009900;    /* Zelená, co tě vrátí do pekla */
+    --color-bg: #2a002a;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #d5ffd5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ffccff;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #003300;    /* Tmavá, co tě pohltí */
+}
+
+/* SteelFrost - modrá, co tě zmrazí */
+:root[data-theme="steelFrost"] {
+    --color-primary: #4682b4;        /* Modrá, co tě zamrazí jako špatný build */
+    --color-primary-invert: #b97d4b; /* Oranžová, co tě spálí na opačném konci */
+    --color-accent: #6495ed;         /* Světlejší modrá, protože styl */
+    --color-accent-invert: #9b6a12;  /* Oranžová, co ti připomene tvůj fail */
+    --color-glow: #87cefa;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #783105;    /* Oranžová, co tě vrátí do pekla */
+    --color-bg: #001a2a;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5d5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #b0e0e6;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #4f1f19;    /* Tmavá, co tě pohltí */
+}
+
+/* NeonBlood - červená, co tě pošle do hororu */
+:root[data-theme="neonBlood"] {
+    --color-primary: #b22222;        /* Červená, co vypadá jako krev z tvého kódu */
+    --color-primary-invert: #22dddd; /* Tyrkysová, co tě utopí v opačném spektru */
+    --color-accent: #dc143c;         /* Světlejší červená, protože drama */
+    --color-accent-invert: #23ebff;  /* Tyrkysová, co ti připomene tvůj fail */
+    --color-glow: #ff4040;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #00bfbf;    /* Tyrkysová, co tě vrátí do pekla */
+    --color-bg: #1a0000;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #e5ffff;      /* Světlá, co tě slepí */
+    --color-text: #ff9999;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #006666;    /* Tmavá, co tě pohltí */
+}
+
+/* VoidCyan - modrá, co tě pohltí do hlubin */
+:root[data-theme="voidCyan"] {
+    --color-primary: #00cccc;        /* Modrá, co tě utopí v kyberprostoru */
+    --color-primary-invert: #ff3333; /* Červená, co tě spálí na opačném konci */
+    --color-accent: #33e6e6;         /* Světlejší modrá, protože styl */
+    --color-accent-invert: #cc1919;  /* Červená, co ti připomene tvůj fail */
+    --color-glow: #66ffff;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #990000;    /* Červená, co tě vrátí do pekla */
+    --color-bg: #001a2a;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5d5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffff;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330000;    /* Tmavá, co tě pohltí */
+}
+
+/* RadioactiveMint - zelená, co tě ozáří */
+:root[data-theme="radioactiveMint"] {
+    --color-primary: #00fa9a;        /* Zelená, co svítí jako radioaktivní odpad */
+    --color-primary-invert: #ff0565; /* Růžová, co tě spálí na opačném konci */
+    --color-accent: #33ffcc;         /* Světlejší zelená, protože styl */
+    --color-accent-invert: #cc0033;  /* Růžová, co ti připomene tvůj fail */
+    --color-glow: #66ffcc;           /* Záře, co svítí jako tvůj kód po páté kávě */
+    --color-glow-invert: #990033;    /* Růžová, co tě vrátí do pekla */
+    --color-bg: #001a1a;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5e5;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffcc;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330033;    /* Tmavá, co tě pohltí */
+}
+
+/* DuskEmber - oranžová, co tě spálí na popel */
+:root[data-theme="duskEmber"] {
+    --color-primary: #ff4500;        /* Oranžová, co tě praští jako bug v produkci */
+    --color-primary-invert: #00baff; /* Modrá, co tě utopí v opačném spektru */
+    --color-accent: #ff6347;         /* Světlejší oranžová, protože drama */
+    --color-accent-invert: #009cb8;  /* Modrá, co ti připomene tvůj fail */
+    --color-glow: #ff7f50;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #0080af;    /* Modrá, co tě vrátí do pekla */
+    --color-bg: #2a0f00;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #d5f0ff;      /* Světlá, co tě slepí */
+    --color-text: #ffcc99;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #003366;    /* Tmavá, co tě pohltí */
+}
+
+/* CyberCrimson - červená, co tě donutí restartovat */
+:root[data-theme="cyberCrimson"] {
+    --color-primary: #dc143c;        /* Červená, co křičí "kód se zasekl!" */
+    --color-primary-invert: #23ebff; /* Tyrkysová, co tě utopí v opačném spektru */
+    --color-accent: #ff4040;         /* Světlejší červená, protože drama */
+    --color-accent-invert: #00bfbf;  /* Tyrkysová, co ti připomene tvůj fail */
+    --color-glow: #ff6666;           /* Záře, co svítí jako tvůj error log */
+    --color-glow-invert: #009999;    /* Tyrkysová, co tě vrátí do pekla */
+    --color-bg: #1a0000;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #e5ffff;      /* Světlá, co tě slepí */
+    --color-text: #ff9999;           /* Světlá, abys viděl chyby */
+    --color-text-invert: #006666;    /* Tmavá, co tě pohltí */
+}
+
+/* PhantomGreen - zelená, co tě straší */
+:root[data-theme="phantomGreen"] {
+    --color-primary: #00ff7f;        /* Zelená, co tě sleduje jako bug v produkci */
+    --color-primary-invert: #ff0080; /* Růžová, co tě spálí na opačném konci */
+    --color-accent: #33ff99;         /* Světlejší zelená, protože styl */
+    --color-accent-invert: #cc0066;  /* Růžová, co ti připomene tvůj fail */
+    --color-glow: #66ff99;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #990066;    /* Růžová, co tě vrátí do pekla */
+    --color-bg: #001a00;             /* Tmavá jako tvůj život po debugu */
+    --color-bg-invert: #ffe5ff;      /* Světlá, co tě donutí mžourat */
+    --color-text: #ccffcc;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #330033;    /* Tmavá, co tě pohltí */
+}
+
+/* TwilightNeon - fialová, co tě pošle do soumraku */
+:root[data-theme="twilightNeon"] {
+    --color-primary: #9932cc;        /* Fialová, co tě pošle do jiné dimenze */
+    --color-primary-invert: #66cd33; /* Zelená, co tě vrátí na zem */
+    --color-accent: #cc66ff;         /* Světlejší fialová, protože styl */
+    --color-accent-invert: #339900;  /* Zelená, co tě uklidní... nebo ne */
+    --color-glow: #cc99ff;           /* Záře, co svítí jako tvůj kód po deploy */
+    --color-glow-invert: #336600;    /* Zelená, co tě pohřbí */
+    --color-bg: #0a001a;             /* Tmavá jako tvůj život po crashi */
+    --color-bg-invert: #f5ffe5;      /* Světlá, co tě slepí */
+    --color-text: #f2e6ff;           /* Světlá, abys viděl warningy */
+    --color-text-invert: #0d1900;    /* Tmavá, co tě pohltí */
+}
