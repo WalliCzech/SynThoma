@@ -32,20 +32,21 @@
   /* ===== ZÁKLADNÍ BARVY ===== */
   --color-primary: #ff4500;        /* Oranžová, co tě praští do očí */
   --color-accent: #ff007a;         /* Růžová, co křičí kyberpunk */
-  --color-glow: #ff007a;           /* Záře, co svítí jako tvůj kód po páté kávě */
+  --color-primary-invert: #ff007a;           /* Záře, co svítí jako tvůj kód po páté kávě */
   --color-bg: #000000;             /* Černá jako tvá duše */
   --color-text: #ffffff;           /* Bílá, aby to bylo čitelné */
   --color-success: #39ff14;        /* Zelená pro výhry */
   --color-warning: #ffcc00;        /* Žlutá pro varování */
 
   /* ===== EFEKTY ===== */
-  --neon-shadow: 0 0 5px var(--color-accent), 0 0 10px var(--color-glow);
-  --neon-glow: 0 0 5px #fff, 0 0 10px var(--color-accent), 0 0 20px var(--color-glow), 0 0 40px var(--color-glow);
-  --neon-strong-glow: 0 0 10px var(--color-accent), 0 0 20px var(--color-glow), 0 0 30px var(--color-glow), 0 0 50px var(--color-glow);
-  --neon-text-glow: 0 0 2px var(--color-glow), 0 0 6px var(--color-glow);
-  --neon-box-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-glow);
+  --neon-shadow: 0 0 5px var(--color-accent), 0 0 10px var(--color-primary-invert);
+  --neon-primary-invert: 0 0 5px #fff, 0 0 10px var(--color-accent), 0 0 20px var(--color-primary-invert), 0 0 40px var(--color-primary-invert);
+  --neon-strong-primary-invert: 0 0 10px var(--color-accent), 0 0 20px var(--color-primary-invert), 0 0 30px var(--color-primary-invert), 0 0 50px var(--color-primary-invert);
+  --neon-text-primary-invert: 0 0 2px var(--color-primary-invert), 0 0 6px var(--color-primary-invert);
+  --neon-box-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-primary-invert);
+  --neon-box-shadow-thin: 0 0 5px var(--color-primary), 0 0 10px var(--color-primary-invert);
   --neon-border: 2px solid var(--color-primary);
-  --neon-border-thin: 1px solid var(--color-primary);
+  --neon-border-invert: 2px solid var(--color-primary-invert);
 
   /* ===== PŘECHODY ===== */
   --neon-gradient: linear-gradient(45deg, var(--color-primary), var(--color-accent));
@@ -60,6 +61,26 @@
   /* ===== VRSTVY ===== */
   --z-index-header: 100;
   --z-index-console: 1000;
+}
+
+/* ===========================================
+ SCANLINE EFEKT PRO OKO
+ =========================================== */
+.oko {
+  mask: url('#scanlineMask');
+  -webkit-mask: url('#scanlineMask');
+  animation: scanline 1.5s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    mask-position: 0 0;
+    -webkit-mask-position: 0 0;
+  }
+  100% {
+    mask-position: 0 12px;
+    -webkit-mask-position: 0 12px;
+  }
 }
 
 /* ===========================================
@@ -101,7 +122,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   margin-bottom: 1rem;
   color: var(--color-text);
-  text-shadow: 0 0 8px var(--color-glow);
+  text-shadow: 0 0 8px var(--color-primary-invert);
 }
 
 h1 { font-size: clamp(4rem, 10vw, 6rem); }
@@ -126,13 +147,13 @@ a {
 
 a:hover {
   color: var(--color-primary);
-  text-shadow: var(--neon-text-glow);
+  text-shadow: var(--neon-text-primary-invert);
 }
 
 .neon-text-nadpis {
   font-family: 'CyberWall', sans-serif;
   font-size: 2rem;
-  text-shadow: 0 0 12px var(--color-glow); 
+  text-shadow: 0 0 12px var(--color-primary-invert); 
   color: var(--color-text);
 } 
 
@@ -197,7 +218,7 @@ code, pre {
 }
 
 .btn:hover {
-  box-shadow: var(--neon-strong-glow);
+  box-shadow: var(--neon-strong-primary-invert);
   transform: translateY(-2px);
 }
 
@@ -206,7 +227,7 @@ code, pre {
   background: var(--neon-gradient);
   border: none;
   color: var(--color-text);
-  text-shadow: var(--neon-text-glow);
+  text-shadow: var(--neon-text-primary-invert);
   padding: 0.5rem 1.5rem;
   border-radius: var(--border-radius);
   font-weight: bold;
@@ -218,18 +239,18 @@ code, pre {
 }
 
 .neon-button:hover {
-  box-shadow: var(--neon-strong-glow);
+  box-shadow: var(--neon-strong-primary-invert);
   transform: scale(1.05);
 }
 
 /* Hybridní tlačítko – protože proč mít jen jednu barvu? */
 .neon-hybrid-button {
-  background: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-glow));
+  background: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-primary-invert));
   background-size: 400%;
   animation: gradientShift 6s ease infinite;
   border: none;
   color: var(--color-text);
-  text-shadow: var(--neon-text-glow);
+  text-shadow: var(--neon-text-primary-invert);
   padding: 0.5rem 1.5rem;
   border-radius: var(--border-radius);
   font-weight: bold;
@@ -244,7 +265,7 @@ code, pre {
 }
 
 .neon-hybrid-button:hover {
-  box-shadow: var(--neon-strong-glow);
+  box-shadow: var(--neon-strong-primary-invert);
   transform: scale(1.05);
 }
 
@@ -259,7 +280,7 @@ code, pre {
   color: var(--color-primary);
   border: var(--neon-border);
   font-family: 'Handjet';
-  text-shadow: 0 0 10px var(--neon-text-glow);
+  text-shadow: 0 0 10px var(--neon-text-primary-invert);
   padding: 0.5rem 1.5rem;
   border-radius: 9999px;
   font-weight: bold;
@@ -274,10 +295,10 @@ code, pre {
 }
 
 .neon-button-outline:hover {
-  background: var(--color-primary);
+  background: var(--color-primary) ;
   color: var(--color-primary-invert);
-  box-shadow: var(--neon-strong-glow);
-  transform: translateY(-2px);
+  box-shadow: var(--neon-strong-primary-invert);
+  transform: scale(1.05);
 }
 
 /* Invertované tlačítko */
@@ -285,7 +306,7 @@ code, pre {
   background: var(--color-primary-invert);
   color: var(--color-primary);
   border: none;
-  box-shadow: var(--neon-strong-glow);
+  box-shadow: var(--neon-strong-primary-invert);
   text-shadow: 0 0 2px var(--color-primary-invert);
   padding: 0.5rem 1.5rem;
   border-radius: var(--border-radius);
@@ -302,8 +323,42 @@ code, pre {
 .neon-button-invert:hover {
   background: var(--color-primary-invert);
   color: var(--color-primary);
-  box-shadow: 0 0 25px var(--color-glow), 0 0 50px var(--color-glow);
+  box-shadow: 0 0 25px var(--color-primary-invert), 0 0 50px var(--color-primary-invert);
   transform: translateY(-2px) scale(1.02);
+}
+
+/* Min tlačítko */
+.neon-button-min {
+  color: var(--color-primary);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.neon-button-min:hover {
+  color: var(--color-primary);
+  text-shadow: 0 0 5px var(--color-primary-invert), 0 0 10px var(--color-primary-invert);
+}
+
+/* Invertované tlačítko min*/
+.neon-button-min-invert {
+  color: var(--color-primary-invert);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.neon-button-min-invert:hover {
+  color: var(--color-primary-invert);
+  text-shadow: 0 0 5px var(--color-primary), 0 0 10px var(--color-primary);
 }
 
 /* Glitch efekt */
@@ -317,7 +372,7 @@ code, pre {
   color: var(--color-text);
   text-shadow:
       0.02em 0 5 var(--color-primary),
-      -0.02em 0 5 var(--color-glow);
+      -0.02em 0 5 var(--color-primary-invert);
   animation: glitch 2s infinite;
 }
 
@@ -338,42 +393,48 @@ code, pre {
   clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
   text-shadow:
       0 0 5px var(--color-accent),
-      0 0 8px var(--color-glow),
-      0 0 15px var(--color-glow);
+      0 0 8px var(--color-primary-invert),
+      0 0 15px var(--color-primary-invert);
 }
 
 .glitch-bottom {
-  color: var(--color-glow);
+  color: var(--color-primary-invert);
   animation: glitchBottom 3.5s linear infinite;
   clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
   text-shadow:
-      0 0 5px var(--color-glow),
+      0 0 5px var(--color-primary-invert),
       0 0 8px var(--color-primary),
       0 0 15px var(--color-primary);
 }
 
+.ai {
+  color: var(--color-primary);
+  text-shadow: 0 0 8px var(--color-primary-invert), 0 0 12px var(--color-primary-invert);
+  font-weight: 900;
+}
+
 @keyframes glitch {
-  0% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-glow); }
-  25% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-glow); }
-  26% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-glow); }
-  99% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-glow); }
-  100% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-glow); }
+  0% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-primary-invert); }
+  25% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-primary-invert); }
+  26% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-primary-invert); }
+  99% { text-shadow: -0.05em 0 0 var(--color-primary), 0.05em 0 0 var(--color-primary-invert); }
+  100% { text-shadow: 0.05em 0 0 var(--color-primary), -0.05em 0 0 var(--color-primary-invert); }
 }
 
 @keyframes glitchTop {
-  0%, 100% { transform: translate(0, -9px); }
-  20% { transform: translate(4px, -13px); }
+  0%, 100% { transform: translate(0, -6px); }
+  20% { transform: translate(3px, -9px); }
   40% { transform: translate(-4px, -5px); }
-  60% { transform: translate(3px, -12px); }
-  80% { transform: translate(-3px, -6px); }
+  60% { transform: translate(3px, -9px); }
+  80% { transform: translate(-3px, -5px); }
 }
 
 @keyframes glitchBottom {
-  0%, 100% { transform: translate(0, 9px); }
-  20% { transform: translate(-4px, 9px); }
+  0%, 100% { transform: translate(0, 7px); }
+  20% { transform: translate(-4px, 7px); }
   40% { transform: translate(4px, 9px); }
-  60% { transform: translate(-3px, 9px); }
-  80% { transform: translate(3px, 9px); }
+  60% { transform: translate(-3px, 7px); }
+  80% { transform: translate(3px, 7px); }
 }
 
 /* ===========================================
@@ -404,7 +465,7 @@ code, pre {
 
 .module-card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: var(--neon-strong-glow);
+  box-shadow: var(--neon-strong-primary-invert);
 }
 
 /* Status indikátory */
@@ -540,7 +601,7 @@ footer {
   color: var(--color-success);
   font-family: 'Roboto Mono', monospace;
   font-size: 0.9rem;
-  text-shadow: var(--neon-text-glow);
+  text-shadow: var(--neon-text-primary-invert);
   outline: none;
 }
 
@@ -549,8 +610,126 @@ footer {
   opacity: 0.6;
 }
 
+.text-moje {
+    font-size: 1.35rem;
+    font-family: 'Handjet', sans-serif;
+    font-weight: normal;
+    color: var(--color-primary);
+    text-shadow: var(--neon-text-primary-invert);
+}
 
+.text-moje2 {
+  font-size: 1.25rem;
+  font-family: 'Handjet', sans-serif;
+  font-weight: normal;
+  color: var(--color-primary-invert);
+  text-shadow: var(--neon-text-primary-invert);
+}
 
+.neon-panel {
+    background: black;
+    backdrop-filter: blur(3px);
+    border: var(--neon-border);
+    box-shadow: var(--neon-box-shadow-thin);
+    transition: var(--transition-normal);
+}
+
+.neon-toggle {
+  width: 50px;
+  height: 28px;
+  background: #222;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 0 8px var(--color-primary), var(--color-primary-invert) inset;
+}
+.neon-toggle.checked {
+  background: var(--color-primary-invert);
+  box-shadow: 0 0 18px var(--color-primary-invert), 0 0 4px var(--color-glow-invert) inset;
+}
+.neon-toggle .knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  transition: left 0.2s;
+  box-shadow: 0 0 8px var(--color-primary), 0 0 4px var(--color-primary-invert) inset;
+}
+.neon-toggle.checked .knob {
+  left: 24px;
+  background: var(--color-primary-invert);
+}
+
+input[type="range"].neon-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #181a25;
+  border-radius: 5px;
+  box-shadow: 0 0 10px var(--color-primary);
+  outline: none;
+  transition: background 0.3s;
+}
+input[type="range"].neon-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 16px var(--color-primary), 0 0 2px var(--color-primary-invert) inset;
+  cursor: pointer;
+  border: 2px solid var(--color-primary-invert);
+  transition: box-shadow 0.3s;
+}
+input[type="range"].neon-slider:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 32px var(--color-primary);
+}
+input[type="range"].neon-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 16px var(--color-primary), 0 0 2px var(--color-primary-invert) inset;
+  cursor: pointer;
+  border: 2px solid var(--color-primary-invert);
+  transition: box-shadow 0.3s;
+}
+input[type="range"].neon-slider:focus::-moz-range-thumb {
+  box-shadow: 0 0 32px var(--color-primary);
+}
+input[type="range"].neon-slider::-ms-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 16px var(--color-primary), 0 0 2px var(--color-primary-invert) inset;
+  cursor: pointer;
+  border: 2px solid var(--color-primary-invert);
+  transition: box-shadow 0.3s;
+}
+input[type="range"].neon-slider:focus::-ms-thumb {
+  box-shadow: 0 0 32px var(--color-primary);
+}
+/* Hide the outline on focus (optional, pro čistotu): */
+input[type="range"].neon-slider:focus {
+  outline: none;
+}
+/* Firefox track */
+input[type="range"].neon-slider::-moz-range-track {
+  background: #181a25;
+  border-radius: 5px;
+}
+input[type="range"].neon-slider::-ms-fill-lower,
+input[type="range"].neon-slider::-ms-fill-upper {
+  background: #181a25;
+  border-radius: 5px;
+}
 
 .rain-effect {
   position: fixed;
@@ -567,7 +746,7 @@ footer {
   position: absolute;
   width: 2px;
   height: 20px;
-  background: var(--color-glow);
+  background: var(--color-primary-invert);
   box-shadow: var(--neon-shadow);
   animation: fall 1s linear infinite;
 }
@@ -615,7 +794,7 @@ footer {
 
 /* Neonový stín pro logo */
 .neon-logoVal {
-  filter: drop-shadow(0 0 14px var(--color-glow));
+  filter: drop-shadow(0 0 14px var(--color-primary-invert));
   transition: var(--transition-normal);
   width: 50px;
   height: 50px;
@@ -625,13 +804,13 @@ footer {
 }
 
 .neon-logoVal:hover {
-  filter: drop-shadow(0 0 20px var(--color-glow));
+  filter: drop-shadow(0 0 20px var(--color-primary-invert));
 }
 
 
 /* Neonový stín pro logo */
 .neon-logo {
-  filter: drop-shadow(0 0 14px var(--color-glow));
+  filter: drop-shadow(0 0 14px var(--color-primary-invert));
   transform-origin: right;
   width: clamp(8rem, 35vw, 35rem);
   height: clamp(8rem, 35vw, 35rem);
@@ -645,7 +824,7 @@ footer {
 }
 
 .neon-logo:hover {
-  filter: drop-shadow(0 0 20px var(--color-glow));
+  filter: drop-shadow(0 0 20px var(--color-primary-invert));
 }
 /* Karty tak epické, že by je chtěl hacknout i Case z Neuromancera! 🌌 */
 
@@ -683,7 +862,7 @@ footer {
   color: var(--color-primary);
   text-shadow: 
     0 0 15px var(--color-accent),
-    0 0 30px var(--color-glow),
+    0 0 30px var(--color-primary-invert),
     0 0 40px var(--color-primary);
   margin-bottom: 0.7rem;
   position: relative;
@@ -714,7 +893,7 @@ footer {
     to bottom,
     transparent 0%,
     transparent 49%,
-    var(--color-glow) 50%,
+    var(--color-primary-invert) 50%,
     transparent 51%,
     transparent 100%
   );
@@ -742,7 +921,7 @@ footer {
   background: 
     repeating-linear-gradient(
       45deg,
-      var(--color-glow) 0,
+      var(--color-primary-invert) 0,
       var(--color-primary) 2px,
       transparent 2px,
       transparent 4px
@@ -846,6 +1025,80 @@ footer {
   }
 }
 
+/* ===========================================
+ RESPOZIVNÍ LAYOUT
+ =========================================== */
+header {
+    padding: clamp(2rem, 5vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-row-resp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 1rem;
+}
+
+.neon-logo {
+    width: clamp(6rem, 20vw, 12rem);
+    height: auto;
+}
+
+.logo-card-overlay, .floating-card {
+    width: clamp(6rem, 18vw, 10rem);
+    height: clamp(8rem, 22vw, 12rem);
+}
+
+/* Generator sekce */
+.generator-section {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.generator-controls {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+#prompt-input, #negative-prompt-input {
+    background: rgba(0, 0, 0, 0.8);
+    border: var(--neon-border-thin);
+    color: var(--color-text);
+    padding: 0.5rem;
+    border-radius: var(--border-radius-sm);
+    resize: vertical;
+    font-family: 'Handjet', sans-serif;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .logo-row-resp {
+        flex-direction: column;
+    }
+    .floating-card {
+        font-size: clamp(0.6rem, 3vw, 0.8rem);
+    }
+}
+
+@media (min-width: 768px) {
+    .generator-controls {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Přístupnost */
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
 .pulse {
   animation: pulseAni 6s ease-in-out infinite;
 }
@@ -868,10 +1121,9 @@ footer {
 }
 
 
-
 .theme-toggle--active {
   transform: scale(1.2);
-  box-shadow: var(--neon-strong-glow);
+  box-shadow: var(--neon-strong-primary-invert);
 }
 
 
