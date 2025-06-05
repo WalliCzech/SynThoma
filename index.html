@@ -3,124 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wAllICzech AI Studio - Kyberpunková revoluce</title>
-    <meta name="description" content="wAllICzech AI Studio - Jednočlověk-projekt pro generování, manipulaci a analýzu obrazů, videí a zvuku s kyberpunkovým šmrncem! 😈">
-    <meta name="keywords" content="AI, kyberpunk, faceswap, lipsync, upscale, segmentace, deepfake, forenzní analýza">
-    <meta name="author" content="WalliCzech">
-    <meta name="theme-color" content="#ff4500">
-    <!-- OpenGraph -->
-    <meta property="og:title" content="wAllICzech AI Studio">
-    <meta property="og:description" content="Kyberpunková AI platforma pro manipulaci s obrazy, videi a zvukem. Ponoř se do neonové budoucnosti!">
-    <meta property="og:image" content="https://walliczech.ai/assets/og-image.jpg">
-    <meta property="og:url" content="https://walliczech.ai">
-    <meta property="og:type" content="website">
-    <!-- JSON-LD -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "wAllICzech AI Studio",
-        "operatingSystem": "Windows, Linux, Android",
-        "applicationCategory": "Multimedia",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "creator": {
-            "@type": "Person",
-            "name": "WalliCzech"
-        }
-        
-    }
-    </script>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <title>wAllICzech Studio | AI Generátor</title>
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="css/themeColors.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.9/babel.min.js"></script>
 </head>
-<body class="font-handjet">
-    <!-- Ovládací tlačítka -->
-    <div class="fixed top-8 right-4 z-50 flex gap-3 opacity-50">
-        <button id="theme-toggle" 
-                class="neon-button-invert theme-toggle px-2 py-1 rounded-full text-[8px] font-handjet transition-all duration-300 hover:scale-105 animate-pulse">
-            Přepnout Neon 🌌
-        </button>
-    </div>
-	
-
-
-    <header class="bg-black min-h-screen ">
-
-
-        <!-- Řádek: Karta + Logo -->
-        <div class="logo-row-resp flex gap-2 justify-center items-center mt-12 mb-12">
-
-            <!-- KARTA -->
-            <div class="logo-card-overlay"></div>
-
-            <object 
-             data="assets/vallia_animated.svg" 
-             type="image/svg+xml" 
-             class="neon-logo drop-shadow-neon">
-             <img src="assets/vallia_animated.svg" alt="wAllICzech Logo" />
-            </object>
-        </div>
-      
-        <!-- NADPISY – centrované jen pod logem -->
-        <div class="text-center justify-center mt-12">
-          <div class="glitch-wrapper">
-            <span class="glitch-top text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-              wAllICzech
-            </span>
-            <span class="glitch-bottom text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-              wAllICzech
-            </span>
-            <h1 class="glitch text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-              w<span class="text-[color:#ff7800]">A</span>ll<span class="text-[color:#ff7800]">I</span>Czech
-            </h1>
-          </div>
-      
-          <div class="glitch-wrapper2 mt-4">
-            <div class="relative">
-              <span class="glitch-top absolute top-0 left-0 w-full text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-                Studio
-              </span>
-              <span class="glitch-bottom absolute top-0 left-0 w-full text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-                Studio
-              </span>
-              <h1 class="glitch relative text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-                Studio
-              </h1>
-            </div>
-          </div>
-        </div>
-      
-      </header>
-      
-      
-      
-    
-    <div class="log-console" id="log-console">
-        <div class="log-console__messages" id="log-messages"></div>
-        <div class="log-console__input">
-            <input type="text" id="console-input" placeholder="> Zadej příkaz..." class="neon-border" />
-        </div>
-    </div>
-    <button class="log-toggle" id="log-toggle">
-        <img src="assets/vallia_animated.svg" alt="wAllICzech Logo" class="neon-logoVal">
-    </button>
-
-
-    <div id="floating-card-template" class="hidden fixed bg-gray-900 text-white p-4 rounded-xl neon-border shadow-lg w-64 transition-all duration-300">
-        <h3 class="text-xl font-bold text-pink-500">Modul</h3>
-        <p class="mt-2 text-sm text-gray-300">Popis modulu se zobrazí zde.</p>
-    </div>
-
-    <!-- Načtení JavaScriptu -->
-    <script src="js/themeColors.js"></script>
-    <script src="js/scripts.js"></script>
+<body class="bg-black text-white font-orbitron">
+    <div id="root"></div>
+    <script type="text/babel" src="js/scripts.js"></script>
 </body>
 </html>
