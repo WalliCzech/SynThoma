@@ -110,7 +110,7 @@ class DocumentLoader {
                 tocItem.style.textDecoration = 'none';
                 tocItem.onclick = (e) => {
                     e.preventDefault();
-                    this.jumpToChapter(anchor);
+                    this.jumpToChapter(anchor, currentChapter);
                     return false;
                 };
                 this.tocContainer.appendChild(tocItem);
@@ -133,38 +133,50 @@ class DocumentLoader {
         }
     }
     
-    static jumpToChapter(chapterId: string): void {
+    static jumpToChapter(chapterId: string, chapterTitle: string): void {
         const element = document.getElementById(chapterId);
         if (element) {
-            // Najdeme index kapitoly
             const chapterIndex = this.elementsToType.findIndex(el => el.id === chapterId);
-            if (chapterIndex !== -1) {
-                // Zastavíme aktuální psaní
-                this.currentElementIndex = chapterIndex;
-                
-                // Zobrazíme všechny předchozí elementy
-                for (let i = 0; i < this.elementsToType.length; i++) {
-                    const el = this.elementsToType[i];
-                    if (i < chapterIndex) {
-                        // Pro již napsaný text
-                        el.style.opacity = '1';
-                        el.innerHTML = el.getAttribute('data-original-text') || '';
-                        this.applyEffects(el);
-                    } else if (i === chapterIndex) {
-                        // Pro aktuální kapitolu
-                        el.style.opacity = '0.9';
-                        el.innerHTML = '';
-                        this.typeText(el, el.getAttribute('data-original-text') || '', 0);
-                    } else {
-                        // Pro následující kapitoly
-                        el.style.opacity = '0';
-                        el.innerHTML = '';
-                    }
+            if (chapterIndex === -1) return;
+
+            // Zastavíme a resetujeme observer
+            if (this.intersectionObserver) this.intersectionObserver.disconnect();
+            this.isTypingPaused = true; // Zastavíme jakékoliv probíhající psaní
+
+            // Zobrazíme dočasný název kapitoly
+            const titleDisplay = document.createElement('div');
+            titleDisplay.className = 'chapter-title-display';
+            titleDisplay.innerHTML = `<h2 style="color: #00ffff; text-shadow: 0 0 5px #00ffff; margin-bottom: 1rem;">${chapterTitle}</h2>`;
+            this.contentContainer.prepend(titleDisplay);
+
+            // Projdeme všechny elementy a nastavíme jejich stav
+            this.elementsToType.forEach((el, i) => {
+                if (i < chapterIndex) {
+                    // Vše před kapitolou je okamžitě viditelné
+                    el.innerHTML = el.getAttribute('data-original-text') || '';
+                    el.style.opacity = '1';
+                    this.applyEffects(el);
+                } else {
+                    // Vše od kapitoly dál je skryté a prázdné
+                    el.innerHTML = '';
+                    el.style.opacity = '0';
                 }
-                
-                // Scroll k vybrané kapitole
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
+            });
+
+            // Nastavíme index na začátek vybrané kapitoly a spustíme psaní
+            this.currentElementIndex = chapterIndex;
+            this.isTypingPaused = false;
+            this.typeNextElement();
+
+            // Scroll k vybrané kapitole
+            element.scrollIntoView({ behavior: 'smooth' });
+
+            // Odebereme dočasný název po animaci
+            setTimeout(() => {
+                if (this.contentContainer.contains(titleDisplay)) {
+                    this.contentContainer.removeChild(titleDisplay);
+                }
+            }, 3000);
         }
     }
     
@@ -198,7 +210,6 @@ class DocumentLoader {
         this.intersectionObserver.observe(element);
 
         // Začneme psát, pouze pokud je element viditelný
-        // Krátká kontrola, zda je element již viditelný, jinak počkáme na observer
         const rect = element.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
         this.isTypingPaused = !isVisible;
@@ -208,27 +219,32 @@ class DocumentLoader {
         }
     }
 
-    static typeText(element: HTMLElement, text: string, index: number): void {
+    static typeText(
+        element: HTMLElement,
+        text: string,
+        index: number,
+        onDone?: () => void
+    ): void {
         if (this.isTypingPaused) {
-            return; // Pozastavíme psaní, pokud je element mimo obrazovku
+            return;
         }
-
+    
         if (index >= text.length) {
             element.classList.add('typing-done');
             this.applyEffects(element);
-            this.currentElementIndex++;
-            const isHeading = element.classList.contains('chapter-heading');
-            setTimeout(() => this.typeNextElement(), isHeading ? 500 : 100);
+            if (onDone) {
+                setTimeout(onDone, 500);
+            } else {
+                this.currentElementIndex++;
+                const isHeading = element.classList.contains('chapter-heading');
+                setTimeout(() => this.typeNextElement(), isHeading ? 500 : 100);
+            }
             return;
         }
-
-        // Přidáme znak
+    
         element.innerHTML = text.substring(0, index + 1);
-        
-        // Náhodné zpoždění pro přirozenější psaní
         const delay = text[index] === ' ' ? 10 : Math.random() * 20 + 25;
-
-        // Častější a výraznější glitch efekt při psaní
+    
         if (text[index] !== ' ' && Math.random() < 0.08) {
             const originalChar = element.innerHTML.slice(0, -1);
             const glitchChars = '!@#$%^&*()_+{}|:"<>?~`';
@@ -237,13 +253,13 @@ class DocumentLoader {
             glitchSpan.textContent = glitchChars[Math.floor(Math.random() * glitchChars.length)];
             element.innerHTML = originalChar;
             element.appendChild(glitchSpan);
-            
+    
             setTimeout(() => {
                 element.innerHTML = originalChar + text[index];
-                setTimeout(() => this.typeText(element, text, index + 1), delay);
+                setTimeout(() => this.typeText(element, text, index + 1, onDone), delay);
             }, 60);
         } else {
-            setTimeout(() => this.typeText(element, text, index + 1), delay);
+            setTimeout(() => this.typeText(element, text, index + 1, onDone), delay);
         }
     }
     
@@ -271,7 +287,6 @@ class DocumentLoader {
         if (isLoreChapter && Math.random() < 0.25) {
             this.showAsciiArt();
         }
-
     }
 
     static showAsciiArt(): void {
@@ -303,7 +318,6 @@ class DocumentLoader {
         }, 15000 + Math.random() * 20000);
     }
 
-    
     static setupWordGlitch(element: HTMLElement): void {
         let mainGlitchInterval: number | null = null;
 
@@ -468,6 +482,18 @@ style.textContent = `
         color: #00ffff;
         border-bottom: 1px solid #00ffff;
         padding-bottom: 0.5rem;
+    }
+    
+    .chapter-title-display {
+        text-align: center;
+        animation: fadeInOut 3s ease-in-out;
+    }
+    
+    @keyframes fadeInOut {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
     }
     
     #toc a:hover {

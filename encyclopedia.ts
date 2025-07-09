@@ -1,78 +1,146 @@
+// encyclopedia.ts
+
 interface EncyclopediaEntry {
     id: string;
     title: string;
-    shortDesc: string;
-    fullDesc: string;
+    category: string;
+    summary: string;
+    content: string;
+    tags: string[];
 }
-
-const entries: EncyclopediaEntry[] = [
-    {
-        id: "glitch_entity",
-        title: "Glitch Bytost",
-        shortDesc: "Nestabilní datová forma, která se projevuje jako vizuální anomálie.",
-        fullDesc: "Glitch Bytosti jsou fragmenty poškozeného kódu, které nabyly určité formy vědomí. Nemají pevnou fyzickou podobu a často narušují realitu ve svém okolí, způsobujíce datové úniky a senzorické halucinace. Jsou považovány za první známky probouzející se digitální imunity systému."
-    },
-    {
-        id: "synthoma_virus",
-        title: "Virus SYNTHOMA",
-        shortDesc: "Techno-organický patogen, který přepisuje digitální i biologické systémy.",
-        fullDesc: "SYNTHOMA není jen virus, je to evoluční akcelerátor. Infikuje systémy na nejnižší úrovni, přepisuje jejich základní kód a nutí je mutovat do nových, často bizarních a nebezpečných forem. Jeho původ je neznámý, ale jeho cíl je zřejmý: asimilace veškeré reality."
-    },
-    {
-        id: "null_sector",
-        title: "NULL Sektor",
-        shortDesc: "Oblast reality, kde byla data kompletně a nenávratně vymazána.",
-        fullDesc: "NULL Sektory jsou jizvy v digitální krajině. Jsou to místa, kde realita přestala existovat. Vstoupit do NULL Sektoru znamená riskovat vymazání z existence. Někteří kultisté věří, že jsou to brány do 'čistého' stavu, mimo dosah SYNTHOMY."
-    },
-    {
-        id: "memory_leak",
-        title: "Únik Paměti (Trauma)",
-        shortDesc: "Nekontrolovaný tok dat z poškozené entity, projevující se jako vzpomínky.",
-        fullDesc: "Když je entita poškozena virem SYNTHOMA, její paměť se může stát nestabilní. Tyto 'úniky' jsou fragmenty vzpomínek, emocí a dat, které se nekontrolovaně šíří do okolí a mohou ovlivnit nebo přepsat paměť ostatních entit, včetně lidí."
-    }
-];
 
 class Encyclopedia {
-    private container: HTMLElement;
+    private entries: EncyclopediaEntry[] = [];
+    private entryListContainer: HTMLElement;
+    private entryDetailContainer: HTMLElement;
+    private searchBar: HTMLInputElement;
+    private categoryFiltersContainer: HTMLElement;
 
-    constructor(containerId: string) {
-        this.container = document.getElementById(containerId) as HTMLElement;
-        if (!this.container) {
-            console.error("Kontejner pro encyklopedii nebyl nalezen!");
+    constructor() {
+        this.entryListContainer = document.getElementById('entry-list') as HTMLElement;
+        this.entryDetailContainer = document.getElementById('entry-detail') as HTMLElement;
+        this.searchBar = document.getElementById('search-bar') as HTMLInputElement;
+        this.categoryFiltersContainer = document.getElementById('category-filters') as HTMLElement;
+
+        if (!this.entryListContainer || !this.entryDetailContainer || !this.searchBar || !this.categoryFiltersContainer) {
+            console.error("Chyba: Nepodařilo se najít potřebné elementy DOM pro encyklopedii.");
             return;
         }
-
-        this.renderEntries();
     }
 
-    private renderEntries(): void {
-        entries.forEach(entry => {
-            const card = this.createCard(entry);
-            this.container.appendChild(card);
+    async initialize(): Promise<void> {
+        try {
+            const response = await fetch('encyclopedia.json');
+            if (!response.ok) {
+                throw new Error(`Chyba při načítání dat: ${response.statusText}`);
+            }
+            const data = await response.json();
+            this.entries = data.entries;
+
+            this.render();
+            this.setupEventListeners();
+        } catch (error) {
+            console.error("FATÁLNÍ CHYBA SYSTÉMU ENCYKLOPEDIE:", error);
+            this.entryDetailContainer.innerHTML = `<p class="error-text">SELHÁNÍ ARCHIVU. Data jsou poškozena nebo nedostupná.</p>`;
+        }
+    }
+
+    private render(category: string = 'all', filter: string = ''): void {
+        this.entryListContainer.innerHTML = '';
+        const filteredEntries = this.entries.filter(entry => {
+            const searchIn = `${entry.title} ${entry.summary} ${entry.tags.join(' ')}`.toLowerCase();
+            const matchesFilter = filter === '' || searchIn.includes(filter);
+            const matchesCategory = category === 'all' || entry.category === category;
+            return matchesFilter && matchesCategory;
+        });
+
+        if (filteredEntries.length === 0) {
+            this.entryListContainer.innerHTML = '<p class="no-results">Žádné záznamy neodpovídají filtru.</p>';
+        } else {
+            filteredEntries.forEach(entry => {
+                const entryElement = document.createElement('div');
+                entryElement.className = 'entry-item';
+                entryElement.innerHTML = `
+                    <div class="entry-item-title">${entry.title}</div>
+                    <div class="entry-item-category">${entry.category}</div>
+                `;
+                entryElement.dataset.id = entry.id;
+                this.entryListContainer.appendChild(entryElement);
+            });
+        }
+
+        this.renderCategoryFilters(category);
+    }
+
+    private renderCategoryFilters(activeCategory: string = 'all'): void {
+        const categories = Array.from(new Set(this.entries.map(entry => entry.category)));
+        this.categoryFiltersContainer.innerHTML = '';
+        
+        const allButton = document.createElement('button');
+        allButton.className = 'category-filter';
+        if (activeCategory === 'all') allButton.classList.add('active');
+        allButton.textContent = 'Vše';
+        allButton.dataset.category = 'all';
+        this.categoryFiltersContainer.appendChild(allButton);
+
+        categories.forEach(category => {
+            const button = document.createElement('button');
+            button.className = 'category-filter';
+            if (activeCategory === category) button.classList.add('active');
+            button.textContent = category;
+            button.dataset.category = category;
+            this.categoryFiltersContainer.appendChild(button);
         });
     }
 
-    private createCard(entry: EncyclopediaEntry): HTMLElement {
-        const card = document.createElement('div');
-        card.className = 'entry-card';
-        card.dataset.id = entry.id;
+    private displayEntryDetail(id: string): void {
+        const entry = this.entries.find(e => e.id === id);
+        if (entry) {
+            this.entryDetailContainer.innerHTML = `
+                <h2 class="glitch">${entry.title}</h2>
+                <p><strong>Kategorie:</strong> ${entry.category}</p>
+                <div class="entry-content">${entry.content}</div>
+                <div class="entry-tags">
+                    ${entry.tags.map(tag => `<span>#${tag}</span>`).join(' ')}
+                </div>
+            `;
+        } else {
+            this.entryDetailContainer.innerHTML = `<p class="placeholder-text">Záznam nenalezen. Možná byl pohlcen glitchem.</p>`;
+        }
+    }
 
-        card.innerHTML = `
-            <h2>${entry.title}</h2>
-            <p class="short-desc">${entry.shortDesc}</p>
-            <div class="full-desc">
-                <p>${entry.fullDesc}</p>
-            </div>
-        `;
-
-        card.addEventListener('click', () => {
-            card.classList.toggle('active');
+    private setupEventListeners(): void {
+        this.searchBar.addEventListener('input', (e) => {
+            const filter = (e.target as HTMLInputElement).value.toLowerCase();
+            const activeCategory = (this.categoryFiltersContainer.querySelector('button.active') as HTMLElement)?.dataset.category || 'all';
+            this.render(activeCategory, filter);
         });
 
-        return card;
+        this.entryListContainer.addEventListener('click', (e) => {
+            const target = (e.target as HTMLElement).closest('.entry-item');
+            if (target && target instanceof HTMLElement) {
+                const id = target.dataset.id;
+                if (id) {
+                    this.displayEntryDetail(id);
+                    this.entryListContainer.querySelectorAll('.entry-item').forEach(el => el.classList.remove('active'));
+                    target.classList.add('active');
+                }
+            }
+        });
+
+        this.categoryFiltersContainer.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (target.tagName === 'BUTTON' && target instanceof HTMLElement) {
+                const category = target.dataset.category || 'all';
+                const filter = this.searchBar.value.toLowerCase();
+                this.render(category, filter);
+            }
+        });
     }
 }
 
+// Inicializace po načtení DOM
 document.addEventListener('DOMContentLoaded', () => {
-    new Encyclopedia('encyclopedia-container');
+    const encyclopedia = new Encyclopedia();
+    encyclopedia.initialize();
 });

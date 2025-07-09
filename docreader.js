@@ -125,7 +125,7 @@ var DocumentLoader = /** @class */ (function () {
                 tocItem.style.textDecoration = 'none';
                 tocItem.onclick = function (e) {
                     e.preventDefault();
-                    _this.jumpToChapter(anchor_1);
+                    _this.jumpToChapter(anchor_1, currentChapter);
                     return false;
                 };
                 _this.tocContainer.appendChild(tocItem);
@@ -144,38 +144,48 @@ var DocumentLoader = /** @class */ (function () {
             this.typeNextElement();
         }
     };
-    DocumentLoader.jumpToChapter = function (chapterId) {
+    DocumentLoader.jumpToChapter = function (chapterId, chapterTitle) {
+        var _this = this;
         var element = document.getElementById(chapterId);
         if (element) {
-            // Najdeme index kapitoly
-            var chapterIndex = this.elementsToType.findIndex(function (el) { return el.id === chapterId; });
-            if (chapterIndex !== -1) {
-                // Zastavíme aktuální psaní
-                this.currentElementIndex = chapterIndex;
-                // Zobrazíme všechny předchozí elementy
-                for (var i = 0; i < this.elementsToType.length; i++) {
-                    var el = this.elementsToType[i];
-                    if (i < chapterIndex) {
-                        // Pro již napsaný text
-                        el.style.opacity = '1';
-                        el.innerHTML = el.getAttribute('data-original-text') || '';
-                        this.applyEffects(el);
-                    }
-                    else if (i === chapterIndex) {
-                        // Pro aktuální kapitolu
-                        el.style.opacity = '0.9';
-                        el.innerHTML = '';
-                        this.typeText(el, el.getAttribute('data-original-text') || '', 0);
-                    }
-                    else {
-                        // Pro následující kapitoly
-                        el.style.opacity = '0';
-                        el.innerHTML = '';
-                    }
+            var chapterIndex_1 = this.elementsToType.findIndex(function (el) { return el.id === chapterId; });
+            if (chapterIndex_1 === -1)
+                return;
+            // Zastavíme a resetujeme observer
+            if (this.intersectionObserver)
+                this.intersectionObserver.disconnect();
+            this.isTypingPaused = true; // Zastavíme jakékoliv probíhající psaní
+            // Zobrazíme dočasný název kapitoly
+            var titleDisplay_1 = document.createElement('div');
+            titleDisplay_1.className = 'chapter-title-display';
+            titleDisplay_1.innerHTML = "<h2 style=\"color: #00ffff; text-shadow: 0 0 5px #00ffff; margin-bottom: 1rem;\">".concat(chapterTitle, "</h2>");
+            this.contentContainer.prepend(titleDisplay_1);
+            // Projdeme všechny elementy a nastavíme jejich stav
+            this.elementsToType.forEach(function (el, i) {
+                if (i < chapterIndex_1) {
+                    // Vše před kapitolou je okamžitě viditelné
+                    el.innerHTML = el.getAttribute('data-original-text') || '';
+                    el.style.opacity = '1';
+                    _this.applyEffects(el);
                 }
-                // Scroll k vybrané kapitole
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
+                else {
+                    // Vše od kapitoly dál je skryté a prázdné
+                    el.innerHTML = '';
+                    el.style.opacity = '0';
+                }
+            });
+            // Nastavíme index na začátek vybrané kapitoly a spustíme psaní
+            this.currentElementIndex = chapterIndex_1;
+            this.isTypingPaused = false;
+            this.typeNextElement();
+            // Scroll k vybrané kapitole
+            element.scrollIntoView({ behavior: 'smooth' });
+            // Odebereme dočasný název po animaci
+            setTimeout(function () {
+                if (_this.contentContainer.contains(titleDisplay_1)) {
+                    _this.contentContainer.removeChild(titleDisplay_1);
+                }
+            }, 3000);
         }
     };
     DocumentLoader.typeNextElement = function () {
@@ -209,7 +219,6 @@ var DocumentLoader = /** @class */ (function () {
         }, { threshold: 0.1 });
         this.intersectionObserver.observe(element);
         // Začneme psát, pouze pokud je element viditelný
-        // Krátká kontrola, zda je element již viditelný, jinak počkáme na observer
         var rect = element.getBoundingClientRect();
         var isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
         this.isTypingPaused = !isVisible;
@@ -217,24 +226,26 @@ var DocumentLoader = /** @class */ (function () {
             this.typeText(element, text, 0);
         }
     };
-    DocumentLoader.typeText = function (element, text, index) {
+    DocumentLoader.typeText = function (element, text, index, onDone) {
         var _this = this;
         if (this.isTypingPaused) {
-            return; // Pozastavíme psaní, pokud je element mimo obrazovku
+            return;
         }
         if (index >= text.length) {
             element.classList.add('typing-done');
             this.applyEffects(element);
-            this.currentElementIndex++;
-            var isHeading = element.classList.contains('chapter-heading');
-            setTimeout(function () { return _this.typeNextElement(); }, isHeading ? 500 : 100);
+            if (onDone) {
+                setTimeout(onDone, 500);
+            }
+            else {
+                this.currentElementIndex++;
+                var isHeading = element.classList.contains('chapter-heading');
+                setTimeout(function () { return _this.typeNextElement(); }, isHeading ? 500 : 100);
+            }
             return;
         }
-        // Přidáme znak
         element.innerHTML = text.substring(0, index + 1);
-        // Náhodné zpoždění pro přirozenější psaní
         var delay = text[index] === ' ' ? 10 : Math.random() * 20 + 25;
-        // Častější a výraznější glitch efekt při psaní
         if (text[index] !== ' ' && Math.random() < 0.08) {
             var originalChar_1 = element.innerHTML.slice(0, -1);
             var glitchChars = '!@#$%^&*()_+{}|:"<>?~`';
@@ -245,11 +256,11 @@ var DocumentLoader = /** @class */ (function () {
             element.appendChild(glitchSpan);
             setTimeout(function () {
                 element.innerHTML = originalChar_1 + text[index];
-                setTimeout(function () { return _this.typeText(element, text, index + 1); }, delay);
+                setTimeout(function () { return _this.typeText(element, text, index + 1, onDone); }, delay);
             }, 60);
         }
         else {
-            setTimeout(function () { return _this.typeText(element, text, index + 1); }, delay);
+            setTimeout(function () { return _this.typeText(element, text, index + 1, onDone); }, delay);
         }
     };
     DocumentLoader.applyEffects = function (element) {
@@ -412,7 +423,7 @@ var DocumentLoader = /** @class */ (function () {
 }());
 // Přidáme styly pro efekty
 var style = document.createElement('style');
-style.textContent = "\n    .glow-text {\n        color: #00ff88;\n        text-shadow: 0 0 5px #00ffff, 0 0 10px #00ff88;\n    }\n    \n    .speech-effect {\n        color: #88aaff;\n        font-style: italic;\n    }\n    \n    .glitch-char {\n        color: #00ffff;\n        opacity: 0.7;\n    }\n    \n    .chapter-heading {\n        margin-top: 2rem;\n        color: #00ffff;\n        border-bottom: 1px solid #00ffff;\n        padding-bottom: 0.5rem;\n    }\n    \n    #toc a:hover {\n        color: #ffffff !important;\n        text-decoration: underline !important;\n    }\n";
+style.textContent = "\n    .glow-text {\n        color: #00ff88;\n        text-shadow: 0 0 5px #00ffff, 0 0 10px #00ff88;\n    }\n    \n    .speech-effect {\n        color: #88aaff;\n        font-style: italic;\n    }\n    \n    .glitch-char {\n        color: #00ffff;\n        opacity: 0.7;\n    }\n    \n    .chapter-heading {\n        margin-top: 2rem;\n        color: #00ffff;\n        border-bottom: 1px solid #00ffff;\n        padding-bottom: 0.5rem;\n    }\n    \n    .chapter-title-display {\n        text-align: center;\n        animation: fadeInOut 3s ease-in-out;\n    }\n    \n    @keyframes fadeInOut {\n        0% { opacity: 0; }\n        10% { opacity: 1; }\n        90% { opacity: 1; }\n        100% { opacity: 0; }\n    }\n    \n    #toc a:hover {\n        color: #ffffff !important;\n        text-decoration: underline !important;\n    }\n";
 document.head.appendChild(style);
 // Spuštění po načtení stránky
 document.addEventListener('DOMContentLoaded', function () {

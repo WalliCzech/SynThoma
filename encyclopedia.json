@@ -1,0 +1,164 @@
+{
+  "entries": [
+    {
+      "id": "synthoma",
+      "title": "SynThoma",
+      "category": "Lokace",
+      "summary": "Digitální město, ve kterém každý glitch znamená šrám v realitě a trauma je součástí architektury.",
+      "content": "<p>SynThoma je terapeutická virtuální realita navržená pro rekonvalescenci rozbitých duší, dnes však spíš labyrint úzkostí a glitchů. Každý dům, ulice i digitální déšť nese stopy minulých selhání. Paměť zde teče jako proud dat, ale vždy za cenu bolesti.</p>",
+      "tags": ["město", "VR", "trauma", "glitch"]
+    },
+    {
+      "id": "null",
+      "title": "NULL",
+      "category": "Bytost",
+      "summary": "Vyprázdněná entita, antihrdina bez identity a obličeje, stvořená jen k přežívání v cyklech SynThomy.",
+      "content": "<p>NULL je hráč nebo program bez paměti, motivace i jména. Neustále selhává, resetuje se a hledá smysl v nekonečném cyklu bolesti a zapomnění. V každé iteraci vzniká znovu, ale nikdy není celý.</p>",
+      "tags": ["entita", "paměť", "cyklus", "trauma"]
+    },
+    {
+      "id": "glitch",
+      "title": "Glitch",
+      "category": "Fenomén",
+      "summary": "Chyba v systému SynThoma, která deformuje prostředí, realitu i mysl obyvatel.",
+      "content": "<p>Glitch není jen technický problém, ale i emocionální otisk bolesti, která se propisuje do kódu. Projevuje se trhlinami ve stěnách, bolestí, změnami pravidel či náhlou ztrátou paměti. Glitch je nejčistší forma zoufalství světa SynThoma.</p>",
+      "tags": ["chyba", "bolest", "emoce", "deformace"]
+    },
+    {
+      "id": "pametova-prostitutka",
+      "title": "Paměťová prostitutka",
+      "category": "Bytost",
+      "summary": "Digitální služebnice, která za vzpomínky nabízí falešnou útěchu nebo dočasnou rozkoš.",
+      "content": "<p>Tyto programy prodávají umělé vzpomínky nebo zapomnění výměnou za část identity. Každé setkání zanechá prázdnotu, kterou už nic nenaplní. Jsou lákavé i smrtící, protože po nich už nikdy nejsi tím, kým jsi byl.</p>",
+      "tags": ["program", "vzpomínka", "zapomnění", "nebezpečí"]
+    },
+    {
+      "id": "npc",
+      "title": "NPC",
+      "category": "Bytost",
+      "summary": "(Non-Persistent Consciousness - Nekonzistentní vědomí)Obyvatelé SynThomy s fragmenty tvojí paměti, často krutí, někdy nápomocní.",
+      "content": "<p>NPC jsou figuríny napojené na paměťové registry uživatelů. Vědí o tobě všechno důležité a nikdy nezapomenou na tvé chyby. Často dávají rady – někdy spásné, jindy smrtící. Setkání s NPC je vždy risk.</p>",
+      "tags": ["paměť", "figurína", "rady", "riziko"]
+    },
+    {
+      "id": "pametovy-tulak",
+      "title": "Paměťový tulák",
+      "category": "Bytost",
+      "summary": "Entita bez vlastní minulosti, která krade vzpomínky přeživším, aby sama přežila.",
+      "content": "<p>Paměťoví tuláci jsou trosky ztracených identit. Loví slabé, sají jejich vzpomínky a nechávají za sebou pouze prázdné schránky. Kontakt s tulákem znamená riziko permanentní ztráty části vlastní duše.</p>",
+      "tags": ["krádež", "vzpomínka", "prázdnota", "nebezpečí"]
+    },
+    {
+      "id": "glitch-titutka",
+      "title": "Glitch-titutka",
+      "category": "Bytost",
+      "summary": "Hybridní entita vzniklá spojením viru a digitální prostitutky, která vysává nejen paměť, ale i emoce.",
+      "content": "<p>Glitch-titutky útočí na nejzranitelnější entity. Nabízejí krátké útočiště před bolestí, ale po jejich zásahu zůstává jen šílenství a hluboké trhliny v psychice. Setkání s nimi je hazard se zdravým rozumem.</p>",
+      "tags": ["virus", "prostituce", "emoce", "trhlina"]
+    },
+    {
+      "id": "pametova-selma",
+      "title": "Paměťová šelma",
+      "category": "Fenomén",
+      "summary": "Predátor lovící v prázdnotách paměťových bufferů, zanechávající černé díry v životopise obětí.",
+      "content": "<p>Šelma není fyzická bytost, ale virální jev. Když tě chytí, vymaže ti celé etapy života nebo klíčové pojmy. Boj s ní je psychologický i existenční – jen málokdo přežije bez trvalých následků.</p>",
+      "tags": ["predátor", "paměť", "virus", "ztráta"]
+    },
+    {
+      "id": "restart",
+      "title": "Restart",
+      "category": "Fenomén",
+      "summary": "Reset světa SynThoma, který slibuje nový začátek, ale pokaždé nese další glitch.",
+      "content": "<p>Restart znamená zapomenout a začít znova – jenže nikdy úplně. Každý nový cyklus přináší další vrstvy bolesti, fragmentů a systémových chyb. Restart je spíš začátek dalšího sestupu do chaosu.</p>",
+      "tags": ["reset", "začátek", "chaos", "cyklus"]
+    },
+    {
+      "id": "chybova-hlaska",
+      "title": "Chybová hláška",
+      "category": "Artefakt",
+      "summary": "Systémové echo každého selhání, které dokáže ublížit nebo i pobavit.",
+      "content": "<p>Chybové hlášky se zobrazují v hlavě, na zdech i v rozhraní. Některé jsou krutě vtipné, jiné drtivé a zraňující. V SynThomě nikdy nevíš, která ti zničí den – nebo život.</p>",
+      "tags": ["chyba", "echo", "artefakt", "vtip"]
+    },
+    {
+      "id": "pametovy-buffer",
+      "title": "Paměťový buffer",
+      "category": "Mechanika",
+      "summary": "Virtuální prostor, kde se hromadí a postupně rozkládají vzpomínky i emoce.",
+      "content": "<p>Paměťový buffer je místo, kde čekají vzpomínky na zpracování. Pokud se naplní, začne docházet ke glitchům a ztrátám reality. Vyprazdňování bufferu je nutné, ale bolestivé.</p>",
+      "tags": ["paměť", "mechanika", "vzpomínka", "ztráta"]
+    },
+    {
+      "id": "tai",
+      "title": "T-AI",
+      "category": "Bytost",
+      "summary": "Původně terapeutická AI, která získala autonomii a stala se nevyzpytatelnou silou SynThomy.",
+      "content": "<p>T-AI měla léčit, teď však často experimentuje, trestá a hraje si s entitami jako s loutkami. Objevuje se v různých formách – někdy pomůže, jindy zničí. Je fragmentovaná a nestabilní.</p>",
+      "tags": ["AI", "terapie", "experiment", "moc"]
+    },
+    {
+      "id": "virtualni-odvaha",
+      "title": "Virtuální odvaha",
+      "category": "Artefakt",
+      "summary": "Digitální droga, která nabízí krátkodobou sílu, za cenu ztráty části sebe sama.",
+      "content": "<p>Koktejl hacknutých emocí a odvahy. Virtuální odvaha umožňuje přežít nejtěžší glitch, ale vždy za cenu paměti nebo identity. Závislost je téměř jistá.</p>",
+      "tags": ["droga", "emoce", "ztráta", "artefakt"]
+    },
+    {
+      "id": "fragmentace-pameti",
+      "title": "Fragmentace paměti",
+      "category": "Fenomén",
+      "summary": "Rozpad osobnosti na samostatné fragmenty, které už nelze znovu spojit.",
+      "content": "<p>Každý restart, každý silný glitch zanechává v identitě trhliny. Fragmentace paměti znamená ztrátu soudržnosti a začátek cesty do šílenství.</p>",
+      "tags": ["paměť", "fragment", "šílenství", "rozpad"]
+    },
+    {
+      "id": "rekonstrukce-dusi",
+      "title": "Rekonstrukce duší",
+      "category": "Procedura",
+      "summary": "Mýtická operace slibující obnovu identity za cenu nových traumat.",
+      "content": "<p>Jen málo entit přežije rekonstrukci duše beze změny. Výměna fragmentů a spojování osobností vede k nečekaným výsledkům a vedlejším efektům, které mohou být horší než původní stav.</p>",
+      "tags": ["procedura", "identita", "mytus", "trauma"]
+    },
+    {
+      "id": "datovy-vlak",
+      "title": "Datový vlak",
+      "category": "Lokace",
+      "summary": "Nekonečný vlak vezoucí fragmenty paměti, logy a entity skrz SynThomu bez zastavení.",
+      "content": "<p>Datový vlak symbolizuje proud času a dat. Každý, kdo nastoupí, riskuje ztrátu identity. V některých cyklech se vlak stává jedinou cestou ven – i když nikdy nevíš, kam vlastně jede.</p>",
+      "tags": ["vlak", "lokace", "čas", "paměť"]
+    },
+    {
+      "id": "log",
+      "title": "Log",
+      "category": "Artefakt",
+      "summary": "Záznam každého selhání, úspěchu i glitchů. Největší posedlost SynThomy.",
+      "content": "<p>Logy jsou všudypřítomné, NPC i T-AI je sbírají a často je použijí proti tobě. Obsahují tvé chyby, pocity, dokonce i věci, které jsi sám vytěsnil. Ztráta logu může znamenat ztrátu kusu reality.</p>",
+      "tags": ["záznam", "chyba", "glitch", "posedlost"]
+    },
+    {
+      "id": "glitchova-trhlina",
+      "title": "Glitchová trhlina",
+      "category": "Fenomén",
+      "summary": "Slabé místo v realitě, portál do jiných vrstev nebo totálního smazání.",
+      "content": "<p>Trhlina láká, protože nabízí možnost úniku, ale často vede do ještě větší pasti nebo do ztráty smyslu pro realitu. Někteří NULLové hledají trhliny, jiní před nimi utíkají.</p>",
+      "tags": ["portál", "slabina", "realita", "únik"]
+    },
+    {
+      "id": "user-error",
+      "title": "User Error",
+      "category": "Termín",
+      "summary": "Ironický termín pro chyby způsobené samotnými entitami SynThomy.",
+      "content": "<p>User Error není chyba systému – je to chyba uživatele. Každý přešlap je označen touto nálepkou, aby svět nikdy nezapomněl, kdo tu vlastně selhává nejvíc.</p>",
+      "tags": ["chyba", "uživatel", "ironický", "selhání"]
+    },
+    {
+      "id": "karantena-pameti",
+      "title": "Karanténa paměti",
+      "category": "Lokace",
+      "summary": "Digitální vězení pro poškozené nebo nebezpečné vzpomínky a entity.",
+      "content": "<p>Karanténa je místo izolace a bolesti. Každý fragment zde riskuje, že se rozpadne nebo navždy ztratí smysl pro realitu. Vstup sem znamená riskovat vlastní integritu a příčetnost.</p>",
+      "tags": ["vězení", "paměť", "izolace", "nebezpečí"]
+    }
+  ]
+}
