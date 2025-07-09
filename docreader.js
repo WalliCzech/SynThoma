@@ -266,7 +266,7 @@ var DocumentLoader = /** @class */ (function () {
         document.body.appendChild(artContainer);
         setTimeout(function () {
             document.body.removeChild(artContainer);
-        }, 1500 + Math.random() * 2000);
+        }, 15000 + Math.random() * 20000);
     };
     DocumentLoader.showSystemMessage = function () {
         var messages = [
@@ -333,8 +333,12 @@ var DocumentLoader = /** @class */ (function () {
             var originalWord = range.toString();
             if (originalWord.trim().length < 3)
                 return;
+            var glitchColors = ['#ff00ff', '#00ffff', '#ff0040', '#00ff88'];
+            var selectedColor = glitchColors[Math.floor(Math.random() * glitchColors.length)];
             var span = document.createElement('span');
             span.className = 'glitch-word';
+            span.style.color = selectedColor;
+            span.style.textShadow = "0 0 5px ".concat(selectedColor);
             try {
                 range.surroundContents(span);
                 var blinkCount_1 = 0;
@@ -352,7 +356,7 @@ var DocumentLoader = /** @class */ (function () {
                     }
                     span.textContent = blinkCount_1 % 2 === 0 ? glitchWord(originalWord) : originalWord;
                     blinkCount_1++;
-                }, 80); // Rychlejší blikání
+                }, 150); // Ještě pomalejší blikání
             }
             catch (e) {
                 // Ignorovat chyby, pokud se nepodaří obalit (stává se)
@@ -367,7 +371,7 @@ var DocumentLoader = /** @class */ (function () {
                 else {
                     cleanup();
                 }
-            }, 1500 + Math.random() * 2000); // Častější spouštění
+            }, 4000 + Math.random() * 4000); // Ještě pomalejší spouštění
         };
         startGlitching();
         // Observer pro restart, pokud se změní obsah

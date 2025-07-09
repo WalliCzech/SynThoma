@@ -280,7 +280,7 @@ class DocumentLoader {
 
         setTimeout(() => {
             document.body.removeChild(artContainer);
-        }, 1500 + Math.random() * 2000);
+        }, 15000 + Math.random() * 20000);
     }
 
     static showSystemMessage(): void {
@@ -384,7 +384,7 @@ class DocumentLoader {
 
                     span.textContent = blinkCount % 2 === 0 ? glitchWord(originalWord) : originalWord;
                     blinkCount++;
-                }, 110); // Zpomalené blikání
+                }, 150); // Ještě pomalejší blikání
 
             } catch (e) {
                 // Ignorovat chyby, pokud se nepodaří obalit (stává se)
@@ -399,7 +399,7 @@ class DocumentLoader {
                 } else {
                     cleanup();
                 }
-            }, 2500 + Math.random() * 3000); // Zpomalené spouštění
+            }, 4000 + Math.random() * 4000); // Ještě pomalejší spouštění
         };
 
         startGlitching();
