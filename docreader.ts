@@ -1,73 +1,82 @@
+// Deklarace mammoth pro TypeScript
+declare const mammoth: {
+  convertToHtml: (options: { arrayBuffer: ArrayBuffer }) => Promise<{ value: string }>;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log(`🛠️ docreader.ts startuje. Připrav se na literární masakr v neonovém šumu! 😏`);
 
     const bookContent: HTMLElement | null = document.getElementById('book-content');
     if (!bookContent) {
-        console.error(`💥 Div pro text knihy nenalezen! HTML je prázdnější než mysl NPC v SynThomě! 😣`);
+        console.error(`💥 Div #book-content nenalezen! HTML je prázdnější než Prázdnota po crashi! 😣`);
         return;
     }
+    console.log(`📍 #book-content nalezen, jdeme dál! 😎`);
 
-    // Načtení .docx
+    // Načtení mammoth.js
     if (typeof mammoth === 'undefined') {
-        console.error(`🚨 Mammoth.js není načtený! Přidej <script>, nebo T-AI spustí nekonečnou smyčku! 😡`);
-        const script = document.createElement('script');
+        console.warn(`🚨 Mammoth.js není načtený! Pokusím se ho přitáhnout, nebo T-AI spustí apokalypsu! 😡`);
+        const script: HTMLScriptElement = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js';
-        script.onload = loadDocx;
+        script.onload = () => {
+            console.log(`🎉 Mammoth.js načten dynamicky. Jdeme na .docx! 😈`);
+            loadDocx();
+        };
         script.onerror = () => console.error(`💀 CDN pro Mammoth.js je mrtvé! Zkus lokální kopii, nebo se modli. 😱`);
         document.head.appendChild(script);
         return;
     } else {
+        console.log(`📚 Mammoth.js je ready. Jdeme rovnou na .docx! 😎`);
         loadDocx();
     }
 
     async function loadDocx(): Promise<void> {
         console.log(`📖 Načítám SYNTHOMA - NULL.docx. Snad to není jen další datový šum... 😈`);
         try {
-            const response = await fetch('SYNTHOMA - NULL.docx');
+            const response: Response = await fetch('SYNTHOMA - NULL.docx');
             if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-            const buffer = await response.arrayBuffer();
+            const buffer: ArrayBuffer = await response.arrayBuffer();
             const result = await mammoth.convertToHtml({ arrayBuffer: buffer });
-            const html = result.value;
+            const html: string = result.value;
             bookContent.innerHTML = html;
             console.log(`🎉 Dokument načten! ${html.length} znaků připraveno k psacímu chaosu. 😎`);
             setupTypingEffect();
-        } catch (err) {
-            console.error(`💀 Chyba při načítání .docx: ${err}. Zkontroluj cestu, nebo čekej neonový crash! 😱`);
+        } catch (err: unknown) {
+            console.error(`💀 Chyba při načítání .docx: ${String(err)}. Zkontroluj cestu, nebo čekej neonový crash! 😱`);
             bookContent.innerHTML = '<p>Chyba při načítání dokumentu. T-AI je naštvaná. 😡</p>';
         }
     }
 
-    // Psací a glitch efekt
     function setupTypingEffect(): void {
         const elements: NodeListOf<HTMLElement> = bookContent.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
         if (elements.length === 0) {
-            console.warn(`⚠️ Žádné odstavce k vykreslení! Dokument je prázdnější než Prázdnota! 😣`);
+            console.warn(`⚠️ Žádné odstavce k vykreslení! Dokument je prázdnější než duše NPC! 😣`);
             return;
         }
+        console.log(`📜 Nalezeno ${elements.length} elementů k vypisování. Připrav se na terminálový vibe! 😏`);
 
-        let currentElementIndex = 0;
+        let currentElementIndex: number = 0;
 
         function typeElement(element: HTMLElement, callback: () => void): void {
-            const text = element.textContent || '';
+            const text: string = element.textContent || '';
             element.textContent = '';
             element.style.opacity = '1';
-            let charIndex = 0;
-            const shouldGlitch = Math.random() < 0.3; // 30% šance na glitch
+            let charIndex: number = 0;
+            const shouldGlitch: boolean = Math.random() < 0.3; // 30% šance na glitch
 
             const typeChar = () => {
                 if (charIndex < text.length) {
                     element.textContent += text[charIndex];
                     charIndex++;
                     if (shouldGlitch && Math.random() < 0.1) {
-                        // Aplikace glitchQuick animace
                         element.classList.add('glitch-quick');
                         setTimeout(() => {
                             element.classList.remove('glitch-quick');
-                        }, 180); // Doba trvání glitchQuick
+                        }, 180);
                     }
-                    setTimeout(typeChar, 10); // Rychlost psaní
+                    setTimeout(typeChar, 10);
                 } else {
-                    element.classList.remove('glitch-quick'); // Uklidit glitch
+                    element.classList.remove('glitch-quick');
                     callback();
                 }
             };
@@ -75,8 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
             typeChar();
         }
 
-        const observer = new IntersectionObserver(
-            (entries) => {
+        const observer: IntersectionObserver = new IntersectionObserver(
+            (entries: IntersectionObserverEntry[]) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && currentElementIndex <= Array.from(elements).indexOf(entry.target as HTMLElement)) {
                         typeElement(entry.target as HTMLElement, () => {
@@ -92,9 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
             { threshold: 0.1 }
         );
 
-        elements.forEach((element, index) => {
+        elements.forEach((element: HTMLElement, index: number) => {
             element.style.opacity = '0';
-            if (index === 0) observer.observe(element); // Začni s prvním
+            if (index === 0) observer.observe(element);
         });
 
         console.log(`🖥️ Psací efekt inicializován. Text se píše jako v terminálu z pekla, s glitchem! 😏`);
