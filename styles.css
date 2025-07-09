@@ -61,7 +61,6 @@ main {
     min-height: 64vh;
 }
 
-
 .btn, button {
     background: var(--btn-bg, #1a1d25);
     color: var(--btn-fg, #0ff);
@@ -85,8 +84,6 @@ main {
     color: var(--accent2, #f0f);
     box-shadow: 0 2px 18px -2px var(--glitch1, #ff0040);
 }
-
-
 
 .glitch-zone {
     animation: glitchZone 8s infinite alternate;
@@ -155,25 +152,29 @@ form textarea {
         margin: 1rem;
         padding: 1rem;
     }
-    .pdf-viewer {
-        min-height: 300px;
-    }
 }
 
 .theme-switcher {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: #1a1a1a;
-    border: 1px solid #00ffcc;
-    color: #00ffcc;
-    padding: 0.5rem 1rem;
+    background: var(--btn-bg, #1a1d25);
+    color: var(--btn-fg, #0ff);
+    padding: 0.7em 1.3em;
     cursor: pointer;
+    border-radius: 0.9em;
+    border: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.03em;
+    box-shadow: 0 2px 14px -4px #00ffd644;
+    transition: background .18s, color .18s, box-shadow .16s;
 }
 
 .theme-switcher:hover {
-    background: #00ffcc;
-    color: #0d0d0d;
+    background: var(--btn-hover, #2a2d35);
+    color: var(--accent2, #f0f);
+    box-shadow: 0 2px 18px -2px var(--glitch1, #ff0040);
 }
 
 .book-content {
@@ -188,66 +189,90 @@ form textarea {
 .book-content p, .book-content h1, .book-content h2, .book-content h3,
 .book-content h4, .book-content h5, .book-content h6 {
     margin: 1rem 0;
+    position: relative;
 }
 
-.reveal {
-    opacity: 0;
-    transform: translateY(20px);
+.book-content p::after, .book-content h1::after, .book-content h2::after,
+.book-content h3::after, .book-content h4::after, .book-content h5::after,
+.book-content h6::after {
+    content: '|';
+    animation: blink 0.5s step-end infinite;
+    margin-left: 2px;
+    color: var(--accent2, #0ff);
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }
 
 .download-link {
     display: block;
     text-align: center;
     margin: 2rem auto;
-    background: #1a1a1a;
-    border: 1px solid #00ffcc;
-    color: #00ffcc;
-    padding: 0.5rem 1rem;
+    background: var(--btn-bg, #1a1d25);
+    color: var(--btn-fg, #0ff);
+    padding: 0.7em 1.3em;
     text-decoration: none;
+    border-radius: 0.9em;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.03em;
+    box-shadow: 0 2px 14px -4px #00ffd644;
+    transition: background .18s, color .18s, box-shadow .16s;
 }
 
 .download-link:hover {
-    background: #00ffcc;
-    color: #0d0d0d;
+    background: var(--btn-hover, #2a2d35);
+    color: var(--accent2, #f0f);
+    box-shadow: 0 2px 18px -2px var(--glitch1, #ff0040);
 }
 
 footer {
     text-align: center;
     padding: 1rem;
     background: #1a1a1a;
-    border-top: 2px solid #00ffcc;
+    border-top: 2px solid var(--accent2, #0ff);
 }
 
 /* Témata */
-[data-theme="cyberWeed"] { --primary: #00cc00; --secondary: #66ff66; }
-[data-theme="cyberPink"] { --primary: #ff00cc; --secondary: #ff66cc; }
-[data-theme="cyberBlue"] { --primary: #0066ff; --secondary: #66ccff; }
-[data-theme="cyberOrange"] { --primary: #ff6600; --secondary: #ff9966; }
-[data-theme="cyberPurple"] { --primary: #6600cc; --secondary: #9966ff; }
-[data-theme="neonGrave"] { --primary: #333333; --secondary: #666666; }
-[data-theme="bloodRust"] { --primary: #990000; --secondary: #cc3333; }
-[data-theme="toxicSlime"] { --primary: #00ff33; --secondary: #66ff99; }
-[data-theme="midnightOil"] { --primary: #003366; --secondary: #336699; }
-[data-theme="glitchRed"] { --primary: #ff0000; --secondary: #ff3333; }
-[data-theme="voidPurple"] { --primary: #330066; --secondary: #663399; }
-[data-theme="acidLemon"] { --primary: #ccff00; --secondary: #ccff66; }
-[data-theme="burntChrome"] { --primary: #666633; --secondary: #999966; }
-[data-theme="frostByte"] { --primary: #00ccff; --secondary: #66ccff; }
+[data-theme="cyberWeed"] { --primary: #00cc00; --secondary: #66ff66; --accent: #00cc00; --accent2: #66ff66; --btn-bg: #1a1d25; --btn-fg: #00cc00; --btn-hover: #2a2d35; --glitch1: #00cc00; }
+[data-theme="cyberPink"] { --primary: #ff00cc; --secondary: #ff66cc; --accent: #ff00cc; --accent2: #ff66cc; --btn-bg: #1a1d25; --btn-fg: #ff00cc; --btn-hover: #2a2d35; --glitch1: #ff00cc; }
+[data-theme="cyberBlue"] { --primary: #0066ff; --secondary: #66ccff; --accent: #0066ff; --accent2: #66ccff; --btn-bg: #1a1d25; --btn-fg: #0066ff; --btn-hover: #2a2d35; --glitch1: #0066ff; }
+[data-theme="cyberOrange"] { --primary: #ff6600; --secondary: #ff9966; --accent: #ff6600; --accent2: #ff9966; --btn-bg: #1a1d25; --btn-fg: #ff6600; --btn-hover: #2a2d35; --glitch1: #ff6600; }
+[data-theme="cyberPurple"] { --primary: #6600cc; --secondary: #9966ff; --accent: #6600cc; --accent2: #9966ff; --btn-bg: #1a1d25; --btn-fg: #6600cc; --btn-hover: #2a2d35; --glitch1: #6600cc; }
+[data-theme="neonGrave"] { --primary: #333333; --secondary: #666666; --accent: #333333; --accent2: #666666; --btn-bg: #1a1d25; --btn-fg: #333333; --btn-hover: #2a2d35; --glitch1: #333333; }
+[data-theme="bloodRust"] { --primary: #990000; --secondary: #cc3333; --accent: #990000; --accent2: #cc3333; --btn-bg: #1a1d25; --btn-fg: #990000; --btn-hover: #2a2d35; --glitch1: #990000; }
+[data-theme="toxicSlime"] { --primary: #00ff33; --secondary: #66ff99; --accent: #00ff33; --accent2: #66ff99; --btn-bg: #1a1d25; --btn-fg: #00ff33; --btn-hover: #2a2d35; --glitch1: #00ff33; }
+[data-theme="midnightOil"] { --primary: #003366; --secondary: #336699; --accent: #003366; --accent2: #336699; --btn-bg: #1a1d25; --btn-fg: #003366; --btn-hover: #2a2d35; --glitch1: #003366; }
+[data-theme="glitchRed"] { --primary: #ff0000; --secondary: #ff3333; --accent: #ff0000; --accent2: #ff3333; --btn-bg: #1a1d25; --btn-fg: #ff0000; --btn-hover: #2a2d35; --glitch1: #ff0000; }
+[data-theme="voidPurple"] { --primary: #330066; --secondary: #663399; --accent: #330066; --accent2: #663399; --btn-bg: #1a1d25; --btn-fg: #330066; --btn-hover: #2a2d35; --glitch1: #330066; }
+[data-theme="acidLemon"] { --primary: #ccff00; --secondary: #ccff66; --accent: #ccff00; --accent2: #ccff66; --btn-bg: #1a1d25; --btn-fg: #ccff00; --btn-hover: #2a2d35; --glitch1: #ccff00; }
+[data-theme="burntChrome"] { --primary: #666633; --secondary: #999966; --accent: #666633; --accent2: #999966; --btn-bg: #1a1d25; --btn-fg: #666633; --btn-hover: #2a2d35; --glitch1: #666633; }
+[data-theme="frostByte"] { --primary: #00ccff; --secondary: #66ccff; --accent: #00ccff; --accent2: #66ccff; --btn-bg: #1a1d25; --btn-fg: #00ccff; --btn-hover: #2a2d35; --glitch1: #00ccff; }
 
 [data-theme] .theme-switcher, [data-theme] .download-link, [data-theme] nav a {
-    border-color: var(--primary);
-    color: var(--primary);
+    border-color: var(--accent2);
+    color: var(--accent2);
 }
 
 [data-theme] .theme-switcher:hover, [data-theme] .download-link:hover {
-    background: var(--primary);
-    color: #0d0d0d;
+    background: var(--btn-hover);
+    color: var(--accent);
+    box-shadow: 0 2px 18px -2px var(--glitch1);
 }
 
 [data-theme] nav a:hover, [data-theme] nav a.active {
-    color: var(--secondary);
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
 }
 
 [data-theme] header, [data-theme] footer {
-    border-color: var(--primary);
+    border-color: var(--accent2);
+}
+
+[data-theme] .book-content p::after, [data-theme] .book-content h1::after,
+[data-theme] .book-content h2::after, [data-theme] .book-content h3::after,
+[data-theme] .book-content h4::after, [data-theme] .book-content h5::after,
+[data-theme] .book-content h6::after {
+    color: var(--accent2);
 }

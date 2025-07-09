@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log(`🛠️ docreader.ts startuje. Připrav se na literární masakr v TypeScriptu! 😏`);
+    console.log(`🛠️ docreader.ts startuje. Připrav se na literární masakr v neonovém šumu! 😏`);
 
     const bookContent: HTMLElement | null = document.getElementById('book-content');
     if (!bookContent) {
-        console.error(`💥 Div pro text knihy nenalezen! HTML je prázdnější než duše NPC! 😣`);
+        console.error(`💥 Div pro text knihy nenalezen! HTML je prázdnější než mysl NPC v SynThomě! 😣`);
         return;
     }
 
     // Načtení .docx
     if (typeof mammoth === 'undefined') {
-        console.error(`🚨 Mammoth.js není načtený! Přidej <script>, nebo T-AI spustí restartovací smyčku! 😡`);
+        console.error(`🚨 Mammoth.js není načtený! Přidej <script>, nebo T-AI spustí nekonečnou smyčku! 😡`);
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js';
         script.onload = loadDocx;
@@ -29,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await mammoth.convertToHtml({ arrayBuffer: buffer });
             const html = result.value;
             bookContent.innerHTML = html;
-            console.log(`🎉 Dokument načten! ${html.length} znaků připraveno k vykreslení. 😎`);
+            console.log(`🎉 Dokument načten! ${html.length} znaků připraveno k psacímu chaosu. 😎`);
             setupTypingEffect();
         } catch (err) {
-            console.error(`💀 Chyba při načítání .docx: ${err}. Zkontroluj cestu, nebo připrav na neonový crash! 😱`);
+            console.error(`💀 Chyba při načítání .docx: ${err}. Zkontroluj cestu, nebo čekej neonový crash! 😱`);
             bookContent.innerHTML = '<p>Chyba při načítání dokumentu. T-AI je naštvaná. 😡</p>';
         }
     }
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupTypingEffect(): void {
         const elements: NodeListOf<HTMLElement> = bookContent.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
         if (elements.length === 0) {
-            console.warn(`⚠️ Žádné odstavce k vykreslení! Dokument je prázdnější než Prázdnota. 😣`);
+            console.warn(`⚠️ Žádné odstavce k vykreslení! Dokument je prázdnější než Prázdnota! 😣`);
             return;
         }
 
@@ -59,20 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     element.textContent += text[charIndex];
                     charIndex++;
                     if (shouldGlitch && Math.random() < 0.1) {
-                        // Náhodný glitch efekt
-                        const glitchText = element.textContent!.split('').map(char => 
-                            Math.random() < 0.2 ? String.fromCharCode(33 + Math.floor(Math.random() * 94)) : char
-                        ).join('');
-                        element.textContent = glitchText;
-                        element.style.color = ['#ff00cc', '#00ffcc', '#ff0000'][Math.floor(Math.random() * 3)];
+                        // Aplikace glitchQuick animace
+                        element.classList.add('glitch-quick');
                         setTimeout(() => {
-                            element.textContent = text.slice(0, charIndex);
-                            element.style.color = '';
-                        }, 100);
+                            element.classList.remove('glitch-quick');
+                        }, 180); // Doba trvání glitchQuick
                     }
                     setTimeout(typeChar, 10); // Rychlost psaní
                 } else {
-                    element.style.color = ''; // Reset barvy
+                    element.classList.remove('glitch-quick'); // Uklidit glitch
                     callback();
                 }
             };
@@ -102,6 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index === 0) observer.observe(element); // Začni s prvním
         });
 
-        console.log(`🖥️ Psací efekt inicializován. Text se píše jako v terminálu z pekla. 😏`);
+        console.log(`🖥️ Psací efekt inicializován. Text se píše jako v terminálu z pekla, s glitchem! 😏`);
     }
 });
