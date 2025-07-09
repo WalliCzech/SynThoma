@@ -1,6 +1,6 @@
-// Deklarace mammoth pro TypeScript
+/* docreader.ts: Hackujeme SynThomu, ať kurzíva svítí jako neonový chaos! 😈 */
 declare const mammoth: {
-  convertToHtml: (options: { arrayBuffer: ArrayBuffer }) => Promise<{ value: string }>;
+    convertToHtml: (options: { arrayBuffer: ArrayBuffer, styleMap?: string[] }) => Promise<{ value: string }>;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,20 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`📚 Mammoth.js je ready. Jdeme rovnou na .docx! 😎`);
         loadDocx();
     }
-		// docreader.js (úryvek)
-	const italicElements = document.querySelectorAll('#book-content p i, #book-content p em');
-		italicElements.forEach(el => {
-		el.classList.add('neon-pulse');
-		console.log(`🔥 Neon pulse přidán pro: ${el.textContent}`);
-	});
+
     async function loadDocx(): Promise<void> {
         console.log(`📖 Načítám SYNTHOMA - NULL.docx. Snad to není jen další datový šum... 😈`);
         try {
             const response: Response = await fetch('SYNTHOMA - NULL.docx');
             if (!response.ok) throw new Error(`HTTP error ${response.status}`);
             const buffer: ArrayBuffer = await response.arrayBuffer();
-            const result = await mammoth.convertToHtml({ arrayBuffer: buffer });
+            const result = await mammoth.convertToHtml({
+                arrayBuffer: buffer,
+                styleMap: [
+                    "i => i", // Mapujeme kurzívu na <i>
+                    "em => em" // Mapujeme kurzívu na <em>
+                ]
+            });
             const html: string = result.value;
+            console.log(`📜 HTML výstup z Mammoth.js: ${html.substring(0, 500)}...`); // Logujeme prvních 500 znaků
             bookContent.innerHTML = html;
             console.log(`🎉 Dokument načten! ${html.length} znaků připraveno k psacímu chaosu. 😎`);
             setupTypingEffect();
@@ -63,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentElementIndex: number = 0;
 
         function typeElement(element: HTMLElement, callback: () => void): void {
-            // Zkontroluj vnořené <em> nebo <i> elementy
             const italicElements = element.querySelectorAll('em, i');
             if (italicElements.length > 0) {
                 console.log(`📢 Nalezeno ${italicElements.length} kurzívních elementů v ${element.tagName}. Připrav se na neonový puls! 😈`);
@@ -81,19 +82,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     charIndex++;
                     if (shouldGlitch && Math.random() < 0.1) {
                         element.classList.add('glitch-quick');
-                        setTimeout(() => {
-                            element.classList.remove('glitch-quick');
-                        }, 180);
+                        setTimeout(() => element.classList.remove('glitch-quick'), 180);
                     }
                     setTimeout(typeChar, 10);
                 } else {
                     element.classList.remove('glitch-quick');
                     element.classList.add('typing-done');
+                    // Přidáme neon-pulse pro kurzívu až po dokončení psacího efektu
+                    italicElements.forEach(el => {
+                        el.classList.add('neon-pulse');
+                        console.log(`🔥 Neon pulse přidán pro: ${el.textContent}`);
+                    });
                     console.log(`✅ Třída typing-done přidána pro element: ${element.tagName}. Kursor zmizel, kurzíva září! 😎`);
                     callback();
                 }
             };
-
             typeChar();
         }
 

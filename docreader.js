@@ -59,12 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("\uD83D\uDCDA Mammoth.js je ready. Jdeme rovnou na .docx! \uD83D\uDE0E");
         loadDocx();
     }
-    // docreader.js (úryvek)
-    var italicElements = document.querySelectorAll('#book-content p i, #book-content p em');
-    italicElements.forEach(function (el) {
-        el.classList.add('neon-pulse');
-        console.log("\uD83D\uDD25 Neon pulse p\u0159id\u00E1n pro: ".concat(el.textContent));
-    });
     function loadDocx() {
         return __awaiter(this, void 0, void 0, function () {
             var response, buffer, result, html, err_1;
@@ -83,10 +77,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         return [4 /*yield*/, response.arrayBuffer()];
                     case 3:
                         buffer = _a.sent();
-                        return [4 /*yield*/, mammoth.convertToHtml({ arrayBuffer: buffer })];
+                        return [4 /*yield*/, mammoth.convertToHtml({
+                                arrayBuffer: buffer,
+                                styleMap: [
+                                    "i => i", // Mapujeme kurzívu na <i>
+                                    "em => em" // Mapujeme kurzívu na <em>
+                                ]
+                            })];
                     case 4:
                         result = _a.sent();
                         html = result.value;
+                        console.log("\uD83D\uDCDC HTML v\u00FDstup z Mammoth.js: ".concat(html.substring(0, 500), "...")); // Logujeme prvních 500 znaků
                         bookContent.innerHTML = html;
                         console.log("\uD83C\uDF89 Dokument na\u010Dten! ".concat(html.length, " znak\u016F p\u0159ipraveno k psac\u00EDmu chaosu. \uD83D\uDE0E"));
                         setupTypingEffect();
@@ -110,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("\uD83D\uDCDC Nalezeno ".concat(elements.length, " element\u016F k vypisov\u00E1n\u00ED. P\u0159iprav se na termin\u00E1lov\u00FD vibe! \uD83D\uDE0F"));
         var currentElementIndex = 0;
         function typeElement(element, callback) {
-            // Zkontroluj vnořené <em> nebo <i> elementy
             var italicElements = element.querySelectorAll('em, i');
             if (italicElements.length > 0) {
                 console.log("\uD83D\uDCE2 Nalezeno ".concat(italicElements.length, " kurz\u00EDvn\u00EDch element\u016F v ").concat(element.tagName, ". P\u0159iprav se na neonov\u00FD puls! \uD83D\uDE08"));
@@ -126,15 +126,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     charIndex++;
                     if (shouldGlitch && Math.random() < 0.1) {
                         element.classList.add('glitch-quick');
-                        setTimeout(function () {
-                            element.classList.remove('glitch-quick');
-                        }, 180);
+                        setTimeout(function () { return element.classList.remove('glitch-quick'); }, 180);
                     }
                     setTimeout(typeChar, 10);
                 }
                 else {
                     element.classList.remove('glitch-quick');
                     element.classList.add('typing-done');
+                    // Přidáme neon-pulse pro kurzívu až po dokončení psacího efektu
+                    italicElements.forEach(function (el) {
+                        el.classList.add('neon-pulse');
+                        console.log("\uD83D\uDD25 Neon pulse p\u0159id\u00E1n pro: ".concat(el.textContent));
+                    });
                     console.log("\u2705 T\u0159\u00EDda typing-done p\u0159id\u00E1na pro element: ".concat(element.tagName, ". Kursor zmizel, kurz\u00EDva z\u00E1\u0159\u00ED! \uD83D\uDE0E"));
                     callback();
                 }

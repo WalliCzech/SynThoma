@@ -1,35 +1,37 @@
+/* styles.css: Neonový chaos pro SynThomu, kde kurzíva svítí jako billboard v digitálním pekle! 😈 */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
+/* Základní setup, aby HTML nebylo nudnější než NPC bez skriptu 😴 */
 html, body {
-  margin: 0;
-  padding: 0;
-  background: #11131a linear-gradient(120deg, #090b13 60%, #1c2236 100%);
-  color: #e0e0e0;
-  font-family: 'JetBrains Mono', monospace;
-  min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: #11131a linear-gradient(120deg, #090b13 60%, #1c2236 100%);
+    color: #e0e0e0;
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
 }
 
 header, footer {
-  text-align: center;
-  margin: 2rem 0 1rem 0;
+    text-align: center;
+    margin: 2rem 0 1rem 0;
 }
 
 h1.glitch {
-  font-size: 2.2rem;
-  color: #0ff;
-  position: relative;
-  text-shadow: 2px 0 2px #0ff, -2px 0 2px #f0f, 0 2px 2px #00ffd0;
-  letter-spacing: .03em;
-  z-index: 2;
-  animation: glitch 1.2s infinite linear alternate-reverse;
+    font-size: 2.2rem;
+    color: #0ff;
+    position: relative;
+    text-shadow: 2px 0 2px #0ff, -2px 0 2px #f0f, 0 2px 2px #00ffd0;
+    letter-spacing: .03em;
+    z-index: 2;
+    animation: glitch 1.2s infinite linear alternate-reverse;
 }
 
 @keyframes glitch {
-  0% { text-shadow: 2px 0 #0ff, -2px 0 #f0f; }
-  25% { text-shadow: 3px 2px #ff0040, -2px -1px #0ff; }
-  50% { text-shadow: -3px 0 #f0f, 2px 2px #00ffd0; }
-  75% { text-shadow: 2px -2px #0ff, -3px 1px #ff0040; }
-  100% { text-shadow: -2px 2px #0ff, 3px -2px #f0f; }
+    0% { text-shadow: 2px 0 #0ff, -2px 0 #f0f; }
+    25% { text-shadow: 3px 2px #ff0040, -2px -1px #0ff; }
+    50% { text-shadow: -3px 0 #f0f, 2px 2px #00ffd0; }
+    75% { text-shadow: 2px -2px #0ff, -3px 1px #ff0040; }
+    100% { text-shadow: -2px 2px #0ff, 3px -2px #f0f; }
 }
 
 nav {
@@ -208,26 +210,22 @@ form textarea {
     content: none !important;
 }
 
-.typing-done i {
-    animation: neon-pulse 1.5s infinite;
-    color: #00ffcc; /* Neonový vibe, ať to svítí! */
+.book-content .typing-done i, .book-content .typing-done em {
+    animation: neon-pulse 1.5s infinite !important;
+    color: var(--accent2, #00ffcc);
+    text-shadow: 0 0 10px var(--accent2, #00ffcc), 0 0 20px var(--accent2, #00ffcc);
+    font-style: italic;
 }
+
 @keyframes neon-pulse {
-    0% { opacity: 1; text-shadow: 0 0 10px #00ffcc; }
-    50% { opacity: 0.5; text-shadow: 0 0 20px #00ffcc; }
-    100% { opacity: 1; text-shadow: 0 0 10px #00ffcc; }
+    0% { opacity: 1; text-shadow: 0 0 10px var(--accent2, #00ffcc); }
+    50% { opacity: 0.5; text-shadow: 0 0 20px var(--accent2, #00ffcc), 0 0 30px var(--accent2, #00ffcc); }
+    100% { opacity: 1; text-shadow: 0 0 10px var(--accent2, #00ffcc); }
 }
 
 .book-content em, .book-content i {
     font-style: italic;
-    animation: pulse-italic 2s infinite ease-in-out;
-    color: var(--accent2, #0ff);
-}
-
-@keyframes pulse-italic {
-    0% { text-shadow: 0 0 2px var(--accent2, #0ff); }
-    50% { text-shadow: 0 0 8px var(--accent2, #0ff), 0 0 12px var(--glitch1, #ff0040); }
-    100% { text-shadow: 0 0 2px var(--accent2, #0ff); }
+    color: var(--accent2, #0ff); /* Bez animace, ať nekonfliktuje */
 }
 
 @keyframes blink {
@@ -263,7 +261,7 @@ footer {
     border-top: 2px solid var(--accent2, #0ff);
 }
 
-/* Témata */
+/* Témata: Ať to svítí jako SynThoma v noci! 😎 */
 [data-theme="cyberWeed"] { --primary: #00cc00; --secondary: #66ff66; --accent: #00cc00; --accent2: #66ff66; --btn-bg: #1a1d25; --btn-fg: #00cc00; --btn-hover: #2a2d35; --glitch1: #00cc00; }
 [data-theme="cyberPink"] { --primary: #ff00cc; --secondary: #ff66cc; --accent: #ff00cc; --accent2: #ff66cc; --btn-bg: #1a1d25; --btn-fg: #ff00cc; --btn-hover: #2a2d35; --glitch1: #ff00cc; }
 [data-theme="cyberBlue"] { --primary: #0066ff; --secondary: #66ccff; --accent: #0066ff; --accent2: #66ccff; --btn-bg: #1a1d25; --btn-fg: #0066ff; --btn-hover: #2a2d35; --glitch1: #0066ff; }
