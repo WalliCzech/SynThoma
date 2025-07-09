@@ -61,10 +61,6 @@ main {
     min-height: 64vh;
 }
 
-.pdf-controls {
-    text-align: center;
-    margin-bottom: 1.4rem;
-}
 
 .btn, button {
     background: var(--btn-bg, #1a1d25);
@@ -74,7 +70,7 @@ main {
     padding: 0.7em 1.3em;
     margin: 0 0.5em;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 1.1rem;
+    font-size: 0.5rem;
     letter-spacing: 0.03em;
     box-shadow: 0 2px 14px -4px #00ffd644;
     cursor: pointer;
@@ -90,38 +86,7 @@ main {
     box-shadow: 0 2px 18px -2px var(--glitch1, #ff0040);
 }
 
-.download-link {
-    display: block;
-    margin: 1.8rem auto 0 auto;
-    max-width: 330px;
-    text-align: center;
-    font-weight: 600;
-}
 
-.pdf-viewer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 500px;
-    background: #16181e;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1.5px solid var(--glitch1, #00ffd0);
-    box-shadow: 0 0 22px 0 #00ffd611;
-    position: relative;
-}
-
-#pdf-canvas {
-    width: 100%;
-    max-width: 740px;
-    background: #1a1d25;
-    border-radius: 7px;
-    box-shadow: 0 0 18px 2px #53ffe033;
-    margin: auto;
-    display: block;
-    min-height: 400px;
-    transition: box-shadow 0.12s;
-}
 
 .glitch-zone {
     animation: glitchZone 8s infinite alternate;
@@ -193,4 +158,96 @@ form textarea {
     .pdf-viewer {
         min-height: 300px;
     }
+}
+
+.theme-switcher {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #1a1a1a;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.theme-switcher:hover {
+    background: #00ffcc;
+    color: #0d0d0d;
+}
+
+.book-content {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+}
+
+.book-content p, .book-content h1, .book-content h2, .book-content h3,
+.book-content h4, .book-content h5, .book-content h6 {
+    margin: 1rem 0;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.download-link {
+    display: block;
+    text-align: center;
+    margin: 2rem auto;
+    background: #1a1a1a;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+
+.download-link:hover {
+    background: #00ffcc;
+    color: #0d0d0d;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #1a1a1a;
+    border-top: 2px solid #00ffcc;
+}
+
+/* Témata */
+[data-theme="cyberWeed"] { --primary: #00cc00; --secondary: #66ff66; }
+[data-theme="cyberPink"] { --primary: #ff00cc; --secondary: #ff66cc; }
+[data-theme="cyberBlue"] { --primary: #0066ff; --secondary: #66ccff; }
+[data-theme="cyberOrange"] { --primary: #ff6600; --secondary: #ff9966; }
+[data-theme="cyberPurple"] { --primary: #6600cc; --secondary: #9966ff; }
+[data-theme="neonGrave"] { --primary: #333333; --secondary: #666666; }
+[data-theme="bloodRust"] { --primary: #990000; --secondary: #cc3333; }
+[data-theme="toxicSlime"] { --primary: #00ff33; --secondary: #66ff99; }
+[data-theme="midnightOil"] { --primary: #003366; --secondary: #336699; }
+[data-theme="glitchRed"] { --primary: #ff0000; --secondary: #ff3333; }
+[data-theme="voidPurple"] { --primary: #330066; --secondary: #663399; }
+[data-theme="acidLemon"] { --primary: #ccff00; --secondary: #ccff66; }
+[data-theme="burntChrome"] { --primary: #666633; --secondary: #999966; }
+[data-theme="frostByte"] { --primary: #00ccff; --secondary: #66ccff; }
+
+[data-theme] .theme-switcher, [data-theme] .download-link, [data-theme] nav a {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+[data-theme] .theme-switcher:hover, [data-theme] .download-link:hover {
+    background: var(--primary);
+    color: #0d0d0d;
+}
+
+[data-theme] nav a:hover, [data-theme] nav a.active {
+    color: var(--secondary);
+}
+
+[data-theme] header, [data-theme] footer {
+    border-color: var(--primary);
 }
