@@ -201,10 +201,6 @@ form textarea {
     color: var(--accent2, #0ff);
 }
 
-.book-content .typing-done::after {
-    content: none;
-}
-
 @keyframes blink {
     50% { opacity: 0; }
 }

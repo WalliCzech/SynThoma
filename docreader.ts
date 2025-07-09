@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(typeChar, 10);
                 } else {
                     element.classList.remove('glitch-quick');
+                    element.classList.add('typing-done'); // Přidat třídu po dokončení
                     callback();
                 }
             };
@@ -106,6 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index === 0) observer.observe(element);
         });
 
-        console.log(`🖥️ Psací efekt inicializován. Text se píše jako v terminálu z pekla, s glitchem! 😏`);
+        console.log(`🖥️ Psací efekt inicializován. Text se píše jako v terminálu z pekla, bez otravného kurzoru na konci! 😏`);
     }
 });
