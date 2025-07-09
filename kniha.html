@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNTHOMA | Četba – NULL-1</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="glitch" data-text="SYNTHOMA: Četba">SYNTHOMA: Četba</h1>
+        <nav>
+            <a href="index.html">Domů</a>
+            <a href="kniha.html" class="active">Kniha</a>
+            <a href="pravidla.html">Pravidla</a>
+            <a href="encyklopedie.html">Encyklopedie</a>
+            <a href="o-autorovi.html">O autorovi</a>
+        </nav>
+    </header>
+    <main>
+        <div class="pdf-controls">
+            <button id="prev" class="btn glitch-btn">Předchozí</button>
+            <span>Strana <span id="page-num"></span> / <span id="page-count"></span></span>
+            <button id="next" class="btn glitch-btn">Další</button>
+        </div>
+        <div class="pdf-viewer glitch-zone">
+            <canvas id="pdf-canvas"></canvas>
+        </div>
+        <a href="SYNTHOMA - NULL.pdf" download class="btn glitch-btn download-link">Stáhnout jako PDF</a>
+    </main>
+    <footer>
+        <span>© 2025 SYNTHOMA – Vše v šumu a ironii.</span>
+    </footer>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+    <script src="pdfreader.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
