@@ -201,6 +201,13 @@ form textarea {
     color: var(--accent2, #0ff);
 }
 
+.book-content p.typing-done::after, .book-content h1.typing-done::after,
+.book-content h2.typing-done::after, .book-content h3.typing-done::after,
+.book-content h4.typing-done::after, .book-content h5.typing-done::after,
+.book-content h6.typing-done::after {
+    content: none !important;
+}
+
 @keyframes blink {
     50% { opacity: 0; }
 }

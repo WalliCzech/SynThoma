@@ -123,7 +123,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 else {
                     element.classList.remove('glitch-quick');
-                    element.classList.add('typing-done'); // Přidat třídu po dokončení
+                    element.classList.add('typing-done');
+                    console.log("\u2705 T\u0159\u00EDda typing-done p\u0159id\u00E1na pro element: ".concat(element.tagName, ". Kursor by m\u011Bl zmizet! \uD83D\uDE0E"));
                     callback();
                 }
             };

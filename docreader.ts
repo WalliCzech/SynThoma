@@ -77,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(typeChar, 10);
                 } else {
                     element.classList.remove('glitch-quick');
-                    element.classList.add('typing-done'); // Přidat třídu po dokončení
+                    element.classList.add('typing-done');
+                    console.log(`✅ Třída typing-done přidána pro element: ${element.tagName}. Kursor by měl zmizet! 😎`);
                     callback();
                 }
             };
