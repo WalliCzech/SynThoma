@@ -58,6 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentElementIndex: number = 0;
 
         function typeElement(element: HTMLElement, callback: () => void): void {
+            // Zkontroluj vnořené <em> nebo <i> elementy
+            const italicElements = element.querySelectorAll('em, i');
+            if (italicElements.length > 0) {
+                console.log(`📢 Nalezeno ${italicElements.length} kurzívních elementů v ${element.tagName}. Připrav se na neonový puls! 😈`);
+            }
+
             const text: string = element.textContent || '';
             element.textContent = '';
             element.style.opacity = '1';
@@ -78,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     element.classList.remove('glitch-quick');
                     element.classList.add('typing-done');
-                    console.log(`✅ Třída typing-done přidána pro element: ${element.tagName}. Kursor by měl zmizet! 😎`);
+                    console.log(`✅ Třída typing-done přidána pro element: ${element.tagName}. Kursor zmizel, kurzíva září! 😎`);
                     callback();
                 }
             };
@@ -108,6 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index === 0) observer.observe(element);
         });
 
-        console.log(`🖥️ Psací efekt inicializován. Text se píše jako v terminálu z pekla, bez otravného kurzoru na konci! 😏`);
+        console.log(`🖥️ Psací efekt inicializován. Kurzíva má neonový puls, kursor je mrtvý! 😏`);
     }
 });

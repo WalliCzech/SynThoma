@@ -104,6 +104,11 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("\uD83D\uDCDC Nalezeno ".concat(elements.length, " element\u016F k vypisov\u00E1n\u00ED. P\u0159iprav se na termin\u00E1lov\u00FD vibe! \uD83D\uDE0F"));
         var currentElementIndex = 0;
         function typeElement(element, callback) {
+            // Zkontroluj vnořené <em> nebo <i> elementy
+            var italicElements = element.querySelectorAll('em, i');
+            if (italicElements.length > 0) {
+                console.log("\uD83D\uDCE2 Nalezeno ".concat(italicElements.length, " kurz\u00EDvn\u00EDch element\u016F v ").concat(element.tagName, ". P\u0159iprav se na neonov\u00FD puls! \uD83D\uDE08"));
+            }
             var text = element.textContent || '';
             element.textContent = '';
             element.style.opacity = '1';
@@ -124,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 else {
                     element.classList.remove('glitch-quick');
                     element.classList.add('typing-done');
-                    console.log("\u2705 T\u0159\u00EDda typing-done p\u0159id\u00E1na pro element: ".concat(element.tagName, ". Kursor by m\u011Bl zmizet! \uD83D\uDE0E"));
+                    console.log("\u2705 T\u0159\u00EDda typing-done p\u0159id\u00E1na pro element: ".concat(element.tagName, ". Kursor zmizel, kurz\u00EDva z\u00E1\u0159\u00ED! \uD83D\uDE0E"));
                     callback();
                 }
             };
@@ -148,6 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (index === 0)
                 observer.observe(element);
         });
-        console.log("\uD83D\uDDA5\uFE0F Psac\u00ED efekt inicializov\u00E1n. Text se p\u00ED\u0161e jako v termin\u00E1lu z pekla, bez otravn\u00E9ho kurzoru na konci! \uD83D\uDE0F");
+        console.log("\uD83D\uDDA5\uFE0F Psac\u00ED efekt inicializov\u00E1n. Kurz\u00EDva m\u00E1 neonov\u00FD puls, kursor je mrtv\u00FD! \uD83D\uDE0F");
     }
 });
