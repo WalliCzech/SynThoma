@@ -34,134 +34,383 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-document.addEventListener('DOMContentLoaded', function () {
-    console.log("\uD83D\uDEE0\uFE0F docreader.ts startuje. P\u0159iprav se na liter\u00E1rn\u00ED masakr v neonov\u00E9m \u0161umu! \uD83D\uDE0F");
-    var bookContent = document.getElementById('book-content');
-    if (!bookContent) {
-        console.error("\uD83D\uDCA5 Div #book-content nenalezen! HTML je pr\u00E1zdn\u011Bj\u0161\u00ED ne\u017E Pr\u00E1zdnota po crashi! \uD83D\uDE23");
-        return;
+var DocumentLoader = /** @class */ (function () {
+    function DocumentLoader() {
     }
-    console.log("\uD83D\uDCCD #book-content nalezen, jdeme d\u00E1l! \uD83D\uDE0E");
-    // Načtení mammoth.js
-    if (typeof mammoth === 'undefined') {
-        console.warn("\uD83D\uDEA8 Mammoth.js nen\u00ED na\u010Dten\u00FD! Pokus\u00EDm se ho p\u0159it\u00E1hnout, nebo T-AI spust\u00ED apokalypsu! \uD83D\uDE21");
-        var script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js';
-        script.onload = function () {
-            console.log("\uD83C\uDF89 Mammoth.js na\u010Dten dynamicky. Jdeme na .docx! \uD83D\uDE08");
-            loadDocx();
-        };
-        script.onerror = function () { return console.error("\uD83D\uDC80 CDN pro Mammoth.js je mrtv\u00E9! Zkus lok\u00E1ln\u00ED kopii, nebo se modli. \uD83D\uDE31"); };
-        document.head.appendChild(script);
-        return;
-    }
-    else {
-        console.log("\uD83D\uDCDA Mammoth.js je ready. Jdeme rovnou na .docx! \uD83D\uDE0E");
-        loadDocx();
-    }
-    function loadDocx() {
+    DocumentLoader.loadDocument = function (contentElement) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, buffer, result, html, err_1;
+            var docxPath, response, buffer, result, html, error_1, errorMessage;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("\uD83D\uDCD6 Na\u010D\u00EDt\u00E1m SYNTHOMA - NULL.docx. Snad to nen\u00ED jen dal\u0161\u00ED datov\u00FD \u0161um... \uD83D\uDE08");
-                        _a.label = 1;
+                        _a.trys.push([0, 4, , 5]);
+                        console.log('🔍 Načítám dokument...');
+                        docxPath = 'SYNTHOMA - NULL.docx';
+                        // Vytvoříme kontejner pro obsah a navigaci
+                        contentElement.innerHTML = "\n                <div id=\"toc-container\" style=\"margin-bottom: 2rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 5px;\">\n                    <h2 style=\"color: #00ff00; margin-top: 0;\">Obsah</h2>\n                    <div id=\"toc\" style=\"display: flex; flex-wrap: wrap; gap: 1rem;\"></div>\n                </div>\n                <div id=\"book-content\" style=\"margin-top: 1rem;\">\n                    <p style=\"color: #00ff00;\">\u23F3 Na\u010D\u00EDt\u00E1m dokument... Pros\u00EDm po\u010Dkejte.</p>\n                </div>\n            ";
+                        this.contentContainer = document.getElementById('book-content');
+                        this.tocContainer = document.getElementById('toc');
+                        // Kontrola existence Mammoth.js
+                        if (typeof mammoth === 'undefined') {
+                            throw new Error('Mammoth.js není načten!');
+                        }
+                        // Načtení dokumentu
+                        console.log('⬇️ Stahuji dokument...');
+                        return [4 /*yield*/, fetch(docxPath)];
                     case 1:
-                        _a.trys.push([1, 5, , 6]);
-                        return [4 /*yield*/, fetch('SYNTHOMA - NULL.docx')];
-                    case 2:
                         response = _a.sent();
-                        if (!response.ok)
+                        if (!response.ok) {
                             throw new Error("HTTP error ".concat(response.status));
+                        }
+                        // Konverze na HTML
+                        console.log('📥 Dokument stažen, konvertuji na HTML...');
                         return [4 /*yield*/, response.arrayBuffer()];
-                    case 3:
+                    case 2:
                         buffer = _a.sent();
-                        return [4 /*yield*/, mammoth.convertToHtml({
-                                arrayBuffer: buffer,
-                                styleMap: [
-                                    "i => i", // Mapujeme kurzívu na <i>
-                                    "em => em" // Mapujeme kurzívu na <em>
-                                ]
-                            })];
-                    case 4:
+                        return [4 /*yield*/, mammoth.convertToHtml({ arrayBuffer: buffer })];
+                    case 3:
                         result = _a.sent();
                         html = result.value;
-                        console.log("\uD83D\uDCDC HTML v\u00FDstup z Mammoth.js: ".concat(html.substring(0, 500), "...")); // Logujeme prvních 500 znaků
-                        bookContent.innerHTML = html;
-                        console.log("\uD83C\uDF89 Dokument na\u010Dten! ".concat(html.length, " znak\u016F p\u0159ipraveno k psac\u00EDmu chaosu. \uD83D\uDE0E"));
-                        setupTypingEffect();
-                        return [3 /*break*/, 6];
-                    case 5:
-                        err_1 = _a.sent();
-                        console.error("\uD83D\uDC80 Chyba p\u0159i na\u010D\u00EDt\u00E1n\u00ED .docx: ".concat(String(err_1), ". Zkontroluj cestu, nebo \u010Dekej neonov\u00FD crash! \uD83D\uDE31"));
-                        bookContent.innerHTML = '<p>Chyba při načítání dokumentu. T-AI je naštvaná. 😡</p>';
-                        return [3 /*break*/, 6];
-                    case 6: return [2 /*return*/];
+                        console.log('✅ Dokument načten!');
+                        // Zobrazení obsahu s animací psaní
+                        this.setupContent(html);
+                        return [3 /*break*/, 5];
+                    case 4:
+                        error_1 = _a.sent();
+                        console.error('❌ Chyba při načítání dokumentu:', error_1);
+                        errorMessage = "Neznámá chyba";
+                        if (error_1 instanceof Error) {
+                            errorMessage = error_1.message;
+                        }
+                        else if (typeof error_1 === 'string') {
+                            errorMessage = error_1;
+                        }
+                        this.contentContainer.innerHTML = "\n                <p style=\"color: #ff5555;\">\n                    \u274C Chyba p\u0159i na\u010D\u00EDt\u00E1n\u00ED dokumentu: ".concat(errorMessage, "\n                </p>\n            ");
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
                 }
             });
         });
-    }
-    function setupTypingEffect() {
-        var elements = bookContent.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
-        if (elements.length === 0) {
-            console.warn("\u26A0\uFE0F \u017D\u00E1dn\u00E9 odstavce k vykreslen\u00ED! Dokument je pr\u00E1zdn\u011Bj\u0161\u00ED ne\u017E du\u0161e NPC! \uD83D\uDE23");
-            return;
-        }
-        console.log("\uD83D\uDCDC Nalezeno ".concat(elements.length, " element\u016F k vypisov\u00E1n\u00ED. P\u0159iprav se na termin\u00E1lov\u00FD vibe! \uD83D\uDE0F"));
-        var currentElementIndex = 0;
-        function typeElement(element, callback) {
-            var italicElements = element.querySelectorAll('em, i');
-            if (italicElements.length > 0) {
-                console.log("\uD83D\uDCE2 Nalezeno ".concat(italicElements.length, " kurz\u00EDvn\u00EDch element\u016F v ").concat(element.tagName, ". P\u0159iprav se na neonov\u00FD puls! \uD83D\uDE08"));
+    };
+    DocumentLoader.setupContent = function (html) {
+        var _this = this;
+        // Vytvoříme dočasný element pro manipulaci s HTML
+        var tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        // Najdeme všechny důležité elementy
+        var allElements = Array.from(tempDiv.children);
+        var currentChapter = 'Úvod';
+        // Projdeme všechny elementy a připravíme je pro psaní
+        allElements.forEach(function (el, index) {
+            var tagName = el.tagName.toLowerCase();
+            var isHeading = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tagName);
+            // Vytvoříme nový element
+            var newEl = document.createElement(tagName);
+            // Pro nadpisy vytvoříme kotvu a přidáme do obsahu
+            if (isHeading) {
+                currentChapter = el.textContent || "Kapitola ".concat(index + 1);
+                var anchor_1 = "chapter-".concat(index);
+                newEl.id = anchor_1;
+                newEl.classList.add('chapter-heading');
+                // Přidáme do obsahu
+                var level = parseInt(tagName[1]) || 1;
+                var tocItem = document.createElement('a');
+                tocItem.href = "#".concat(anchor_1);
+                tocItem.textContent = currentChapter;
+                tocItem.style.marginLeft = "".concat((level - 1) * 1, "rem");
+                tocItem.style.display = 'block';
+                tocItem.style.color = '#00ff00';
+                tocItem.style.textDecoration = 'none';
+                tocItem.onclick = function (e) {
+                    e.preventDefault();
+                    _this.jumpToChapter(anchor_1);
+                    return false;
+                };
+                _this.tocContainer.appendChild(tocItem);
             }
-            var text = element.textContent || '';
-            element.textContent = '';
-            element.style.opacity = '1';
-            var charIndex = 0;
-            var shouldGlitch = Math.random() < 0.3; // 30% šance na glitch
-            var typeChar = function () {
-                if (charIndex < text.length) {
-                    element.textContent += text[charIndex];
-                    charIndex++;
-                    if (shouldGlitch && Math.random() < 0.1) {
-                        element.classList.add('glitch-quick');
-                        setTimeout(function () { return element.classList.remove('glitch-quick'); }, 180);
+            // Uložíme původní obsah
+            newEl.setAttribute('data-original-text', el.innerHTML);
+            newEl.innerHTML = '';
+            newEl.style.opacity = '0';
+            newEl.style.transition = 'opacity 0.3s';
+            // Přidáme do dokumentu
+            _this.contentContainer.appendChild(newEl);
+            _this.elementsToType.push(newEl);
+        });
+        // Spustíme psaní prvního elementu
+        if (this.elementsToType.length > 0) {
+            this.typeNextElement();
+        }
+    };
+    DocumentLoader.jumpToChapter = function (chapterId) {
+        var element = document.getElementById(chapterId);
+        if (element) {
+            // Najdeme index kapitoly
+            var chapterIndex = this.elementsToType.findIndex(function (el) { return el.id === chapterId; });
+            if (chapterIndex !== -1) {
+                // Zastavíme aktuální psaní
+                this.currentElementIndex = chapterIndex;
+                // Zobrazíme všechny předchozí elementy
+                for (var i = 0; i < this.elementsToType.length; i++) {
+                    var el = this.elementsToType[i];
+                    if (i < chapterIndex) {
+                        // Pro již napsaný text
+                        el.style.opacity = '1';
+                        el.innerHTML = el.getAttribute('data-original-text') || '';
+                        this.applyEffects(el);
                     }
-                    setTimeout(typeChar, 10);
+                    else if (i === chapterIndex) {
+                        // Pro aktuální kapitolu
+                        el.style.opacity = '0.9';
+                        el.innerHTML = '';
+                        this.typeText(el, el.getAttribute('data-original-text') || '', 0);
+                    }
+                    else {
+                        // Pro následující kapitoly
+                        el.style.opacity = '0';
+                        el.innerHTML = '';
+                    }
+                }
+                // Scroll k vybrané kapitole
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    };
+    DocumentLoader.typeNextElement = function () {
+        if (this.currentElementIndex < this.elementsToType.length) {
+            var element = this.elementsToType[this.currentElementIndex];
+            var originalText = element.getAttribute('data-original-text') || '';
+            element.style.opacity = '0.9';
+            this.typeText(element, originalText, 0);
+        }
+    };
+    DocumentLoader.typeText = function (element, text, index) {
+        var _this = this;
+        if (index < text.length) {
+            // Přidáme znak
+            element.innerHTML = text.substring(0, index + 1);
+            // Náhodné zpoždění pro přirozenější psaní (rychlejší pro mezery)
+            var isSpace = text[index] === ' ';
+            var delay = isSpace ? 5 : Math.random() * 15 + 20; // Zrychlené psaní
+            // Častější a výraznější glitch efekt při psaní (10% šance)
+            if (!isSpace && Math.random() < 0.1) {
+                var glitchChars = '!@#$%^&*()_+{}|:"<>?~`';
+                var glitchLength = 3 + Math.floor(Math.random() * 8); // Více náhodných znaků
+                var glitchText = '';
+                // Vytvoříme delší a výraznější glitch efekt
+                for (var i = 0; i < glitchLength; i++) {
+                    glitchText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                }
+                var glitchSpan_1 = document.createElement('span');
+                glitchSpan_1.className = 'glitch-char';
+                glitchSpan_1.textContent = glitchText;
+                glitchSpan_1.style.color = '#ff00ff';
+                glitchSpan_1.style.textShadow = '0 0 5px #ff00ff';
+                element.appendChild(glitchSpan_1);
+                // Kratší zpoždění pro rychlejší psaní
+                setTimeout(function () {
+                    if (element.contains(glitchSpan_1)) {
+                        element.removeChild(glitchSpan_1);
+                    }
+                    setTimeout(function () { return _this.typeText(element, text, index + 1); }, 10);
+                }, 30 + Math.random() * 50);
+            }
+            else {
+                setTimeout(function () { return _this.typeText(element, text, index + 1); }, delay);
+            }
+        }
+        else {
+            // Po dokončení psaní zobrazíme element plně
+            element.style.opacity = '1';
+            this.applyEffects(element);
+            // Po krátké pauze začneme psát další element
+            this.currentElementIndex++;
+            var isHeading = element.classList.contains('chapter-heading');
+            setTimeout(function () { return _this.typeNextElement(); }, isHeading ? 500 : 100);
+        }
+    };
+    DocumentLoader.applyEffects = function (element) {
+        // Efekty pro kurzívu
+        var italicElements = element.querySelectorAll('em, i');
+        italicElements.forEach(function (el) {
+            el.classList.add('glow-text');
+            var delay = Math.random() * 0.5;
+            el.style.animationDelay = "".concat(delay, "s");
+        });
+        // Efekty pro text v závorkách
+        var speechElements = element.querySelectorAll('.speech-text');
+        speechElements.forEach(function (el) {
+            el.classList.add('speech-effect');
+        });
+        // Náhodné glitchování slov
+        this.setupWordGlitch(element);
+        // Zásadní kapitoly pro lore - přidání ASCII artu
+        var loreKeywords = ['NULL', 'SYNTHOMA', 'realita', 'anomálie', 'kód'];
+        var isLoreChapter = loreKeywords.some(function (keyword) { var _a; return (_a = element.textContent) === null || _a === void 0 ? void 0 : _a.includes(keyword); });
+        if (isLoreChapter && Math.random() < 0.25) {
+            this.showAsciiArt();
+        }
+        // Náhodné zobrazení chybových hlášek
+        if (Math.random() < 0.1) {
+            this.showSystemMessage();
+        }
+    };
+    DocumentLoader.showAsciiArt = function () {
+        var asciiArts = [
+            "\n<pre style=\"color: #00ff00; opacity: 0.2; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1; font-size: 8px; text-align: center;\">\n  _   _   _   _   _   _   _   _ \n /  /  /  /  /  /  /  /  \n( S | Y | N | T | H | O | M | A )\n _/ _/ _/ _/ _/ _/ _/ _/ \n</pre>\n            ",
+            "\n<pre style=\"color: #00ff00; opacity: 0.2; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1; font-size: 8px; text-align: center;\">\n  [01010011 01011001 01001110]\n  [01010100 01001000 01001111]\n  [01001101 01000001 00111111]\n</pre>\n            "
+        ];
+        var art = asciiArts[Math.floor(Math.random() * asciiArts.length)];
+        var artContainer = document.createElement('div');
+        artContainer.innerHTML = art;
+        document.body.appendChild(artContainer);
+        setTimeout(function () {
+            document.body.removeChild(artContainer);
+        }, 1500 + Math.random() * 2000);
+    };
+    DocumentLoader.showSystemMessage = function () {
+        var messages = [
+            'VAROVÁNÍ: Detekována anomálie v datovém proudu...',
+            'NULL: \'Realita je jen zastaralý protokol.\'',
+            'Systémová integrita: 98.7%... Rekalibrace...',
+            'Memory leak v sektoru 7G... Ignoruji...',
+            'Chyba: Pokus o čtení z nealokované paměti. Adresa: 0xDEADBEEF'
+        ];
+        var message = messages[Math.floor(Math.random() * messages.length)];
+        var msgContainer = document.createElement('div');
+        msgContainer.className = 'system-message';
+        msgContainer.textContent = message;
+        document.body.appendChild(msgContainer);
+        setTimeout(function () {
+            msgContainer.style.opacity = '0';
+            setTimeout(function () {
+                document.body.removeChild(msgContainer);
+            }, 1000);
+        }, 3000 + Math.random() * 3000);
+    };
+    DocumentLoader.setupWordGlitch = function (element) {
+        var mainGlitchInterval = null;
+        var cleanup = function () {
+            if (mainGlitchInterval)
+                clearInterval(mainGlitchInterval);
+            mainGlitchInterval = null;
+        };
+        var glitchWord = function (word) {
+            var glitchChars = '!@#$%^&*()_+{}|:"<>?~`';
+            return word.split('').map(function (char) { return (char.trim() === '' ? char : glitchChars[Math.floor(Math.random() * glitchChars.length)]); }).join('');
+        };
+        var findWords = function () {
+            var words = [];
+            var walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, {
+                acceptNode: function (node) {
+                    if (node.nodeValue && node.nodeValue.trim().length > 2 && node.parentNode && !node.parentNode.nodeName.match(/^(H[1-6]|A|SCRIPT|STYLE)$/)) {
+                        if (node.parentNode.classList && !node.parentNode.classList.contains('glitch-word')) {
+                            return NodeFilter.FILTER_ACCEPT;
+                        }
+                    }
+                    return NodeFilter.FILTER_REJECT;
+                }
+            });
+            var currentNode;
+            while (currentNode = walker.nextNode()) {
+                var text = currentNode.nodeValue || '';
+                var wordRegex = /\b\w{3,}\b/g; // Slova s alespoň 3 znaky
+                var match = void 0;
+                while ((match = wordRegex.exec(text))) {
+                    words.push({ node: currentNode, startIndex: match.index, endIndex: match.index + match[0].length });
+                }
+            }
+            return words;
+        };
+        var triggerGlitch = function () {
+            var words = findWords();
+            if (words.length === 0)
+                return;
+            var _a = words[Math.floor(Math.random() * words.length)], node = _a.node, startIndex = _a.startIndex, endIndex = _a.endIndex;
+            var range = document.createRange();
+            range.setStart(node, startIndex);
+            range.setEnd(node, endIndex);
+            var originalWord = range.toString();
+            if (originalWord.trim().length < 3)
+                return;
+            var span = document.createElement('span');
+            span.className = 'glitch-word';
+            try {
+                range.surroundContents(span);
+                var blinkCount_1 = 0;
+                var maxBlinks_1 = 4 + Math.floor(Math.random() * 4); // 4-7 blinks
+                var blinkInterval_1 = setInterval(function () {
+                    if (!document.body.contains(span) || blinkCount_1 >= maxBlinks_1) {
+                        clearInterval(blinkInterval_1);
+                        var parent_1 = span.parentNode;
+                        if (parent_1) {
+                            var textNode = document.createTextNode(originalWord);
+                            parent_1.replaceChild(textNode, span);
+                            parent_1.normalize();
+                        }
+                        return;
+                    }
+                    span.textContent = blinkCount_1 % 2 === 0 ? glitchWord(originalWord) : originalWord;
+                    blinkCount_1++;
+                }, 80); // Rychlejší blikání
+            }
+            catch (e) {
+                // Ignorovat chyby, pokud se nepodaří obalit (stává se)
+            }
+        };
+        var startGlitching = function () {
+            cleanup();
+            mainGlitchInterval = window.setInterval(function () {
+                if (document.body.contains(element)) {
+                    triggerGlitch();
                 }
                 else {
-                    element.classList.remove('glitch-quick');
-                    element.classList.add('typing-done');
-                    // Přidáme neon-pulse pro kurzívu až po dokončení psacího efektu
-                    italicElements.forEach(function (el) {
-                        el.classList.add('neon-pulse');
-                        console.log("\uD83D\uDD25 Neon pulse p\u0159id\u00E1n pro: ".concat(el.textContent));
-                    });
-                    console.log("\u2705 T\u0159\u00EDda typing-done p\u0159id\u00E1na pro element: ".concat(element.tagName, ". Kursor zmizel, kurz\u00EDva z\u00E1\u0159\u00ED! \uD83D\uDE0E"));
-                    callback();
+                    cleanup();
                 }
-            };
-            typeChar();
-        }
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting && currentElementIndex <= Array.from(elements).indexOf(entry.target)) {
-                    typeElement(entry.target, function () {
-                        currentElementIndex++;
-                        if (currentElementIndex < elements.length) {
-                            observer.observe(elements[currentElementIndex]);
-                        }
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        elements.forEach(function (element, index) {
-            element.style.opacity = '0';
-            if (index === 0)
-                observer.observe(element);
+            }, 1500 + Math.random() * 2000); // Častější spouštění
+        };
+        startGlitching();
+        // Observer pro restart, pokud se změní obsah
+        var observer = new MutationObserver(function () {
+            startGlitching();
         });
-        console.log("\uD83D\uDDA5\uFE0F Psac\u00ED efekt inicializov\u00E1n. Kurz\u00EDva m\u00E1 neonov\u00FD puls, kursor je mrtv\u00FD! \uD83D\uDE0F");
-    }
+        observer.observe(element, { childList: true, subtree: true });
+        // Cleanup, když element zmizí
+        var disconnectObserver = new MutationObserver(function () {
+            if (!document.body.contains(element)) {
+                cleanup();
+                observer.disconnect();
+                disconnectObserver.disconnect();
+                window.removeEventListener('beforeunload', cleanup);
+            }
+        });
+        disconnectObserver.observe(document.body, { childList: true, subtree: true });
+        window.addEventListener('beforeunload', cleanup);
+    };
+    DocumentLoader.initialize = function () {
+        console.log('🖥️ Inicializace DocumentLoader...');
+        var appContainer = document.getElementById('app');
+        if (!appContainer) {
+            console.error('❌ Element #app nenalezen!');
+            return;
+        }
+        // Vytvoříme základní strukturu
+        appContainer.innerHTML = "\n            <div id=\"book-container\" style=\"max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Courier New', monospace; color: #ffffff; background: #111; line-height: 1.6;\">\n                <h1 style=\"color: #00ff00; text-align: center; margin-bottom: 2rem;\">SYNTHOMA</h1>\n                <div id=\"content-container\"></div>\n            </div>\n        ";
+        // Načtení dokumentu
+        var contentContainer = document.getElementById('content-container');
+        if (contentContainer) {
+            this.loadDocument(contentContainer);
+        }
+    };
+    DocumentLoader.currentElementIndex = 0;
+    DocumentLoader.elementsToType = [];
+    return DocumentLoader;
+}());
+// Přidáme styly pro efekty
+var style = document.createElement('style');
+style.textContent = "\n    .glow-text {\n        color: #00ff88;\n        text-shadow: 0 0 5px #00ff88, 0 0 10px #00ff88;\n    }\n    \n    .speech-effect {\n        color: #88aaff;\n        font-style: italic;\n    }\n    \n    .glitch-char {\n        color: #ff00ff;\n        opacity: 0.7;\n    }\n    \n    .chapter-heading {\n        margin-top: 2rem;\n        color: #00ffff;\n        border-bottom: 1px solid #00ffff;\n        padding-bottom: 0.5rem;\n    }\n    \n    #toc a:hover {\n        color: #ffffff !important;\n        text-decoration: underline !important;\n    }\n";
+document.head.appendChild(style);
+// Spuštění po načtení stránky
+document.addEventListener('DOMContentLoaded', function () {
+    DocumentLoader.initialize();
 });
