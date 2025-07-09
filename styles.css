@@ -208,6 +208,16 @@ form textarea {
     content: none !important;
 }
 
+.typing-done i {
+    animation: neon-pulse 1.5s infinite;
+    color: #00ffcc; /* Neonový vibe, ať to svítí! */
+}
+@keyframes neon-pulse {
+    0% { opacity: 1; text-shadow: 0 0 10px #00ffcc; }
+    50% { opacity: 0.5; text-shadow: 0 0 20px #00ffcc; }
+    100% { opacity: 1; text-shadow: 0 0 10px #00ffcc; }
+}
+
 .book-content em, .book-content i {
     font-style: italic;
     animation: pulse-italic 2s infinite ease-in-out;

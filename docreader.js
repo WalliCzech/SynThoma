@@ -135,6 +135,12 @@ document.addEventListener('DOMContentLoaded', function () {
             };
             typeChar();
         }
+        // docreader.js (úryvek)
+        var italicElements = document.querySelectorAll('#book-content p i');
+        italicElements.forEach(function (el) {
+            el.classList.add('neon-pulse'); // Přidává třídu pro animaci
+            console.log("\uD83D\uDD25 Neon pulse p\u0159id\u00E1n pro: ".concat(el.textContent));
+        });
         var observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting && currentElementIndex <= Array.from(elements).indexOf(entry.target)) {

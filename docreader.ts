@@ -91,7 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             typeChar();
         }
-
+		// docreader.js (úryvek)
+		const italicElements = document.querySelectorAll('#book-content p i');
+		italicElements.forEach(el => {
+			el.classList.add('neon-pulse'); // Přidává třídu pro animaci
+			console.log(`🔥 Neon pulse přidán pro: ${el.textContent}`);
+		});
         const observer: IntersectionObserver = new IntersectionObserver(
             (entries: IntersectionObserverEntry[]) => {
                 entries.forEach(entry => {
