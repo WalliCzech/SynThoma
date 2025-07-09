@@ -248,10 +248,6 @@ class DocumentLoader {
             this.showAsciiArt();
         }
 
-        // Náhodné zobrazení chybových hlášek
-        if (Math.random() < 0.1) {
-            this.showSystemMessage();
-        }
     }
 
     static showAsciiArt(): void {
@@ -283,29 +279,6 @@ class DocumentLoader {
         }, 15000 + Math.random() * 20000);
     }
 
-    static showSystemMessage(): void {
-        const messages = [
-            'VAROVÁNÍ: Detekována anomálie v datovém proudu...',
-            'NULL: \'Realita je jen zastaralý protokol.\'',
-            'Systémová integrita: 98.7%... Rekalibrace...',
-            'Memory leak v sektoru 7G... Ignoruji...',
-            'Chyba: Pokus o čtení z nealokované paměti. Adresa: 0xDEADBEEF'
-        ];
-
-        const message = messages[Math.floor(Math.random() * messages.length)];
-        const msgContainer = document.createElement('div');
-        msgContainer.className = 'system-message';
-        msgContainer.textContent = message;
-
-        document.body.appendChild(msgContainer);
-
-        setTimeout(() => {
-            msgContainer.style.opacity = '0';
-            setTimeout(() => {
-                document.body.removeChild(msgContainer);
-            }, 1000);
-        }, 3000 + Math.random() * 3000);
-    }
     
     static setupWordGlitch(element: HTMLElement): void {
         let mainGlitchInterval: number | null = null;
@@ -357,7 +330,7 @@ class DocumentLoader {
             const originalWord = range.toString();
             if (originalWord.trim().length < 3) return; 
 
-            const glitchColors = ['#ff00ff', '#00ffff', '#ff0040', '#00ff88'];
+            const glitchColors = ['#ffffff'];
             const selectedColor = glitchColors[Math.floor(Math.random() * glitchColors.length)];
 
             const span = document.createElement('span');
@@ -369,7 +342,7 @@ class DocumentLoader {
                 range.surroundContents(span);
                 
                 let blinkCount = 0;
-                const maxBlinks = 4 + Math.floor(Math.random() * 4); // 4-7 blinks
+                const maxBlinks = 4 + Math.floor(Math.random() * 10); // 4-7 blinks
                 const blinkInterval = setInterval(() => {
                     if (!document.body.contains(span) || blinkCount >= maxBlinks) {
                         clearInterval(blinkInterval);
@@ -384,7 +357,7 @@ class DocumentLoader {
 
                     span.textContent = blinkCount % 2 === 0 ? glitchWord(originalWord) : originalWord;
                     blinkCount++;
-                }, 150); // Ještě pomalejší blikání
+                }, 50); // Ještě pomalejší blikání
 
             } catch (e) {
                 // Ignorovat chyby, pokud se nepodaří obalit (stává se)
@@ -435,7 +408,7 @@ class DocumentLoader {
         // Vytvoříme základní strukturu
         appContainer.innerHTML = `
             <div id="book-container" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Courier New', monospace; color: #ffffff; background: #111; line-height: 1.6;">
-                <h1 style="color: #00ff00; text-align: center; margin-bottom: 2rem;">SYNTHOMA</h1>
+                <h1 style="color: #0ff; text-align: center; margin-bottom: 2rem;">SYNTHOMA</h1>
                 <div id="content-container"></div>
             </div>
         `;
@@ -453,7 +426,7 @@ const style = document.createElement('style');
 style.textContent = `
     .glow-text {
         color: #00ff88;
-        text-shadow: 0 0 5px #00ff88, 0 0 10px #00ff88;
+        text-shadow: 0 0 5px #00ffff, 0 0 10px #00ff88;
     }
     
     .speech-effect {
@@ -462,7 +435,7 @@ style.textContent = `
     }
     
     .glitch-char {
-        color: #ff00ff;
+        color: #00ffff;
         opacity: 0.7;
     }
     

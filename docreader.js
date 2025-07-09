@@ -250,10 +250,6 @@ var DocumentLoader = /** @class */ (function () {
         if (isLoreChapter && Math.random() < 0.25) {
             this.showAsciiArt();
         }
-        // Náhodné zobrazení chybových hlášek
-        if (Math.random() < 0.1) {
-            this.showSystemMessage();
-        }
     };
     DocumentLoader.showAsciiArt = function () {
         var asciiArts = [
@@ -267,26 +263,6 @@ var DocumentLoader = /** @class */ (function () {
         setTimeout(function () {
             document.body.removeChild(artContainer);
         }, 15000 + Math.random() * 20000);
-    };
-    DocumentLoader.showSystemMessage = function () {
-        var messages = [
-            'VAROVÁNÍ: Detekována anomálie v datovém proudu...',
-            'NULL: \'Realita je jen zastaralý protokol.\'',
-            'Systémová integrita: 98.7%... Rekalibrace...',
-            'Memory leak v sektoru 7G... Ignoruji...',
-            'Chyba: Pokus o čtení z nealokované paměti. Adresa: 0xDEADBEEF'
-        ];
-        var message = messages[Math.floor(Math.random() * messages.length)];
-        var msgContainer = document.createElement('div');
-        msgContainer.className = 'system-message';
-        msgContainer.textContent = message;
-        document.body.appendChild(msgContainer);
-        setTimeout(function () {
-            msgContainer.style.opacity = '0';
-            setTimeout(function () {
-                document.body.removeChild(msgContainer);
-            }, 1000);
-        }, 3000 + Math.random() * 3000);
     };
     DocumentLoader.setupWordGlitch = function (element) {
         var mainGlitchInterval = null;
@@ -333,7 +309,7 @@ var DocumentLoader = /** @class */ (function () {
             var originalWord = range.toString();
             if (originalWord.trim().length < 3)
                 return;
-            var glitchColors = ['#ff00ff', '#00ffff', '#ff0040', '#00ff88'];
+            var glitchColors = ['#ffffff'];
             var selectedColor = glitchColors[Math.floor(Math.random() * glitchColors.length)];
             var span = document.createElement('span');
             span.className = 'glitch-word';
@@ -342,7 +318,7 @@ var DocumentLoader = /** @class */ (function () {
             try {
                 range.surroundContents(span);
                 var blinkCount_1 = 0;
-                var maxBlinks_1 = 4 + Math.floor(Math.random() * 4); // 4-7 blinks
+                var maxBlinks_1 = 4 + Math.floor(Math.random() * 10); // 4-7 blinks
                 var blinkInterval_1 = setInterval(function () {
                     if (!document.body.contains(span) || blinkCount_1 >= maxBlinks_1) {
                         clearInterval(blinkInterval_1);
@@ -356,7 +332,7 @@ var DocumentLoader = /** @class */ (function () {
                     }
                     span.textContent = blinkCount_1 % 2 === 0 ? glitchWord(originalWord) : originalWord;
                     blinkCount_1++;
-                }, 150); // Ještě pomalejší blikání
+                }, 50); // Ještě pomalejší blikání
             }
             catch (e) {
                 // Ignorovat chyby, pokud se nepodaří obalit (stává se)
@@ -399,7 +375,7 @@ var DocumentLoader = /** @class */ (function () {
             return;
         }
         // Vytvoříme základní strukturu
-        appContainer.innerHTML = "\n            <div id=\"book-container\" style=\"max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Courier New', monospace; color: #ffffff; background: #111; line-height: 1.6;\">\n                <h1 style=\"color: #00ff00; text-align: center; margin-bottom: 2rem;\">SYNTHOMA</h1>\n                <div id=\"content-container\"></div>\n            </div>\n        ";
+        appContainer.innerHTML = "\n            <div id=\"book-container\" style=\"max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Courier New', monospace; color: #ffffff; background: #111; line-height: 1.6;\">\n                <h1 style=\"color: #0ff; text-align: center; margin-bottom: 2rem;\">SYNTHOMA</h1>\n                <div id=\"content-container\"></div>\n            </div>\n        ";
         // Načtení dokumentu
         var contentContainer = document.getElementById('content-container');
         if (contentContainer) {
@@ -412,7 +388,7 @@ var DocumentLoader = /** @class */ (function () {
 }());
 // Přidáme styly pro efekty
 var style = document.createElement('style');
-style.textContent = "\n    .glow-text {\n        color: #00ff88;\n        text-shadow: 0 0 5px #00ff88, 0 0 10px #00ff88;\n    }\n    \n    .speech-effect {\n        color: #88aaff;\n        font-style: italic;\n    }\n    \n    .glitch-char {\n        color: #ff00ff;\n        opacity: 0.7;\n    }\n    \n    .chapter-heading {\n        margin-top: 2rem;\n        color: #00ffff;\n        border-bottom: 1px solid #00ffff;\n        padding-bottom: 0.5rem;\n    }\n    \n    #toc a:hover {\n        color: #ffffff !important;\n        text-decoration: underline !important;\n    }\n";
+style.textContent = "\n    .glow-text {\n        color: #00ff88;\n        text-shadow: 0 0 5px #00ffff, 0 0 10px #00ff88;\n    }\n    \n    .speech-effect {\n        color: #88aaff;\n        font-style: italic;\n    }\n    \n    .glitch-char {\n        color: #00ffff;\n        opacity: 0.7;\n    }\n    \n    .chapter-heading {\n        margin-top: 2rem;\n        color: #00ffff;\n        border-bottom: 1px solid #00ffff;\n        padding-bottom: 0.5rem;\n    }\n    \n    #toc a:hover {\n        color: #ffffff !important;\n        text-decoration: underline !important;\n    }\n";
 document.head.appendChild(style);
 // Spuštění po načtení stránky
 document.addEventListener('DOMContentLoaded', function () {
