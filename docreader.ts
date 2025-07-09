@@ -29,7 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`📚 Mammoth.js je ready. Jdeme rovnou na .docx! 😎`);
         loadDocx();
     }
-
+		// docreader.js (úryvek)
+	const italicElements = document.querySelectorAll('#book-content p i, #book-content p em');
+		italicElements.forEach(el => {
+		el.classList.add('neon-pulse');
+		console.log(`🔥 Neon pulse přidán pro: ${el.textContent}`);
+	});
     async function loadDocx(): Promise<void> {
         console.log(`📖 Načítám SYNTHOMA - NULL.docx. Snad to není jen další datový šum... 😈`);
         try {
@@ -91,12 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             typeChar();
         }
-		// docreader.js (úryvek)
-		const italicElements = document.querySelectorAll('#book-content p i');
-		italicElements.forEach(el => {
-			el.classList.add('neon-pulse'); // Přidává třídu pro animaci
-			console.log(`🔥 Neon pulse přidán pro: ${el.textContent}`);
-		});
+
         const observer: IntersectionObserver = new IntersectionObserver(
             (entries: IntersectionObserverEntry[]) => {
                 entries.forEach(entry => {

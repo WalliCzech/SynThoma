@@ -59,6 +59,12 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("\uD83D\uDCDA Mammoth.js je ready. Jdeme rovnou na .docx! \uD83D\uDE0E");
         loadDocx();
     }
+    // docreader.js (úryvek)
+    var italicElements = document.querySelectorAll('#book-content p i, #book-content p em');
+    italicElements.forEach(function (el) {
+        el.classList.add('neon-pulse');
+        console.log("\uD83D\uDD25 Neon pulse p\u0159id\u00E1n pro: ".concat(el.textContent));
+    });
     function loadDocx() {
         return __awaiter(this, void 0, void 0, function () {
             var response, buffer, result, html, err_1;
@@ -135,12 +141,6 @@ document.addEventListener('DOMContentLoaded', function () {
             };
             typeChar();
         }
-        // docreader.js (úryvek)
-        var italicElements = document.querySelectorAll('#book-content p i');
-        italicElements.forEach(function (el) {
-            el.classList.add('neon-pulse'); // Přidává třídu pro animaci
-            console.log("\uD83D\uDD25 Neon pulse p\u0159id\u00E1n pro: ".concat(el.textContent));
-        });
         var observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting && currentElementIndex <= Array.from(elements).indexOf(entry.target)) {
