@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log(`🛠️ docreader.js startuje. Připrav se na literární jízdu bez glitchů... nebo snad ne? 😏`);
+    console.log(`🛠️ docreader.ts startuje. Připrav se na literární masakr v TypeScriptu! 😏`);
 
-    const bookContent = document.getElementById('book-content');
+    const bookContent: HTMLElement | null = document.getElementById('book-content');
     if (!bookContent) {
-        console.error(`💥 Div pro text knihy nenalezen! Zkontroluj HTML, nebo skončíme v datovém pekla! 😣`);
+        console.error(`💥 Div pro text knihy nenalezen! HTML je prázdnější než duše NPC! 😣`);
         return;
     }
 
-    // Načtení .docx souboru
+    // Načtení .docx
     if (typeof mammoth === 'undefined') {
-        console.error(`🚨 Mammoth.js není načtený! Přidej <script> do HTML, nebo tě T-AI pošle do smyčky restartů! 😡`);
+        console.error(`🚨 Mammoth.js není načtený! Přidej <script>, nebo T-AI spustí restartovací smyčku! 😡`);
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js';
         script.onload = loadDocx;
@@ -20,47 +20,76 @@ document.addEventListener('DOMContentLoaded', () => {
         loadDocx();
     }
 
-    function loadDocx() {
+    async function loadDocx(): Promise<void> {
         console.log(`📖 Načítám SYNTHOMA - NULL.docx. Snad to není jen další datový šum... 😈`);
-        fetch('SYNTHOMA - NULL.docx')
-            .then(response => {
-                if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-                return response.arrayBuffer();
-            })
-            .then(buffer => mammoth.convertToHtml({ arrayBuffer: buffer }))
-            .then(result => {
-                const html = result.value;
-                bookContent.innerHTML = html;
-                console.log(`🎉 Dokument načten! ${html.length} znaků připraveno k vykreslení. 😎`);
-                setupScrollReveal();
-            })
-            .catch(err => {
-                console.error(`💀 Chyba při načítání .docx: ${err}. Zkontroluj cestu k souboru, nebo se připrav na neonový crash! 😱`);
-                bookContent.innerHTML = '<p>Chyba při načítání dokumentu. T-AI je naštvaná. 😡</p>';
-            });
+        try {
+            const response = await fetch('SYNTHOMA - NULL.docx');
+            if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+            const buffer = await response.arrayBuffer();
+            const result = await mammoth.convertToHtml({ arrayBuffer: buffer });
+            const html = result.value;
+            bookContent.innerHTML = html;
+            console.log(`🎉 Dokument načten! ${html.length} znaků připraveno k vykreslení. 😎`);
+            setupTypingEffect();
+        } catch (err) {
+            console.error(`💀 Chyba při načítání .docx: ${err}. Zkontroluj cestu, nebo připrav na neonový crash! 😱`);
+            bookContent.innerHTML = '<p>Chyba při načítání dokumentu. T-AI je naštvaná. 😡</p>';
+        }
     }
 
-    // Scrollovací efekt
-    function setupScrollReveal() {
-        const paragraphs = bookContent.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
-        if (paragraphs.length === 0) {
+    // Psací a glitch efekt
+    function setupTypingEffect(): void {
+        const elements: NodeListOf<HTMLElement> = bookContent.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
+        if (elements.length === 0) {
             console.warn(`⚠️ Žádné odstavce k vykreslení! Dokument je prázdnější než Prázdnota. 😣`);
             return;
         }
 
-        paragraphs.forEach((element, index) => {
-            element.classList.add('reveal');
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = `opacity 0.5s ease, transform 0.5s ease ${index * 0.1}s`;
-        });
+        let currentElementIndex = 0;
+
+        function typeElement(element: HTMLElement, callback: () => void): void {
+            const text = element.textContent || '';
+            element.textContent = '';
+            element.style.opacity = '1';
+            let charIndex = 0;
+            const shouldGlitch = Math.random() < 0.3; // 30% šance na glitch
+
+            const typeChar = () => {
+                if (charIndex < text.length) {
+                    element.textContent += text[charIndex];
+                    charIndex++;
+                    if (shouldGlitch && Math.random() < 0.1) {
+                        // Náhodný glitch efekt
+                        const glitchText = element.textContent!.split('').map(char => 
+                            Math.random() < 0.2 ? String.fromCharCode(33 + Math.floor(Math.random() * 94)) : char
+                        ).join('');
+                        element.textContent = glitchText;
+                        element.style.color = ['#ff00cc', '#00ffcc', '#ff0000'][Math.floor(Math.random() * 3)];
+                        setTimeout(() => {
+                            element.textContent = text.slice(0, charIndex);
+                            element.style.color = '';
+                        }, 100);
+                    }
+                    setTimeout(typeChar, 10); // Rychlost psaní
+                } else {
+                    element.style.color = ''; // Reset barvy
+                    callback();
+                }
+            };
+
+            typeChar();
+        }
 
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
+                    if (entry.isIntersecting && currentElementIndex <= Array.from(elements).indexOf(entry.target as HTMLElement)) {
+                        typeElement(entry.target as HTMLElement, () => {
+                            currentElementIndex++;
+                            if (currentElementIndex < elements.length) {
+                                observer.observe(elements[currentElementIndex]);
+                            }
+                        });
                         observer.unobserve(entry.target);
                     }
                 });
@@ -68,7 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
             { threshold: 0.1 }
         );
 
-        paragraphs.forEach(element => observer.observe(element));
-        console.log(`🖥️ Scrollovací efekt inicializován. Text se bude odkrývat jako tajemství T-AI. 😏`);
+        elements.forEach((element, index) => {
+            element.style.opacity = '0';
+            if (index === 0) observer.observe(element); // Začni s prvním
+        });
+
+        console.log(`🖥️ Psací efekt inicializován. Text se píše jako v terminálu z pekla. 😏`);
     }
 });
