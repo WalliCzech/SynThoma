@@ -44,10 +44,12 @@ var DocumentLoader = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 4, , 5]);
-                        console.log('🔍 Načítám dokument...');
+                        console.log('⌛ Načítám virtuální prostředí...');
+                        console.log('⏳ Připojení do SynThomy...');
+                        console.log('🌪️ Úspěšné...');
                         docxPath = 'SYNTHOMA - NULL.docx';
                         // Vytvoříme kontejner pro obsah a navigaci
-                        contentElement.innerHTML = "\n                <div id=\"toc-container\" style=\"margin-bottom: 2rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 5px;\">\n                    <h2 style=\"color: #00ff00; margin-top: 0;\">Obsah</h2>\n                    <div id=\"toc\" style=\"display: flex; flex-wrap: wrap; gap: 1rem;\"></div>\n                </div>\n                <div id=\"book-content\" style=\"margin-top: 1rem;\">\n                    <p style=\"color: #00ff00;\">\u23F3 Na\u010D\u00EDt\u00E1m dokument... Pros\u00EDm po\u010Dkejte.</p>\n                </div>\n            ";
+                        contentElement.innerHTML = "\n                <div id=\"toc-container\" style=\"margin-bottom: 2rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 5px;\">\n                    <h2 style=\"color: #ffffff; margin-top: 0;\">Obsah</h2>\n                    <div id=\"toc\" style=\"display: flex; flex-wrap: wrap; gap: 1rem;\"></div>\n                </div>\n                <div id=\"book-content\" style=\"margin-top: 1rem;\">\n                    <p style=\"color: #ffffff;\">\u231B Na\u010D\u00EDt\u00E1m virtu\u00E1ln\u00ED prost\u0159ed\u00ED....</p>\n                    <p style=\"color: #ffffff;\">\u23F3 P\u0159ipojen\u00ED do SynThomy....</p>\n                    <p style=\"color: #ffffff;\">\uD83C\uDF2A\uFE0F \u00DAsp\u011B\u0161n\u00E9....</p>\n                </div>\n            ";
                         this.contentContainer = document.getElementById('book-content');
                         this.tocContainer = document.getElementById('toc');
                         // Kontrola existence Mammoth.js
@@ -119,7 +121,7 @@ var DocumentLoader = /** @class */ (function () {
                 tocItem.textContent = currentChapter;
                 tocItem.style.marginLeft = "".concat((level - 1) * 1, "rem");
                 tocItem.style.display = 'block';
-                tocItem.style.color = '#00ff00';
+                tocItem.style.color = '#ffffff';
                 tocItem.style.textDecoration = 'none';
                 tocItem.onclick = function (e) {
                     e.preventDefault();
@@ -177,56 +179,77 @@ var DocumentLoader = /** @class */ (function () {
         }
     };
     DocumentLoader.typeNextElement = function () {
-        if (this.currentElementIndex < this.elementsToType.length) {
-            var element = this.elementsToType[this.currentElementIndex];
-            var originalText = element.getAttribute('data-original-text') || '';
-            element.style.opacity = '0.9';
-            this.typeText(element, originalText, 0);
+        var _this = this;
+        if (this.currentElementIndex >= this.elementsToType.length) {
+            console.log('✅ Všechny elementy vypsány.');
+            if (this.intersectionObserver)
+                this.intersectionObserver.disconnect();
+            return;
+        }
+        var element = this.elementsToType[this.currentElementIndex];
+        var text = element.getAttribute('data-original-text') || '';
+        element.innerHTML = ''; // Vyčistíme obsah před psaním
+        element.style.opacity = '1';
+        // Odpojíme starý observer a sledujeme nový element
+        if (this.intersectionObserver)
+            this.intersectionObserver.disconnect();
+        this.intersectionObserver = new IntersectionObserver(function (entries) {
+            var _a;
+            var entry = entries[0];
+            if (entry.isIntersecting) {
+                if (_this.isTypingPaused) {
+                    _this.isTypingPaused = false;
+                    // Pokračujeme v psaní od místa, kde jsme skončili
+                    _this.typeText(element, text, ((_a = element.textContent) === null || _a === void 0 ? void 0 : _a.length) || 0);
+                }
+            }
+            else {
+                _this.isTypingPaused = true;
+            }
+        }, { threshold: 0.1 });
+        this.intersectionObserver.observe(element);
+        // Začneme psát, pouze pokud je element viditelný
+        // Krátká kontrola, zda je element již viditelný, jinak počkáme na observer
+        var rect = element.getBoundingClientRect();
+        var isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+        this.isTypingPaused = !isVisible;
+        if (!this.isTypingPaused) {
+            this.typeText(element, text, 0);
         }
     };
     DocumentLoader.typeText = function (element, text, index) {
         var _this = this;
-        if (index < text.length) {
-            // Přidáme znak
-            element.innerHTML = text.substring(0, index + 1);
-            // Náhodné zpoždění pro přirozenější psaní (rychlejší pro mezery)
-            var isSpace = text[index] === ' ';
-            var delay = isSpace ? 5 : Math.random() * 15 + 20; // Zrychlené psaní
-            // Častější a výraznější glitch efekt při psaní (10% šance)
-            if (!isSpace && Math.random() < 0.1) {
-                var glitchChars = '!@#$%^&*()_+{}|:"<>?~`';
-                var glitchLength = 3 + Math.floor(Math.random() * 8); // Více náhodných znaků
-                var glitchText = '';
-                // Vytvoříme delší a výraznější glitch efekt
-                for (var i = 0; i < glitchLength; i++) {
-                    glitchText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
-                }
-                var glitchSpan_1 = document.createElement('span');
-                glitchSpan_1.className = 'glitch-char';
-                glitchSpan_1.textContent = glitchText;
-                glitchSpan_1.style.color = '#ff00ff';
-                glitchSpan_1.style.textShadow = '0 0 5px #ff00ff';
-                element.appendChild(glitchSpan_1);
-                // Kratší zpoždění pro rychlejší psaní
-                setTimeout(function () {
-                    if (element.contains(glitchSpan_1)) {
-                        element.removeChild(glitchSpan_1);
-                    }
-                    setTimeout(function () { return _this.typeText(element, text, index + 1); }, 10);
-                }, 30 + Math.random() * 50);
-            }
-            else {
-                setTimeout(function () { return _this.typeText(element, text, index + 1); }, delay);
-            }
+        if (this.isTypingPaused) {
+            return; // Pozastavíme psaní, pokud je element mimo obrazovku
         }
-        else {
-            // Po dokončení psaní zobrazíme element plně
-            element.style.opacity = '1';
+        if (index >= text.length) {
+            element.classList.add('typing-done');
             this.applyEffects(element);
-            // Po krátké pauze začneme psát další element
             this.currentElementIndex++;
             var isHeading = element.classList.contains('chapter-heading');
             setTimeout(function () { return _this.typeNextElement(); }, isHeading ? 500 : 100);
+            return;
+        }
+        // Přidáme znak
+        element.innerHTML = text.substring(0, index + 1);
+        // Náhodné zpoždění pro přirozenější psaní
+        var delay = text[index] === ' ' ? 10 : Math.random() * 20 + 25;
+        // Častější a výraznější glitch efekt při psaní
+        if (text[index] !== ' ' && Math.random() < 0.08) {
+            var originalChar_1 = element.innerHTML.slice(0, -1);
+            var glitchChars = '!@#$%^&*()_+{}|:"<>?~`';
+            var glitchSpan = document.createElement('span');
+            glitchSpan.className = 'glitch-char';
+            glitchSpan.textContent = glitchChars[Math.floor(Math.random() * glitchChars.length)];
+            element.innerHTML = originalChar_1;
+            element.appendChild(glitchSpan);
+            setTimeout(function () {
+                element.innerHTML = originalChar_1 + text[index];
+                setTimeout(function () { return _this.typeText(element, text, index + 1); }, delay);
+            }, 60);
+        }
+        else {
+            setTimeout(function () { return _this.typeText(element, text, index + 1); }, delay);
         }
     };
     DocumentLoader.applyEffects = function (element) {
@@ -318,7 +341,7 @@ var DocumentLoader = /** @class */ (function () {
             try {
                 range.surroundContents(span);
                 var blinkCount_1 = 0;
-                var maxBlinks_1 = 4 + Math.floor(Math.random() * 10); // 4-7 blinks
+                var maxBlinks_1 = 1 + Math.floor(Math.random() * 2); // 4-7 blinks
                 var blinkInterval_1 = setInterval(function () {
                     if (!document.body.contains(span) || blinkCount_1 >= maxBlinks_1) {
                         clearInterval(blinkInterval_1);
@@ -347,7 +370,7 @@ var DocumentLoader = /** @class */ (function () {
                 else {
                     cleanup();
                 }
-            }, 4000 + Math.random() * 4000); // Ještě pomalejší spouštění
+            }, 4000 + Math.random() * 8000); // Ještě pomalejší spouštění
         };
         startGlitching();
         // Observer pro restart, pokud se změní obsah
@@ -384,6 +407,7 @@ var DocumentLoader = /** @class */ (function () {
     };
     DocumentLoader.currentElementIndex = 0;
     DocumentLoader.elementsToType = [];
+    DocumentLoader.isTypingPaused = false;
     return DocumentLoader;
 }());
 // Přidáme styly pro efekty

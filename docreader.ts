@@ -7,21 +7,27 @@ class DocumentLoader {
     private static currentElementIndex = 0;
     private static elementsToType: HTMLElement[] = [];
     private static contentContainer: HTMLElement;
+    private static isTypingPaused = false;
+    private static intersectionObserver: IntersectionObserver;
     private static tocContainer: HTMLElement;
 
     static async loadDocument(contentElement: HTMLElement): Promise<void> {
         try {
-            console.log('🔍 Načítám dokument...');
+            console.log('⌛ Načítám virtuální prostředí...');
+            console.log('⏳ Připojení do SynThomy...');
+            console.log('🌪️ Úspěšné...');
             const docxPath = 'SYNTHOMA - NULL.docx';
             
             // Vytvoříme kontejner pro obsah a navigaci
             contentElement.innerHTML = `
                 <div id="toc-container" style="margin-bottom: 2rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 5px;">
-                    <h2 style="color: #00ff00; margin-top: 0;">Obsah</h2>
+                    <h2 style="color: #ffffff; margin-top: 0;">Obsah</h2>
                     <div id="toc" style="display: flex; flex-wrap: wrap; gap: 1rem;"></div>
                 </div>
                 <div id="book-content" style="margin-top: 1rem;">
-                    <p style="color: #00ff00;">⏳ Načítám dokument... Prosím počkejte.</p>
+                    <p style="color: #ffffff;">⌛ Načítám virtuální prostředí....</p>
+                    <p style="color: #ffffff;">⏳ Připojení do SynThomy....</p>
+                    <p style="color: #ffffff;">🌪️ Úspěšné....</p>
                 </div>
             `;
             
@@ -100,7 +106,7 @@ class DocumentLoader {
                 tocItem.textContent = currentChapter;
                 tocItem.style.marginLeft = `${(level - 1) * 1}rem`;
                 tocItem.style.display = 'block';
-                tocItem.style.color = '#00ff00';
+                tocItem.style.color = '#ffffff';
                 tocItem.style.textDecoration = 'none';
                 tocItem.onclick = (e) => {
                     e.preventDefault();
@@ -163,63 +169,81 @@ class DocumentLoader {
     }
     
     static typeNextElement(): void {
-        if (this.currentElementIndex < this.elementsToType.length) {
-            const element = this.elementsToType[this.currentElementIndex];
-            const originalText = element.getAttribute('data-original-text') || '';
-            
-            element.style.opacity = '0.9';
-            this.typeText(element, originalText, 0);
+        if (this.currentElementIndex >= this.elementsToType.length) {
+            console.log('✅ Všechny elementy vypsány.');
+            if (this.intersectionObserver) this.intersectionObserver.disconnect();
+            return;
+        }
+
+        const element = this.elementsToType[this.currentElementIndex];
+        const text = element.getAttribute('data-original-text') || '';
+        element.innerHTML = ''; // Vyčistíme obsah před psaním
+        element.style.opacity = '1';
+
+        // Odpojíme starý observer a sledujeme nový element
+        if (this.intersectionObserver) this.intersectionObserver.disconnect();
+        this.intersectionObserver = new IntersectionObserver((entries) => {
+            const entry = entries[0];
+            if (entry.isIntersecting) {
+                if (this.isTypingPaused) {
+                    this.isTypingPaused = false;
+                    // Pokračujeme v psaní od místa, kde jsme skončili
+                    this.typeText(element, text, element.textContent?.length || 0);
+                }
+            } else {
+                this.isTypingPaused = true;
+            }
+        }, { threshold: 0.1 });
+
+        this.intersectionObserver.observe(element);
+
+        // Začneme psát, pouze pokud je element viditelný
+        // Krátká kontrola, zda je element již viditelný, jinak počkáme na observer
+        const rect = element.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+        this.isTypingPaused = !isVisible;
+
+        if (!this.isTypingPaused) {
+            this.typeText(element, text, 0);
         }
     }
-    
-    static typeText(element: HTMLElement, text: string, index: number): void {
-        if (index < text.length) {
-            // Přidáme znak
-            element.innerHTML = text.substring(0, index + 1);
-            
-            // Náhodné zpoždění pro přirozenější psaní (rychlejší pro mezery)
-            const isSpace = text[index] === ' ';
-            const delay = isSpace ? 5 : Math.random() * 15 + 20; // Zrychlené psaní
-            
-            // Častější a výraznější glitch efekt při psaní (10% šance)
-            if (!isSpace && Math.random() < 0.1) {
-                const glitchChars = '!@#$%^&*()_+{}|:"<>?~`';
-                const glitchLength = 3 + Math.floor(Math.random() * 8); // Více náhodných znaků
-                let glitchText = '';
-                
-                // Vytvoříme delší a výraznější glitch efekt
-                for (let i = 0; i < glitchLength; i++) {
-                    glitchText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
-                }
-                
 
-                const glitchSpan = document.createElement('span');
-                glitchSpan.className = 'glitch-char';
-                glitchSpan.textContent = glitchText;
-                glitchSpan.style.color = '#ff00ff';
-                glitchSpan.style.textShadow = '0 0 5px #ff00ff';
-                
-                element.appendChild(glitchSpan);
-                
-                // Kratší zpoždění pro rychlejší psaní
-                setTimeout(() => {
-                    if (element.contains(glitchSpan)) {
-                        element.removeChild(glitchSpan);
-                    }
-                    setTimeout(() => this.typeText(element, text, index + 1), 10);
-                }, 30 + Math.random() * 50);
-            } else {
-                setTimeout(() => this.typeText(element, text, index + 1), delay);
-            }
-        } else {
-            // Po dokončení psaní zobrazíme element plně
-            element.style.opacity = '1';
+    static typeText(element: HTMLElement, text: string, index: number): void {
+        if (this.isTypingPaused) {
+            return; // Pozastavíme psaní, pokud je element mimo obrazovku
+        }
+
+        if (index >= text.length) {
+            element.classList.add('typing-done');
             this.applyEffects(element);
-            
-            // Po krátké pauze začneme psát další element
             this.currentElementIndex++;
             const isHeading = element.classList.contains('chapter-heading');
             setTimeout(() => this.typeNextElement(), isHeading ? 500 : 100);
+            return;
+        }
+
+        // Přidáme znak
+        element.innerHTML = text.substring(0, index + 1);
+        
+        // Náhodné zpoždění pro přirozenější psaní
+        const delay = text[index] === ' ' ? 10 : Math.random() * 20 + 25;
+
+        // Častější a výraznější glitch efekt při psaní
+        if (text[index] !== ' ' && Math.random() < 0.08) {
+            const originalChar = element.innerHTML.slice(0, -1);
+            const glitchChars = '!@#$%^&*()_+{}|:"<>?~`';
+            const glitchSpan = document.createElement('span');
+            glitchSpan.className = 'glitch-char';
+            glitchSpan.textContent = glitchChars[Math.floor(Math.random() * glitchChars.length)];
+            element.innerHTML = originalChar;
+            element.appendChild(glitchSpan);
+            
+            setTimeout(() => {
+                element.innerHTML = originalChar + text[index];
+                setTimeout(() => this.typeText(element, text, index + 1), delay);
+            }, 60);
+        } else {
+            setTimeout(() => this.typeText(element, text, index + 1), delay);
         }
     }
     
@@ -342,7 +366,7 @@ class DocumentLoader {
                 range.surroundContents(span);
                 
                 let blinkCount = 0;
-                const maxBlinks = 4 + Math.floor(Math.random() * 10); // 4-7 blinks
+                const maxBlinks = 1 + Math.floor(Math.random() * 2); // 4-7 blinks
                 const blinkInterval = setInterval(() => {
                     if (!document.body.contains(span) || blinkCount >= maxBlinks) {
                         clearInterval(blinkInterval);
@@ -372,7 +396,7 @@ class DocumentLoader {
                 } else {
                     cleanup();
                 }
-            }, 4000 + Math.random() * 4000); // Ještě pomalejší spouštění
+            }, 4000 + Math.random() * 8000); // Ještě pomalejší spouštění
         };
 
         startGlitching();
