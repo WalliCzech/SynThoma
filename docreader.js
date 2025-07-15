@@ -1,5 +1,26 @@
 "use strict";
 class DocumentLoader {
+    // Přehrávání zvuku
+    static playSynthomaAudio(filename) {
+        if (this.audioPlayer) {
+            this.audioPlayer.pause();
+            this.audioPlayer.currentTime = 0;
+        }
+        const audioPath = `/audio/${filename}`;
+        this.audioPlayer = new Audio(audioPath);
+        this.audioPlayer.volume = 0.77; // Jemný ambient
+        this.audioPlayer.play().catch(error => {
+            console.error(`Chyba při přehrávání zvuku ${filename}:`, error);
+        });
+    }
+    // Zpracování textu s přehráváním zvuků
+    static processTextWithAudio(text) {
+        const playPattern = /<play\s+([A-Za-z0-9\s\-]+\.(mp3|wav))>/gi;
+        return text.replace(playPattern, (match, filename) => {
+            this.playSynthomaAudio(filename.trim());
+            return ''; // Odstraníme značku z textu
+        });
+    }
     static async loadDocument(contentElement) {
         try {
             console.log('⌛ Načítám virtuální prostředí...');
@@ -31,6 +52,20 @@ class DocumentLoader {
                 throw new Error(`HTTP error ${response.status}`);
             }
             // Konverze na HTML
+            console.log('🔄 Konverzuji na HTML...');
+            const arrayBuffer = await response.arrayBuffer();
+            const conversionResult = await mammoth.convertToHtml({ arrayBuffer });
+            // Zpracování HTML s přehráváním zvuků
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(conversionResult.value, 'text/html');
+            // Procházení všech textových elementů
+            doc.body.querySelectorAll('p, h1, h2, h3, h4, h5, h6').forEach(element => {
+                const originalText = element.textContent || '';
+                const processedText = this.processTextWithAudio(originalText);
+                element.textContent = processedText;
+            });
+            // Aktualizace obsahu
+            this.contentContainer.innerHTML = doc.body.innerHTML;
             console.log('📥 Dokument stažen, konvertuji na HTML...');
             const buffer = await response.arrayBuffer();
             const result = await mammoth.convertToHtml({ arrayBuffer: buffer });
@@ -202,7 +237,7 @@ class DocumentLoader {
             return;
         }
         element.innerHTML = text.substring(0, index + 1);
-        const delay = text[index] === ' ' ? 10 : Math.random() * 20 + 25;
+        const delay = text[index] === ' ' ? 15 : Math.random() * 20 + 25;
         if (text[index] !== ' ' && Math.random() < 0.08) {
             const originalChar = element.innerHTML.slice(0, -1);
             const glitchChars = '!@#$%^&*()_+{}|:"<>?~`';
@@ -381,7 +416,7 @@ class DocumentLoader {
         // Vytvoříme základní strukturu
         appContainer.innerHTML = `
             <div id="book-container" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Courier New', monospace; color: #ffffff; background: #111; line-height: 1.6;">
-                <h1 style="color: #0ff; text-align: center; margin-bottom: 2rem;">SYNTHOMA</h1>
+                <h1 style="color: #0ff; text-align: center; margin-bottom: 2rem;">SYNTHOMA - NULL</h1>
                 <div id="content-container"></div>
             </div>
         `;
@@ -395,6 +430,7 @@ class DocumentLoader {
 DocumentLoader.currentElementIndex = 0;
 DocumentLoader.elementsToType = [];
 DocumentLoader.isTypingPaused = false;
+DocumentLoader.audioPlayer = null;
 // Přidáme styly pro efekty
 const style = document.createElement('style');
 style.textContent = `

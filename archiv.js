@@ -1,6 +1,6 @@
 "use strict";
-// encyclopedia.ts
-class Encyclopedia {
+// archiv.ts
+class Archiv {
     constructor() {
         this.entries = [];
         this.entryListContainer = document.getElementById('entry-list');
@@ -14,7 +14,7 @@ class Encyclopedia {
     }
     async initialize() {
         try {
-            const response = await fetch('encyclopedia.json');
+            const response = await fetch('archiv.json');
             if (!response.ok) {
                 throw new Error(`Chyba při načítání dat: ${response.statusText}`);
             }
@@ -118,6 +118,6 @@ class Encyclopedia {
 }
 // Inicializace po načtení DOM
 document.addEventListener('DOMContentLoaded', () => {
-    const encyclopedia = new Encyclopedia();
-    encyclopedia.initialize();
+    const archiv = new Archiv();
+    archiv.initialize();
 });

@@ -10,6 +10,32 @@ class DocumentLoader {
     private static isTypingPaused = false;
     private static intersectionObserver: IntersectionObserver;
     private static tocContainer: HTMLElement;
+    private static audioPlayer: HTMLAudioElement | null = null;
+
+    // Přehrávání zvuku
+    private static playSynthomaAudio(filename: string): void {
+        if (this.audioPlayer) {
+            this.audioPlayer.pause();
+            this.audioPlayer.currentTime = 0;
+        }
+
+        const audioPath = `/audio/${filename}`;
+        this.audioPlayer = new Audio(audioPath);
+        this.audioPlayer.volume = 0.77; // Jemný ambient
+        this.audioPlayer.play().catch(error => {
+            console.error(`Chyba při přehrávání zvuku ${filename}:`, error);
+        });
+    }
+
+    // Zpracování textu s přehráváním zvuků
+    private static processTextWithAudio(text: string): string {
+        const playPattern = /<play\s+([A-Za-z0-9\s\-]+\.(mp3|wav))>/gi;
+        
+        return text.replace(playPattern, (match, filename) => {
+            this.playSynthomaAudio(filename.trim());
+            return ''; // Odstraníme značku z textu
+        });
+    }
 
     static async loadDocument(contentElement: HTMLElement): Promise<void> {
         try {
@@ -48,7 +74,23 @@ class DocumentLoader {
             }
             
             // Konverze na HTML
-            console.log('📥 Dokument stažen, konvertuji na HTML...');
+            console.log('🔄 Konverzuji na HTML...');
+            const arrayBuffer = await response.arrayBuffer();
+            const conversionResult = await mammoth.convertToHtml({ arrayBuffer });
+            
+            // Zpracování HTML s přehráváním zvuků
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(conversionResult.value, 'text/html');
+            
+            // Procházení všech textových elementů
+            doc.body.querySelectorAll('p, h1, h2, h3, h4, h5, h6').forEach(element => {
+                const originalText = element.textContent || '';
+                const processedText = this.processTextWithAudio(originalText);
+                element.textContent = processedText;
+            });
+            
+            // Aktualizace obsahu
+            this.contentContainer.innerHTML = doc.body.innerHTML;            console.log('📥 Dokument stažen, konvertuji na HTML...');
             const buffer = await response.arrayBuffer();
             const result = await mammoth.convertToHtml({ arrayBuffer: buffer });
             
