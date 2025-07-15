@@ -243,7 +243,7 @@ class DocumentLoader {
         }
     
         element.innerHTML = text.substring(0, index + 1);
-        const delay = text[index] === ' ' ? 10 : Math.random() * 20 + 25;
+        const delay = text[index] === ' ' ? 15 : Math.random() * 20 + 25;
     
         if (text[index] !== ' ' && Math.random() < 0.08) {
             const originalChar = element.innerHTML.slice(0, -1);
@@ -446,7 +446,7 @@ class DocumentLoader {
         // Vytvoříme základní strukturu
         appContainer.innerHTML = `
             <div id="book-container" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Courier New', monospace; color: #ffffff; background: #111; line-height: 1.6;">
-                <h1 style="color: #0ff; text-align: center; margin-bottom: 2rem;">SYNTHOMA</h1>
+                <h1 style="color: #0ff; text-align: center; margin-bottom: 2rem;">SYNTHOMA - NULL</h1>
                 <div id="content-container"></div>
             </div>
         `;
