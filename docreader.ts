@@ -87,7 +87,7 @@ class DocumentLoader {
         // Projdeme všechny elementy a připravíme je pro psaní
         allElements.forEach((el: Element, index: number) => {
             const tagName = el.tagName.toLowerCase();
-            const isHeading = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tagName);
+            const isHeading = ['h1', 'h2', 'h3', 'h4', 'h6'].includes(tagName);
             
             // Vytvoříme nový element
             const newEl = document.createElement(tagName);
