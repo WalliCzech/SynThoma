@@ -44,6 +44,10 @@ p {
     color: #0ff;
     font-size: 1.3rem;
     line-height: 1.4;
+    white-space: pre-wrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: none;
 }
 
 .button-simple {
@@ -115,6 +119,10 @@ main {
     min-height: 100vh; /* Minimální výška celé viewport výšky */
     display: flex;
     flex-direction: column;
+    word-break: normal;
+    overflow-wrap: normal;
+    white-space: pre-wrap;
+    hyphens: none;
 }
   
 #glitch-bg {
@@ -187,6 +195,10 @@ main {
     box-shadow: 0 0 20px 2px #17182370;
     min-height: 64vh;
     flex: 1;
+    word-break: normal;
+    overflow-wrap: normal;
+    white-space: pre-wrap;
+    hyphens: none;
 }
 
 .btn, button {
