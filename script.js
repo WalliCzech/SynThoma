@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Inicializace typewritter efektu
-    const fullText = `<h5 class= "glitch">LOG [WELCOME]:</h5>„Vstupuješ do SYNTHOMY. Nelekej se, pokud se ti při čtení začne lehce škubat levé oko – je to běžný vedlejší efekt.“
+    const fullText = `<h5 class= "glitch">LOG [WELCOME]:</h5>„Vstupuješ do SYNTHOMY. Nelekej se, pokud ti při čtení začne lehce škubat levé oko – je to běžný vedlejší efekt.“
 <h5 class= "glitch">LOG [WHAT_IS_THIS]:</h5>„SYNTHOMA je kniha i svět. Glitch-noir příběh z temné digitální budoucnosti, kde se každý tvůj strach a každé trauma mění v datový log. Paměť je tu šelma. AI tě provede – se sarkasmem místo empatie. Všechno, co cítíš, se zálohuje. Tady je bezpečí jen iluze. Restart je rutina, chyba je součást cesty.“
 <h5 class= "glitch">LOG [FOR_READERS]:</h5>„Tato kniha není manuál ke štěstí. Je to průvodce městem rozbitých emocí, kde hlavní hrdina NULL je sběratel cizích chyb – a jeho parťák je ironická AI. Humor je černý, atmosféra temná, a většina vtipů bolí ještě minutu po přečtení.“
 <h5 class= "glitch">LOG [WARNING]:</h5>„Varování: SYNTHOMA analyzuje i vaše selhání. Pokud se vám něco bude zdát povědomé, je to tím, že v tom nejste sami. Čtení může způsobit mírnou existenciální krizi, smích přes slzy a nutkání restartovat vlastní život.“
