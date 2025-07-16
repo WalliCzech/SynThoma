@@ -99,7 +99,10 @@ function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
     writeNext();
 }
 
-function typewriterParagraphs(element, text, options = {}, onDone = null) {
+function typewriterParagraphs(target, text, options = {}, onComplete = () => {}) {
+    // Uložíme celý text pro případ, že bychom ho potřebovali zobrazit najednou
+    target._fullText = text;
+    
     const paragraphs = text
         .replace(/\r\n/g, '\n')    // Sjednoť řádky, ať to není digitální apokalypsa 🔥
         .split(/\n\s*\n/)          // Rozděl na odstavce, žádné halucinace
@@ -110,21 +113,218 @@ function typewriterParagraphs(element, text, options = {}, onDone = null) {
         if (idx < paragraphs.length) {
             // Nový odstavec, čistý jako duše nově vytvořeného divu 🙏
             const p = document.createElement('p');
-            element.appendChild(p);
+            target.appendChild(p);
             typewriterWrite(p, paragraphs[idx], options, () => {
                 idx++;
                 setTimeout(writeNextParagraph, 250); // Pauza, ať čtenář nekolabuje 😴
             });
         } else if (onDone) {
-            onDone();
+            onComplete();
         }
     }
     writeNextParagraph();
 }
 
-// Zbytek kódu zůstává, protože navigace je zpátky v neonové slávě 💥
+// Inicializace efektu válce při scrollování
+function initCylinderScroll() {
+    const container = document.querySelector('.scroll-container');
+    const content = document.querySelector('.main-description');
+    const track = document.querySelector('.scrollbar-track');
+    const thumb = document.querySelector('.scrollbar-thumb');
+    
+    if (!container || !content || !track || !thumb) return null;
+    
+    let isDragging = false;
+    let startY, scrollStartTop;
+    let scrollTimeout;
+    let isUserScrolling = false;
+    
+    // Nastavení velikosti posuvníku
+    function updateScrollbar() {
+        const containerHeight = container.clientHeight;
+        const contentHeight = container.scrollHeight;
+        const thumbHeight = Math.max((containerHeight / contentHeight) * 100, 20);
+        
+        thumb.style.height = `${thumbHeight}px`;
+        updateThumbPosition();
+    }
+    
+    // Aktualizace pozice posuvníku
+    function updateThumbPosition() {
+        const scrollPercentage = container.scrollTop / (container.scrollHeight - container.clientHeight);
+        const trackHeight = track.clientHeight - thumb.clientHeight;
+        const thumbTop = scrollPercentage * trackHeight;
+        
+        thumb.style.transform = `translateY(${thumbTop}px)`;
+        
+        // Aplikujeme efekt válce
+        applyCylinderEffect(scrollPercentage);
+    }
+    
+    // Efekt válce a rozpadu textu
+    function applyCylinderEffect(scrollPercentage) {
+        // Výpočet rotace na základě pozice scrollování
+        const rotation = scrollPercentage * 15 - 7.5; // -7.5° až +7.5°
+        const scale = 1 - (scrollPercentage * 0.05); // Velmi mírné zmenšení
+        
+        // Aplikujeme transformaci
+        content.style.transform = `perspective(1000px) rotateX(${rotation}deg) scale(${scale})`;
+        
+        // Efekt rozpadu textu nahoře - intenzivnější a viditelnější
+        const topGlitchIntensity = Math.min(scrollPercentage * 8, 1.5);
+        if (topGlitchIntensity > 0.1) {
+            content.classList.add('scrolling');
+            
+            // Vytvoříme výraznější glitch efekt
+            const glitchX = (Math.random() - 0.5) * 15 * topGlitchIntensity;
+            const glitchY = (Math.random() - 0.5) * 8 * topGlitchIntensity;
+            const glitchOpacity = Math.min(0.7, topGlitchIntensity * 0.8);
+            
+            content.style.setProperty('--glitch-x', `${glitchX}px`);
+            content.style.setProperty('--glitch-y', `${glitchY}px`);
+            content.style.setProperty('--glitch-opacity', glitchOpacity);
+            
+            // Přidáme náhodné změny barev pro větší efekt
+            const hueRotate = Math.sin(Date.now() * 0.01) * 60 * topGlitchIntensity;
+            content.style.filter = `hue-rotate(${hueRotate}deg)`;
+        } else {
+            content.classList.remove('scrolling');
+            content.style.filter = 'none';
+        }
+        
+        // Resetujeme timer pro detekci konce scrollování
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            content.classList.remove('scrolling');
+            content.style.filter = 'none';
+        }, 200);
+    }
+    
+    // Události myši pro přetahování posuvníku
+    thumb.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startY = e.clientY;
+        scrollStartTop = container.scrollTop;
+        e.preventDefault();
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        const deltaY = e.clientY - startY;
+        const trackHeight = track.clientHeight - thumb.clientHeight;
+        const scrollRatio = (container.scrollHeight - container.clientHeight) / trackHeight;
+        
+        container.scrollTop = scrollStartTop + deltaY * scrollRatio;
+    });
+    
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+    
+    // Kliknutí na track pro skok na danou pozici
+    track.addEventListener('click', (e) => {
+        const rect = track.getBoundingClientRect();
+        const clickPosition = e.clientY - rect.top;
+        const thumbHeight = thumb.clientHeight;
+        const scrollRatio = (container.scrollHeight - container.clientHeight) / (rect.height - thumbHeight);
+        
+        container.scrollTop = (clickPosition - thumbHeight / 2) * scrollRatio;
+    });
+    
+    // Scroll kontejneru
+    container.addEventListener('scroll', () => {
+        updateThumbPosition();
+        
+        // Zastavení automatického psaní, pokud uživatel scrolluje
+        if (window.typewriterInterval && !isUserScrolling) {
+            isUserScrolling = true;
+            clearInterval(window.typewriterInterval);
+            window.typewriterInterval = null;
+            
+            // Zobrazíme celý text, pokud uživatel scrolluje
+            const target = document.getElementById('myGlitchText');
+            if (target && target._fullText) {
+                target.innerHTML = target._fullText;
+            }
+        }
+    });
+    
+    // Detekce začátku scrollování myší
+    container.addEventListener('mousedown', () => {
+        isUserScrolling = true;
+        if (window.typewriterInterval) {
+            clearInterval(window.typewriterInterval);
+            window.typewriterInterval = null;
+        }
+    });
+    
+    // Detekce dotykového scrollování
+    container.addEventListener('touchstart', () => {
+        isUserScrolling = true;
+        if (window.typewriterInterval) {
+            clearInterval(window.typewriterInterval);
+            window.typewriterInterval = null;
+        }
+    }, { passive: true });
+    
+    // Inicializace
+    updateScrollbar();
+    
+    // Přidání události pro změnu velikosti okna
+    const resizeObserver = new ResizeObserver(updateScrollbar);
+    resizeObserver.observe(container);
+    
+    // Vrátíme funkci pro čištění
+    return () => {
+        resizeObserver.disconnect();
+        container.removeEventListener('scroll', updateThumbPosition);
+    };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🎮 SYNTHOMA script initialized. System status: GLITCH_STABILIZED_RGB');
+    
+    // Inicializace efektu válce
+    const cleanupCylinderScroll = initCylinderScroll();
+
+    // Inicializace typewritter efektu
+    const target = document.getElementById('myGlitchText');
+    if (target) {
+        const fullText = `
+            <h5 class="glitch">LOG [WELCOME]:</h5>
+            „Vstupuješ do SYNTHOMY. Nelekej se, pokud ti při čtení začne lehce škubat levé oko – je to běžný vedlejší efekt.“
+            <h5 class="glitch">LOG [WHAT_IS_THIS]:</h5>
+            „SYNTHOMA je kniha i svět. Glitch-noir příběh z temné digitální budoucnosti, kde se každý tvůj strach a každé trauma mění v datový log. Paměť je tu šelma. AI tě provede – se sarkasmem místo empatie. Všechno, co cítíš, se zálohuje. Tady je bezpečí jen iluze. Restart je rutina, chyba je součást cesty.“
+            <h5 class="glitch">LOG [FOR_READERS]:</h5>
+            „Tato kniha není manuál ke štěstí. Je to průvodce městem rozbitých emocí, kde hlavní hrdina NULL je sběratel cizích chyb – a jeho parťák je ironická AI. Humor je černý, atmosféra temná, a většina vtipů bolí ještě minutu po přečtení.“
+            <h5 class="glitch">LOG [WARNING]:</h5>
+            „Varování: SYNTHOMA analyzuje i vaše selhání. Pokud se vám něco bude zdát povědomé, je to tím, že v tom nejste sami. Čtení může způsobit mírnou existenciální krizi, smích přes slzy a nutkání restartovat vlastní život.“
+            <h5 class="glitch">LOG [SUMMARY]:</h5>
+            „SYNTHOMA – NULL je cyberpunková kniha o terapii, vině a touze po smyslu ve světě, kde všechno důležité někdo zalogoval a pak zapomněl heslo.“
+            <h5 class="glitch">LOG [HELP]:</h5>
+            „Potíže s existencí? Klidně pokračuj ve čtení. Systém tě v tom nenechá samotného. Přinejhorším dostaneš vtipnou poznámku od AI."
+            <a href="kniha.html" class="button-simple" style="cursor: pointer;">Klikni pro vlastní restart</a>
+        `;
+
+        target.innerHTML = ''; // Vyprázdníme cílový element
+        typewriterParagraphs(target, fullText.trim(), {
+            speedMin: 13,
+            speedMax: 46,
+            paragraphPause: 240
+        }, () => {
+            if (typeof gentleGlitchify === 'function') {
+                gentleGlitchify(target, {
+                    delayMin: 1400,
+                    delayMax: 2900,
+                    glitchDuration: 90,
+                    glitchChance: 0.07
+                });
+            }
+        });
+    } else {
+        console.warn('⚠️ Element s ID myGlitchText nebyl nalezen');
+    }
 
     // Inicializace glitch efektu pro .glitch elementy
     document.querySelectorAll('.glitch').forEach(el => {
@@ -175,6 +375,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) {
         ctx = canvas.getContext('2d');
         
+        // Vlastní implementace plynulého scrollování bez scrollbaru
+        function smoothScrollTo(targetY, duration = 1000) {
+            const startY = window.scrollY;
+            const distance = targetY - startY;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const run = easeInOutCubic(timeElapsed, startY, distance, duration);
+                window.scrollTo(0, run);
+                if (timeElapsed < duration) requestAnimationFrame(animation);
+            }
+
+            // Funkce pro plynulé zrychlování a zpomalování
+            function easeInOutCubic(t, b, c, d) {
+                t /= d/2;
+                if (t < 1) return c/2*t*t*t + b;
+                t -= 2;
+                return c/2*(t*t*t + 2) + b;
+            }
+
+            requestAnimationFrame(animation);
+        }
+
+        // Skrolování stránky bez scrollbaru
+        function scrollToBottom() {
+            smoothScrollTo(document.body.scrollHeight);
+        }
+
         function resize() {
             W = window.innerWidth;
             H = window.innerHeight;
@@ -249,31 +479,12 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(draw);
     }
 
-    // Inicializace typewritter efektu
-    const fullText = `<h5 class= "glitch">LOG [WELCOME]:</h5>„Vstupuješ do SYNTHOMY. Nelekej se, pokud ti při čtení začne lehce škubat levé oko – je to běžný vedlejší efekt.“
-<h5 class= "glitch">LOG [WHAT_IS_THIS]:</h5>„SYNTHOMA je kniha i svět. Glitch-noir příběh z temné digitální budoucnosti, kde se každý tvůj strach a každé trauma mění v datový log. Paměť je tu šelma. AI tě provede – se sarkasmem místo empatie. Všechno, co cítíš, se zálohuje. Tady je bezpečí jen iluze. Restart je rutina, chyba je součást cesty.“
-<h5 class= "glitch">LOG [FOR_READERS]:</h5>„Tato kniha není manuál ke štěstí. Je to průvodce městem rozbitých emocí, kde hlavní hrdina NULL je sběratel cizích chyb – a jeho parťák je ironická AI. Humor je černý, atmosféra temná, a většina vtipů bolí ještě minutu po přečtení.“
-<h5 class= "glitch">LOG [WARNING]:</h5>„Varování: SYNTHOMA analyzuje i vaše selhání. Pokud se vám něco bude zdát povědomé, je to tím, že v tom nejste sami. Čtení může způsobit mírnou existenciální krizi, smích přes slzy a nutkání restartovat vlastní život.“
-<h5 class= "glitch">LOG [SUMMARY]:</h5>„SYNTHOMA – NULL je cyberpunková kniha o terapii, vině a touze po smyslu ve světě, kde všechno důležité někdo zalogoval a pak zapomněl heslo.“
-<h5 class= "glitch">LOG [HELP]:</h5>„Potíže s existencí? Klidně pokračuj ve čtení. Systém tě v tom nenechá samotného. Přinejhorším dostaneš vtipnou poznámku od AI.“  
-<a href="kniha.html" class="button-simple" style="cursor: pointer;">Klikni pro vlastní restart</a>
-      
-`;
+    // Konec inicializace
     
-    const target = document.getElementById('myGlitchText');
-    target.innerHTML = ''; // Prázdné
-    typewriterParagraphs(target, fullText, {
-            speedMin: 13,
-            speedMax: 46,
-            paragraphPause: 240
-        }, () => {
-            gentleGlitchify(target, {
-                delayMin: 1400,
-                delayMax: 2900,
-                glitchDuration: 90,
-                glitchChance: 0.07
-            });
-        });
+    // Uklidíme při odpojení komponenty
+    return () => {
+        if (cleanupCylinderScroll) cleanupCylinderScroll();
+    };
     }
 );
 
