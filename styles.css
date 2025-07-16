@@ -1,7 +1,33 @@
 /* styles.css: Neonový chaos pro SynThomu, kde kurzíva svítí jako billboard v digitálním pekle! 😈 */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
 
-/* Styly pro zvýrazněný text v závorkách */
+/* Použijeme VT323 pro nadpisy a Press Start 2P pro text */
+@font-face {
+    font-family: 'Synthom';
+    src: url('fonts/BungeeHairline-Regular.ttf');
+  font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Text';
+    src: url('fonts/HandJet.ttf');
+  font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Synthom', mo-serif;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+
+}/* Styly pro zvýrazněný text v závorkách */
 .speech-text {
     color: #ff69b4; /* Růžová barva pro řeč */
     font-style: italic;
@@ -9,6 +35,33 @@
     padding: 0 2px;
     transition: all 0.3s ease;
 }
+
+p {
+    font-family: 'Text', monospace;
+    color: #0ff;
+    font-size: 1.3rem;
+    line-height: 1.4;
+}
+
+.button-simple {
+    font-family: 'Text', monospace;
+    font-size: 1.3rem;
+    line-height: 1.4;
+    color: #0ff;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 1.3rem;
+    transition: color .15s;
+    font-size: 1.18rem;
+}
+    
+.button-simple:hover {
+    color: #0ff;
+    text-decoration: underline;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+
+}
+
 
 .speech-effect {
     animation: speechGlow 2s infinite alternate;
@@ -47,14 +100,31 @@
 }
 
 /* Základní setup, aby HTML nebylo nudnější než NPC bez skriptu 😴 */
-html, body {
-    background: #070707;
-    color: #f0f0f0;
-    min-height: 100vh;
-    font-family: 'Fira Mono', 'Consolas', monospace;
+body, html {
+    background: #09090e;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+  
+  #glitch-bg {
+    position: fixed;
+    left: 0; top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.72; /* jemnější průhlednost */
+    filter: blur(0.7px) brightness(1.08) contrast(1.12);
+    transition: opacity 0.3s;
+  }
+  
+  body > *:not(#glitch-bg) {
     position: relative;
-    overflow-x: hidden;
-}
+    z-index: 2;
+  }
 
 header, footer {
     text-align: center;
@@ -84,6 +154,7 @@ nav {
 }
 
 nav a {
+    font-family: 'Synthom', monospace;
     color: var(--accent2, #0ff);
     text-decoration: none;
     font-weight: bold;
@@ -285,28 +356,6 @@ form textarea {
     50% { opacity: 0; }
 }
 
-.download-link {
-    display: block;
-    text-align: center;
-    margin: 2rem auto;
-    background: var(--btn-bg, #1a1d25);
-    color: var(--btn-fg, #0ff);
-    padding: 0.7em 1.3em;
-    text-decoration: none;
-    border-radius: 0.9em;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.5rem;
-    letter-spacing: 0.03em;
-    box-shadow: 0 2px 14px -4px #00ffd644;
-    transition: background .18s, color .18s, box-shadow .16s;
-}
-
-.download-link:hover {
-    background: var(--btn-hover, #2a2d35);
-    color: var(--accent2, #f0f);
-    box-shadow: 0 2px 18px -2px var(--glitch1, #ff0040);
-}
-
 footer {
     text-align: center;
     padding: 1rem;
@@ -374,8 +423,8 @@ footer {
 }
 
 .glitch-word {
-    color: #ff00ff;
-    text-shadow: 0 0 5px #ff00ff;
+    color: #ff00ff #00ffff;
+    text-shadow: 0 0 5px #ff00ff #00ffff;
 }
 
 /* Encyklopedie - Card Layout */
@@ -422,74 +471,6 @@ footer {
     display: block;
 }
 
-
-/* Glitch vrstvy */
-.glitch-bg {
-    position: fixed;
-    z-index: 0;
-    width: 100vw;
-    height: 100vh;
-    left: 0; top: 0;
-    pointer-events: none;
-    mix-blend-mode: lighten;
-    opacity: 0.13;
-    background: repeating-linear-gradient(
-      135deg, #333 0 2px, #070707 2px 12px
-    );
-    animation: glitch-move 2s infinite linear alternate;
-  }
-  
-  @keyframes glitch-move {
-    0% { transform: translateY(0) scaleX(1); }
-    20% { transform: translateY(-3px) scaleX(1.01);}
-    45% { transform: translateY(2px) scaleX(0.98);}
-    65% { transform: translateY(-2px) scaleX(1);}
-    100% { transform: translateY(1px) scaleX(1.02);}
-  }
-  
-  /* Glitchující text */
-  .glitch {
-    position: relative;
-    color: #ff0090;
-    font-weight: 900;
-    letter-spacing: 0.06em;
-    display: inline-block;
-    z-index: 2;
-  }
-  .glitch:before, .glitch:after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    opacity: 0.7;
-    z-index: 1;
-  }
-  .glitch:before {
-    color: #00fff9;
-    left: 2px; top: -2px;
-    mix-blend-mode: screen;
-    animation: glitch-anim 1.1s infinite linear alternate-reverse;
-  }
-  .glitch:after {
-    color: #faff00;
-    left: -2px; top: 1px;
-    mix-blend-mode: multiply;
-    animation: glitch-anim2 0.9s infinite linear alternate-reverse;
-  }
-  @keyframes glitch-anim {
-    0% { transform: translate(0,0);}
-    15% { transform: translate(-1px,1px);}
-    35% { transform: translate(2px,-1px);}
-    60% { transform: translate(-1px,2px);}
-    100% { transform: translate(0,0);}
-  }
-  @keyframes glitch-anim2 {
-    0% { transform: translate(0,0);}
-    25% { transform: translate(2px,-1px);}
-    60% { transform: translate(-2px,1px);}
-    100% { transform: translate(0,0);}
-  }
-
   nav ul.nav-horizontal {
     display: flex;
     flex-direction: row;
@@ -533,4 +514,55 @@ footer {
   }
   
 
-  
+  .glitch-char {
+    display: inline-block;
+    transition: color 0.07s, filter 0.1s;
+}
+
+.glitch-char.glitchy {
+    color: #ff2afd;
+    filter: blur(1px) brightness(1.8) drop-shadow(0 0 4px #ff00c8);
+    text-shadow: 0 0 6px #0ff, 0 0 12px #ff00c8;
+}
+
+.glitch-quick {
+    animation: glitchjump 0.12s linear 2;
+}
+
+@keyframes glitchjump {
+    0%   { transform: translateY(0); }
+    40%  { transform: translateY(-2px) skewX(-1deg); }
+    70%  { transform: translateY(1px) skewX(2deg); }
+    100% { transform: translateY(0); }
+}
+
+.glitch-text {
+    animation: glitch-char 0.12s linear 2; 
+}
+
+.glitch-text::after {
+    content: '';
+    display: inline-block;
+    width: 1ch;
+    height: 1.1em;
+    vertical-align: -0.15em;
+    background: #0ff;
+    margin-left: 0.05em;
+    animation: blink 1s steps(1) infinite alternate;
+  }
+  @keyframes blink {
+    0%,100% { opacity: 0; }
+    50% { opacity: 0.8; }
+  }
+
+
+  .typewriter-cursor {
+    display: inline-block;
+    width: 1ch;
+    animation: blink 1s steps(1) infinite alternate;
+    color: #0ff;
+    font-weight: bold;
+    filter: drop-shadow(0 0 4px #0ff) brightness(1.8);
+    vertical-align: -0.09em;
+    font-family: 'Handjet', monospace;
+}

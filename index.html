@@ -6,13 +6,12 @@
     <title>| SYNTHOMA |</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <canvas id="glitch-bg"></canvas>
     <header>
         <h1 class="glitch">SYNTHOMA</h1>
-        <p class="manifest">
-            [Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]<br><br><br>
-        </p>
-        <button id="theme-switcher" class="theme-switcher" title="Změň světlo, nebo zůstaň v nekonečné neonové tmě">🎨 <span class="theme-name">neon_void</span></button>
+        <p class="manifest" style="font-family: Synthom; font-size: 0.8rem; font-weight: bold;">[Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]</p>
     </header>
     <nav>
         <ul class="nav-horizontal">
@@ -22,26 +21,17 @@
             <li><a href="o-autorovi.html">O entitě</a></li>
         </ul>
     </nav>
-    <main style="background: rgba(0,0,0,0.2);">
-        <section class="main-description" style="padding: 5rem;">
-            <p class="glitch">SYNTHOMA <br><br></p>
-            <p>
-                Digitální glitch-noir na pomezí knihy, sebezpytné simulace a hledání sebe sama.<br><br>
-                Světa, kde je identita paměťová chyba, démoni mají jména a systém tě přinutí přepsat sám sebe.<br><br>
-                Je to svět fragmentů manifestů, surové logy, rozbité dialogy i kapky ironie v pixelovém dešti.<br><br>
-                Procházej kapitoly, ztrácej se v archivu, nebo prostě jen glitchuj do rytmu sarkasmu.<br><br>
-                Tohle není pro slabé povahy. Jen pro ty, kdo chtějí vidět vlastní log a nezhroutit se při bluescreenu.<br><br>
-                <br><br>
-                Začni číst, anebo se rovnou...<br><br><br>
-                <b>SYNTHOMA je otevřená, systém nestabilní, exit port neexistuje.</b><br><br>
-                <b>LOG [SYSTEM]:</b><br><br>
-            </p>
-            <a href="kniha.html" class="button" style="cursor: pointer;">Klikni pro vlastní restart</a>
+    <main>
+        <section class="main-description" style="padding: 5rem; align-self: left;">
+
+            <p id="myGlitchText" class="glitch-text"></p>
+
         </section>
     </main>
     <footer style="background: rgba(0,0,0,0.2);">
         <p>© 2025 SYNTHOMA| Tady je každý error úmyslný. <span class="glitch">🪲</span></p>
     </footer>
-    <script src="script.js"></script>
+    
+    <script src="script.js" defer></script>
 </body>
 </html>
