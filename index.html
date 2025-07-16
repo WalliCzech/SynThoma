@@ -8,28 +8,29 @@
 </head>
 
 <body>
-    <canvas id="glitch-bg"></canvas>
+    <canvas id="glitch-bg" z-index="0"></canvas>
     <header>
         <h1 class="glitch">SYNTHOMA</h1>
-        <p class="manifest" style="font-family: Synthom; font-size: 0.8rem; font-weight: bold;">[Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]</p>
+        <p class="manifest" style="font-family: Synthom; font-size: 1rem; font-weight: bold;">
+            [Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]</p>
     </header>
     <nav>
         <ul class="nav-horizontal">
             <li><a href="index.html" class="active">Domů</a></li>
             <li><a href="kniha.html">Kniha / LOG</a></li>
             <li><a href="archiv.html">Archiv</a></li>
-            <li><a href="o-autorovi.html">O entitě</a></li>
+            <li><a href="o-autorovi.html">O autorovi</a></li>
         </ul>
     </nav>
-    <main>
-        <section class="main-description" style="padding: 5rem; align-self: left;">
+    <main style="background: rgba(0,0,0,1);border-radius: 5x;">
+        <section class="main-description" style="padding: 1rem; align-self: left;">
 
             <p id="myGlitchText" class="glitch-text"></p>
 
         </section>
     </main>
     <footer style="background: rgba(0,0,0,0.2);">
-        <p>© 2025 SYNTHOMA| Tady je každý error úmyslný. <span class="glitch">🪲</span></p>
+        <p style="font-family: Synthom; font-size: 1rem; font-weight: bold;">© 2025 | SYNTHOMA | Tady je každý error úmyslný. <span class="glitch">🪲</span></p>
     </footer>
     
     <script src="script.js" defer></script>

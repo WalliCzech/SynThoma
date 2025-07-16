@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYNTHOMA - NULL | O autorovi</title>
+    <title>| SYNTHOMA |</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <canvas id="glitch-bg" z-index="0"></canvas>
     <header>
-        <div class="glitch-wrapper">
-            <span class="glitch-top">PHYSICAL</span>
-            <span class="glitch-bottom">PHYSICAL</span>
-            <h1 class="text">O autorovi</h1>
-        </div>
-        <p>Chybový výpis: Autor nalezen, ale jeho identita je rozglitchovaná. 😈</p>
-    </header>
+        <h1 class="glitch">SYNTHOMA</h1>
+        <p class="manifest" style="font-family: Synthom; font-size: 1rem; font-weight: bold;">
+            [Chybový výpis: Autor nalezen, ale jeho identita je rozglitchovaná.]</p>
+    </header> 
     <nav>
         <ul class="nav-horizontal">
             <li><a href="index.html">Domů</a></li>
@@ -23,9 +22,9 @@
             <li><a href="o-autorovi.html" class="active">O autorovi</a></li>
         </ul>
     </nav>
-    <main>
+    <main style="background: rgba(0,0,0,1);border-radius: 5x;">
         <section id="o-autorovi">
-            <h3 class="glitch">WalliCzech</h3>
+            <h3 class="glitch-text">WalliCzech</h3>
             <p>
                 <strong>AI identifikace autora:</strong><br>
                 [SYSTEM ERROR] – Autor detekován, ale data jsou fragmentovaná.<br>
@@ -44,19 +43,21 @@
             <h2>Kontakt</h2>
             <p>Chceš vzkázat něco autorovi? Piš, nebo tě najde T-AI v datovém smogu. 😈</p>
             <form action="https://formspree.io/f/your-form-id" method="POST">
-                <label for="jmeno">Jméno:</label>
+                <label style="font-family: Text; font-size: 1rem; font-weight: normal;" for="jmeno">Jméno:</label>
                 <input type="text" id="jmeno" name="jmeno" required placeholder="Zadej, nebo zůstaneš NULL"><br>
-                <label for="email">Email:</label>
+                <label style="font-family: Text; font-size: 1rem; font-weight: normal;" for="email">Email:</label>
                 <input type="email" id="email" name="email" required placeholder="Tvůj digitální otisk"><br>
-                <label for="zprava">Zpráva:</label>
-                <textarea id="zprava" name="zprava" required placeholder="Co máš na srdci?"></textarea><br>
-                <input type="submit" class="btn" value="Odeslat (nebo riskni restart)"> 😱
+                <label style="font-family: Text; font-size: 1rem; font-weight: normal;" for="zprava">Zpráva:</label>
+                <textarea id="zprava" name="zprava" required placeholder="Co máš na srdci?" style="height:100px"></textarea><br>
+                <input type="submit" class="btn" value="Odeslat">
             </form>
         </section>
     </main>
-    <footer>
-        <p>© 2025 SYNTHOMA: NULL | Všechny chyby jsou záměrné. 😜</p>
+    <footer style="background: rgba(0,0,0,0.2);">
+        <p>© 2025 | SYNTHOMA | Tady je každý error úmyslný. <span class="glitch">🪲</span></p>
     </footer>
-    <script src="script.js"></script>
+    
+    <script src="script.js" defer></script>
 </body>
 </html>
+

@@ -1,4 +1,4 @@
-/* styles.css: Neonový chaos pro SynThomu, kde kurzíva svítí jako billboard v digitálním pekle! 😈 */
+/* styles.css: Neonový chaos pro SynThomu, kde text svítí a nehraje si na Shreka! 😈 */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
 
@@ -6,28 +6,30 @@
 @font-face {
     font-family: 'Synthom';
     src: url('fonts/BungeeHairline-Regular.ttf');
-  font-weight: normal;
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
-
-@font-face {
-    font-family: 'Text';
-    src: url('fonts/HandJet.ttf');
-  font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Synthom', mo-serif;
+    font-family: 'Synthom', monospace;
     font-weight: normal;
     letter-spacing: 1px;
     text-transform: uppercase;
+}
 
+h5.glitch {
+    font-family: 'Synthom', monospace;
+    font-weight: bold;
+    color: #0ff;
+    position: relative;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    letter-spacing: .03em;
+    z-index: 2;
+    animation: glitch 1.2s infinite linear alternate-reverse;
+}
 
-}/* Styly pro zvýrazněný text v závorkách */
+/* Styly pro zvýrazněný text v závorkách */
 .speech-text {
     color: #ff69b4; /* Růžová barva pro řeč */
     font-style: italic;
@@ -37,19 +39,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-    font-family: 'Text', monospace;
+    font-family: 'Synthom', monospace;
+    font-weight: bold;
     color: #0ff;
     font-size: 1.3rem;
     line-height: 1.4;
 }
 
 .button-simple {
-    font-family: 'Text', monospace;
+    font-family: 'Synthom', monospace;
     font-size: 1.3rem;
     line-height: 1.4;
     color: #0ff;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: normal;
     margin: 0 1.3rem;
     transition: color .15s;
     font-size: 1.18rem;
@@ -59,9 +62,7 @@ p {
     color: #0ff;
     text-decoration: underline;
     text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-
 }
-
 
 .speech-effect {
     animation: speechGlow 2s infinite alternate;
@@ -94,22 +95,30 @@ p {
         opacity: 0.9;
     }
     100% {
-        text-shadow: 0 0 15px rgba(0, 255, 255, 0.9), 0 0 25px rgba(0, 255, 255, 0.6);
+        text-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 255, 255, 0.6);
         opacity: 1;
     }
 }
 
 /* Základní setup, aby HTML nebylo nudnější než NPC bez skriptu 😴 */
 body, html {
-    background: #09090e;
+    background: #000;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
-  }
+    overflow-y: auto; /* Povolení scrollování celé stránky */
+}
+
+/* Stylování hlavního obsahu */
+main {
+    min-height: 100vh; /* Minimální výška celé viewport výšky */
+    display: flex;
+    flex-direction: column;
+}
   
-  #glitch-bg {
+#glitch-bg {
+    background-color: #000;
     position: fixed;
     left: 0; top: 0;
     width: 100vw;
@@ -119,12 +128,12 @@ body, html {
     opacity: 0.72; /* jemnější průhlednost */
     filter: blur(0.7px) brightness(1.08) contrast(1.12);
     transition: opacity 0.3s;
-  }
+}
   
-  body > *:not(#glitch-bg) {
+body > *:not(#glitch-bg) {
     position: relative;
-    z-index: 2;
-  }
+    z-index: 10;
+}
 
 header, footer {
     text-align: center;
@@ -171,12 +180,13 @@ nav a:hover {
 
 main {
     max-width: 820px;
-    margin: 3rem auto 2rem auto;
-    padding: 1.5rem;
+    margin: 3rem auto;
+    padding: 2rem;
     background: rgba(20,20,25,0.95);
     border-radius: 20px;
     box-shadow: 0 0 20px 2px #17182370;
     min-height: 64vh;
+    flex: 1;
 }
 
 .btn, button {
@@ -256,75 +266,11 @@ form textarea:focus {
     box-shadow: 0 0 10px var(--accent);
 }
 
-form textarea {
-    min-height: 150px;
-    resize: vertical;
-}
-
-@media (max-width: 600px) {
-    nav a {
-        margin: 0 0.5rem;
-        font-size: 1rem;
-    }
-    main {
-        margin: 1rem;
-        padding: 1rem;
-    }
-}
-
-.theme-switcher {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: var(--btn-bg, #1a1d25);
-    color: var(--btn-fg, #0ff);
-    padding: 0.7em 1.3em;
-    cursor: pointer;
-    border-radius: 0.9em;
-    border: none;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.5rem;
-    letter-spacing: 0.03em;
-    box-shadow: 0 2px 14px -4px #00ffd644;
-    transition: background .18s, color .18s, box-shadow .16s;
-}
-
-.theme-switcher:hover {
-    background: var(--btn-hover, #2a2d35);
-    color: var(--accent2, #f0f);
-    box-shadow: 0 2px 18px -2px var(--glitch1, #ff0040);
-}
-
-.book-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    opacity: 1 !important; /* Přepíšeme JS nastavení */
-    transition: opacity 0.3s ease;
-    line-height: 1.8;
-    font-size: 1.1rem;
-    color: #e0e0e0;
-    font-family: 'JetBrains Mono', monospace;
-    background-color: rgba(10, 10, 10, 0.8);
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-.book-content p, .book-content h1, .book-content h2, .book-content h3,
-.book-content h4, .book-content h5, .book-content h6 {
-    margin: 1rem 0;
-    position: relative;
-}
-
+/* Vypneme .book-content ::after, ať nekonfliktuje s typewriterem */
 .book-content p::after, .book-content h1::after, .book-content h2::after,
 .book-content h3::after, .book-content h4::after, .book-content h5::after,
 .book-content h6::after {
-    content: '|';
-    animation: blink 0.5s step-end infinite;
-    margin-left: 2px;
-    color: var(--accent2, #0ff);
+    content: none !important; /* Žádné pseudo-kurzory, typewriter vládne sám! */
 }
 
 .book-content p.typing-done::after, .book-content h1.typing-done::after,
@@ -334,11 +280,17 @@ form textarea {
     content: none !important;
 }
 
+/* Ujistíme se, že .typing-done nemění font-size */
+.book-content .typing-done {
+    font-size: 1.3rem; /* Stejná velikost jako <p> */
+}
+
 .book-content .typing-done i, .book-content .typing-done em {
     animation: neon-pulse 1.5s infinite !important;
     color: var(--accent2, #00ffcc);
     text-shadow: 0 0 10px var(--accent2, #00ffcc), 0 0 20px var(--accent2, #00ffcc);
     font-style: italic;
+    font-size: 1.3rem; /* Konzistentní velikost */
 }
 
 @keyframes neon-pulse {
@@ -350,6 +302,7 @@ form textarea {
 .book-content em, .book-content i {
     font-style: italic;
     color: var(--accent2, #0ff); /* Bez animace, ať nekonfliktuje */
+    font-size: 1.3rem; /* Konzistentní velikost */
 }
 
 @keyframes blink {
@@ -361,6 +314,32 @@ footer {
     padding: 1rem;
     background: #1a1a1a;
     border-top: 2px solid var(--accent2, #0ff);
+}
+
+/* Styl pro typewriter a glitchující ocas – konzistentní velikost a neonový chaos! */
+.typewriter-cursor {
+    animation: blink 0.5s step-end infinite;
+    margin-left: 2px;
+    color: var(--accent2, #0ff);
+    font-size: 1.3rem; /* Stejná velikost jako <p> */
+    font-family: 'Synthom', monospace; /* Stejný font */
+}
+
+.glitch-tail {
+    display: inline;
+    font-family: 'Synthom', monospace;
+    font-weight: bold;
+    font-size: 1rem; /* Stejná velikost jako <p> */
+    margin-left: 2px; /* Malý odstup od kurzoru */
+    filter: brightness(1.4) contrast(1.2); /* Výraznější barvy */
+    animation: neon-glitch 0.2s infinite; /* Rychlá animace pro chaos */
+}
+
+@keyframes neon-glitch {
+    0% { color: var(--accent2, #f0f); filter: brightness(1.4) contrast(1.2); }
+    5% { color: var(--accent2, #0ff); filter: brightness(1.6) contrast(1.3) hue-rotate(10deg); }
+    10% { color: var(--accent2, #f00); filter: brightness(1.4) contrast(1.2); }
+    15% { color: var(--accent2, #00f); filter: brightness(1.4) contrast(1.2); }
 }
 
 /* Témata: Ať to svítí jako SynThoma v noci! 😎 */
@@ -399,13 +378,6 @@ footer {
     border-color: var(--accent2);
 }
 
-[data-theme] .book-content p::after, [data-theme] .book-content h1::after,
-[data-theme] .book-content h2::after, [data-theme] .book-content h3::after,
-[data-theme] .book-content h4::after, [data-theme] .book-content h5::after,
-[data-theme] .book-content h6::after {
-    color: var(--accent2);
-}
-
 .system-message {
     position: fixed;
     bottom: 20px;
@@ -423,8 +395,8 @@ footer {
 }
 
 .glitch-word {
-    color: #ff00ff #00ffff;
-    text-shadow: 0 0 5px #ff00ff #00ffff;
+    color: #ff00ff;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #00ffff;
 }
 
 /* Encyklopedie - Card Layout */
@@ -471,7 +443,7 @@ footer {
     display: block;
 }
 
-  nav ul.nav-horizontal {
+nav ul.nav-horizontal {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -480,14 +452,14 @@ footer {
     margin: 20px 0 30px 0;
     list-style: none;
     gap: 2vw;  /* pěkné rozestupy mezi odkazy */
-  }
+}
   
-  nav ul.nav-horizontal li {
+nav ul.nav-horizontal li {
     margin: 0;
     padding: 0;
-  }
+}
   
-  nav ul.nav-horizontal li a {
+nav ul.nav-horizontal li a {
     color: #f0f0f0;
     text-decoration: none;
     font-weight: 600;
@@ -496,25 +468,24 @@ footer {
     padding: 8px 18px;
     border-radius: 6px;
     transition: 
-      background 0.17s cubic-bezier(.5,1.7,.3,1), 
-      color 0.17s,
-      box-shadow 0.18s;
+        background 0.17s cubic-bezier(.5,1.7,.3,1), 
+        color 0.17s,
+        box-shadow 0.18s;
     position: relative;
     z-index: 2;
-  }
+}
   
-  nav ul.nav-horizontal li a.active,
-  nav ul.nav-horizontal li a:hover {
+nav ul.nav-horizontal li a.active,
+nav ul.nav-horizontal li a:hover {
     color: #0ff;
     position: relative;
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #0ff,;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #0ff;
     letter-spacing: .03em;
     z-index: 2;
     animation: glitch 1.2s infinite linear alternate-reverse;
-  }
-  
+}
 
-  .glitch-char {
+.glitch-char {
     display: inline-block;
     transition: color 0.07s, filter 0.1s;
 }
@@ -538,31 +509,11 @@ footer {
 
 .glitch-text {
     animation: glitch-char 0.12s linear 2; 
+    white-space: pre-line;
+    margin-left: 0.05em;
 }
 
 .glitch-text::after {
     content: '';
-    display: inline-block;
-    width: 1ch;
-    height: 1.1em;
-    vertical-align: -0.15em;
-    background: #0ff;
     margin-left: 0.05em;
-    animation: blink 1s steps(1) infinite alternate;
-  }
-  @keyframes blink {
-    0%,100% { opacity: 0; }
-    50% { opacity: 0.8; }
-  }
-
-
-  .typewriter-cursor {
-    display: inline-block;
-    width: 1ch;
-    animation: blink 1s steps(1) infinite alternate;
-    color: #0ff;
-    font-weight: bold;
-    filter: drop-shadow(0 0 4px #0ff) brightness(1.8);
-    vertical-align: -0.09em;
-    font-family: 'Handjet', monospace;
 }
