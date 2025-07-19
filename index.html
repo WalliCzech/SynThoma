@@ -2,10 +2,14 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>| SYNTHOMA |</title>
     <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
 <body>
     <div class="video-background">
         <video id="bgvid1" autoplay muted loop playsinline></video>
@@ -22,14 +26,15 @@
 
     <nav>
         <ul class="nav-horizontal">
-            <li><a href="index.html" class="active">Domů</a> <a href="kniha.html">Kniha / LOG</a></li>
-            <li><a href="archiv.html">Archiv</a> <a href="o-autorovi.html">O autorovi</a></li>
-
+            <li><a href="index.html" class="active">Domů</a></li>
+            <li><a href="kniha.html">Kniha / LOG</a></li>
+            <li><a href="archiv.html">Archiv</a></li>
+            <li><a href="o-autorovi.html">O autorovi</a></li>
         </ul>
-        <li class="audio-controls">
+        <div class="audio-controls">
             <button class="play-audio-btn" data-audio="audio/SYNTHOMA2.mp3">▶ Přehrát zvuk</button>
             <button class="stop-audio-btn" style="display: none;">⏹ Zastavit</button>
-        </li>
+        </div>
     </nav>
     <main>
 

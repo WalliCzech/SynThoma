@@ -1,6 +1,45 @@
+// Funkce pro detekci změny měřítka (zoom)
+function handleZoom() {
+    const viewport = document.querySelector('meta[name=viewport]');
+    const scale = window.visualViewport.scale;
+    
+    // Pokud je zoom větší než 1, upravíme viewport pro lepší čitelnost
+    if (scale > 1) {
+        document.documentElement.style.overflowX = 'auto';
+        document.body.style.overflowX = 'auto';
+        document.body.style.touchAction = 'pan-x pan-y pinch-zoom';
+        
+        // Zvýšíme základní velikost písma pro lepší čitelnost při zoomu
+        const baseFontSize = Math.max(16, 16 * scale * 0.8);
+        document.documentElement.style.setProperty('--mobile-font-size', `${baseFontSize}px`);
+    } else {
+        // Vrátíme výchozí hodnoty
+        document.documentElement.style.overflowX = 'hidden';
+        document.body.style.overflowX = 'hidden';
+        document.documentElement.style.setProperty('--mobile-font-size', '1rem');
+    }
+    
+    console.log(`🔍 Aktuální zoom: ${Math.round(scale * 100)}%`);
+}
+
+// Inicializace event listenerů pro zoom
+function initZoomHandlers() {
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', handleZoom);
+        window.visualViewport.addEventListener('scroll', handleZoom);
+    }
+    
+    // Přidáme třídu pro detekci touch zařízení
+    if ('ontouchstart' in window || navigator.maxTouchPoints) {
+        document.documentElement.classList.add('touch-device');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🎮 SYNTHOMA script initialized. System status: GLITCH_STABILIZED_RGB');
-// Inicializace canvasu pro pozadí
+    initZoomHandlers();
+    
+    // Inicializace canvasu pro pozadí
     const canvas = document.getElementById('glitch-bg');
     let ctx, W, H;
 

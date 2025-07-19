@@ -1,4 +1,18 @@
-/* styles.css: Neonový chaos pro SYNTHOMA, kde video pozadí svítí pod textem jako poškozený hologram! 😈⚡️ */
+/* styles.css: Neonový chaos pro SYNTHOMA - optimalizováno pro mobil! 📱💥 */
+
+/* =========================
+      ZÁKLADNÍ PROMĚNNÉ
+   ========================= */
+:root {
+    --primary-color: #0ff;
+    --secondary-color: #ff00ff;
+    --text-color: #0ff;
+    --bg-color: #000;
+    --mobile-font-size: 1rem;
+    --desktop-font-size: 2rem;
+    --heading-mobile: 2.5rem;
+    --heading-desktop: 4.4rem;
+}
 
 /* =========================
       IMPORTY A FONTY
@@ -32,28 +46,51 @@
    
    @font-face {
        font-family: 'Text03';
-       src: url('fonts/zekton/zekton__.ttf');
+       src: url('fonts/zekton/zektonbo.ttf');
        font-weight: normal;
        font-style: normal;
        font-display: swap;
    }
+   @font-face {
+    font-family: 'Text03i';
+    src: url('fonts/zekton/zektonbi.ttf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
    
    /* =========================
          ZÁKLADNÍ LAYOUT A BODY
       ========================= */
+   html {
+       overflow-x: hidden;
+       width: 100%;
+       -webkit-text-size-adjust: 100%;
+       -ms-text-size-adjust: 100%;
+       touch-action: manipulation;
+   }
+   
    body {
        margin: 0;
        padding: 0;
-       background-color: #000;
-       color: #0ff;
        overflow-x: hidden;
        line-height: 1.6;
        display: flex;
        flex-direction: column;
        min-height: 100vh;
-       position: relative; /* Zajistí správné vrstvení */
-       z-index: 0; /* Neutrální z-index pro body */
+       position: relative;
+       z-index: 0;
        font-family: 'JetBrains Mono', monospace;
+       text-rendering: optimizeLegibility;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+       word-wrap: break-word;
+       overflow-wrap: break-word;
+   }
+   
+   /* Zajistí, že obsah bude mít minimální šířku pro lepší čitelnost při zoomu */
+   main {
+       min-width: 280px;
    }
    
    main {
@@ -122,41 +159,141 @@
    p {
        font-family: 'Text03', monospace;
        font-weight: bold;
-       font-size: 2rem;
-       color: #0ff;
-       line-height: 1.4;
+       font-size: 1rem;
+       color: var(--text-color);
+       line-height: 1.5;
        text-align: left;
-       margin-left: 3rem;
-       margin-right: 3rem;
-       z-index: 10; /* Nad videem */
+       margin: 1rem 2rem;
+       z-index: 10;
+       opacity: 0.8;
+       word-break: break-word;
+       hyphens: auto;
+   }
+
+   .log {
+       font-family: 'Text03', monospace;
+       font-weight: normal;
+       color: rgb(0, 255, 255, 0.4);
+       text-shadow: 0 0 5px #f00, 0 0 15px #f00;
+       font-size: 1.3rem;
+       line-height: 1.5;
+       text-align: left;
+       margin-left: 1rem;
+       margin-right: 2rem;
+       margin-top: 1rem;
+       margin-bottom: 1rem;
+       padding: 0.5rem 1rem;
+       z-index: 10;
    }
 
    .dialog {
-    font-family: 'Text03', monospace;
-    font-weight: bold;
-    color: #0ff;
-    font-size: 2rem;
-    line-height: 1.4;
-    text-align: left;
-    margin-left: 3rem;
-    margin-right: 3rem;
-    z-index: 10; /* Nad videem */
-    text-shadow:0 0 5px #f0f, 0 0 10px #0ff
+       font-family: 'Text03i', monospace;
+       font-weight: italic;
+       color: rgba(0, 255, 255, 0.85);
+       font-size: 1.3rem;
+       line-height: 1.5;
+       text-align: left;
+       margin-left: 4rem;
+       margin-right: 2rem;
+       margin-top: 1rem;
+       margin-bottom: 1rem;
+       padding: 0.5rem 1rem;
+       z-index: 10;
+       text-shadow: 0 0 5px var(--secondary-color), 0 0 10px var(--primary-color);
    }
    
    .manifest {
        font-family: 'Text02', monospace;
        font-weight: bold;
-       color: #0ff;
-       text-shadow: 0 0 5px #00f, 0 0 10px #0ff, 0 0 15px #0ff;
-       font-size: 1.3rem;
-       line-height: 1.6;
+       color: var(--primary-color);
+       text-shadow: 0 0 5px #00f, 0 0 10px var(--primary-color), 0 0 15px var(--primary-color);
+       font-size: 1rem;
+       line-height: 1.4;
        text-align: center;
        position: relative;
        z-index: 100;
-       margin: 20px auto;
-       max-width: 80%;
+       margin: 10px auto;
+       max-width: 90%;
+       padding: 0 10px;
+   }
 
+   .ctecka {
+    font-family: 'Text03', monospace;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: rgba(0, 255, 255, 0.89);
+    line-height: 1.5;
+    text-align: left;
+    margin: 1rem 2rem;
+    text-shadow: 0 0 5px #00f;
+    z-index: 10;
+   }
+   
+   /* =========================
+         RESPONZIVNÍ STYLY
+      ========================= */
+   @media (max-width: 768px) {
+       :root {
+           --mobile-font-size: 1rem;
+           --heading-mobile: 2rem;
+       }
+       
+       /* Povolení text-size-adjust pro lepší čitelnost při zoomu */
+       html {
+           -webkit-text-size-adjust: 100%;
+           -ms-text-size-adjust: 100%;
+       }
+       
+       /* Lepší zobrazení textu při zoomu */
+       body {
+           text-size-adjust: 100%;
+           -webkit-text-size-adjust: 100%;
+           -moz-text-size-adjust: 100%;
+           -ms-text-size-adjust: 100%;
+           text-rendering: optimizeLegibility;
+           -webkit-font-smoothing: antialiased;
+       }
+       
+       body {
+           font-size: var(--mobile-font-size);
+       }
+       
+       h1, #glitch-synthoma.glitch-master {
+           font-size: var(--heading-mobile) !important;
+           margin: 0.5rem 0;
+       }
+       
+       p, .dialog {
+           font-size: 1.1rem !important;
+           margin-left: 1rem !important;
+           margin-right: 1rem !important;
+           line-height: 1.4;
+       }
+       
+       .manifest {
+           font-size: 0.9rem !important;
+           margin: 10px 0;
+       }
+       
+       nav ul {
+           flex-direction: column;
+           padding: 0;
+       }
+       
+       nav li {
+           margin: 5px 0;
+       }
+       
+       .audio-controls {
+           margin-top: 10px;
+           display: flex;
+           justify-content: center;
+       }
+       
+       .audio-controls button {
+           padding: 8px 15px;
+           font-size: 0.9rem;
+       }
    }
    
    /* =========================
@@ -164,21 +301,24 @@
       ========================= */
    #glitch-synthoma.glitch-master {
        font-family: 'Synthoma', monospace;
-       font-size: 4.4rem;
-       color: #0ff;
+       font-size: var(--heading-desktop);
+       color: var(--primary-color);
        text-transform: uppercase;
        letter-spacing: .08em;
        position: relative;
        text-align: center;
-       z-index: 10; /* Nad videem */
+       z-index: 10;
        user-select: none;
        text-shadow:
-           0 0 6px #0ff,
-           0 0 16px #ff00ff,
-           0 0 36px #0ff,
-           2px 2px 12px #ff00ff;
+           0 0 6px var(--primary-color),
+           0 0 16px var(--secondary-color),
+           0 0 36px var(--primary-color),
+           2px 2px 12px var(--secondary-color);
        animation: glitch 1.2s infinite linear alternate-reverse;
        will-change: transform, text-shadow;
+       margin: 0.5rem 0;
+       word-break: break-word;
+       padding: 0 10px;
    }
    
    .glitch-span,
@@ -283,6 +423,9 @@
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    height: 100%;
     z-index: -1000;
     overflow: hidden;
 }
@@ -379,8 +522,37 @@
 }
    
    /* =========================
-         NAV
+         NAVIGACE
       ========================= */
+   nav {
+       margin: 10px 0;
+       text-align: center;
+   }
+   
+   nav ul {
+       list-style: none;
+       padding: 0;
+       margin: 0;
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+       gap: 10px;
+   }
+   
+   nav a {
+       color: var(--primary-color);
+       text-decoration: none;
+       padding: 8px 15px;
+       border: 1px solid var(--primary-color);
+       border-radius: 4px;
+       transition: all 0.3s ease;
+       font-size: 0.9rem;
+   }
+   
+   nav a:hover, nav a.active {
+       background-color: rgba(0, 255, 255, 0.1);
+       text-shadow: 0 0 5px var(--primary-color);
+   }
    /* Styly pro audio ovládací prvky */
    .audio-controls {
        margin-left: 2em;
@@ -526,21 +698,17 @@
          GLITCH typewriter
       ========================= */
    .SYNTHOMAREADER {
-    font-family: 'Text03', monospace;
-    font-weight: bold;
-    font-size: 2rem;
-       min-height: 2.5em;
        width: 100%;
-       padding: 1rem 1rem;
+       padding: 0;
+       margin: 0.2rem 0;
+       padding: 0.2rem;
        box-sizing: border-box;
        background: transparent;
        border: none;
-       border-radius: 8px;
-       transition: min-height 0.4s cubic-bezier(.8,0,.23,1.1);
-       line-height: 1.55;
-       word-break: break-word;
-       white-space: pre-line;
-       z-index: 10; /* Nad videem */
+       border-radius: 4px;
+       transition: all 0.3s ease;
+       line-height: 1.4;
+       z-index: 10;
    }
 
 
@@ -557,7 +725,6 @@
    .audio-controls .glitch-btn {
        margin: 0 0.5rem;
        padding: 0.5rem 1.5rem;
-       font-size: 1.2rem;
        border: 1px solid #0ff;
        box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
        transition: all 0.3s ease;
@@ -576,15 +743,12 @@
       .glitch-btn {
        font-family: 'Text03', monospace;
        font-weight: bold;
-       font-size: 2rem;
        color: #0ff;
        line-height: 1.4;
-       text-align: left;
-       margin-left: 3rem;
-       margin-right: 3rem;
+       text-align: center;
        text-shadow: 0 0 5px #0ff, 0 0 5px #ff00ff;
        z-index: 10; /* Nad videem */
-       background-color: #000;
+       background-color: rgba(0, 0, 0, 0);
        border-radius: 8px;
        border: none;
        padding: 1rem 1rem;
