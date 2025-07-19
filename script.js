@@ -205,12 +205,47 @@ function glitchCycle() {
         }, 110 + Math.random()*90);
     }
 }
-
 // Iniciační render
 document.getElementById('glitch-synthoma').innerHTML = createGlitchLayers(SYNTHOMA_TEXT);
 
 // Glitch cyklus
 setInterval(glitchCycle, 120);
+
+
+
+
+// Funkce pro glitchování jednoho slova
+function startGlitchWord(selector = '.glitch-word2', interval = 50, intensity = 0.27, duration = 110) {
+    document.querySelectorAll(selector).forEach(el => {
+        const origText = el.getAttribute('data-text') || el.textContent;
+        el.textContent = origText;
+
+        setInterval(() => {
+            // Pro každý frame vyměň některé znaky za glitch znaky
+            let glitched = '';
+            for (let i = 0; i < origText.length; i++) {
+                if (Math.random() < intensity && origText[i] !== ' ') {
+                    glitched += GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+                } else {
+                    glitched += origText[i];
+                }
+            }
+            el.textContent = glitched;
+
+            // Po krátké chvíli vrať zpět originál
+            setTimeout(() => {
+                el.textContent = origText;
+            }, duration + Math.random() * 70);
+        }, interval + Math.random() * 40);
+    });
+}
+
+// Spustíme na všech .glitch-word
+startGlitchWord('.glitch-word2', 72, 0.31, 90);
+
+
+
+
 
 let currentAudio = null;
 
@@ -542,6 +577,7 @@ function loadContent() {
             
             // Spustíme psaní zbytku textu
             typewriterWrite(reader, html, {}, () => {
+                startGlitchWord('.glitch-word2', 75, 0.29, 80);
                 console.log('✅ Obsah úspěšně načten a zobrazen. Neon svítí, svět se točí! 🌌');
             });
         })
@@ -685,40 +721,52 @@ window.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', function() {
     const glitchName = document.getElementById('glitch-name');
-    const originalText = glitchName.textContent;
-    const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/░▒▓█▄▀●◊';
     
-    function getRandomChar() {
-      return chars[Math.floor(Math.random() * chars.length)];
-    }
-    
-    function glitch() {
-      const text = originalText.split('');
-      // Náhodně vybereme 1-2 znaky k nahrazení
-      const indices = [];
-      const numGlitches = 1 + Math.floor(Math.random() * 2);
-      
-      while (indices.length < numGlitches) {
-        const idx = Math.floor(Math.random() * text.length);
-        if (text[idx] !== ' ' && text[idx] !== '\n') {
-          indices.push(idx);
+    // Kontrola, zda element existuje
+    if (glitchName) {
+        const originalText = glitchName.textContent;
+        const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/░▒▓█▄▀●◊';
+        
+        function getRandomChar() {
+            return chars[Math.floor(Math.random() * chars.length)];
         }
-      }
-      
-      indices.forEach(idx => {
-        text[idx] = getRandomChar();
-      });
-      
-      glitchName.textContent = text.join('');
-      
-      // Náhodné zpoždění pro další glitch efekt
-      const delay = 50 + Math.random() * 150; // 50-200ms
-      setTimeout(() => {
-        glitchName.textContent = originalText;
-        setTimeout(glitch, 50 + Math.random() * 200);
-      }, delay);
+        
+        function glitch() {
+            const text = originalText.split('');
+            // Náhodně vybereme 1-2 znaky k nahrazení
+            const indices = [];
+            const numGlitches = 1 + Math.floor(Math.random() * 2);
+            
+            while (indices.length < numGlitches) {
+                const idx = Math.floor(Math.random() * text.length);
+                if (text[idx] !== ' ' && text[idx] !== '\n') {
+                    indices.push(idx);
+                }
+            }
+            
+            indices.forEach(idx => {
+                text[idx] = getRandomChar();
+            });
+            
+            glitchName.textContent = text.join('');
+            
+            // Náhodné zpoždění pro další glitch efekt
+            const delay = 50 + Math.random() * 150; // 50-200ms
+            setTimeout(() => {
+                if (glitchName) { // Kontrola znovu, pro jistotu
+                    glitchName.textContent = originalText;
+                    setTimeout(glitch, 50 + Math.random() * 200);
+                }
+            }, delay);
+        }
+        
+        // Spustíme glitch efekt s malým zpožděním po načtení stránky
+        setTimeout(glitch, 1000);
+    } else {
+        console.log("Element 'glitch-name' nebyl nalezen. Přeskočeno nastavení glitch efektu.");
     }
-    
-    // Spustíme glitch efekt s malým zpožděním po načtení stránky
-    setTimeout(glitch, 1000);
-  });
+});
+
+
+
+

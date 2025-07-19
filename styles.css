@@ -84,6 +84,8 @@
        line-height: 1.6;
        display: flex;
        flex-direction: column;
+       justify-content: center;
+       align-items: center;
        min-height: 100vh;
        position: relative;
        z-index: 0;
@@ -103,7 +105,6 @@
    main {
        max-width: 800px;
        width: calc(100% - 2rem);
-       margin: 1rem auto;
        padding: 0;
        background: rgba(0, 0, 0, 0.8); /* Lehká průhlednost pro kyberpunkový efekt */
        border-radius: 15px;
@@ -137,6 +138,8 @@
     font-size: 2rem;
     letter-spacing: 1px;
     text-transform: uppercase;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
     color: #0ff;
     text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
    }
@@ -147,7 +150,8 @@
        color: #0ff;
        font-size: 1.1rem;
        line-height: 1.6;
-       margin: 0 0 1.5rem 0;
+       margin-top: 0rem;
+       margin-bottom: 0rem;
        padding: 0.5rem 1rem;
        word-break: keep-all;
        overflow-wrap: break-word;
@@ -161,19 +165,63 @@
        will-change: opacity, transform;
    }
    
-   .title {
-       font-weight: bold;
-       color: #0ff;
-       line-height: 1.4;
-       text-align: center;
-       text-shadow: 0 0 5px #0ff, 0 0 10px #ff00ff;
-       margin: 1rem 0;
-       z-index: 10; /* Nad videem */
+   p {
+    font-family: 'Text03', monospace;
+    font-weight: normal;
+    color: rgb(0, 255, 255, 0.8);
+    font-size: 1.3rem;
+    line-height: 1.5;
+    text-align: left;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    padding: 0.5rem 1rem;
+    z-index: 10;
+    text-shadow: 0 0 6px #00f;
    }
-   
 
+
+
+
+
+.title {
+    font-family: 'Synthoma', monospace;
+    position: relative;
+    font-weight: bold;
+    color: rgb(0, 255, 255, 1);
+    line-height: 1.4;
+    font-size: 2.2rem;
+    text-align: center;
+    vertical-align: center;
+    text-shadow: 0 0 15px #0ff, 0 0 20px #ff00ff;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    padding: 0.5rem 1rem 0.5rem 1.6rem;
+    z-index: 10;
+    justify-content: center;
+}
+
+.title::before {
+    content: '';
+    position: absolute;
+    left: 0; /* zarovnáme odshora (ne přes celý blok) */
+    width: 4px;       /* tloušťka čáry */
+    height: 100%;      /* můžeš si upravit, jak dlouhá má být */
+    border-radius: 2px;
+    background: solid(#0ff);
+    box-shadow:
+        -1px 0 4px 2px #0ff,
+        0px 0 8px 3px #ff00ff,
+        0px 0 12px 1px #faff00;
+    animation: border-glow 2.6s infinite cubic-bezier(.8,0,.23,1.1);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.6;
+}
 
    .log {
+    position: relative;
     color: #0ff;
     text-transform: uppercase;
     font-family: 'Text03b', monospace;
@@ -182,29 +230,108 @@
     font-size: 1.35rem;
     line-height: 1.5;
     text-align: left;
+    vertical-align: center;
     margin-left: 1rem;
     margin-right: 2rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    padding: 0.5rem 1rem 0rem 1.6rem;
     z-index: 10;
+    justify-content: center;
+
    }
 
+   .log::before {
+    content: '';
+    position: absolute;
+    left: 0; /* zarovnáme odshora (ne přes celý blok) */
+    width: 4px;       /* tloušťka čáry */
+    height: 100%;      /* můžeš si upravit, jak dlouhá má být */
+    border-radius: 2px;
+    background: solid(#f00);
+    box-shadow:
+        -1px 0 4px 2px #f00,
+        0px 0 8px 3px #f00,
+        0px 0 12px 1px #ff0;
+    animation: border-glow 2.6s infinite cubic-bezier(.8,0,.23,1.1);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
    .dialog {
-       font-family: 'Text03i', monospace;
-       font-weight: italic;
-       color: #f0f;
-       font-size: 1.35rem;
-       line-height: 1.5;
-       text-align: left;
-       margin-left: 4rem;
-       margin-right: 2rem;
-       margin-top: 1rem;
-       margin-bottom: 1rem;
-       padding: 0.5rem 1rem;
-       z-index: 10;
-       text-shadow: 0 0 5px #f0f, 0 0 10px #0ff;
+    position: relative;
+    color: rgb(0, 255, 255, 0.75);
+    text-shadow: 0 0 5px #f0f, 0 0 10px #f0f;
+    font-family: 'Text03i', monospace;
+    font-weight: normal;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    text-align: left;
+    vertical-align: center;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    padding: 0.5rem 1rem 0rem 2.6rem;
+    z-index: 10;
+    justify-content: center;
    }
+
+   .dialog::before {
+    content: '';
+    position: absolute;
+    left: 0; /* zarovnáme odshora (ne přes celý blok) */
+    width: 4px;       /* tloušťka čáry */
+    height: 100%;      /* můžeš si upravit, jak dlouhá má být */
+    border-radius: 2px;
+    background: solid(#f0f);
+    box-shadow:
+        -1px 0 4px 2px #0ff,
+        0px 0 8px 3px #f0f,
+        0px 0 12px 1px #0ff;
+    animation: border-glow 2.6s infinite cubic-bezier(.8,0,.23,1.1);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.text {
+    position: relative;
+    color: #0ff;
+    text-shadow: 0 0 2px #f0f, 0 0 4px #0ff;
+    font-family: 'Text03', monospace;
+    font-weight: normal;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    text-align: left;
+    vertical-align: center;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    padding: 0.5rem 1rem 0rem 1.6rem;
+    z-index: 10;
+    justify-content: center;
+}
+
+.text::before {
+    content: '';
+    position: absolute;
+    left: 0; /* zarovnáme odshora (ne přes celý blok) */
+    width: 4px;       /* tloušťka čáry */
+    height: 100%;      /* můžeš si upravit, jak dlouhá má být */
+    border-radius: 2px;
+    background: solid(#0ff);
+    box-shadow:
+        -1px 0 4px 1px #0ff,
+        0px 0 8px 1px #0ff,
+        0px 0 12px 1px #00f;
+    animation: border-glow 2.6s infinite cubic-bezier(.8,0,.23,1.1);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.6;
+}
    
    .manifest {
        font-family: 'Text02', monospace;
@@ -224,19 +351,16 @@
    .ctecka {
     display: flex; 
     flex-direction: column;
-    font-family: 'Text03', monospace;
-    font-weight: normal;
-    font-size: 1.3rem;
-    color: rgba(0, 255, 255, 0.89);
-    line-height: 1.5;
-    text-align: left;
-    margin-left: 1rem;
-    margin-right: 2rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 0 5px #00f;
-    z-index: 10;
+    
    }
+
+   /* Neon animace čáry – můžeš upravit podle chuti */
+@keyframes border-glow {
+    0%, 100% { filter: brightness(1.4) blur(0.4px); }
+    40%      { filter: brightness(2.1) blur(1.3px); }
+    70%      { filter: brightness(1.7) blur(0.6px); }
+}
+   
    
    /* =========================
          RESPONZIVNÍ STYLY
@@ -332,7 +456,8 @@
            2px 2px 12px var(--secondary-color);
        animation: glitch 1.2s infinite linear alternate-reverse;
        will-change: transform, text-shadow;
-       margin: 0.5rem 0;
+       margin-top: 0rem;
+       margin-bottom: 0rem;
        word-break: break-word;
        padding: 0 10px;
    }
@@ -559,14 +684,11 @@
        color: var(--primary-color);
        text-decoration: none;
        padding: 8px 15px;
-       border: 1px solid var(--primary-color);
-       border-radius: 4px;
        transition: all 0.3s ease;
        font-size: 0.9rem;
    }
    
    nav a:hover, nav a.active {
-       background-color: rgba(0, 255, 255, 0.1);
        text-shadow: 0 0 5px var(--primary-color);
    }
    /* Styly pro audio ovládací prvky */
@@ -576,21 +698,23 @@
    
    .play-audio-btn,
    .stop-audio-btn {
-       background: rgba(0, 0, 0, 0.7);
-       border: 1px solid #0ff;
+    font-family: 'Text02', monospace;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.6rem;
+       border: none;
        color: #0ff;
-       font-family: 'Text03', monospace;
+       background: transparent;
        padding: 0.5em 1em;
        cursor: pointer;
        transition: all 0.3s ease;
        text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
-       box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
    }
    
    .play-audio-btn:hover,
    .stop-audio-btn:hover {
-       background: rgba(0, 255, 255, 0.2);
-       box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+
+       text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
    }
    
    .play-audio-btn:active,
@@ -624,8 +748,6 @@
        font-size: 1.16rem;
        letter-spacing: 0.09em;
        padding: 8px 18px;
-       border-radius: 6px;
-       transition: background 0.17s cubic-bezier(.5,1.7,.3,1), color 0.17s, box-shadow 0.18s;
        position: relative;
        z-index: 10; /* Nad videem */
    }
@@ -643,14 +765,19 @@
       ========================= */
    .typewriter-cursor {
        display: inline-block;
-       font-family: inherit;
+       font-family: 'Text03', monospace;
        font-weight: bold;
-       font-size: 1em;
+       font-size: 1.3rem;
        color: #0ff;
        vertical-align: baseline;
+       align-items: center;
        animation: blink 1.2s steps(2, start) infinite;
-       filter: drop-shadow(0 0 6px #0ff);
+       filter: drop-shadow(0 0 12px #0ff);
        position: relative;
+       margin-top: 4rem;
+       margin-bottom: 0rem;
+       margin-left: 1rem;
+
        z-index: 10; /* Nad videem */
    }
    
@@ -661,9 +788,9 @@
    
    .glitch-tail {
        display: inline-block;
-       margin-left: 2px;
-       font-family: 'JetBrains Mono', 'Synthoma', monospace;
-       font-size: 0.74em;
+       margin-left: 1rem;
+       font-family: 'Text03', monospace;
+       font-size: 1.3rem;
        opacity: 0.75;
        pointer-events: none;
        letter-spacing: 1px;
@@ -724,51 +851,3 @@
        z-index: 10;
    }
 
-
-
-   /* =========================
-         buttons
-      ========================= */
-      
-   .audio-controls {
-       margin: 1rem 0;
-       text-align: center;
-   }
-   
-   .audio-controls .glitch-btn {
-       margin: 0 0.5rem;
-       padding: 0.5rem 1.5rem;
-       border: 1px solid #0ff;
-       box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-       transition: all 0.3s ease;
-   }
-   
-   .audio-controls .glitch-btn:hover {
-       background-color: rgba(0, 255, 255, 0.1);
-       transform: translateY(-2px);
-       box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
-   }
-   
-   .audio-controls .glitch-btn:active {
-       transform: translateY(1px);
-   }
-
-      .glitch-btn {
-       font-family: 'Text03', monospace;
-       font-weight: bold;
-       color: #0ff;
-       line-height: 1.4;
-       text-align: center;
-       text-shadow: 0 0 5px #0ff, 0 0 5px #ff00ff;
-       z-index: 10; /* Nad videem */
-       background-color: rgba(0, 0, 0, 0);
-       border-radius: 8px;
-       border: none;
-       padding: 1rem 1rem;
-       transition: background-color 0.3s ease;
-       cursor: pointer;
-       user-select: none;
-       will-change: transform, opacity;
-       animation: glitch 1.2s infinite linear alternate-reverse;
-       will-change: transform, text-shadow;
-    }
