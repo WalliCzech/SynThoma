@@ -20,18 +20,17 @@
 
     <header>
         <h1 id="glitch-synthoma" class="glitch-master" data-text="SYNTHOMA"></h1>
-        <p class="manifest">[Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]</p>
+        <a class="manifest">[Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]</a>
     </header>
 
     <nav>
         <ul class="nav-horizontal">
             <li><a href="index.html" class="active">Domů</a></li>
-            <li><a href="kniha.html">Kniha / LOG</a></li>
-            <li><a href="archiv.html">Archiv</a></li>
-            <li><a href="o-autorovi.html">O autorovi</a></li>
+            <li><a href="kniha.html" class="noisy-text">Kniha</a></li>
+            <li><a href="o-autorovi.html" class="noisy-text">Autor</a></li>
         </ul>
         <div class="audio-controls">
-            <button class="play-audio-btn" data-audio="audio/SynthBachmoff-main.mp3">▶ Přehrát zvuk</button>
+            <button class="play-audio-btn" data-audio="audio/SynthBachmoff-main.mp3">▶ Hudba</button>
             <button class="stop-audio-btn" style="display: none;">⏹ Zastavit</button>
         </div>
     </nav>
@@ -43,5 +42,8 @@
     
     <script src="audioPlayer.js" defer></script>
     <script src="script.js" defer></script>
+    <script>
+        startTextNoise();
+    </script>
 </body>
 </html>

@@ -152,6 +152,85 @@ document.addEventListener('DOMContentLoaded', () => {
  }
 
  // Konec inicializace
+
+// ===== POPUP FUNCTIONALITY =====
+// Inicializace popupů po načtení DOM
+function initPopups() {
+    // Najdeme všechny elementy s třídou popup-tip
+    const popupTips = document.querySelectorAll('.popup-tip');
+    
+    // Přidáme event listenery pro každý popup
+    popupTips.forEach(tip => {
+        const shortText = tip.getAttribute('data-short');
+        const longText = tip.getAttribute('data-long');
+        
+        if (!shortText || !longText) return; // Přeskočíme, pokud chybí data
+        
+        // Vytvoříme element pro krátký popup (tooltip)
+        const shortPopup = document.createElement('div');
+        shortPopup.className = 'popup-short';
+        shortPopup.textContent = shortText;
+        tip.appendChild(shortPopup);
+        
+        // Vytvoříme element pro dlouhý popup
+        const longPopup = document.createElement('div');
+        longPopup.className = 'popup-long';
+        longPopup.innerHTML = `
+            <div class="popup-long-close">&times;</div>
+            <div class="popup-content">${longText}</div>
+        `;
+        document.body.appendChild(longPopup);
+        
+        // Zobrazíme krátký popup při najetí myší
+        tip.addEventListener('mouseenter', () => {
+            shortPopup.style.display = 'block';
+        });
+        
+        // Skryjeme krátký popup při odjetí myši
+        tip.addEventListener('mouseleave', () => {
+            shortPopup.style.display = 'none';
+        });
+        
+        // Kliknutí na text zobrazí dlouhý popup
+        tip.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Zavřeme všechny ostatní popupy
+            document.querySelectorAll('.popup-long').forEach(popup => {
+                popup.style.display = 'none';
+            });
+            
+            // Zobrazíme aktuální popup
+            longPopup.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Zablokujeme scrollování stránky
+        });
+        
+        // Kliknutí na křížek zavře popup
+        const closeBtn = longPopup.querySelector('.popup-long-close');
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            longPopup.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Obnovíme scrollování stránky
+        });
+        
+        // Kliknutí mimo popup ho také zavře
+        longPopup.addEventListener('click', (e) => {
+            if (e.target === longPopup) {
+                longPopup.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Obnovíme scrollování stránky
+            }
+        });
+    });
+    
+    console.log('🎯 Popup systém aktivován. Klikni na zvýrazněný text pro více informací!');
+}
+
+// Spustíme inicializaci popupů a textového šumu po načtení stránky
+document.addEventListener('DOMContentLoaded', () => {
+    initPopups();
+    startTextNoise('.noisy-text', 0.45, 30);
+});
  
  // Uklidíme při odpojení komponenty
  return () => {
@@ -770,3 +849,177 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+// Inicializace popupů po načtení stránky
+document.addEventListener('DOMContentLoaded', () => {
+    // Krátký hover popisek
+    document.body.addEventListener('mouseenter', function(e) {
+        if (e.target.classList.contains('popup-tip')) {
+            let tip = e.target;
+            // Pokud už má popisek, neřešíme
+            if (tip.querySelector('.popup-short')) return;
+            let short = tip.getAttribute('data-short');
+            if (short) {
+                let el = document.createElement('span');
+                el.className = 'popup-short';
+                el.textContent = short;
+                tip.appendChild(el);
+               
+                
+                
+            // --- OCHRANA PROTI PŘESAHU ---
+            setTimeout(() => {
+                let rect = el.getBoundingClientRect();
+                let parentRect = tip.parentElement.getBoundingClientRect();
+                let rightOverflow = (rect.right - window.innerWidth);
+                if (rightOverflow > 0) {
+                    el.style.left = `-${rightOverflow + 8}px`;
+                }
+                let leftOverflow = (rect.left);
+                if (leftOverflow < 0) {
+                    el.style.left = `${8 - leftOverflow}px`;
+                }
+            }, 10);
+            }
+        }
+    }, true);
+
+    // Skryjeme tooltip při odjetí myši
+    document.body.addEventListener('mouseleave', function(e) {
+        if (e.target.classList.contains('popup-tip')) {
+            let tip = e.target;
+            let short = tip.querySelector('.popup-short');
+            if (short) short.remove();
+        }
+    }, true);
+
+    // Kliknutí – zobrazí velký detailní popup
+    document.body.addEventListener('click', function(e) {
+        // Zavřít popup kliknutím na křížek
+        if (e.target.classList.contains('popup-long-close')) {
+            let pop = document.querySelector('.popup-long');
+            if (pop) {
+                pop.remove();
+                document.body.style.overflow = 'auto'; // Obnovíme scrollování
+            }
+            return;
+        }
+        
+        // Zavřít popup kliknutím mimo obsah
+        if (e.target.classList.contains('popup-long')) {
+            let pop = document.querySelector('.popup-long');
+            if (pop) {
+                pop.remove();
+                document.body.style.overflow = 'auto'; // Obnovíme scrollování
+            }
+            return;
+        }
+        
+        // Otevřít popup při kliknutí na .popup-tip
+        if (e.target.classList.contains('popup-tip')) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            let tip = e.target;
+            let long = tip.getAttribute('data-long');
+            if (long) {
+                // Zavřeme případný otevřený popup
+                let existingPopup = document.querySelector('.popup-long');
+                if (existingPopup) existingPopup.remove();
+                
+                // Zobrazíme nový popup
+                showLongPopup(long);
+            }
+        }
+    });
+    
+    console.log('🎯 Popup systém aktivován. Klikni na zvýrazněný text pro více informací!');
+});
+
+// Funkce na vykreslení velkého popupu
+function showLongPopup(text) {
+    // Vytvoříme overlay pro ztmavení pozadí
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    
+    // Vytvoříme obsah popupu
+    const popup = document.createElement('div');
+    popup.className = 'popup-long';
+    popup.innerHTML = `
+        <div class="popup-content">
+            <button class="popup-long-close" aria-label="Zavřít">&times;</button>
+            <div class="popup-text">${text}</div>
+        </div>
+    `;
+    
+    // Přidáme popup do stránky
+    document.body.appendChild(overlay);
+    document.body.appendChild(popup);
+    
+    // Zablokujeme scrollování stránky
+    document.body.style.overflow = 'hidden';
+    
+    // Přidáme event listener pro klávesu ESC
+    const closePopup = () => {
+        popup.remove();
+        overlay.remove();
+        document.body.style.overflow = 'auto';
+        document.removeEventListener('keydown', handleEsc);
+    };
+    
+    const handleEsc = (e) => {
+        if (e.key === 'Escape') {
+            closePopup();
+        }
+    };
+    
+    // Přidáme event listener pro kliknutí na overlay
+    overlay.addEventListener('click', closePopup);
+    
+    // Přidáme event listener pro tlačítko zavřít
+    const closeBtn = popup.querySelector('.popup-long-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closePopup();
+        });
+    }
+    
+    // Přidáme event listener pro klávesu ESC
+    document.addEventListener('keydown', handleEsc);
+    
+    // Zajistíme, aby se popup zobrazil správně
+    setTimeout(() => {
+        popup.style.opacity = '1';
+        popup.style.transform = 'translate(-50%, -50%) scale(1)';
+    }, 10);
+    
+    // Vrátíme referenci na popup pro případné další úpravy
+    return popup;
+}
+
+
+function startTextNoise(selector = '.noisy-text', intensity = 0.33, interval = 41) {
+    document.querySelectorAll(selector).forEach(el => {
+        const orig = el.textContent.trim();
+        el.innerHTML = '';
+        for (let i = 0; i < orig.length; i++) {
+            const span = document.createElement('span');
+            span.textContent = orig[i];
+            span.className = 'noisy-char';
+            span.style.display = 'inline-block'; // Lepší zalamování
+            el.appendChild(span);
+        }
+        setInterval(() => {
+            el.querySelectorAll('.noisy-char').forEach(char => {
+                if (Math.random() < intensity && char.textContent.trim() !== '') {
+                    char.style.color = `rgb(${200 + Math.random() * 55}, ${200 + Math.random() * 55}, ${200 + Math.random() * 55})`;
+                } else {
+                    char.style.color = '#dcdcdc';
+                }
+            });
+        }, interval);
+    });
+}
+document.addEventListener('DOMContentLoaded', () => {
+    startTextNoise('.noisy-text', 0.45, 30);
+});

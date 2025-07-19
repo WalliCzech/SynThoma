@@ -334,11 +334,11 @@
 }
    
    .manifest {
-       font-family: 'Text02', monospace;
+       font-family: 'Text02', sans-serif;
        font-weight: bold;
-       color: var(--primary-color);
-       text-shadow: 0 0 5px #00f, 0 0 10px var(--primary-color), 0 0 15px var(--primary-color);
-       font-size: 1rem;
+       font-size: 1.6rem;
+       color: #0ff;
+       text-shadow: 0 0 5px #00f, 0 0 10px #00f, 0 0 15px #0ff;
        line-height: 1.4;
        text-align: center;
        position: relative;
@@ -351,7 +351,7 @@
    .ctecka {
     display: flex; 
     flex-direction: column;
-    
+    overflow: auto;
    }
 
    /* Neon animace čáry – můžeš upravit podle chuti */
@@ -441,7 +441,7 @@
 
    #glitch-synthoma.glitch-master {
        font-family: 'Synthoma', monospace;
-       font-size: var(--heading-desktop);
+       font-size: 6.2rem;
        color: var(--primary-color);
        text-transform: uppercase;
        letter-spacing: .08em;
@@ -456,8 +456,8 @@
            2px 2px 12px var(--secondary-color);
        animation: glitch 1.2s infinite linear alternate-reverse;
        will-change: transform, text-shadow;
-       margin-top: 0rem;
-       margin-bottom: 0rem;
+       margin-top: 3rem;
+       margin-bottom: 1rem;
        word-break: break-word;
        padding: 0 10px;
    }
@@ -745,7 +745,7 @@
        color: #b5b5b5;
        text-decoration: none;
        font-weight: 600;
-       font-size: 1.8rem;
+       font-size: 2.2rem;
        letter-spacing: 0.09em;
        padding: 8px 18px;
        position: relative;
@@ -845,9 +845,159 @@
        box-sizing: border-box;
        background: transparent;
        border: none;
+       overflow: visible;
        border-radius: 4px;
        transition: all 0.3s ease;
        line-height: 1.4;
        z-index: 10;
    }
 
+
+   /* =========================
+         GLITCH popup
+      ========================= */
+      .popup-tip {
+        color: #f0f;
+        text-shadow: 0 0 5px #0ff;
+        cursor: pointer;
+        border-bottom: 1px dotted #f0f;
+        position: relative;
+        transition: color 0.2s;
+        z-index: 1000;
+        display: inline-block;
+    }
+    .popup-tip:hover {
+        color: #ff00c8;
+    }
+    
+    .popup-tip .popup-short {
+        position: absolute;
+        font-family: 'Text03', monospace;
+        display: block;
+        left: 0;
+        top: 100%;
+        margin-top: 5px;
+        background: rgba(20, 20, 28, 0.97);
+        color: #0ff;
+        padding: 6px 12px;
+        border-radius: 6px;
+        box-shadow: 0 0 15px #0ff, 0 0 2px #ff00ff;
+        font-size: 14px;
+        z-index: 1000;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        overflow: auto;
+        transform: translateY(10px);
+        transition: opacity 0.2s, transform 0.2s;
+    }
+    
+    .popup-tip:hover .popup-short {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Overlay pro ztmavení pozadí */
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 1000;
+        backdrop-filter: blur(5px);
+    }
+    
+    /* Hlavní kontejner popupu */
+    .popup-long {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+        background: #090e18;
+        color: #0ff;
+        border-radius: 12px;
+        box-shadow: 0 0 35px rgba(0, 255, 255, 0.4), 0 0 15px rgba(255, 0, 255, 0.8);
+        z-index: 1001;
+        max-width: 90vw;
+        max-height: 85vh;
+        width: 600px;
+        opacity: 0;
+        transition: opacity 0.2s, transform 0.2s;
+        overflow: hidden;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    
+    .popup-content {
+        position: relative;
+        padding: 35px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .popup-text {
+        line-height: 1.7;
+        font-family: 'Text03', monospace;
+        font-size: 1.4rem;
+        color: #0ff;
+    }
+    
+    .popup-long-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        color: #ff00c8;
+        font-size: 28px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.2s;
+        z-index: 1002;
+    }
+    
+    .popup-long-close:hover {
+        color: #0ff;
+        transform: rotate(90deg);
+        background: rgba(255, 0, 200, 0.1);
+    }
+    
+    /* Responzivita */
+    @media (max-width: 768px) {
+        .popup-long {
+            width: 95%;
+            max-width: 95%;
+            padding: 20px;
+        }
+        
+        .popup-content {
+            padding: 25px 20px;
+        }
+    }
+    
+    /* Animace */
+    @keyframes popupFadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+
+
+    
+    .noisy-text {
+        display: inline-block;
+        position: relative;
+        color: #dcdcdc;
+    }
