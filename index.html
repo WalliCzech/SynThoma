@@ -6,37 +6,38 @@
     <title>| SYNTHOMA |</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <canvas id="glitch-bg" z-index="0"></canvas>
+    <div class="video-background">
+        <video id="bgvid1" autoplay muted loop playsinline></video>
+        <video id="bgvid2" autoplay muted loop playsinline></video>
+        <canvas id="glitch-bg"></canvas>
+        <div id="bgvid-glitch"></div>
+        <div class="scanlines"></div>
+    </div>
+
     <header>
-        <h1 class="glitch">SYNTHOMA</h1>
-        <p class="manifest" style="font-family: Synthom; font-size: 1rem; font-weight: bold;">
-            [Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]</p>
+        <h1 id="glitch-synthoma" class="glitch-master" data-text="SYNTHOMA"></h1>
+        <p class="manifest">[Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]</p>
     </header>
+
     <nav>
         <ul class="nav-horizontal">
-            <li><a href="index.html" class="active">Domů</a></li>
-            <li><a href="kniha.html">Kniha / LOG</a></li>
-            <li><a href="archiv.html">Archiv</a></li>
-            <li><a href="o-autorovi.html">O autorovi</a></li>
+            <li><a href="index.html" class="active">Domů</a> <a href="kniha.html">Kniha / LOG</a></li>
+            <li><a href="archiv.html">Archiv</a> <a href="o-autorovi.html">O autorovi</a></li>
+
         </ul>
+        <li class="audio-controls">
+            <button class="play-audio-btn" data-audio="audio/SYNTHOMA2.mp3">▶ Přehrát zvuk</button>
+            <button class="stop-audio-btn" style="display: none;">⏹ Zastavit</button>
+        </li>
     </nav>
-    <main style="background: rgba(0,0,0,1);">
-        <div class="scroll-container" id="scrollContainer">
-            <div class="main-description">
-                <p id="myGlitchText" class="glitch-text"></p>
-            </div>
-        </div>
-        <div class="cylinder-effect"></div>
-        <div class="scrollbar-track">
-            <div class="scrollbar-thumb"></div>
-        </div>
+    <main>
+
+        <div id="SYNTHOMAREADER" class="SYNTHOMAREADER"></div>
+
     </main>
-    <footer style="background: rgba(0,0,0,0.2);">
-        <p style="font-family: Synthom; font-size: 1rem; font-weight: bold;">© 2025 | SYNTHOMA | Tady je každý error úmyslný. <span class="glitch">🪲</span></p>
-    </footer>
     
+    <script src="audioPlayer.js" defer></script>
     <script src="script.js" defer></script>
 </body>
 </html>

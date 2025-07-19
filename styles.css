@@ -1,677 +1,597 @@
-/* styles.css: Neonový chaos pro SynThomu, kde text svítí a nehraje si na Shreka! 😈 */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+/* styles.css: Neonový chaos pro SYNTHOMA, kde video pozadí svítí pod textem jako poškozený hologram! 😈⚡️ */
 
-/* Použijeme VT323 pro nadpisy a Press Start 2P pro text */
-@font-face {
-    font-family: 'Synthom';
-    src: url('fonts/BungeeHairline-Regular.ttf');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+/* =========================
+      IMPORTY A FONTY
+   ========================= */
+   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+   
+   @font-face {
+       font-family: 'Synthoma';
+       src: url('fonts/astronboy/astronbw.ttf');
+       font-weight: bold;
+       font-style: normal; /* Oprava: font-style nemůže být "bold" */
+       font-display: swap;
+   }
+   
+   @font-face {
+       font-family: 'Text01';
+       src: url('fonts/astronboy/astronbo.ttf');
+       font-weight: bold;
+       font-style: normal;
+       font-display: swap;
+   }
+   
+   @font-face {
+       font-family: 'Text02';
+       src: url('fonts/BungeeHairline-Regular.ttf');
+       font-weight: normal;
+       font-style: normal;
+       font-display: swap;
+   }
+   
+   @font-face {
+       font-family: 'Text03';
+       src: url('fonts/zekton/zekton__.ttf');
+       font-weight: normal;
+       font-style: normal;
+       font-display: swap;
+   }
+   
+   /* =========================
+         ZÁKLADNÍ LAYOUT A BODY
+      ========================= */
+   body {
+       margin: 0;
+       padding: 0;
+       background-color: #000;
+       color: #0ff;
+       overflow-x: hidden;
+       line-height: 1.6;
+       display: flex;
+       flex-direction: column;
+       min-height: 100vh;
+       position: relative; /* Zajistí správné vrstvení */
+       z-index: 0; /* Neutrální z-index pro body */
+       font-family: 'JetBrains Mono', monospace;
+   }
+   
+   main {
+       max-width: 800px;
+       width: calc(100% - 2rem);
+       margin: 1rem auto;
+       padding: 0;
+       background: rgba(0, 0, 0, 0.8); /* Lehká průhlednost pro kyberpunkový efekt */
+       border-radius: 15px;
+       border: 1px solid rgba(0, 255, 255, 0.2);
+       min-height: 70vh;
+       overflow: hidden;
+       position: relative;
+       z-index: 10; /* Nad videem a glitch-bg */
+       box-sizing: border-box;
+       display: flex;
+       flex-direction: column;
+       box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+   }
+   
+   /* =========================
+         TYPOGRAFIE A NADPISY
+      ========================= */
+   h1 {
+       font-family: 'Synthoma', monospace;
+       font-weight: normal;
+       letter-spacing: 1px;
+       text-transform: uppercase;
+       color: #0ff;
+       text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+   }
+   
+   h2, h3, h4, h5, h6 {
+       font-family: 'Text01', monospace;
+       font-weight: bold;
+       color: #0ff;
+       font-size: 1.1rem;
+       line-height: 1.6;
+       margin: 0 0 1.5rem 0;
+       padding: 0.5rem 1rem;
+       word-break: keep-all;
+       overflow-wrap: break-word;
+       hyphens: manual;
+       max-width: 100%;
+       box-sizing: border-box;
+       white-space: normal;
+       text-align: left;
+       border-left: 2px solid rgba(0, 255, 255, 0.2);
+       transition: all 0.3s ease;
+       opacity: 0.6;
+       will-change: opacity, transform;
+   }
+   
+   .title {
+       font-family: 'Synthoma', monospace;
+       font-weight: bold;
+       color: #0ff;
+       font-size: 2.5rem;
+       line-height: 1.4;
+       text-align: center;
+       text-shadow: 0 0 5px #0ff, 0 0 10px #ff00ff;
+       margin: 1rem 0;
+       z-index: 10; /* Nad videem */
+   }
+   
+   p {
+       font-family: 'Text03', monospace;
+       font-weight: bold;
+       font-size: 2rem;
+       color: #0ff;
+       line-height: 1.4;
+       text-align: left;
+       margin-left: 3rem;
+       margin-right: 3rem;
+       z-index: 10; /* Nad videem */
+   }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Synthom', monospace;
-    font-weight: normal;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-h5.glitch {
-    font-family: 'Synthom', monospace;
+   .dialog {
+    font-family: 'Text03', monospace;
     font-weight: bold;
     color: #0ff;
-    position: relative;
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-    letter-spacing: .03em;
-    z-index: 2;
-    animation: glitch 1.2s infinite linear alternate-reverse;
-}
-
-/* Styly pro zvýrazněný text v závorkách */
-.speech-text {
-    color: #ff69b4; /* Růžová barva pro řeč */
-    font-style: italic;
-    position: relative;
-    padding: 0 2px;
-    transition: all 0.3s ease;
-}
-
-p {
-    font-family: 'Synthom', monospace;
-    font-weight: bold;
-    color: #0ff;
-    font-size: 1.3rem;
+    font-size: 2rem;
     line-height: 1.4;
-    white-space: pre-wrap;
-    word-break: normal;
-    overflow-wrap: normal;
-    hyphens: none;
-}
+    text-align: left;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    z-index: 10; /* Nad videem */
+    text-shadow:0 0 5px #f0f, 0 0 10px #0ff
+   }
+   
+   .manifest {
+       font-family: 'Text02', monospace;
+       font-weight: bold;
+       color: #0ff;
+       text-shadow: 0 0 5px #00f, 0 0 10px #0ff, 0 0 15px #0ff;
+       font-size: 1.3rem;
+       line-height: 1.6;
+       text-align: center;
+       position: relative;
+       z-index: 100;
+       margin: 20px auto;
+       max-width: 80%;
 
-.button-simple {
-    font-family: 'Synthom', monospace;
-    font-size: 1.3rem;
-    line-height: 1.4;
-    color: #0ff;
-    text-decoration: none;
-    font-weight: normal;
-    margin: 0 1.3rem;
-    transition: color .15s;
-    font-size: 1.18rem;
-}
-    
-.button-simple:hover {
-    color: #0ff;
-    text-decoration: underline;
-    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-}
+   }
+   
+   /* =========================
+         GLITCH
+      ========================= */
+   #glitch-synthoma.glitch-master {
+       font-family: 'Synthoma', monospace;
+       font-size: 4.4rem;
+       color: #0ff;
+       text-transform: uppercase;
+       letter-spacing: .08em;
+       position: relative;
+       text-align: center;
+       z-index: 10; /* Nad videem */
+       user-select: none;
+       text-shadow:
+           0 0 6px #0ff,
+           0 0 16px #ff00ff,
+           0 0 36px #0ff,
+           2px 2px 12px #ff00ff;
+       animation: glitch 1.2s infinite linear alternate-reverse;
+       will-change: transform, text-shadow;
+   }
+   
+   .glitch-span,
+   .glitch-fake1,
+   .glitch-fake2 {
+       position: absolute;
+       left: 0;
+       top: 0;
+       width: 100%;
+       height: 100%;
+       pointer-events: none;
+       color: #00f;
+   }
+   
+   .glitch-fake1 {
+       color: #ff00c8;
+       opacity: 0.58;
+       text-shadow: 2px 0 #ff00c8, 0 0 10px #ff00c8, 0 0 28px #fff;
+       z-index: 1;
+       animation: glitchLayer1 2.2s infinite linear alternate;
+       pointer-events: none;
+   }
+   
+   .glitch-fake2 {
+       color: #0ff;
+       opacity: 0.44;
+       text-shadow: -2px 0 #0ff, 0 0 8px #0ff, 0 0 28px #fff;
+       z-index: 2;
+       animation: glitchLayer2 1.7s infinite linear alternate;
+       pointer-events: none;
+   }
+   
+   @keyframes glitchLayer1 {
+       0% { transform: translate(0, 0) skewX(0deg); }
+       50% { transform: translate(-3px, 1px) skewX(2deg); }
+       100% { transform: translate(0, 0) skewX(0deg); }
+   }
+   
+   @keyframes glitchLayer2 {
+       0% { transform: translate(0, 0) skewY(0deg); }
+       60% { transform: translate(-2px, 1px) skewY(-1deg); }
+       100% { transform: translate(0, 0) skewY(0deg); }
+   }
+   
+   .glitch-char {
+       display: inline-block;
+       position: relative;
+       z-index: 20;
+       transition: color 0.06s, filter 0.12s, transform 0.10s;
+       will-change: color, filter, transform;
+   }
+   
+   .glitch-char.glitchy {
+       color: #f0f;
+       filter: blur(1.5px) brightness(2.2);
+       text-shadow: 0 0 15px #0ff, 0 0 8px #ff00c8, 0 0 2px #0ff;
+       animation: glitchjump 0.12s linear 2;
+       transform: translateY(-2px) scale(1.07) skewX(3deg);
+   }
+   
+   @keyframes glitchjump {
+       0% { transform: translateY(0) scale(1) skewX(0deg); }
+       40% { transform: translateY(-2px) scale(1.09) skewX(4deg); }
+       70% { transform: translateY(2px) scale(0.96) skewX(-2deg); }
+       100% { transform: translateY(0) scale(1) skewX(0deg); }
+   }
+   
+   @keyframes glitch {
+       0% { text-shadow: 2px 0 #0ff, -2px 0 #f0f; transform: translate(-1px, 0); opacity: 0.8; }
+       25% { text-shadow: 3px 2px #ff0040, -2px -1px #0ff; transform: translate(1px, 0); opacity: 0.9; }
+       50% { text-shadow: -3px 0 #f0f, 2px 2px #00ffd0; transform: translate(-1px, 1px); opacity: 0.7; }
+       75% { text-shadow: 2px -2px #0ff, -3px 1px #ff0040; transform: translate(1px, -1px); opacity: 0.8; }
+       100% { text-shadow: -2px 2px #0ff, 3px -2px #f0f; transform: translate(0); opacity: 1; }
+   }
+   
+   /* =========================
+         GLITCH background
+      ========================= */
+   #glitch-bg {
+       background-color: #000;
+       position: fixed;
+       left: 0;
+       top: 0;
+       width: 100vw;
+       height: 100vh;
+       z-index: -500; /* Pod videem */
+       pointer-events: none;
+       opacity: 0.72;
+       filter: blur(0.7px) brightness(1.08) contrast(1.12);
+       transition: opacity 0.3s;
+       will-change: opacity;
+   }
+   
+   /* =========================
+         GLITCH video
+      ========================= */
 
-.speech-effect {
-    animation: speechGlow 2s infinite alternate;
-    text-shadow: 0 0 5px rgba(255, 105, 180, 0.7);
-}
 
-@keyframes speechGlow {
-    from {
-        text-shadow: 0 0 5px rgba(255, 105, 180, 0.7);
-    }
-    to {
-        text-shadow: 0 0 15px rgba(255, 105, 180, 0.9), 0 0 25px rgba(255, 105, 180, 0.6);
-    }
-}
-
-/* Styly pro svítící kurzívu */
-.glow-text {
-    color: #0ff;
-    font-style: italic;
-    position: relative;
-    animation: glowPulse 3s infinite alternate;
-    text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
-    padding: 0 2px;
-    border-radius: 2px;
-}
-
-@keyframes glowPulse {
-    0% {
-        text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
-        opacity: 0.9;
-    }
-    100% {
-        text-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 255, 255, 0.6);
-        opacity: 1;
-    }
-}
-
-/* Základní setup, aby HTML nebylo nudnější než NPC bez skriptu 😴 */
-body, html {
-    background: #000;
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-    width: 100%;
-    overflow-y: auto; /* Povolení scrollování celé stránky */
-}
-
-/* Stylování hlavního obsahu */
-main {
-    min-height: 100vh; /* Minimální výška celé viewport výšky */
-    display: flex;
-    flex-direction: column;
-    word-break: keep-all; /* Zabrání zalamování uprostřed slov */
-    overflow-wrap: normal;
-    white-space: normal;
-    hyphens: none;
-    -webkit-hyphens: none;
-    -ms-hyphens: none;
-    overflow: hidden; /* Skryje všechny scrollbary */
-}
-  
-#glitch-bg {
-    background-color: #000;
+.video-background {
     position: fixed;
-    left: 0; top: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.72; /* jemnější průhlednost */
-    filter: blur(0.7px) brightness(1.08) contrast(1.12);
-    transition: opacity 0.3s;
-}
-  
-body > *:not(#glitch-bg) {
-    position: relative;
-    z-index: 10;
-}
-
-header, footer {
-    text-align: center;
-    margin: 2rem 0 1rem 0;
-}
-
-h1.glitch {
-    font-size: 3.2rem;
-    color: #0ff;
-    position: relative;
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-    letter-spacing: .03em;
-    z-index: 2;
-    animation: glitch 1.2s infinite linear alternate-reverse;
-}
-
-@keyframes glitch {
-    0% { text-shadow: 2px 0 #0ff, -2px 0 #f0f; }
-    25% { text-shadow: 3px 2px #ff0040, -2px -1px #0ff; }
-    50% { text-shadow: -3px 0 #f0f, 2px 2px #00ffd0; }
-    75% { text-shadow: 2px -2px #0ff, -3px 1px #ff0040; }
-    100% { text-shadow: -2px 2px #0ff, 3px -2px #f0f; }
-}
-
-nav {
-    margin: 1rem 0;
-}
-
-nav a {
-    font-family: 'Synthom', monospace;
-    color: var(--accent2, #0ff);
-    text-decoration: none;
-    font-weight: bold;
-    margin: 0 1.3rem;
-    transition: color .15s;
-    font-size: 1.18rem;
-}
-
-nav a.active,
-nav a:hover {
-    color: var(--accent, #f0f);
-    border-bottom: 2px solid var(--accent);
-}
-
-main {
-    max-width: 820px;
-    margin: 3rem auto;
-    padding: 0; /* Odstraníme padding, protože ho přesuneme do vnitřního kontejneru */
-    background: rgba(20,20,25,0.95);
-    border-radius: 20px;
-    box-shadow: 0 0 20px 2px #17182370;
-    min-height: 64vh;
-    max-height: 70vh; /* Maximální výška pro lepší efekt */
-    flex: 1;
-    word-break: normal;
-    overflow: hidden; /* Skryjeme scrollbary, budeme je simulovat */
-    position: relative;
-}
-
-/* Kontejner pro obsah */
-.scroll-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: visible; /* Povolíme přetečení, ale scrollbar skryjeme */
-    padding: 2rem;
-    scrollbar-width: none; /* Pro Firefox */
-    -ms-overflow-style: none; /* Pro IE a Edge */
-}
-
-/* Skrytí scrollbaru ve všech prohlížečích */
-.scroll-container::-webkit-scrollbar {
-    display: none; /* Pro Chrome, Safari a Opera */
-    width: 0 !important;
-    height: 0 !important;
-}
-
-/* Skrytí vlastního scrollbaru */
-.scrollbar-track,
-.scrollbar-thumb {
-    display: none !important;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Animace pro glitch efekt */
-@keyframes glitch {
-    0% {
-        transform: translate(-1px, 0);
-        opacity: 0.8;
-    }
-    20% {
-        transform: translate(1px, 0);
-        opacity: 0.9;
-    }
-    40% {
-        transform: translate(-1px, 1px);
-        opacity: 0.7;
-    }
-    60% {
-        transform: translate(1px, -1px);
-        opacity: 0.8;
-    }
-    80% {
-        transform: translate(-1px, 1px);
-        opacity: 0.9;
-    }
-    100% {
-        transform: translate(0);
-        opacity: 1;
-    }
-}
-
-/* Efekt válce a rozpadu */
-.cylinder-effect {
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.8) 0%,
-        transparent 20%,
-        transparent 80%,
-        rgba(0, 0, 0, 0.8) 100%
-    );
-    border-radius: 20px;
-    box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.2);
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateX(0deg);
+    z-index: -1000;
     overflow: hidden;
 }
 
-/* Maska pro rozpad textu nahoře */
-.cylinder-effect::before {
-    content: '';
+#glitch-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100px;
-    background: linear-gradient(to bottom, 
-        rgba(16, 16, 21, 1) 0%, 
-        rgba(16, 16, 21, 0.9) 30%, 
-        rgba(16, 16, 21, 0) 100%);
-    z-index: 2;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.2;
     pointer-events: none;
-}
-
-/* Efekt rozpadu textu */
-.main-description {
-    position: relative;
-    z-index: 2;
-    transform-origin: top center;
-    transition: transform 0.1s ease-out, filter 0.1s ease-out;
-    padding: 2rem 0;
-    --glitch-x: 0px;
-    --glitch-y: 0px;
-    --glitch-opacity: 0;
-    will-change: transform, filter;
-    white-space: normal;
-    word-wrap: break-word;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-}
-
-/* Glitch efekt pro horní část textu */
-.main-description::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: linear-gradient(to bottom, 
-        rgba(0, 255, 255, 0.1) 0%, 
-        rgba(0, 255, 255, 0.05) 70%,
-        rgba(0, 255, 255, 0) 100%);
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-    pointer-events: none;
-    transform: translate3d(0, 0, 0);
+    mix-blend-mode: screen;
+    filter: brightness(0.41) contrast(1.1) blur(0.7px);
     will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
-/* Aktivace efektu při scrollování */
-.scrolling .main-description {
-    filter: drop-shadow(calc(-1 * var(--glitch-x)) var(--glitch-y) 1px rgba(0, 255, 255, 0.7))
-            drop-shadow(var(--glitch-x) calc(-1 * var(--glitch-y)) 1px rgba(255, 0, 255, 0.7));
-}
-
-.scrolling .main-description::before {
-    opacity: 1;
-    animation: glitch 0.2s infinite alternate;
-    transform: translate3d(var(--glitch-x), var(--glitch-y), 0);
-}
-
-.btn, button {
-    background: var(--btn-bg, #1a1d25);
-    color: var(--btn-fg, #0ff);
-    border: none;
-    border-radius: 0.9em;
-    padding: 0.7em 1.3em;
-    margin: 0 0.5em;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.5rem;
-    letter-spacing: 0.03em;
-    box-shadow: 0 2px 14px -4px #00ffd644;
-    cursor: pointer;
-    outline: none;
-    transition: background .18s, color .18s, box-shadow .16s;
-}
-
-.btn:active,
-.btn:focus,
-.btn:hover {
-    background: var(--btn-hover, #2a2d35);
-    color: var(--accent2, #f0f);
-    box-shadow: 0 2px 18px -2px var(--glitch1, #ff0040);
-}
-
-.glitch-zone {
-    animation: glitchZone 8s infinite alternate;
-}
-
-@keyframes glitchZone {
-    0% { filter: none; }
-    6%, 7% { filter: contrast(1.7) hue-rotate(-9deg) brightness(1.02); }
-    18%, 19% { filter: contrast(1.14) saturate(1.16) blur(1px); }
-    51%,52% { filter: hue-rotate(30deg) brightness(1.08); }
-    90%, 91% { filter: contrast(2.1) hue-rotate(-12deg) brightness(0.92); }
-    99% { filter: none; }
-}
-
-.glitch-quick {
-    animation: glitchQuick .18s;
-}
-
-@keyframes glitchQuick {
-    0% { filter: none; }
-    40% { filter: blur(1.8px) hue-rotate(-19deg) contrast(2.1); }
-    99% { filter: none; }
-}
-
-form {
-    max-width: 500px;
-    margin: 1.5rem auto;
-}
-
-form label {
-    display: block;
-    margin: 0.5rem 0 0.2rem;
-    color: var(--accent2, #0ff);
-}
-
-form input,
-form textarea {
+#bgvid1, #bgvid2 {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    background: #1a1d25;
-    border: 1px solid var(--glitch1, #00ffd0);
-    border-radius: 0.5rem;
-    color: #e0e0e0;
-    font-family: 'JetBrains Mono', monospace;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.41) contrast(1.1) blur(0.7px);
+    z-index: -1;
 }
 
-form input:focus,
-form textarea:focus {
-    outline: none;
-    border-color: var(--accent, #f0f);
-    box-shadow: 0 0 10px var(--accent);
-}
-
-/* Vypneme .book-content ::after, ať nekonfliktuje s typewriterem */
-.book-content p::after, .book-content h1::after, .book-content h2::after,
-.book-content h3::after, .book-content h4::after, .book-content h5::after,
-.book-content h6::after {
-    content: none !important; /* Žádné pseudo-kurzory, typewriter vládne sám! */
-}
-
-.book-content p.typing-done::after, .book-content h1.typing-done::after,
-.book-content h2.typing-done::after, .book-content h3.typing-done::after,
-.book-content h4.typing-done::after, .book-content h5.typing-done::after,
-.book-content h6.typing-done::after {
-    content: none !important;
-}
-
-/* Ujistíme se, že .typing-done nemění font-size */
-.book-content .typing-done {
-    font-size: 1.3rem; /* Stejná velikost jako <p> */
-}
-
-.book-content .typing-done i, .book-content .typing-done em {
-    animation: neon-pulse 1.5s infinite !important;
-    color: var(--accent2, #00ffcc);
-    text-shadow: 0 0 10px var(--accent2, #00ffcc), 0 0 20px var(--accent2, #00ffcc);
-    font-style: italic;
-    font-size: 1.3rem; /* Konzistentní velikost */
-}
-
-@keyframes neon-pulse {
-    0% { opacity: 1; text-shadow: 0 0 10px var(--accent2, #00ffcc); }
-    50% { opacity: 0.5; text-shadow: 0 0 20px var(--accent2, #00ffcc), 0 0 30px var(--accent2, #00ffcc); }
-    100% { opacity: 1; text-shadow: 0 0 10px var(--accent2, #00ffcc); }
-}
-
-.book-content em, .book-content i {
-    font-style: italic;
-    color: var(--accent2, #0ff); /* Bez animace, ať nekonfliktuje */
-    font-size: 1.3rem; /* Konzistentní velikost */
-}
-
-@keyframes blink {
-    50% { opacity: 0; }
-}
-
-footer {
-    text-align: center;
-    padding: 1rem;
-    background: #1a1a1a;
-    border-top: 2px solid var(--accent2, #0ff);
-}
-
-/* Styl pro typewriter a glitchující ocas – konzistentní velikost a neonový chaos! */
-.typewriter-cursor {
-    animation: blink 0.5s step-end infinite;
-    margin-left: 2px;
-    color: var(--accent2, #0ff);
-    font-size: 1.3rem; /* Stejná velikost jako <p> */
-    font-family: 'Synthom', monospace; /* Stejný font */
-}
-
-.glitch-tail {
-    display: inline;
-    font-family: 'Synthom', monospace;
-    font-weight: bold;
-    font-size: 1rem; /* Stejná velikost jako <p> */
-    margin-left: 2px; /* Malý odstup od kurzoru */
-    filter: brightness(1.4) contrast(1.2); /* Výraznější barvy */
-    animation: neon-glitch 0.2s infinite; /* Rychlá animace pro chaos */
-}
-
-@keyframes neon-glitch {
-    0% { color: var(--accent2, #f0f); filter: brightness(1.4) contrast(1.2); }
-    5% { color: var(--accent2, #0ff); filter: brightness(1.6) contrast(1.3) hue-rotate(10deg); }
-    10% { color: var(--accent2, #f00); filter: brightness(1.4) contrast(1.2); }
-    15% { color: var(--accent2, #00f); filter: brightness(1.4) contrast(1.2); }
-}
-
-/* Témata: Ať to svítí jako SynThoma v noci! 😎 */
-[data-theme="cyberWeed"] { --primary: #00cc00; --secondary: #66ff66; --accent: #00cc00; --accent2: #66ff66; --btn-bg: #1a1d25; --btn-fg: #00cc00; --btn-hover: #2a2d35; --glitch1: #00cc00; }
-[data-theme="cyberPink"] { --primary: #ff00cc; --secondary: #ff66cc; --accent: #ff00cc; --accent2: #ff66cc; --btn-bg: #1a1d25; --btn-fg: #ff00cc; --btn-hover: #2a2d35; --glitch1: #ff00cc; }
-[data-theme="cyberBlue"] { --primary: #0066ff; --secondary: #66ccff; --accent: #0066ff; --accent2: #66ccff; --btn-bg: #1a1d25; --btn-fg: #0066ff; --btn-hover: #2a2d35; --glitch1: #0066ff; }
-[data-theme="cyberOrange"] { --primary: #ff6600; --secondary: #ff9966; --accent: #ff6600; --accent2: #ff9966; --btn-bg: #1a1d25; --btn-fg: #ff6600; --btn-hover: #2a2d35; --glitch1: #ff6600; }
-[data-theme="cyberPurple"] { --primary: #6600cc; --secondary: #9966ff; --accent: #6600cc; --accent2: #9966ff; --btn-bg: #1a1d25; --btn-fg: #6600cc; --btn-hover: #2a2d35; --glitch1: #6600cc; }
-[data-theme="neonGrave"] { --primary: #333333; --secondary: #666666; --accent: #333333; --accent2: #666666; --btn-bg: #1a1d25; --btn-fg: #333333; --btn-hover: #2a2d35; --glitch1: #333333; }
-[data-theme="bloodRust"] { --primary: #990000; --secondary: #cc3333; --accent: #990000; --accent2: #cc3333; --btn-bg: #1a1d25; --btn-fg: #990000; --btn-hover: #2a2d35; --glitch1: #990000; }
-[data-theme="toxicSlime"] { --primary: #00ff33; --secondary: #66ff99; --accent: #00ff33; --accent2: #66ff99; --btn-bg: #1a1d25; --btn-fg: #00ff33; --btn-hover: #2a2d35; --glitch1: #00ff33; }
-[data-theme="midnightOil"] { --primary: #003366; --secondary: #336699; --accent: #003366; --accent2: #336699; --btn-bg: #1a1d25; --btn-fg: #003366; --btn-hover: #2a2d35; --glitch1: #003366; }
-[data-theme="glitchRed"] { --primary: #ff0000; --secondary: #ff3333; --accent: #ff0000; --accent2: #ff3333; --btn-bg: #1a1d25; --btn-fg: #ff0000; --btn-hover: #2a2d35; --glitch1: #ff0000; }
-[data-theme="voidPurple"] { --primary: #330066; --secondary: #663399; --accent: #330066; --accent2: #663399; --btn-bg: #1a1d25; --btn-fg: #330066; --btn-hover: #2a2d35; --glitch1: #330066; }
-[data-theme="acidLemon"] { --primary: #ccff00; --secondary: #ccff66; --accent: #ccff00; --accent2: #ccff66; --btn-bg: #1a1d25; --btn-fg: #ccff00; --btn-hover: #2a2d35; --glitch1: #ccff00; }
-[data-theme="burntChrome"] { --primary: #666633; --secondary: #999966; --accent: #666633; --accent2: #999966; --btn-bg: #1a1d25; --btn-fg: #666633; --btn-hover: #2a2d35; --glitch1: #666633; }
-[data-theme="frostByte"] { --primary: #00ccff; --secondary: #66ccff; --accent: #00ccff; --accent2: #66ccff; --btn-bg: #1a1d25; --btn-fg: #00ccff; --btn-hover: #2a2d35; --glitch1: #00ccff; }
-
-[data-theme] .theme-switcher, [data-theme] .download-link, [data-theme] nav a {
-    border-color: var(--accent2);
-    color: var(--accent2);
-}
-
-[data-theme] .theme-switcher:hover, [data-theme] .download-link:hover {
-    background: var(--btn-hover);
-    color: var(--accent);
-    box-shadow: 0 2px 18px -2px var(--glitch1);
-}
-
-[data-theme] nav a:hover, [data-theme] nav a.active {
-    color: var(--accent);
-    border-bottom: 2px solid var(--accent);
-}
-
-[data-theme] header, [data-theme] footer {
-    border-color: var(--accent2);
-}
-
-.system-message {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 0, 0, 0.7);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    z-index: 1000;
-    font-family: 'Courier New', monospace;
+#bgvid1 {
     opacity: 1;
-    transition: opacity 1s ease-out;
-    text-shadow: 0 0 5px black;
 }
 
-.glitch-word {
-    color: #ff00ff;
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #00ffff;
+#bgvid2 { 
+    opacity: 0;
 }
 
-/* Encyklopedie - Card Layout */
-.encyclopedia-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+#bgvid-glitch {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    pointer-events: none;
+    z-index: -100;
+    opacity: 0;
+    background: 
+        linear-gradient(45deg, #ff00ff22, #00ffff22, #ffff0022),
+        linear-gradient(135deg, #ff00ff11, #00ffff11, #ffff0011);
+    mix-blend-mode: overlay;
+    filter: brightness(0.41) contrast(1.1) blur(0.7px);
+    transform: translateZ(0);
+    backdrop-filter: blur(1px);
+    transition: opacity 0.8s ease-out;
+    will-change: opacity, transform, clip-path;
+    animation: glitchOverlay 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    transform-origin: center;
 }
 
-.entry-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid #00ff88;
-    border-radius: 8px;
-    padding: 20px;
-    width: 300px;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+@keyframes glitchOverlay {
+    0% { 
+        opacity: 0;
+        transform: scale(1) translateZ(0);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+    20% {
+        opacity: 0.8;
+        clip-path: polygon(0 10%, 100% 15%, 100% 85%, 0 90%);
+    }
+    35% {
+        clip-path: polygon(0 5%, 100% 25%, 100% 75%, 0 95%);
+    }
+    50% {
+        opacity: 1;
+        clip-path: polygon(0 15%, 100% 5%, 100% 95%, 0 85%);
+    }
+    65% {
+        clip-path: polygon(0 25%, 100% 5%, 100% 95%, 0 75%);
+    }
+    80% {
+        opacity: 0.9;
+        clip-path: polygon(0 5%, 100% 15%, 100% 85%, 0 95%);
+    }
+    100% { 
+        opacity: 0;
+        transform: scale(1.1) translateZ(0);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
 }
+   
+   /* =========================
+         NAV
+      ========================= */
+   /* Styly pro audio ovládací prvky */
+   .audio-controls {
+       margin-left: 2em;
+   }
+   
+   .play-audio-btn,
+   .stop-audio-btn {
+       background: rgba(0, 0, 0, 0.7);
+       border: 1px solid #0ff;
+       color: #0ff;
+       font-family: 'Text03', monospace;
+       padding: 0.5em 1em;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+       box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+   }
+   
+   .play-audio-btn:hover,
+   .stop-audio-btn:hover {
+       background: rgba(0, 255, 255, 0.2);
+       box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+   }
+   
+   .play-audio-btn:active,
+   .stop-audio-btn:active {
+       transform: translateY(1px);
+   }
+   
+   /* Navigace */
+   nav ul.nav-horizontal {
+       font-family: 'Text02', monospace;
+       display: flex;
+       flex-direction: row;
+       justify-content: center;
+       align-items: center;
+       padding: 0;
+       margin: 20px 0 30px 0;
+       list-style: none;
+       gap: 2vw;
+       z-index: 10; /* Nad videem */
+   }
+   
+   nav ul.nav-horizontal li {
+       margin: 0;
+       padding: 0;
+   }
+   
+   nav ul.nav-horizontal li a {
+       color: #b5b5b5;
+       text-decoration: none;
+       font-weight: 600;
+       font-size: 1.16rem;
+       letter-spacing: 0.09em;
+       padding: 8px 18px;
+       border-radius: 6px;
+       transition: background 0.17s cubic-bezier(.5,1.7,.3,1), color 0.17s, box-shadow 0.18s;
+       position: relative;
+       z-index: 10; /* Nad videem */
+   }
+   
+   nav ul.nav-horizontal li a.active,
+   nav ul.nav-horizontal li a:hover {
+       color: #0ff;
+       text-shadow: 0 0 5px #ff00ff, 0 0 10px #0ff;
+       letter-spacing: .03em;
+       animation: glitch 1.2s infinite linear alternate-reverse;
+   }
+   
+   /* =========================
+         GLITCH typewriter
+      ========================= */
+   .typewriter-cursor {
+       display: inline-block;
+       font-family: inherit;
+       font-weight: bold;
+       font-size: 1em;
+       color: #0ff;
+       vertical-align: baseline;
+       animation: blink 1.2s steps(2, start) infinite;
+       filter: drop-shadow(0 0 6px #0ff);
+       position: relative;
+       z-index: 10; /* Nad videem */
+   }
+   
+   @keyframes blink {
+       0%, 100% { opacity: 1; }
+       55% { opacity: 0.1; }
+   }
+   
+   .glitch-tail {
+       display: inline-block;
+       margin-left: 2px;
+       font-family: 'JetBrains Mono', 'Synthoma', monospace;
+       font-size: 0.74em;
+       opacity: 0.75;
+       pointer-events: none;
+       letter-spacing: 1px;
+       vertical-align: middle;
+       filter: blur(0.5px);
+       user-select: none;
+       transition: color 0.16s, text-shadow 0.18s, filter 0.14s;
+       animation: floattail 2.8s infinite ease-in-out;
+       z-index: 10; /* Nad videem */
+   }
+   
+   @keyframes floattail {
+       0% { transform: translateY(0) rotate(0deg); }
+       40% { transform: translateY(-2px) rotate(5deg); }
+       60% { transform: translateY(2px) rotate(-5deg); }
+       100% { transform: translateY(0) rotate(0deg); }
+   }
+   
+   .glitch-char {
+       display: inline-block;
+       font-family: inherit;
+       font-size: inherit;
+       transition: color 0.07s, filter 0.10s;
+       filter: drop-shadow(0 0 8px #0ff) blur(0.5px);
+       animation: glitch-char 0.2s linear;
+       z-index: 10; /* Nad videem */
+   }
+   
+   @keyframes glitch-char {
+       0% { transform: translate(0, 0); }
+       50% { transform: translate(2px, -2px) scale(1.1); }
+       100% { transform: translate(0, 0); }
+   }
+   
+   .glitch-word {
+       animation: glitchWordPulse 0.7s;
+       z-index: 10; /* Nad videem */
+   }
+   
+   @keyframes glitchWordPulse {
+       0% { filter: blur(0.2px) brightness(1.3); }
+       40% { filter: blur(1.1px) brightness(2.1); }
+       80% { filter: blur(0.3px) brightness(1.4); }
+       100% { filter: none; }
+   }
+   
+   /* =========================
+         GLITCH typewriter
+      ========================= */
+   .SYNTHOMAREADER {
+    font-family: 'Text03', monospace;
+    font-weight: bold;
+    font-size: 2rem;
+       min-height: 2.5em;
+       width: 100%;
+       padding: 1rem 1rem;
+       box-sizing: border-box;
+       background: transparent;
+       border: none;
+       border-radius: 8px;
+       transition: min-height 0.4s cubic-bezier(.8,0,.23,1.1);
+       line-height: 1.55;
+       word-break: break-word;
+       white-space: pre-line;
+       z-index: 10; /* Nad videem */
+   }
 
-.entry-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px #00ff88;
-}
 
-.entry-card h2 {
-    color: #00ff88;
-    margin-top: 0;
-}
 
-.entry-card .short-desc {
-    color: #ccc;
-}
+   /* =========================
+         buttons
+      ========================= */
+      
+   .audio-controls {
+       margin: 1rem 0;
+       text-align: center;
+   }
+   
+   .audio-controls .glitch-btn {
+       margin: 0 0.5rem;
+       padding: 0.5rem 1.5rem;
+       font-size: 1.2rem;
+       border: 1px solid #0ff;
+       box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+       transition: all 0.3s ease;
+   }
+   
+   .audio-controls .glitch-btn:hover {
+       background-color: rgba(0, 255, 255, 0.1);
+       transform: translateY(-2px);
+       box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+   }
+   
+   .audio-controls .glitch-btn:active {
+       transform: translateY(1px);
+   }
 
-.entry-card .full-desc {
-    display: none;
-    margin-top: 15px;
-    color: #fff;
-    border-top: 1px solid #00ff88;
-    padding-top: 15px;
-}
-
-.entry-card.active .full-desc {
-    display: block;
-}
-
-nav ul.nav-horizontal {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 20px 0 30px 0;
-    list-style: none;
-    gap: 2vw;  /* pěkné rozestupy mezi odkazy */
-}
-  
-nav ul.nav-horizontal li {
-    margin: 0;
-    padding: 0;
-}
-  
-nav ul.nav-horizontal li a {
-    color: #f0f0f0;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.16rem;
-    letter-spacing: 0.09em;
-    padding: 8px 18px;
-    border-radius: 6px;
-    transition: 
-        background 0.17s cubic-bezier(.5,1.7,.3,1), 
-        color 0.17s,
-        box-shadow 0.18s;
-    position: relative;
-    z-index: 2;
-}
-  
-nav ul.nav-horizontal li a.active,
-nav ul.nav-horizontal li a:hover {
-    color: #0ff;
-    position: relative;
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #0ff;
-    letter-spacing: .03em;
-    z-index: 2;
-    animation: glitch 1.2s infinite linear alternate-reverse;
-}
-
-.glitch-char {
-    display: inline-block;
-    transition: color 0.07s, filter 0.1s;
-}
-
-.glitch-char.glitchy {
-    color: #ff2afd;
-    filter: blur(1px) brightness(1.8) drop-shadow(0 0 4px #ff00c8);
-    text-shadow: 0 0 6px #0ff, 0 0 12px #ff00c8;
-}
-
-.glitch-quick {
-    animation: glitchjump 0.12s linear 2;
-}
-
-@keyframes glitchjump {
-    0%   { transform: translateY(0); }
-    40%  { transform: translateY(-2px) skewX(-1deg); }
-    70%  { transform: translateY(1px) skewX(2deg); }
-    100% { transform: translateY(0); }
-}
-
-.glitch-text {
-    animation: glitch-char 0.12s linear 2; 
-    white-space: pre-line;
-    margin-left: 0.05em;
-}
-
-.glitch-text::after {
-    content: '';
-    margin-left: 0.05em;
-}
+      .glitch-btn {
+       font-family: 'Text03', monospace;
+       font-weight: bold;
+       font-size: 2rem;
+       color: #0ff;
+       line-height: 1.4;
+       text-align: left;
+       margin-left: 3rem;
+       margin-right: 3rem;
+       text-shadow: 0 0 5px #0ff, 0 0 5px #ff00ff;
+       z-index: 10; /* Nad videem */
+       background-color: #000;
+       border-radius: 8px;
+       border: none;
+       padding: 1rem 1rem;
+       transition: background-color 0.3s ease;
+       cursor: pointer;
+       user-select: none;
+       will-change: transform, opacity;
+       animation: glitch 1.2s infinite linear alternate-reverse;
+       will-change: transform, text-shadow;
+    }
