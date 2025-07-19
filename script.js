@@ -19,7 +19,7 @@ function handleZoom() {
         document.documentElement.style.setProperty('--mobile-font-size', '1rem');
     }
     
-    console.log(`🔍 Aktuální zoom: ${Math.round(scale * 100)}%`);
+    console.log(`🔍 Zoom detekován: ${Math.round(scale * 100)}%. Oči už tě pálí, nebo ještě vydržíš? 😆`);
 }
 
 // Inicializace event listenerů pro zoom
@@ -32,11 +32,12 @@ function initZoomHandlers() {
     // Přidáme třídu pro detekci touch zařízení
     if ('ontouchstart' in window || navigator.maxTouchPoints) {
         document.documentElement.classList.add('touch-device');
+        console.log('📱 Detekován touch. Prsty připravené na glitchovou jízdu?');
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎮 SYNTHOMA script initialized. System status: GLITCH_STABILIZED_RGB');
+    console.log('🎮 SYNTHOMA script initialized. System status: GLITCH_STABILIZED_RGB... nebo možná jen přetížený neon! 😎');
     initZoomHandlers();
     
     // Inicializace canvasu pro pozadí
@@ -158,10 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
  };  
 });
 
-
-
-
-
 const SYNTHOMA_TEXT = "SYNTHOMA";
 const GLITCH_CHARS = "!@#$%^&*_-+=/?\\|<>[]{};:~NYHSMT#¤%&@§÷×¤░▒▓█▄▀●◊O|/\\_^-~.*+";
 const COLORS = ["#ff00ff", "#0ff", "#fff", "#faff00", "#ff2afd", "#00fff9"];
@@ -215,11 +212,7 @@ document.getElementById('glitch-synthoma').innerHTML = createGlitchLayers(SYNTHO
 // Glitch cyklus
 setInterval(glitchCycle, 120);
 
-
-
-
 let currentAudio = null;
-
 
 // ===== Funkce pro psaní textu s efektem psacího stroje a glitch efekty =====
 function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
@@ -230,7 +223,6 @@ function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
     const paragraphPause = options.paragraphPause || 240;
     const glitchProbability = options.glitchProbability || 0.03; // 3% šance na glitch
 
-    
     // Vymažeme všechny staré kurzory a glitch-taily
     element.querySelectorAll('.typewriter-cursor, .glitch-tail').forEach(c => c.remove());
     element.innerHTML = '<span class="typewriter-cursor">|<span class="glitch-tail"></span></span>';
@@ -244,8 +236,7 @@ function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
 
     // --- Funkce pro generování náhodných glitch znaků (pro ocas a efekty) ---
     function getGlitchTail() {
-        const glitchSet = [
-    '', 'N', 'Y', 'H', 'S', 'M', 'T','#', '¤', '%', '&', '@', '§', '÷', '×', '¤', '░', '▒', '▓', '█', '▄', '▀', '●', '◊', 'O', '|', '/', '\\', '_', '-', '^', '~', '.', '*', '+' ];
+        const glitchSet = ['N', 'Y', 'H', 'S', 'M', 'T','#', '¤', '%', '&', '@', '§', '÷', '×', '¤', '░', '▒', '▓', '█', '▄', '▀', '●', '◊', 'O', '|', '/', '\\', '_', '-', '^', '~', '.', '*', '+'];
         const count = 5 + Math.floor(Math.random() * 5); // 5–10 znaků
         let result = '';
         for (let j = 0; j < count; j++) {
@@ -254,7 +245,6 @@ function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
         return result;
     }
 
-    
     // --- Funkce pro náhodné přidání glitch efektu k písmenu ---
     function maybeAddGlitch(char, isTag = false) {
         if (isTag || Math.random() > glitchProbability) return char;
@@ -318,6 +308,11 @@ function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
         // Glitch tail přidáme za kurzor
         const tail = createGlitchTail();
         cursor.appendChild(tail);
+        // Upravíme styl kurzoru, aby byl na stejném řádku
+        cursor.style.display = 'inline';
+        cursor.style.position = 'relative';
+        cursor.style.top = '0';
+        cursor.style.verticalAlign = 'baseline';
         return { cursor, tail };
     }
 
@@ -366,40 +361,39 @@ function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
 
     // --- Rekurzivní psaní po znacích (nebo HTML tagách) ---
     function writeNext() {
-
-            element.querySelectorAll('.typewriter-cursor, .glitch-tail').forEach(c => c.remove());
+        element.querySelectorAll('.typewriter-cursor, .glitch-tail').forEach(c => c.remove());
         
-            // === DETEKCE HUDEBNÍHO TAGU ===
-            let rest = fullHTML.slice(i);
-            let match = rest.match(playPattern);
-            if (match) {
-                let mp3file = match[1];
-                // Zastav předchozí audio, pokud hraje
-                if (currentAudio) { 
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                }
-                // Spusť nové audio
-                currentAudio = new Audio(mp3file);
-                currentAudio.volume = 0.6;
-                currentAudio.play();
-                // Můžeš do textu vložit symbol hudby
-                if (openTags.length) {
-                    let targetTag = element.querySelectorAll(openTags[openTags.length-1]);
-                    if (targetTag.length) {
-                        targetTag[targetTag.length-1].insertAdjacentHTML('beforeend', "🎵");
-                    } else {
-                        element.innerHTML += "🎵";
-                    }
+        // === DETEKCE HUDEBNÍHO TAGU ===
+        let rest = fullHTML.slice(i);
+        let match = rest.match(playPattern);
+        if (match) {
+            let mp3file = match[1];
+            // Zastav předchozí audio, pokud hraje
+            if (currentAudio) { 
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            // Spusť nové audio
+            currentAudio = new Audio(mp3file);
+            currentAudio.volume = 0.6;
+            currentAudio.play();
+            // Můžeš do textu vložit symbol hudby
+            if (openTags.length) {
+                let targetTag = element.querySelectorAll(openTags[openTags.length-1]);
+                if (targetTag.length) {
+                    targetTag[targetTag.length-1].insertAdjacentHTML('beforeend', "🎵");
                 } else {
                     element.innerHTML += "🎵";
                 }
-                // Posuň i za značku <play ...mp3>
-                i += match[0].length;
-                updateCursor();
-                setTimeout(writeNext, 900); // malá pauza pro efekt
-                return;
+            } else {
+                element.innerHTML += "🎵";
             }
+            // Posuň i za značku <play ...mp3>
+            i += match[0].length;
+            updateCursor();
+            setTimeout(writeNext, 900); // malá pauza pro efekt
+            return;
+        }
         // Vymažeme staré kurzory a ocásky
         element.querySelectorAll('.typewriter-cursor, .glitch-tail').forEach(c => c.remove());
         if (i < fullHTML.length) {
@@ -473,16 +467,23 @@ function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
             }
             setTimeout(writeNext, delay);
         } else {
-            // Dokončeno!
+            // Dokončeno! Zachováme styly a přidáme finální efekt
             element.classList.add('typing-done');
             element.querySelectorAll('.typewriter-cursor, .glitch-tail').forEach(c => c.remove());
+            // Zajistíme, že barva a efekty zůstanou
+            element.style.color = '#0ff';
+            element.style.textShadow = '0 0 5px #0ff, 0 0 10px #ff00ff';
             if (options.onCompleteEffect !== false) {
                 element.classList.add('glitch-word');
                 setTimeout(() => {
                     element.classList.remove('glitch-word');
+                    // Udržíme barvu a stín i po efektu
+                    element.style.color = '#0ff';
+                    element.style.textShadow = '0 0 5px #0ff, 0 0 10px #ff00ff';
                 }, 1000);
             }
             if (onDone) onDone();
+            console.log('📜 Text dopisován. SYNTHOMAREADER žije v neonové slávě! 😎');
         }
     }
 
@@ -495,12 +496,34 @@ function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
     };
 }
 
-// Upravená funkce pro načítání obsahu
+// Upravená funkce pro načítání obsahu podle aktuální stránky
 function loadContent() {
-    fetch('SYNTHOMANULL.html')
-        .then(response => response.text())
+    // Zjistíme, na jaké stránce jsme
+    const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+    const isKnihaPage = window.location.pathname.endsWith('kniha.html');
+    
+    // Vybereme soubor k načtení podle stránky
+    const fileToLoad = isIndexPage ? 'SYNTHOMAINFO.html' : 
+                       isKnihaPage ? 'SYNTHOMANULL.html' : 'SYNTHOMANULL.html';
+    
+    console.log(`🔍 Načítám obsah z: ${fileToLoad}. Doufám, že to není jen další glitch v matrixu... 😏`);
+    
+    fetch(fileToLoad)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}. Server asi zrovna pije kyberkávu. ☕`);
+            }
+            return response.text();
+        })
         .then(html => {
             const reader = document.getElementById('SYNTHOMAREADER');
+            if (!reader) {
+                console.error('❌ Element SYNTHOMAREADER nebyl nalezen! Kde se ta čtečka schovává? 😤');
+                return;
+            }
+            
+            // Vyčistíme obsah čtečky
+            reader.innerHTML = '';
             
             // Vytvoříme kontejner pro tlačítko, který zůstane vždy viditelný
             const buttonContainer = document.createElement('div');
@@ -510,7 +533,7 @@ function loadContent() {
             // Vytvoříme tlačítko přímo v DOMu
             const changeTrackBtn = document.createElement('button');
             changeTrackBtn.className = 'glitch-btn change-track-btn';
-            changeTrackBtn.setAttribute('data-audio', 'audio/ambient.mp3');
+            changeTrackBtn.setAttribute('data-audio', 'audio/SynthBachmoff-main.mp3');
             changeTrackBtn.textContent = '🎵 Změnit skladbu';
             
             // Přidáme tlačítko do kontejneru a kontejner do čtečky
@@ -519,8 +542,15 @@ function loadContent() {
             
             // Spustíme psaní zbytku textu
             typewriterWrite(reader, html, {}, () => {
-                // Callback po dokončení psaní
+                console.log('✅ Obsah úspěšně načten a zobrazen. Neon svítí, svět se točí! 🌌');
             });
+        })
+        .catch(error => {
+            console.error('❌ Chyba při načítání obsahu:', error, 'Zkus to znovu, nebo to zabalíme. 😣');
+            const reader = document.getElementById('SYNTHOMAREADER');
+            if (reader) {
+                reader.innerHTML = '<div class="error">Chyba při načítání obsahu. Zkuste obnovit stránku, nebo si dejte kyberpivo. 🍺</div>';
+            }
         });
 }
 
@@ -530,15 +560,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadContent();
 });
 
-
-
-
-
-
-
-
-
-
 const SYNTHOMA_VIDEOS = [
     "video/SYNTHOMA1.mp4",
     "video/SYNTHOMA2.mp4",
@@ -547,25 +568,27 @@ const SYNTHOMA_VIDEOS = [
     "video/SYNTHOMA5.mp4",
     "video/SYNTHOMA6.mp4",
     "video/SYNTHOMA7.mp4",
-    "video/SYNTHOMA8.mp4"
+    "video/SYNTHOMA8.mp4",
+    "video/SYNTHOMA9.mp4",
+    "video/SYNTHOMA10.mp4"
 ];
   
 let currentVid = 0;
 let isTransitioning = false;
 let videoTimeout;
   
-  // Náhodné video, které není aktuální
-  function getRandomVideoIdx(excludeIdx) {
+// Náhodné video, které není aktuální
+function getRandomVideoIdx(excludeIdx) {
     if (SYNTHOMA_VIDEOS.length <= 1) return 0;
     let idx;
     do { 
-      idx = Math.floor(Math.random() * SYNTHOMA_VIDEOS.length); 
+        idx = Math.floor(Math.random() * SYNTHOMA_VIDEOS.length); 
     } while (idx === excludeIdx);
     return idx;
-  }
+}
   
-  // Hladký přechod mezi videi s glitch efektem
-  function glitchTransition(toIdx) {
+// Hladký přechod mezi videi s glitch efektem
+function glitchTransition(toIdx) {
     if (isTransitioning) return;
     isTransitioning = true;
     
@@ -584,48 +607,48 @@ let videoTimeout;
     
     // Počkej na načtení metadat videa
     nextVideo.onloadeddata = () => {
-      // Spusť přehrávání
-      nextVideo.play().then(() => {
-        // Spusť glitch efekt
-        glitch.style.animation = 'none';
-        void glitch.offsetHeight; // Trigger reflow
-        glitch.style.animation = '';
-        
-        // Plynulý přechod mezi videi
-        nextVideo.style.opacity = '1';
-        currentVideo.style.opacity = '0';
-        
-        // Reset stavu po dokončení přechodu
-        setTimeout(() => {
-          isTransitioning = false;
-          currentVid = toIdx;
-          // Naplánuj další přechod
-          scheduleNextTransition();
-        }, 1000);
-      }).catch(e => {
-        console.error('Chyba při přehrávání videa:', e);
-        isTransitioning = false;
-      });
+        // Spusť přehrávání
+        nextVideo.play().then(() => {
+            // Spusť glitch efekt
+            glitch.style.animation = 'none';
+            void glitch.offsetHeight; // Trigger reflow
+            glitch.style.animation = '';
+            
+            // Plynulý přechod mezi videi
+            nextVideo.style.opacity = '1';
+            currentVideo.style.opacity = '0';
+            
+            // Reset stavu po dokončení přechodu
+            setTimeout(() => {
+                isTransitioning = false;
+                currentVid = toIdx;
+                // Naplánuj další přechod
+                scheduleNextTransition();
+            }, 100);
+        }).catch(e => {
+            console.error('Chyba při přehrávání videa:', e, 'Video se zaseklo, asi má kocovinu. 😵');
+            isTransitioning = false;
+        });
     };
     
     nextVideo.onerror = () => {
-      console.error('Chyba při načítání videa:', SYNTHOMA_VIDEOS[toIdx]);
-      isTransitioning = false;
+        console.error('Chyba při načítání videa:', SYNTHOMA_VIDEOS[toIdx], 'Tohle video je asi na dark webu. 🌚');
+        isTransitioning = false;
     };
-  }
+}
   
-  // Naplánuj další přechod
-  function scheduleNextTransition() {
+// Naplánuj další přechod
+function scheduleNextTransition() {
     if (videoTimeout) clearTimeout(videoTimeout);
     const nextTime = 15000 + Math.random() * 15000; // 15-30 sekund
     videoTimeout = setTimeout(() => {
-      const nextIdx = getRandomVideoIdx(currentVid);
-      glitchTransition(nextIdx);
+        const nextIdx = getRandomVideoIdx(currentVid);
+        glitchTransition(nextIdx);
     }, nextTime);
-  }
+}
   
-  // Inicializace po načtení stránky
-  window.addEventListener('DOMContentLoaded', () => {
+// Inicializace po načtení stránky
+window.addEventListener('DOMContentLoaded', () => {
     const vid1 = document.getElementById('bgvid1');
     const vid2 = document.getElementById('bgvid2');
     
@@ -634,9 +657,10 @@ let videoTimeout;
     vid1.playbackRate = 0.5; // 50% rychlosti
     vid1.defaultPlaybackRate = 0.5; // Pro jistotu i defaultní rychlost
     vid1.play().then(() => {
-      vid1.style.opacity = '1';
-      // Naplánuj první přechod
-      scheduleNextTransition();
+        vid1.style.opacity = '1';
+        // Naplánuj první přechod
+        scheduleNextTransition();
+        console.log('🎥 Video běží. Připrav se na kyberpunkový trip! 🚀');
     });
     
     // Nastav 50% rychlost i pro druhé video
@@ -649,9 +673,52 @@ let videoTimeout;
     
     // Při kliknutí na stránku přepne na další video (pro testování)
     document.addEventListener('click', () => {
-      if (!isTransitioning) {
-        const nextIdx = getRandomVideoIdx(currentVid);
-        glitchTransition(nextIdx);
-      }
+        if (!isTransitioning) {
+            const nextIdx = getRandomVideoIdx(currentVid);
+            glitchTransition(nextIdx);
+            console.log('🖱️ Klik! Přepínám video, ať se to hýbe! 😜');
+        }
     });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const glitchName = document.getElementById('glitch-name');
+    const originalText = glitchName.textContent;
+    const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/░▒▓█▄▀●◊';
+    
+    function getRandomChar() {
+      return chars[Math.floor(Math.random() * chars.length)];
+    }
+    
+    function glitch() {
+      const text = originalText.split('');
+      // Náhodně vybereme 1-2 znaky k nahrazení
+      const indices = [];
+      const numGlitches = 1 + Math.floor(Math.random() * 2);
+      
+      while (indices.length < numGlitches) {
+        const idx = Math.floor(Math.random() * text.length);
+        if (text[idx] !== ' ' && text[idx] !== '\n') {
+          indices.push(idx);
+        }
+      }
+      
+      indices.forEach(idx => {
+        text[idx] = getRandomChar();
+      });
+      
+      glitchName.textContent = text.join('');
+      
+      // Náhodné zpoždění pro další glitch efekt
+      const delay = 50 + Math.random() * 150; // 50-200ms
+      setTimeout(() => {
+        glitchName.textContent = originalText;
+        setTimeout(glitch, 50 + Math.random() * 200);
+      }, delay);
+    }
+    
+    // Spustíme glitch efekt s malým zpožděním po načtení stránky
+    setTimeout(glitch, 1000);
   });

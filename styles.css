@@ -46,16 +46,23 @@
    
    @font-face {
        font-family: 'Text03';
-       src: url('fonts/zekton/zektonbo.ttf');
+       src: url('fonts/euro/eurof35.ttf');
        font-weight: normal;
        font-style: normal;
        font-display: swap;
    }
    @font-face {
+    font-family: 'Text03b';
+    src: url('fonts/euro/eurof55.ttf');
+    font-weight: bold;
+    font-style: bold;
+    font-display: swap;
+}
+   @font-face {
     font-family: 'Text03i';
-    src: url('fonts/zekton/zektonbi.ttf');
-    font-weight: normal;
-    font-style: normal;
+    src: url('fonts/euro/eurof36.ttf');
+    font-weight: bold;
+    font-style: italic;
     font-display: swap;
 }
    
@@ -117,13 +124,24 @@
    h1 {
        font-family: 'Synthoma', monospace;
        font-weight: normal;
+       font-size: 2.5rem;
        letter-spacing: 1px;
        text-transform: uppercase;
        color: #0ff;
        text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
    }
+
+   h2 {
+    font-family: 'Synthoma', monospace;
+    font-weight: normal;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+   }
    
-   h2, h3, h4, h5, h6 {
+  h3, h4, h5, h6 {
        font-family: 'Text01', monospace;
        font-weight: bold;
        color: #0ff;
@@ -138,17 +156,14 @@
        box-sizing: border-box;
        white-space: normal;
        text-align: left;
-       border-left: 2px solid rgba(0, 255, 255, 0.2);
        transition: all 0.3s ease;
        opacity: 0.6;
        will-change: opacity, transform;
    }
    
    .title {
-       font-family: 'Synthoma', monospace;
        font-weight: bold;
        color: #0ff;
-       font-size: 2.5rem;
        line-height: 1.4;
        text-align: center;
        text-shadow: 0 0 5px #0ff, 0 0 10px #ff00ff;
@@ -156,41 +171,30 @@
        z-index: 10; /* Nad videem */
    }
    
-   p {
-       font-family: 'Text03', monospace;
-       font-weight: bold;
-       font-size: 1rem;
-       color: var(--text-color);
-       line-height: 1.5;
-       text-align: left;
-       margin: 1rem 2rem;
-       z-index: 10;
-       opacity: 0.8;
-       word-break: break-word;
-       hyphens: auto;
-   }
+
 
    .log {
-       font-family: 'Text03', monospace;
-       font-weight: normal;
-       color: rgb(0, 255, 255, 0.4);
-       text-shadow: 0 0 5px #f00, 0 0 15px #f00;
-       font-size: 1.3rem;
-       line-height: 1.5;
-       text-align: left;
-       margin-left: 1rem;
-       margin-right: 2rem;
-       margin-top: 1rem;
-       margin-bottom: 1rem;
-       padding: 0.5rem 1rem;
-       z-index: 10;
+    color: #0ff;
+    text-transform: uppercase;
+    font-family: 'Text03b', monospace;
+    font-weight: bold;
+    text-shadow: 0 0 5px #f00, 0 0 15px #f00;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    text-align: left;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    z-index: 10;
    }
 
    .dialog {
        font-family: 'Text03i', monospace;
        font-weight: italic;
-       color: rgba(0, 255, 255, 0.85);
-       font-size: 1.3rem;
+       color: #f0f;
+       font-size: 1.35rem;
        line-height: 1.5;
        text-align: left;
        margin-left: 4rem;
@@ -199,7 +203,7 @@
        margin-bottom: 1rem;
        padding: 0.5rem 1rem;
        z-index: 10;
-       text-shadow: 0 0 5px var(--secondary-color), 0 0 10px var(--primary-color);
+       text-shadow: 0 0 5px #f0f, 0 0 10px #0ff;
    }
    
    .manifest {
@@ -218,13 +222,18 @@
    }
 
    .ctecka {
+    display: flex; 
+    flex-direction: column;
     font-family: 'Text03', monospace;
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-weight: normal;
+    font-size: 1.3rem;
     color: rgba(0, 255, 255, 0.89);
     line-height: 1.5;
     text-align: left;
-    margin: 1rem 2rem;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
     text-shadow: 0 0 5px #00f;
     z-index: 10;
    }
@@ -299,6 +308,13 @@
    /* =========================
          GLITCH
       ========================= */
+
+    #glitch-name {
+        display: inline-block;
+        color: #00f0ff;
+        text-shadow: 0 0 5px #00f0ff, 0 0 10px #ff007a;
+      }
+
    #glitch-synthoma.glitch-master {
        font-family: 'Synthoma', monospace;
        font-size: var(--heading-desktop);
@@ -699,9 +715,6 @@
       ========================= */
    .SYNTHOMAREADER {
        width: 100%;
-       padding: 0;
-       margin: 0.2rem 0;
-       padding: 0.2rem;
        box-sizing: border-box;
        background: transparent;
        border: none;
