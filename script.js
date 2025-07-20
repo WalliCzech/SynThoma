@@ -615,10 +615,12 @@ function loadContent() {
     // Zjistíme, na jaké stránce jsme
     const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
     const isKnihaPage = window.location.pathname.endsWith('kniha.html');
+    const isAutorPage = window.location.pathname.endsWith('autor.html');
     
     // Vybereme soubor k načtení podle stránky
     const fileToLoad = isIndexPage ? 'SYNTHOMAINFO.html' : 
-                       isKnihaPage ? 'SYNTHOMANULL.html' : 'SYNTHOMANULL.html';
+                       isKnihaPage ? 'SYNTHOMANULL.html' : isAutorPage ? 'SYNTHOMAAUTOR.html' : 'SYNTHOMANULL.html';
+
     
     console.log(`🔍 Načítám obsah z: ${fileToLoad}. Doufám, že to není jen další glitch v matrixu... 😏`);
     
@@ -1000,21 +1002,49 @@ function showLongPopup(text) {
 
 function startTextNoise(selector = '.noisy-text', intensity = 0.33, interval = 41) {
     document.querySelectorAll(selector).forEach(el => {
-        const orig = el.textContent.trim();
+        // Uložíme původní HTML obsah
+        const originalHTML = el.innerHTML;
+        
+        // Rozdělíme obsah na slova a mezery, abychom je mohli správně zpracovat
+        const wordsAndSpaces = originalHTML.split(/(\s+)/);
+        
+        // Vyčistíme obsah elementu
         el.innerHTML = '';
-        for (let i = 0; i < orig.length; i++) {
-            const span = document.createElement('span');
-            span.textContent = orig[i];
-            span.className = 'noisy-char';
-            span.style.display = 'inline-block'; // Lepší zalamování
-            el.appendChild(span);
-        }
+        
+        // Projdeme všechna slova a mezery
+        wordsAndSpaces.forEach(item => {
+            if (item.trim() === '') {
+                // Zachováme původní mezery
+                el.appendChild(document.createTextNode(' '));
+                return;
+            }
+            
+            // Pro každé slovo vytvoříme span, který bude obsahovat jednotlivá písmena
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'noisy-word';
+            wordSpan.style.whiteSpace = 'nowrap'; // Zajistíme, že se slovo nerozbije
+            
+            // Rozdělíme slovo na písmena
+            for (let i = 0; i < item.length; i++) {
+                const char = item[i];
+                const charSpan = document.createElement('span');
+                charSpan.className = 'noisy-char';
+                charSpan.textContent = char;
+                wordSpan.appendChild(charSpan);
+            }
+            
+            el.appendChild(wordSpan);
+        });
+        
+        // Aplikujeme šum na písmena
         setInterval(() => {
             el.querySelectorAll('.noisy-char').forEach(char => {
-                if (Math.random() < intensity && char.textContent.trim() !== '') {
-                    char.style.color = `rgb(${200 + Math.random() * 55}, ${200 + Math.random() * 55}, ${200 + Math.random() * 55})`;
+                if (Math.random() < intensity) {
+                    char.style.color = Math.random() > 0.5 ? '#eee' : '#888';
+                    char.style.opacity = 0.7 + Math.random() * 0.3;
                 } else {
                     char.style.color = '#dcdcdc';
+                    char.style.opacity = '1';
                 }
             });
         }, interval);
@@ -1023,3 +1053,5 @@ function startTextNoise(selector = '.noisy-text', intensity = 0.33, interval = 4
 document.addEventListener('DOMContentLoaded', () => {
     startTextNoise('.noisy-text', 0.45, 30);
 });
+
+

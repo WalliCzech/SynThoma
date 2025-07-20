@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>| SYNTHOMA |</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="apple-touch-icon" href="icon-192x192.png">
 <body>
     <div class="video-background">
         <video id="bgvid1" autoplay muted loop playsinline></video>
@@ -19,20 +18,23 @@
     </div>
 
     <header>
-        <h1 id="glitch-synthoma" class="glitch-master" data-text="SYNTHOMA"></h1>
-        <a class="manifest">[Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]</a>
+        <h1 id="glitch-synthoma" class="glitch-master" data-text="SYNTHOMA" ></h1>
+        <p class="manifest noisy-text">[Tma nikdy není opravdová, je jen světlem, které se vzdalo smyslu.]</p>
     </header>
 
     <nav>
-        <ul class="nav-horizontal">
-            <li><a href="index.html" class="active">Domů</a></li>
+        <ul class="nav" style="margin-bottom: 4em;">
+            <li><a href="index.html" class="active">Info</a></li>
+
             <li><a href="kniha.html" class="noisy-text">Kniha</a></li>
-            <li><a href="o-autorovi.html" class="noisy-text">Autor</a></li>
+
+            <li><a href="autor.html" class="noisy-text">Autor</a></li>
         </ul>
-        <div class="audio-controls">
-            <button class="play-audio-btn" data-audio="audio/SynthBachmoff-main.mp3">▶ Hudba</button>
-            <button class="stop-audio-btn" style="display: none;">⏹ Zastavit</button>
+        <div class="audio-controls" style="margin-bottom: 4em;">
+            <button class="play-audio-btn noisy-text" data-audio="audio/SynthBachmoff-main.mp3">Hudba VYPNUTA </button>
+            <button class="stop-audio-btn" style="display: none; color: #0ff;">Hudba ZAPNUTA </button>
         </div>
+
     </nav>
     <main>
 
@@ -42,8 +44,5 @@
     
     <script src="audioPlayer.js" defer></script>
     <script src="script.js" defer></script>
-    <script>
-        startTextNoise();
-    </script>
 </body>
 </html>

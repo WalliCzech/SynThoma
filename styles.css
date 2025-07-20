@@ -89,7 +89,6 @@
        min-height: 100vh;
        position: relative;
        z-index: 0;
-       font-family: 'JetBrains Mono', monospace;
        text-rendering: optimizeLegibility;
        -webkit-font-smoothing: antialiased;
        -moz-osx-font-smoothing: grayscale;
@@ -103,7 +102,7 @@
    }
    
    main {
-       max-width: 800px;
+       max-width: 900px;
        width: calc(100% - 2rem);
        padding: 0;
        background: rgba(0, 0, 0, 0.8); /* Lehká průhlednost pro kyberpunkový efekt */
@@ -117,6 +116,8 @@
        display: flex;
        flex-direction: column;
        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+       scrollbar-width: none;
+       scrollbar-color: transparent transparent;
    }
    
    /* =========================
@@ -125,7 +126,7 @@
    h1 {
        font-family: 'Synthoma', monospace;
        font-weight: normal;
-       font-size: 2.5rem;
+       font-size: 4.2rem !important;
        letter-spacing: 1px;
        text-transform: uppercase;
        color: #0ff;
@@ -343,11 +344,12 @@
        text-align: center;
        position: relative;
        z-index: 100;
-       margin: 10px auto;
-       max-width: 90%;
-       padding: 0 10px;
+       margin-top: 3rem;
+       margin-bottom: 3rem;
+       margin-left: 6rem;
+       margin-right: 6rem;
+       max-width: 80%;
    }
-
    .ctecka {
     display: flex; 
     flex-direction: column;
@@ -367,7 +369,7 @@
       ========================= */
    @media (max-width: 768px) {
        :root {
-           --mobile-font-size: 1rem;
+           --mobile-font-size: 2.1rem;
            --heading-mobile: 2rem;
        }
        
@@ -387,12 +389,9 @@
            -webkit-font-smoothing: antialiased;
        }
        
-       body {
-           font-size: var(--mobile-font-size);
-       }
        
        h1, #glitch-synthoma.glitch-master {
-           font-size: var(--heading-mobile) !important;
+           font-size: 2.7rem !important;
            margin: 0.5rem 0;
        }
        
@@ -408,12 +407,17 @@
            margin: 10px 0;
        }
        
+       nav {
+            font-size: 1.2rem;
+       }
        nav ul {
+           font-size: 1.2rem;
            flex-direction: column;
            padding: 0;
        }
        
        nav li {
+           font-size: 1.2rem;
            margin: 5px 0;
        }
        
@@ -424,7 +428,6 @@
        }
        
        .audio-controls button {
-           padding: 8px 15px;
            font-size: 0.9rem;
        }
    }
@@ -440,8 +443,6 @@
       }
 
    #glitch-synthoma.glitch-master {
-       font-family: 'Synthoma', monospace;
-       font-size: 6.2rem;
        color: var(--primary-color);
        text-transform: uppercase;
        letter-spacing: .08em;
@@ -458,8 +459,8 @@
        will-change: transform, text-shadow;
        margin-top: 3rem;
        margin-bottom: 1rem;
-       word-break: break-word;
        padding: 0 10px;
+       word-break: keep-all;
    }
    
    .glitch-span,
@@ -661,60 +662,56 @@
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
 }
-   
-   /* =========================
-         NAVIGACE
-      ========================= */
-   nav {
-       margin: 10px 0;
+
+   .play-audio-btn{
+    font-family: 'Text02', monospace;
+    font-style: normal;
+    font-weight: bold;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 100;
+    font-size: 2.2rem;
+       border: none;
+       color: #b5b5b5;
+       background: transparent;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
        text-align: center;
    }
-   
-   nav ul {
-       list-style: none;
-       padding: 0;
-       margin: 0;
-       display: flex;
-       flex-wrap: wrap;
-       justify-content: center;
-       gap: 10px;
-   }
-   
-   nav a {
-       color: var(--primary-color);
-       text-decoration: none;
-       padding: 8px 15px;
-       transition: all 0.3s ease;
-       font-size: 0.9rem;
-   }
-   
-   nav a:hover, nav a.active {
-       text-shadow: 0 0 5px var(--primary-color);
-   }
-   /* Styly pro audio ovládací prvky */
-   .audio-controls {
-       margin-left: 2em;
-   }
-   
-   .play-audio-btn,
+
    .stop-audio-btn {
     font-family: 'Text02', monospace;
     font-style: normal;
     font-weight: bold;
-    font-size: 1.6rem;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 100;
+    font-size: 2.2rem;
        border: none;
        color: #0ff;
+       text-shadow: 0 0 5px #ff00ff, 0 0 10px #0ff;
+       letter-spacing: .03em;
+       animation: glitch 1.2s infinite linear alternate-reverse;
        background: transparent;
-       padding: 0.5em 1em;
        cursor: pointer;
        transition: all 0.3s ease;
-       text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+       text-align: center;
    }
    
    .play-audio-btn:hover,
    .stop-audio-btn:hover {
 
-       text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    color: #0ff;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #0ff;
+    letter-spacing: .03em;
+    animation: glitch 1.2s infinite linear alternate-reverse;
    }
    
    .play-audio-btn:active,
@@ -722,38 +719,67 @@
        transform: translateY(1px);
    }
    
+   nav {
+    margin: 10px 0;
+    text-align: center;
+
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+nav a {
+    font-family: 'Text02', monospace;
+    font-style: normal;
+    
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 8px 15px;
+    font-size: 2.2rem;
+    transition: all 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+    text-shadow: 0 0 5px var(--primary-color);
+}
+/* Styly pro audio ovládací prvky */
+.audio-controls {
+    text-align: center;
+}
+
    /* Navigace */
-   nav ul.nav-horizontal {
+   nav ul.nav {
        font-family: 'Text02', monospace;
-       display: flex;
-       flex-direction: row;
        justify-content: center;
-       align-items: center;
-       padding: 0;
-       margin: 20px 0 30px 0;
        list-style: none;
-       gap: 2vw;
+      align-items: horizontal;
        z-index: 10; /* Nad videem */
    }
    
-   nav ul.nav-horizontal li {
+   nav ul.nav li {
        margin: 0;
-       padding: 0;
+       padding: 1em;
    }
    
-   nav ul.nav-horizontal li a {
+   nav ul.nav li a {
        color: #b5b5b5;
+
        text-decoration: none;
-       font-weight: 600;
-       font-size: 2.2rem;
+
        letter-spacing: 0.09em;
-       padding: 8px 18px;
        position: relative;
        z-index: 10; /* Nad videem */
    }
    
-   nav ul.nav-horizontal li a.active,
-   nav ul.nav-horizontal li a:hover {
+   nav ul.nav li a.active,
+   nav ul.nav li a:hover {
        color: #0ff;
        text-shadow: 0 0 5px #ff00ff, 0 0 10px #0ff;
        letter-spacing: .03em;
@@ -997,7 +1023,29 @@
 
     
     .noisy-text {
+        display: block;
+        text-align: center;
+        line-height: 1.5;
+    }
+    
+    /* Kontejner pro slova */
+    .noisy-word {
+        display: inline-block;
+        white-space: nowrap;
+    }
+    
+    /* Styly pro jednotlivé znaky */
+    .noisy-char {
         display: inline-block;
         position: relative;
-        color: #dcdcdc;
+        transition: color 0.2s ease, opacity 0.2s ease;
     }
+    
+    /* Zajistíme, že mezery mezi slovy zůstanou zachovány */
+    .noisy-text > span:not(.noisy-word) {
+        white-space: pre;
+    }
+    
+
+    
+
