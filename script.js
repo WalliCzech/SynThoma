@@ -1,3 +1,71 @@
+// ===== Chapter List Functions =====
+function showChapterList() {
+    const container = document.createElement('div');
+    container.id = 'chapter-list-container';
+    container.innerHTML = `
+        <div class="chapter-list">
+            <h2 class="glitch-word2">::: KAPITOLY :::</h2>
+            <div id="chapters" class="chapters"></div>
+        </div>
+    `;
+    
+    document.body.appendChild(container);
+    
+    // Add chapters to the list
+    const chaptersContainer = document.getElementById('chapters');
+    CHAPTERS.forEach((chapter, index) => {
+        const chapterElement = document.createElement('div');
+        chapterElement.className = 'chapter-item';
+        chapterElement.textContent = chapter.title;
+        chapterElement.dataset.chapterId = chapter.id;
+        chapterElement.dataset.file = chapter.file;
+        chapterElement.style.animationDelay = `${index * 0.1}s`;
+        
+        chapterElement.addEventListener('click', () => {
+            loadChapter(chapter.file);
+        });
+        
+        chaptersContainer.appendChild(chapterElement);
+    });
+}
+
+function loadChapter(file) {
+    fetch(file)
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const content = doc.querySelector('.ctecka') || doc.body;
+            
+            // Remove chapter list
+            const container = document.getElementById('chapter-list-container');
+            if (container) {
+                container.remove();
+            }
+            
+            // Add content to the page
+            document.body.innerHTML = '';
+            document.body.appendChild(content);
+            
+            // Re-initialize scripts
+            if (window.typewriterWrite) {
+                const textElements = document.querySelectorAll('.text, .dialog, .dialogN, .dialogS');
+                textElements.forEach(el => {
+                    const text = el.textContent;
+                    el.textContent = '';
+                    typewriterWrite(el, text);
+                });
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        })
+        .catch(error => {
+            console.error('Error loading chapter:', error);
+            alert('Chyba při načítání kapitoly. Zkuste to prosím znovu.');
+        });
+}
+
 // Funkce pro detekci změny měřítka (zoom)
 function handleZoom() {
     const viewport = document.querySelector('meta[name=viewport]');
@@ -39,6 +107,14 @@ function initZoomHandlers() {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🎮 SYNTHOMA script initialized. System status: GLITCH_STABILIZED_RGB... nebo možná jen přetížený neon! 😎');
     initZoomHandlers();
+    
+    // Show chapter list on initial load for SYNTHOMAREADER
+    if (window.location.pathname.includes('SYNTHOMAREADER')) {
+        // Small delay to ensure everything is loaded
+        setTimeout(() => {
+            showChapterList();
+        }, 300);
+    }
     
     // Inicializace canvasu pro pozadí
     const canvas = document.getElementById('glitch-bg');
@@ -290,43 +366,126 @@ document.getElementById('glitch-synthoma').innerHTML = createGlitchLayers(SYNTHO
 // Glitch cyklus
 setInterval(glitchCycle, 120);
 
-
-
+// Definice glitch znaků, pokud ještě neexistují
+window.GLITCH_CHARS = window.GLITCH_CHARS || '!@#$%^&*_-+=/?\\|<>[]{};:~NYHSMT#¤%&@§÷×¤░▒▓█▄▀●◊O|/\\_^-~.*+';
 
 // Funkce pro glitchování jednoho slova
 function startGlitchWord(selector = '.glitch-word2', interval = 50, intensity = 0.27, duration = 110) {
-    document.querySelectorAll(selector).forEach(el => {
-        const origText = el.getAttribute('data-text') || el.textContent;
-        el.textContent = origText;
+    // Najdeme všechny elementy s daným selektorem
+    const elements = document.querySelectorAll(selector);
+    
+    // Pokud nebyly nalezeny žádné elementy, ukončíme funkci
+    if (elements.length === 0) {
+        console.warn(`Žádné elementy s selektorem '${selector}' nebyly nalezeny.`);
+        return false;
+    }
+    
+    let atLeastOneElementProcessed = false;
+    
+    elements.forEach(el => {
+        // Přeskočíme elementy, které už mají glitch efekt
+        if (el.hasAttribute('data-glitch-active')) {
+            return;
+        }
+        
+        // Označíme element jako aktivní
+        el.setAttribute('data-glitch-active', 'true');
+        atLeastOneElementProcessed = true;
+        
+        // Uložíme originální text do data atributu, pokud tam ještě není
+        if (!el.hasAttribute('data-text')) {
+            el.setAttribute('data-text', el.textContent);
+        }
+        
+        const origText = el.getAttribute('data-text');
+        
+        // Pokud je element prázdný, přeskočíme ho
+        if (!origText || origText.trim() === '') {
+            console.warn('Prázdný textový obsah pro glitch efekt.');
+            return;
+        }
+        
+        // Nastavíme pevnou šířku podle aktuální šířky elementu
+        const originalWidth = el.offsetWidth || 50; // Záložní šířka
+        el.style.minWidth = `${originalWidth}px`;
+        el.style.display = 'inline-block';
+        el.style.textAlign = 'center';
 
-        setInterval(() => {
+        // Nastavíme interval pro glitch efekt
+        const glitchInterval = setInterval(() => {
             // Pro každý frame vyměň některé znaky za glitch znaky
             let glitched = '';
             for (let i = 0; i < origText.length; i++) {
                 if (Math.random() < intensity && origText[i] !== ' ') {
-                    glitched += GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+                    glitched += window.GLITCH_CHARS[Math.floor(Math.random() * window.GLITCH_CHARS.length)];
                 } else {
                     glitched += origText[i];
                 }
             }
-            el.textContent = glitched;
+            
+            // Aktualizujeme text pouze pokud se změnil
+            if (el.textContent !== glitched) {
+                el.textContent = glitched;
+            }
 
             // Po krátké chvíli vrať zpět originál
             setTimeout(() => {
-                el.textContent = origText;
+                if (el.textContent !== origText) {
+                    el.textContent = origText;
+                }
             }, duration + Math.random() * 70);
         }, interval + Math.random() * 40);
+        
+        // Uložíme ID intervalu pro případné pozdější zastavení
+        el.setAttribute('data-glitch-interval', glitchInterval);
     });
+    
+    return atLeastOneElementProcessed;
 }
 
-// Spustíme na všech .glitch-word
-startGlitchWord('.glitch-word2', 72, 0.31, 90);
+// Funkce pro inicializaci glitch efektu
+function initGlitchEffects() {
+    // Spustíme na všech .glitch-word2 v celém dokumentu
+    const glitchElements = document.querySelectorAll('.glitch-word2');
+    
+    if (glitchElements.length > 0) {
+        console.log('🔮 Inicializuji glitch efekty...');
+        startGlitchWord('.glitch-word2', 250, 0.17, 50);
+        return true;
+    } else {
+        console.log('⏳ Žádné glitch elementy k dispozici. Zkouším znovu...');
+        return false;
+    }
+}
+
+// Spustíme glitch efekt při načtení DOMu
+document.addEventListener('DOMContentLoaded', () => {
+    // První pokus o inicializaci
+    initGlitchEffects();
+    
+    // Zkusíme znovu po chvíli, kdyby se DOM ještě měnil
+    const maxAttempts = 5;
+    let attempts = 0;
+    
+    const retryInterval = setInterval(() => {
+        attempts++;
+        const success = initGlitchEffects();
+        
+        if (success || attempts >= maxAttempts) {
+            clearInterval(retryInterval);
+            if (!success) {
+                console.warn('Nepodařilo se najít žádné glitch elementy po', attempts, 'pokusech.');
+            }
+        }
+    }, 500);
+});
+
+// Spustíme také při načtení celé stránky
+window.addEventListener('load', () => {
+    initGlitchEffects();
+});
 
 
-
-
-
-let currentAudio = null;
 
 // ===== Funkce pro psaní textu s efektem psacího stroje a glitch efekty =====
 function typewriterWrite(element, fullHTML, options = {}, onDone = null) {
@@ -619,7 +778,7 @@ function loadContent() {
     
     // Vybereme soubor k načtení podle stránky
     const fileToLoad = isIndexPage ? 'SYNTHOMAINFO.html' : 
-                       isKnihaPage ? 'SYNTHOMANULL.html' : isAutorPage ? 'SYNTHOMAAUTOR.html' : 'SYNTHOMANULL.html';
+                       isKnihaPage ? 'SYNTHOMAREADER.html' : isAutorPage ? 'SYNTHOMAAUTOR.html' : 'SYNTHOMANULL.html';
 
     
     console.log(`🔍 Načítám obsah z: ${fileToLoad}. Doufám, že to není jen další glitch v matrixu... 😏`);
@@ -1002,6 +1161,10 @@ function showLongPopup(text) {
 
 function startTextNoise(selector = '.noisy-text', intensity = 0.33, interval = 41) {
     document.querySelectorAll(selector).forEach(el => {
+        // Přeskočíme tlačítka s třídou play-audio-btn
+        if (el.classList.contains('play-audio-btn')) {
+            return;
+        }
         // Uložíme původní HTML obsah
         const originalHTML = el.innerHTML;
         

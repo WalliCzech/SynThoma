@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SYNTHOMA READER</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="chapters.js" defer></script>
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #0ff;
+            font-family: 'JetBrains Mono', monospace;
+            overflow: hidden;
+        }
+        
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 1.2rem;
+            color: #0ff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        
+        .glitch-word2 {
+            animation: glitch2 5s infinite alternate;
+            position: relative;
+            display: inline-block;
+        }
+        
+        @keyframes glitch2 {
+            0% { text-shadow: 0.05em 0 0 #0ff, -0.05em -0.025em 0 #f0f; }
+            14% { text-shadow: 0.05em 0 0 #0ff, -0.05em -0.025em 0 #f0f; }
+            15% { text-shadow: -0.05em -0.025em 0 #0ff, 0.025em 0.025em 0 #f0f; }
+            49% { text-shadow: -0.05em -0.025em 0 #0ff, 0.025em 0.025em 0 #f0f; }
+            50% { text-shadow: 0.025em 0.05em 0 #0ff, 0.05em 0 0 #f0f, -0.025em -0.05em 0 #0f0; }
+            99% { text-shadow: 0.025em 0.05em 0 #0ff, 0.05em 0 0 #f0f, -0.025em -0.05em 0 #0f0; }
+            100% { text-shadow: -0.025em 0 0 #0ff, -0.025em -0.025em 0 #f0f; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <span class="glitch-word2" data-text="INITIALIZING SYNTHOMA READER...">INITIALIZING SYNTHOMA READER...</span>
+    </div>
+    
+    <script>
+        // Hide loading message when scripts are loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const loading = document.querySelector('.loading');
+                if (loading) {
+                    loading.style.opacity = '0';
+                    setTimeout(() => loading.remove(), 500);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

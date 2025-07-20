@@ -18,6 +18,85 @@
       IMPORTY A FONTY
    ========================= */
    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* =========================
+      SEZNAM KAPITOL
+   ========================= */
+#chapter-list-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.chapter-list {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
+
+.chapter-list h2 {
+    font-family: 'Synthoma', monospace;
+    color: #0ff;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    letter-spacing: 2px;
+}
+
+.chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chapter-item {
+    font-family: 'JetBrains Mono', monospace;
+    color: #0ff;
+    font-size: 1.2rem;
+    padding: 15px 20px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.chapter-item:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    border-color: #0ff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .chapter-list h2 {
+        font-size: 2rem;
+    }
+    
+    .chapter-item {
+        font-size: 1rem;
+        padding: 12px 15px;
+    }
+}
    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
    
    @font-face {
@@ -118,6 +197,7 @@
        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
        scrollbar-width: none;
        scrollbar-color: transparent transparent;
+       margin-bottom: 5rem;
    }
    
    /* =========================
@@ -198,6 +278,8 @@
     text-shadow: 0 0 15px #0ff, 0 0 20px #ff00ff;
     margin-left: 1rem;
     margin-right: 2rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
     padding: 0.5rem 1rem 0.5rem 1.6rem;
     z-index: 10;
     justify-content: center;
@@ -337,7 +419,7 @@
    .manifest {
        font-family: 'Text02', sans-serif;
        font-weight: bold;
-       font-size: 1.6rem;
+       font-size: 1.2rem;
        color: #0ff;
        text-shadow: 0 0 5px #00f, 0 0 10px #00f, 0 0 15px #0ff;
        line-height: 1.4;
@@ -349,6 +431,7 @@
        margin-left: 6rem;
        margin-right: 6rem;
        max-width: 80%;
+       max-height: 70%;
    }
    .ctecka {
     display: flex; 
@@ -356,14 +439,94 @@
     overflow: auto;
    }
 
+   .dialogS {
+    position: relative;
+    color: rgba(161, 55, 46, 0.75);
+    text-shadow: 0 0 5px rgba(255, 0, 0), 0 0 10px rgba(255, 0, 255);
+    font-family: 'Text03i', monospace;
+    font-weight: normal;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    text-align: left;
+    vertical-align: center;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    padding: 0.5rem 1rem 0rem 2.6rem;
+    z-index: 10;
+    justify-content: center;
+   }
+
+   .dialogS::before {
+    content: '';
+    position: absolute;
+    left: 0; /* zarovnáme odshora (ne přes celý blok) */
+    width: 4px;       /* tloušťka čáry */
+    height: 100%;      /* můžeš si upravit, jak dlouhá má být */
+    border-radius: 2px;
+    background: solid(#f0f);
+    box-shadow:
+        -1px 0 4px 2px #0ff,
+        0px 0 8px 3px #f0f,
+        0px 0 12px 1px #f00;
+    animation: border-glow 2.6s infinite cubic-bezier(.8,0,.23,1.1);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.dialogN {
+    position: relative;
+    color: rgba(107, 142, 142, 0.75);
+    text-shadow: 0 0 5px #000, 0 0 10px rgb(67, 15, 67);
+    font-family: 'Text03i', monospace;
+    font-weight: normal;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    text-align: left;
+    vertical-align: center;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    padding: 0.5rem 1rem 0rem 2.6rem;
+    z-index: 10;
+    justify-content: center;
+   }
+
+   .dialogN::before {
+    content: '';
+    position: absolute;
+    left: 0; /* zarovnáme odshora (ne přes celý blok) */
+    width: 4px;       /* tloušťka čáry */
+    height: 100%;      /* můžeš si upravit, jak dlouhá má být */
+    border-radius: 2px;
+    background: solid(#f0f);
+    box-shadow:
+        -1px 0 4px 2px #00f,
+        0px 0 8px 3px #f0f,
+        0px 0 12px 1px #0ff;
+    animation: border-glow 2.6s infinite cubic-bezier(.8,0,.23,1.1);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+    .textV {
+        font-family: 'Text03i', monospace;
+        font-weight: normal;
+        text-shadow: 0 0 15px #f0f, 0 0 20px #0ff;
+    }
+
    /* Neon animace čáry – můžeš upravit podle chuti */
 @keyframes border-glow {
     0%, 100% { filter: brightness(1.4) blur(0.4px); }
     40%      { filter: brightness(2.1) blur(1.3px); }
     70%      { filter: brightness(1.7) blur(0.6px); }
 }
-   
-   
+
+
    /* =========================
          RESPONZIVNÍ STYLY
       ========================= */
@@ -390,10 +553,11 @@
        }
        
        
-       h1, #glitch-synthoma.glitch-master {
+       h1 {
            font-size: 2.7rem !important;
            margin: 0.5rem 0;
        }
+
        
        p, .dialog {
            font-size: 1.1rem !important;
@@ -457,9 +621,6 @@
            2px 2px 12px var(--secondary-color);
        animation: glitch 1.2s infinite linear alternate-reverse;
        will-change: transform, text-shadow;
-       margin-top: 3rem;
-       margin-bottom: 1rem;
-       padding: 0 10px;
        word-break: keep-all;
    }
    
@@ -535,7 +696,56 @@
        75% { text-shadow: 2px -2px #0ff, -3px 1px #ff0040; transform: translate(1px, -1px); opacity: 0.8; }
        100% { text-shadow: -2px 2px #0ff, 3px -2px #f0f; transform: translate(0); opacity: 1; }
    }
-   
+
+   .alarm-emote {
+    text-shadow: 0 0 16px #00f, 0 0 8px #0ff, 0 0 32px #f0f;
+    animation: alarm-blink 0.46s steps(2, end) infinite,
+               alarm-glitch 0.7s infinite cubic-bezier(.77,0,.23,1.08);
+    filter: brightness(1.4) drop-shadow(0 0 24px #f0f);
+  }
+  @keyframes alarm-blink {
+    0%, 65%, 100% { opacity: 1; filter: brightness(1.2) }
+    45% { opacity: 0.22; filter: brightness(2.2) }
+  }
+  @keyframes alarm-glitch {
+    0%, 100% { transform: none; color: #ff0040; }
+    24% { transform: translate(-1.3px, 2px) scale(1.08); color: #f0f; }
+    52% { transform: translate(2.7px, -1px) scale(1.16); color: #0ff; }
+    67% { transform: translate(0, 0) scale(1.18); color: #ff0040; }
+  }
+  @keyframes error-shake {
+    0%   { transform: translateX(0); }
+    20%  { transform: translateX(-7px) rotate(-1deg);}
+    40%  { transform: translateX(7px) rotate(1deg);}
+    60%  { transform: translateX(-5px) rotate(-0.7deg);}
+    80%  { transform: translateX(3px) rotate(0.5deg);}
+    100% { transform: translateX(0); }
+  }
+
+  .glitch-word2 {
+    display: inline-block;
+    position: relative;
+    min-width: 1em; /* Minimální šířka podle šířky písmene */
+    text-align: center;
+    color: #0ff;
+    max-width: 80%;
+    margin-right: 0.5rem;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+    white-space: nowrap; /* Zabraňuje zalomení textu */
+}
+
+@keyframes glitch2 {
+    0% { text-shadow: 0.05em 0 0 #0ff, -0.05em -0.025em 0 #f0f; }
+    14% { text-shadow: 0.05em 0 0 #0ff, -0.05em -0.025em 0 #f0f; }
+    15% { text-shadow: -0.05em -0.025em 0 #0ff, 0.025em 0.025em 0 #f0f; }
+    49% { text-shadow: -0.05em -0.025em 0 #0ff, 0.025em 0.025em 0 #f0f; }
+    50% { text-shadow: 0.025em 0.05em 0 #0ff, 0.05em 0 0 #f0f, -0.025em -0.05em 0 #f0f; }
+    99% { text-shadow: 0.025em 0.05em 0 #0ff, 0.05em 0 0 #f0f, -0.025em -0.05em 0 #f0f; }
+    100% { text-shadow: -0.025em 0 0 #0ff, -0.025em -0.025em 0 #f0f; }
+}
+
+
+
    /* =========================
          GLITCH background
       ========================= */
@@ -546,7 +756,7 @@
        top: 0;
        width: 100vw;
        height: 100vh;
-       z-index: -500; /* Pod videem */
+       z-index: -100; /* Pod videem */
        pointer-events: none;
        opacity: 0.72;
        filter: blur(0.7px) brightness(1.08) contrast(1.12);
@@ -670,9 +880,10 @@
     justify-content: center;
     padding: 0;
     margin: 0;
+    z-index: 100;
+    pointer-events: auto; /* Zajišťuje, že tlačítko bude vždy klikatelné */
     display: flex;
     flex-wrap: wrap;
-    z-index: 100;
     font-size: 2.2rem;
        border: none;
        color: #b5b5b5;
@@ -883,17 +1094,18 @@ nav a:hover, nav a.active {
          GLITCH popup
       ========================= */
       .popup-tip {
-        color: #f0f;
+        color: #0ff;
         text-shadow: 0 0 5px #0ff;
         cursor: pointer;
-        border-bottom: 1px dotted #f0f;
+        border-bottom: 1px dotted rgb(255, 0, 255, 0.5);
+        text-shadow: 0 0 10px #f0f, 0 0 15px #f0f, 0 0 20px #0ff;
         position: relative;
         transition: color 0.2s;
         z-index: 1000;
         display: inline-block;
     }
     .popup-tip:hover {
-        color: #ff00c8;
+        color: #f0f;
     }
     
     .popup-tip .popup-short {

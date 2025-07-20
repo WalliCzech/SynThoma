@@ -95,6 +95,7 @@ function handleAudioButtonClick(e) {
     // Zpracování tlačítek pro přehrávání
     if (e.target.classList.contains('play-audio-btn')) {
         e.preventDefault();
+        e.stopPropagation();  // Zastavíme šíření události
         const audioFile = e.target.getAttribute('data-audio') || 'audio/ambient.mp3';
         window.audioPlayer.play(audioFile);
     }
