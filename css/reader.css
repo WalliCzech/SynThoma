@@ -42,13 +42,14 @@
       .SYNTHOMAREADER {
         position: relative;
         max-width: 900px;
+        border-radius: 15px;
         margin: 0 auto;
-        padding: 2rem;
+        padding: 0.5rem;
         color: var(--text-primary);
-        line-height: 1.6;
+        line-height: 1.4;
         overflow: visible; /* Změněno z overflow-y: hidden na visible */
         max-height: none; /* Odstranění omezení výšky, která by mohla způsobovat scrollbar */
-        min-height: 300px;
+        min-height: 200px;
         opacity: 1;
         background-color: rgba(var(--bg-secondary-rgb), var(--reader-bg-opacity, 0.75));
         transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;

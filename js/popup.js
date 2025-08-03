@@ -77,26 +77,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Funkce na aktualizaci pozice, protože myš je rychlejší než tvůj kód 😏
     function updatePopupPosition(event) {
         if (!popupElement) return;
-
-        const x = event.clientX + 15;
-        const y = event.clientY + 15;
+    
+        // Získáme rozměry okna a popupu
+        const padding = 10;
         const popupWidth = popupElement.offsetWidth;
         const popupHeight = popupElement.offsetHeight;
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
-
-        let finalX = x;
-        if (x + popupWidth > viewportWidth - 15) {
-            finalX = event.clientX - popupWidth - 15; // Pěkně to nacpeme zpátky
+    
+        let x = event.clientX + 15;
+        let y = event.clientY + 15;
+    
+        // Horizontální korekce – pokud by popup přetekl vpravo
+        if (x + popupWidth + padding > viewportWidth) {
+            x = viewportWidth - popupWidth - padding;
         }
-
-        let finalY = y;
-        if (y + popupHeight > viewportHeight - 15) {
-            finalY = event.clientY - popupHeight - 15; // Ať to neleze z obrazovky
+        // Pokud by popup přetekl vlevo (extrémně velký popup u okraje)
+        if (x < padding) {
+            x = padding;
         }
-        
-        popupElement.style.left = `${finalX}px`;
-        popupElement.style.top = `${finalY}px`;
+    
+        // Vertikální korekce – pokud by popup přetekl dolů
+        if (y + popupHeight + padding > viewportHeight) {
+            y = viewportHeight - popupHeight - padding;
+        }
+        // Pokud by popup přetekl nahoru (extrémně velký popup u horního okraje)
+        if (y < padding) {
+            y = padding;
+        }
+    
+        popupElement.style.left = `${x}px`;
+        popupElement.style.top = `${y}px`;
     }
 
     // Delegování událostí, protože dynamické elementy jsou jako kočky – neposlušné 😼

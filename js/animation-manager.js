@@ -15,6 +15,14 @@ window.animationManager = {
         if (!this.isPaused) {
             this.startAll();
         }
+
+        // Sebe-oživení po krátké chvíli pro případ, že by jiný skript animace vypnul
+        setTimeout(() => {
+            if (!localStorage.getItem('animationsDisabled')) {
+                console.log('Animation Manager: Kontrola a restart animací.');
+                this.startAll();
+            }
+        }, 1500);
     },
 
     // Přepne stav všech animací a uloží ho
@@ -64,6 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.animationManager.initialize();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    window.animationManager.initialize();
+// Pojistka pro spuštění animací po úplném načtení stránky
+window.addEventListener('load', () => {
+    if (window.animationManager && !window.animationManager.isPaused) {
+        console.log('Pojistka: Restartuji animace po načtení okna.');
+        window.animationManager.startAll();
+    }
 });

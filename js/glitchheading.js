@@ -46,7 +46,7 @@
 
     window.stopGlitchHeading = function() {
         if (!glitchInterval) return;
-        console.log('Stopping Glitch Heading...');
+        console.log('Stopping Glitch Heading... ');
         clearInterval(glitchInterval);
         glitchInterval = null;
         // Reset stavu

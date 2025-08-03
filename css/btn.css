@@ -176,7 +176,7 @@
         color: var(--text-primary);
         text-decoration: none;
         padding: 8px 15px;
-        font-size: calc(2.2rem * var(--font-size-multiplier));
+        font-size: calc(1.3rem * var(--font-size-multiplier));
         transition: all 0.3s ease;
     }
     
@@ -188,6 +188,7 @@
     nav a.active {
         color: var(--text-primary);
         text-shadow: 0 0 8px var(--text-primary), 0 0 15px var(--glow-secondary);
+        animation: glitch 1s infinite;
     }
 
     /* Společné styly pro podtržení */

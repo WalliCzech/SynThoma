@@ -1,5 +1,4 @@
-  
-   /* =========================
+/* =========================
          GLITCH EFFECTS
       ========================= */
       
@@ -45,6 +44,8 @@
         text-align: center;
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
         z-index: 10;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -57,7 +58,6 @@
             2px 2px 12px var(--glow-primary);
         animation: glitch 1.2s infinite linear alternate-reverse;
         will-change: transform, text-shadow;
-        word-break: keep-all;
         font-family: 'Synthoma', monospace;
     } 
     
@@ -120,7 +120,7 @@
         min-width: 1em;
         text-align: center;
         color: var(--text-primary);
-        max-width: 80%;
+        max-width: 70%;
         margin-right: 0.5rem;
         text-shadow: 0 0 5px var(--glow-secondary), 0 0 10px var(--glow-secondary);
         white-space: nowrap;

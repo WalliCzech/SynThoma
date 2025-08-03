@@ -22,13 +22,13 @@
 
 /* Manifest kontejner */
 #manifest-container {
-    font-size: 3rem;
+    font-size: calc(1.2rem * var(--font-size-multiplier));
 }
 
 /* Manifest wrapper */
 .manifest-wrapper {
-    margin-top: 2.7rem;
-    margin-bottom: 4rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +53,7 @@
     border-radius: 5px;
     color: var(--text-primary, #00ffff);
     padding: 12px 25px;
-    font-size: 1.8rem;
+    font-size: calc(0.8rem * var(--font-size-multiplier));
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
@@ -68,6 +68,7 @@
     background: rgba(0, 0, 0, 0.9);
     box-shadow: 0 0 15px var(--glow-primary, rgba(0, 255, 255, 0.7));
     transform: translateY(-2px);
+    animation: glitch 1s infinite;
 }
 
 .glitch-button:before {

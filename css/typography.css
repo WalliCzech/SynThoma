@@ -56,7 +56,7 @@
       h1 {
         font-family: 'Synthoma', monospace;
         font-weight: normal;
-        font-size: calc(4.2rem * var(--font-size-multiplier));
+        font-size: calc(4rem * var(--font-size-multiplier));
         letter-spacing: 1px;
         text-transform: uppercase;
         color: var(--text-primary);
@@ -78,7 +78,7 @@
         font-family: 'Text01', monospace;
         font-weight: bold;
         color: var(--text-primary);
-        font-size: calc(1.1rem * var(--font-size-multiplier));
+        font-size: calc(1.7rem * var(--font-size-multiplier));
         line-height: 1.6;
         margin: 0;
         padding: 0.5rem 1rem;
@@ -101,7 +101,7 @@
         font-family: 'Text03', monospace;
         font-weight: normal;
         color: var(--text-secondary);
-        font-size: calc(1.3rem * var(--font-size-multiplier));
+        font-size: calc(1.1rem * var(--font-size-multiplier));
         line-height: 1.5;
         text-align: left;
         margin: 0 1rem 0 1rem;
@@ -116,18 +116,18 @@
         font-weight: bold;
         color: var(--text-primary);
         line-height: 1.4;
-        font-size: calc(2.2rem * var(--font-size-multiplier));
+        font-size: calc(1.8rem * var(--font-size-multiplier));
         text-align: center;
         text-shadow: 0 0 15px var(--glow-secondary), 0 0 20px var(--glow-primary);
-        margin: 0 1rem 0 1rem;
-        padding: 0.5rem 1rem 0.5rem 1.6rem;
+        margin: 0 0.1rem 0 0.1rem;
+        padding: 0.5rem 1rem 0.5rem 0.5rem;
         z-index: 10;
     }
     
     .title::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: -0.5rem;
         width: 4px;
         height: 100%;
         border-radius: 2px;
@@ -146,18 +146,18 @@
         font-family: 'Text03b', monospace;
         font-weight: bold;
         text-shadow: 0 0 5px red, 0 0 15px red;
-        font-size: calc(1.35rem * var(--font-size-multiplier));
+        font-size: calc(1.15rem * var(--font-size-multiplier));
         line-height: 1.5;
         text-align: left;
-        margin: 0 1rem 0 1rem;
-        padding: 0.5rem 1rem 0rem 1.6rem;
+        margin: 0 0.1rem 0 0.1rem;
+        padding: 0.5rem 1rem 0rem 0.5rem;
         z-index: 10;
     }
     
     .log::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: -0.5rem;
         width: 4px;
         height: 100%;
         border-radius: 2px;
@@ -175,18 +175,18 @@
         text-shadow: 0 0 5px var(--glow-primary), 0 0 10px var(--glow-primary);
         font-family: 'Text03i', monospace;
         font-weight: normal;
-        font-size: calc(1.35rem * var(--font-size-multiplier));
+        font-size: calc(1.15rem * var(--font-size-multiplier));
         line-height: 1.5;
         text-align: left;
-        margin: 0 1rem 0 1rem;
-        padding: 0.5rem 1rem 0rem 2.6rem;
+        margin: 0 0.1rem 0 0.1rem;
+        padding: 0.5rem 1rem 0rem 0.5rem;
         z-index: 10;
     }
     
     .dialog::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: -0.5rem;
         width: 4px;
         height: 100%;
         border-radius: 2px;
@@ -204,18 +204,18 @@
         text-shadow: 0 0 2px var(--glow-primary), 0 0 4px var(--glow-secondary);
         font-family: 'Text03', monospace;
         font-weight: normal;
-        font-size: calc(1.35rem * var(--font-size-multiplier));
+        font-size: calc(1.15rem * var(--font-size-multiplier));
         line-height: 1.5;
         text-align: left;
-        margin: 0 1rem 0 1rem;
-        padding: 0.5rem 1rem 0rem 1.6rem;
+        margin: 0 0.1rem 0 0.1rem;
+        padding: 0.5rem 1rem 0rem 0.5rem;
         z-index: 10;
     }
     
     .text::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: -0.5rem;
         width: 4px;
         height: 100%;
         border-radius: 2px;
@@ -231,7 +231,6 @@
         font-family: 'Text02', sans-serif;
         font-weight: bold;
         color: #fff;
-        font-size: calc(3rem * var(--font-size-multiplier, 1));
         line-height: 1.4;
         text-align: center;
         text-shadow: 0 5px 5px var(--glow-primary), 0 15px 10px var(--glow-primary), 0 25px 20px var(--glow-primary), 0 35px 40px var(--glow-primary), 0 45px 80px var(--glow-primary);
@@ -247,18 +246,18 @@
         text-shadow: 0 0 5px red, 0 0 10px var(--glow-primary);
         font-family: 'Text03i', monospace;
         font-weight: normal;
-        font-size: calc(1.35rem * var(--font-size-multiplier));
+        font-size: calc(1.15rem * var(--font-size-multiplier));
         line-height: 1.5;
         text-align: left;
-        margin: 0 1rem 0 1rem;
-        padding: 0.5rem 1rem 0rem 2.6rem;
+        margin: 0 0.1rem 0 0.1rem;
+        padding: 0.5rem 1rem 0rem 0.5rem;
         z-index: 10;
     }
     
     .dialogS::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: -0.5rem;
         width: 4px;
         height: 100%;
         border-radius: 2px;
@@ -276,18 +275,18 @@
         text-shadow: 0 0 5px var(--bg-primary), 0 0 10px var(--shadow-primary);
         font-family: 'Text03i', monospace;
         font-weight: normal;
-        font-size: calc(1.35rem * var(--font-size-multiplier));
+        font-size: calc(1.15rem * var(--font-size-multiplier));
         line-height: 1.5;
         text-align: left;
-        margin: 0 1rem 0 1rem;
-        padding: 0.5rem 1rem 0rem 2.6rem;
+        margin: 0 0.1rem 0 0.1rem;
+        padding: 0.5rem 1rem 0rem 0.5rem;
         z-index: 10;
     }
     
     .dialogN::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: -0.5rem;
         width: 4px;
         height: 100%;
         border-radius: 2px;
