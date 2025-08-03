@@ -1,0 +1,625 @@
+/* styles.css: Neonový chaos pro SYNTHOMA - optimalizováno pro mobil! 📱💥 */
+
+/* ===== IMPORTOVANÉ STYLY ===== */
+/* Všechny @import musí být na začátku souboru podle specifikace CSS */
+@import url('typography.css');      /* Základní typografie a fonty*/
+@import url('animations.css');     /* Klíčové snímky a animace */
+@import url('glitch.css');         /* Glitch efekty */
+@import url('btn.css');            /* Tlačítka a ovládací prvky */
+@import url('settingspanel.css');          /* Ovládací panel */
+@import url('reader.css');         /* Čtečka obsahu */
+@import url('responsive.css');     /* Responzivní styly - musí být poslední */
+@import url('videobg.css');     /* Responzivní styly - musí být poslední */
+
+/* Reset a základní styly */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-color: hsl(var(--border));
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; /* Safari */
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%; /* Prevence automatického zvětšování písma na mobilních zařízeních */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  touch-action: manipulation;
+
+  color: var(--text-primary);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Styly pro výběr textu */
+::selection {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+/* Styly pro skrolování */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.8);
+}
+
+/* Loading overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none; /* Výchozí stav je skrytý */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    -webkit-backdrop-filter: blur(5px);
+    -moz-backdrop-filter: blur(5px);
+    -ms-backdrop-filter: blur(5px);
+    -o-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+/* Zobrazíme loading overlay pouze pokud má třídu active */
+#loading-overlay.active {
+    display: flex;
+}
+
+.loading-content {
+    text-align: center;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    /* Zajištění, že se loading overlay po načtení stránky skryje */
+    display: none;
+}
+
+/* Zobrazíme loading overlay pouze pokud má třídu active */
+.loading-content.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    -webkit-backdrop-filter: blur(5px);
+    -moz-backdrop-filter: blur(5px);
+    -ms-backdrop-filter: blur(5px);
+    -o-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--border-secondary);
+    border-radius: 50%;
+    border-top-color: var(--accent-secondary);
+    animation: spin 1s ease-in-out infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    margin-top: 15px;
+    font-size: 1.2em;
+    text-shadow: 0 0 10px var(--glow-secondary);
+}
+
+/* Error container */
+.error-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  
+    border: 1px solid red;
+    color: red;
+    padding: 15px 25px;
+    border-radius: 5px;
+    z-index: 10000;
+    max-width: 90%;
+    box-shadow: 0 0 15px red;
+}
+
+.error-message h3 {
+    margin-top: 0;
+    color: #ff6666;
+}
+
+.error-message button {
+    background: #ff4444;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    margin-top: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.error-message button:hover {
+    background: #ff6666;
+}
+
+/* Audio controls */
+.audio-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.audio-toggle {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.audio-toggle:hover {
+    background: var(--border-secondary);
+    box-shadow: 0 0 10px var(--glow-secondary);
+}
+
+.volume-control {
+    -webkit-appearance: none;
+    appearance: none; /* Standardní vlastnost */
+    width: 100px;
+    height: 4px;
+    background: var(--border-secondary);
+    border-radius: 2px;
+    outline: none;
+}
+
+.volume-control::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--accent-secondary);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--glow-secondary);
+}
+
+.volume-control::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--accent-secondary);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--glow-secondary);
+    border: none;
+}
+
+
+   /* =========================
+          ZÁKLADNÍ PROMĚNNÉ
+       ========================= */
+:root {
+    /* Základní proměnné pro animace a velikosti */
+    --font-size-multiplier: 1;
+    --animation-duration: 1s;
+    --animation-play-state: running;
+
+    /* Výchozí motiv: Dark Glitch */
+    --bg-primary: #000;
+    --bg-secondary: #000;
+    --bg-secondary-rgb: 0, 0, 0;
+    --bg-tertiary: rgba(0, 15, 30, 0.9);
+
+    --text-primary: #0ff;
+    --text-secondary: rgba(0, 255, 255, 0.7);
+    --text-accent: #ff00ff;
+
+    --accent-primary: #ff00ff; /* Magenta/Pink */
+    --accent-secondary: #00ffff; /* Cyan */
+
+    --border-primary: #00ffff;
+    --border-secondary: rgba(0, 255, 255, 0.3);
+
+    --glow-primary: rgba(255, 0, 255, 0.7);
+    --glow-secondary: rgba(0, 255, 255, 0.7);
+
+    --shadow-primary: #00f;
+}
+   
+   /* =========================
+         ZÁKLADNÍ LAYOUT A BODY
+      ========================= */
+   * {
+       animation-duration: var(--animation-duration) !important;
+       animation-play-state: var(--animation-play-state) !important;
+       transition-duration: var(--animation-duration) !important;
+   }
+   
+   html {
+       overflow-x: hidden;
+       width: 100%;
+       touch-action: manipulation;
+   }
+   
+
+   
+   body.no-scroll {
+       overflow: hidden;
+       position: fixed;
+       width: 100%;
+       height: 100%;
+   }
+   
+
+   
+   main {
+       min-width: 280px;
+       max-width: 900px;
+       width: calc(100% - 2rem);
+       padding: 0;
+
+       border-radius: 15px;
+       border: 1px solid var(--border-secondary);
+       min-height: 70vh;
+       overflow: hidden;
+       position: relative;
+       z-index: 10;
+       box-sizing: border-box;
+       display: flex;
+       flex-direction: column;
+       box-shadow: 0 0 20px var(--glow-secondary);
+       margin-bottom: 5rem;
+   }
+
+   .ctecka {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+   /* =========================
+         GLITCH POPUP
+      ========================= */
+   .popup-tip {
+       color: var(--text-primary);
+       text-shadow: 0 0 5px var(--glow-secondary);
+       cursor: pointer;
+       border-bottom: 1px dotted var(--glow-primary);
+       position: relative;
+       transition: color 0.2s;
+       z-index: 1000;
+       display: inline-block;
+   }
+   
+   .popup-tip:hover {
+       color: var(--accent-primary);
+   }
+   
+   .popup-tip .popup-short {
+       position: absolute;
+       font-family: 'Text03', monospace;
+       display: block;
+       left: 0;
+       top: 100%;
+       margin-top: 5px;
+       background: var(--bg-tertiary);
+       color: var(--text-primary);
+       padding: 6px 12px;
+       border-radius: 6px;
+       box-shadow: 0 0 15px var(--glow-secondary), 0 0 2px var(--glow-primary);
+       font-size: 14px;
+       z-index: 1000;
+       white-space: nowrap;
+       pointer-events: none;
+       opacity: 0;
+       transform: translateY(10px);
+       transition: opacity 0.2s, transform 0.2s;
+   }
+   
+   .popup-tip:hover .popup-short {
+       opacity: 1;
+       transform: translateY(0);
+   }
+   
+   .popup-overlay {
+       position: fixed;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background: rgba(0, 0, 0, 0.85);
+       z-index: 1000;
+       -webkit-backdrop-filter: blur(5px);
+       -moz-backdrop-filter: blur(5px);
+       -ms-backdrop-filter: blur(5px);
+       -o-backdrop-filter: blur(5px);
+       backdrop-filter: blur(5px);
+   }
+   
+   .popup-long {
+       position: fixed;
+       left: 50%;
+       top: 50%;
+       transform: translate(-50%, -50%) scale(0.95);
+     
+       color: var(--text-primary);
+       border-radius: 12px;
+       box-shadow: 0 0 35px var(--glow-secondary), 0 0 15px var(--glow-primary);
+       z-index: 1001;
+       max-width: 90vw;
+       max-height: 85vh;
+       width: 600px;
+       opacity: 0;
+       transition: opacity 0.2s, transform 0.2s;
+       overflow: hidden;
+       border: 1px solid rgba(0, 255, 255, 0.2);
+   }
+   
+   .popup-content {
+       position: relative;
+       padding: 35px;
+       max-height: 80vh;
+       overflow-y: auto;
+   }
+   
+   .popup-text {
+       line-height: 1.7;
+       font-family: 'Text03', monospace;
+       font-size: calc(1.4rem * var(--font-size-multiplier));
+       color: #0ff;
+   }
+   
+   .popup-long-close {
+       position: absolute;
+       top: 15px;
+       right: 15px;
+       background: none;
+       border: none;
+       color: #ff00c8;
+       font-size: 28px;
+       cursor: pointer;
+       width: 40px;
+       height: 40px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       border-radius: 50%;
+       transition: all 0.2s;
+       z-index: 1002;
+   }
+   
+   .popup-long-close:hover {
+       color: #0ff;
+       transform: rotate(90deg);
+       background: rgba(255, 0, 200, 0.1);
+   }
+
+   .popup-container {
+    position: fixed;
+    background: rgba(20, 20, 28, 0.97);
+    color: #0ff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    box-shadow: 0 0 15px #0ff, 0 0 2px #ff00ff;
+    font-family: 'Text03', monospace;
+    font-size: 14px;
+    z-index: 1001;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    max-width: 300px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+   }
+   
+   /* =========================
+         LOADING AND ERROR
+      ========================= */
+   #chapter-loading {
+       display: none;
+       position: fixed;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background: rgba(0, 0, 0, 0.8);
+       z-index: 1000;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+   }
+   
+   #chapter-loading .spinner {
+       width: 50px;
+       height: 50px;
+       border: 5px solid rgba(0, 255, 255, 0.3);
+       border-radius: 50%;
+       border-top-color: #0ff;
+       animation: spin 1s ease-in-out infinite;
+       margin-bottom: 1rem;
+   }
+   
+   .loading-chapter {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       min-height: 300px;
+       color: #0ff;
+       font-family: 'JetBrains Mono', monospace;
+       font-size: 1.2rem;
+       text-align: center;
+       padding: 2rem;
+       background: rgba(0, 0, 0, 0.3);
+       border: 1px solid rgba(0, 255, 255, 0.2);
+       border-radius: 5px;
+       margin: 1rem 0;
+   }
+   
+   .loading-chapter p {
+       margin: 0;
+       color: #0ff;
+       text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+   }
+   
+   .loading-animation {
+       margin-top: 1rem;
+       width: 50px;
+       height: 50px;
+       border: 3px solid rgba(0, 255, 255, 0.3);
+       border-radius: 50%;
+       border-top-color: #0ff;
+       animation: spin 1s ease-in-out infinite;
+   }
+   
+   .loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 1.2rem;
+    color: #0ff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+   
+   .error {
+       text-align: center;
+       color: #f00;
+       font-family: 'Text01', monospace;
+       font-size: 1.2rem;
+       margin: 2em 0;
+       text-shadow: 0 0 10px #f00;
+   }
+   
+   .error-message {
+       background: rgba(255, 0, 0, 0.1);
+       border: 1px solid rgba(255, 0, 0, 0.3);
+       border-radius: 5px;
+       padding: 2rem;
+       margin: 1rem 0;
+       text-align: center;
+       color: #ff5555;
+   }
+   
+   .error-message h3 {
+       margin-top: 0;
+       color: #ff4444;
+       text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+   }
+   
+   .error-message p {
+       margin: 1rem 0;
+       color: #ff8888;
+   }
+   
+   .error-message button,
+   .retry-button {
+       background: rgba(255, 68, 68, 0.1);
+       border: 1px solid #ff4444;
+       color: #ff8888;
+       padding: 0.5rem 1rem;
+       margin-top: 1rem;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       font-family: 'JetBrains Mono', monospace;
+       font-size: 1rem;
+       border-radius: 4px;
+   }
+   
+   .error-message button:hover,
+   .retry-button:hover {
+       background: rgba(255, 68, 68, 0.3);
+       color: #fff;
+       border-color: #ff0000;
+   }
+   
+   
+   /* =========================
+         OVERLAY
+      ========================= */
+   .overlay {
+       position: fixed;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background: rgba(0, 0, 0, 0.8);
+       z-index: 1000;
+       -webkit-backdrop-filter: blur(5px);
+       -moz-backdrop-filter: blur(5px);
+       -ms-backdrop-filter: blur(5px);
+       -o-backdrop-filter: blur(5px);
+       backdrop-filter: blur(5px);
+       opacity: 0;
+       visibility: hidden;
+       transition: all 0.3s ease;
+       display: none;
+   }
+   
+   .overlay.active {
+       opacity: 1;
+       visibility: visible;
+       display: block;
+   }
+
+  
+   
+   .no-animations * {
+       animation: none !important;
+       transition: none !important;
+   }

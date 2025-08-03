@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthoma Reader</title>
+    <!-- Základní styl, který pravděpodobně importuje ostatní -->
+    <link rel="stylesheet" href="css/base.css">
+    <!-- Styly pro jednotlivé komponenty, pro jistotu je přidáme všechny -->
+    <link rel="stylesheet" href="css/videobg.css">
+    <link rel="stylesheet" href="css/settingspanel.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/glitch.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/intro.css">
+</head>
+<body>
+
+    <!-- Video pozadí a glitch canvas (musí být na začátku, aby byly v pozadí) -->
+    <div class="video-background">
+        <video id="bgvid1" autoplay muted playsinline></video>
+        <video id="bgvid2" muted playsinline></video>
+        <video id="bgvid3" muted playsinline></video>
+        <video id="bgvid4" muted playsinline></video>
+        <video id="bgvid5" muted playsinline></video>
+        <video id="bgvid6" muted playsinline></video>
+        <video id="bgvid7" muted playsinline></video>
+        <video id="bgvid8" muted playsinline></video>
+        <video id="bgvid9" muted playsinline></video>
+        <video id="bgvid10" muted playsinline></video>
+    </div>
+    <canvas id="glitch-bg"></canvas>
+
+    <!-- Glitch Nadpis -->
+    <div id="glitch-synthoma" class="glitch-master" style="font-size: calc(8rem * var(--font-size-multiplier, 1)); margin-top: 0.5rem; margin-bottom: 0.5rem;">
+        <span class="glitch-fake1">SYNTHOMA</span>
+        <span class="glitch-fake2">SYNTHOMA</span>
+        <span class="glitch-real"><span class="glitch-char">S</span><span class="glitch-char">Y</span><span class="glitch-char">N</span><span class="glitch-char">T</span><span class="glitch-char">H</span><span class="glitch-char">O</span><span class="glitch-char">M</span><span class="glitch-char">A</span></span>
+    </div>
+
+    <!-- Manifest -->
+    <div class="manifest-wrapper">
+        <div id="manifest-container" class="manifest shinning"></div>
+    </div>
+
+    <!-- Tlačítko Pokračovat (zobrazí se až po vypsání manifestu) -->
+    <div id="continue-button-container" class="hidden">
+        <button id="continue-button" class="glitch-button">Pokračovat</button>
+    </div>
+
+    <!-- Obsah čtečky (původně skrytý) -->
+    <div id="reader-content" class="hidden">
+        <div class="loading">
+            <span class="glitch-word2" data-text="INITIALIZING SYNTHOMA READER...">INITIALIZING SYNTHOMA READER...</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link active" data-file="data/SYNTHOMAINFO.html">INFO</a></li>
+                <li><a href="#" class="nav-link" data-action="show-chapters">KNIHA</a></li>
+                <li><a href="#" class="nav-link" data-file="data/SYNTHOMAAUTOR.html">AUTOR</a></li>
+            </ul>
+        </nav>
+        <main class="main-reader-content">
+            <div id="content-area" >
+                <div id="typewriter-container" class="ctecka SYNTHOMAREADER"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Ovládací panel -->
+    <button id="toggle-panel-btn" class="panel-toggle-button">🔧️</button>
+    <div id="control-panel" class="hidden">
+        <div class="panel-section">
+            <h3 class="panel-heading">Nastavení displeje</h3>
+            <div class="setting-item">
+                <label for="font-size-slider">Velikost písma</label>
+                <input type="range" id="font-size-slider" min="0.5" max="2.5" step="0.1" value="1">
+            </div>
+            <div class="setting-item">
+                <label for="opacity-slider">Průhlednost pozadí</label>
+                <input type="range" id="opacity-slider" min="0" max="1" step="0.05" value="0.75">
+            </div>
+            <div class="setting-item">
+                <button id="toggle-animations" class="panel-button">Animace: Zap</button>
+            </div>
+        </div>
+        <div class="panel-section">
+            <h3 class="panel-heading">Motivy</h3>
+            <div class="theme-buttons">
+                <button class="theme-button" data-theme="synthoma">Synthoma</button>
+                <button class="theme-button" data-theme="synth-wave">Synth-Wave</button>
+                <button class="theme-button" data-theme="green-matrix">Matrix</button>
+            </div>
+        </div>
+        <div class="panel-section">
+            <h3 class="panel-heading">Audio přehrávač</h3>
+            <div id="audio-player-controls">
+                <div id="custom-audio-controls">
+                    <button id="play-pause-btn" class="panel-button">▶️</button>
+                    <button id="stop-btn" class="panel-button">⏹️</button>
+                    <div id="progress-bar-container">
+                        <div id="progress-bar"></div>
+                    </div>
+                </div>
+                <div id="playlist-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Všechny potřebné skripty -->
+    <script src="js/glitchheading.js"></script>
+    <script src="js/videobg.js"></script>
+    <script src="js/reader.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/animation-manager.js"></script>
+    <script src="js/settingspanel.js"></script>
+    <script src="js/glitching.js"></script>
+    <script src="js/noising.js"></script>
+    <script src="js/shinning.js"></script>
+    <script src="js/intro-sequence.js"></script>
+
+</body>
+</html>

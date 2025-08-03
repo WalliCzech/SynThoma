@@ -1,0 +1,248 @@
+
+   /* =========================
+         TLAČÍTKO A SEZNAM KAPITOL
+      ========================= */
+      
+      /* Vypnutí animací tlačítek, když je aktivní .no-animations */
+      .no-animations .chapter-list-button,
+      .no-animations .chapter-item,
+      .no-animations .btn,
+      .no-animations .nav a,
+      .no-animations .settings-toggle,
+      .no-animations .player-controls button {
+          transition: none !important;
+          transform: none !important;
+          box-shadow: none !important;
+          animation: none !important;
+      }
+      
+      /* Vypnutí hover efektů */
+      .no-animations .chapter-list-button:hover,
+      .no-animations .chapter-item:hover,
+      .no-animations .btn:hover,
+      .no-animations .nav a:hover {
+          transform: none !important;
+          background: rgba(0, 0, 0, 0.7) !important;
+          box-shadow: none !important;
+      }
+
+      
+      .chapter-list-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-primary);
+        color: var(--text-primary);
+        padding: 10px 15px;
+        cursor: pointer;
+        z-index: 1000;
+        font-family: 'JetBrains Mono', monospace;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px var(--glow-secondary);
+    }
+    
+    .chapter-list-button:hover {
+        background: var(--border-secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px var(--glow-secondary);
+    }
+    
+    #chapter-list-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-primary-translucent, rgba(0, 0, 0, 0.95));
+        z-index: 999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    #chapter-list-container.visible {
+        opacity: 1;
+        pointer-events: all;
+    }
+    
+    .chapter-list {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
+        padding: 20px;
+        max-width: 800px;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 0 30px var(--glow-secondary);
+        text-align: center;
+    }
+    
+    .chapter-list h2 {
+        font-family: 'Synthoma', monospace;
+        color: var(--text-primary);
+        font-size: 2.5rem;
+        margin: 0 0 2rem 0;
+        text-shadow: 0 0 10px var(--glow-secondary);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    
+    .chapters {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .chapter-item {
+        padding: 12px 20px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-secondary);
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: calc(1.2rem * var(--font-size-multiplier));
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 0.5s ease forwards;
+    }
+    
+    .chapter-item:hover {
+        background: var(--border-secondary);
+        border-color: var(--border-primary);
+        transform: translateX(5px);
+        box-shadow: 0 0 15px var(--glow-secondary);
+    }
+    
+    .chapter-item::before {
+        content: '>';
+        position: absolute;
+        left: -20px;
+        transition: all 0.3s ease;
+        opacity: 0;
+    }
+    
+    .chapter-item:hover::before {
+        left: 10px;
+        opacity: 1;
+    }
+    
+    .chapter-item h4 {
+        margin: 0 0 5px 0;
+        color: var(--text-primary);
+        font-size: 1.1rem;
+    }
+    
+    .chapter-item p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+    }
+
+
+
+
+   
+   /* =========================
+         NAVIGATION
+      ========================= */
+      nav {
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    nav a {
+        font-family: 'Text02', monospace;
+        color: var(--text-primary);
+        text-decoration: none;
+        padding: 8px 15px;
+        font-size: calc(2.2rem * var(--font-size-multiplier));
+        transition: all 0.3s ease;
+    }
+    
+    nav a {
+        position: relative; /* Nutné pro ::after pseudo-element */
+    }
+
+    nav a:hover,
+    nav a.active {
+        color: var(--text-primary);
+        text-shadow: 0 0 8px var(--text-primary), 0 0 15px var(--glow-secondary);
+    }
+
+    /* Společné styly pro podtržení */
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px; /* Lehce pod textem */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background-color: var(--accent-primary);
+        transition: width 0.3s ease;
+    }
+
+    /* Aktivace podtržení při hoveru nebo aktivním stavu */
+    nav a:hover::after,
+    nav a.active::after {
+        width: 80%;
+    }
+    
+    .chapter-button {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .chapter-button:hover {
+        color: var(--text-primary);
+        text-shadow: 0 0 10px var(--glow-secondary);
+    }
+    
+    .chapter-button::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--accent-secondary);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+    }
+    
+    .chapter-button:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+  

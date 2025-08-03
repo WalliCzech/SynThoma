@@ -1,0 +1,165 @@
+ 
+   /* =========================
+         RESPONSIVE STYLES
+      ========================= */
+      @media (max-width: 768px) {
+        :root {
+            --mobile-font-size: 2.1rem;
+            --heading-mobile: 2rem;
+        }
+    
+        body {
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -o-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+    
+        h1 {
+            font-size: calc(2.7rem * var(--font-size-multiplier));
+            margin: 0.5rem 0;
+        }
+    
+        p, .dialog {
+            font-size: calc(1.1rem * var(--font-size-multiplier));
+            margin: 0 1rem;
+            line-height: 1.4;
+        }
+    
+        .manifest {
+            font-size: calc(0.9rem * var(--font-size-multiplier));
+            margin: 10px 0;
+        }
+    
+        nav {
+            font-size: calc(1.2rem * var(--font-size-multiplier));
+        }
+    
+        nav ul {
+            flex-direction: column;
+            padding: 0;
+        }
+    
+        nav li {
+            margin: 5px 0;
+        }
+    
+        .chapter-list h2 {
+            font-size: calc(2rem * var(--font-size-multiplier));
+        }
+    
+        .settings-panel {
+            width: 100%;
+            max-width: 100%;
+        }
+    
+        .settings-header h2 {
+            font-size: 1.3rem;
+        }
+    
+        .setting-item {
+            padding: 12px;
+        }
+    
+        .setting-button {
+            padding: 4px 12px;
+            font-size: 0.9rem;
+        }
+    
+        .chapter-list-container {
+            width: 90%;
+        }
+    
+        .chapter-item {
+            padding: 10px 12px;
+            font-size: 0.85rem;
+        }
+    
+        .chapter-item h4 {
+            font-size: 1rem;
+        }
+    
+        .chapter-item p {
+            font-size: 0.75rem;
+        }
+    
+        .popup-long {
+            width: 95%;
+            max-width: 95%;
+            padding: 20px;
+        }
+    
+        .popup-content {
+            padding: 25px 20px;
+        }
+    
+        .chapter-selector {
+            width: 95%;
+            max-height: 90vh;
+        }
+    
+        .chapters-list {
+            grid-template-columns: 1fr;
+            padding: 15px;
+        }
+    
+        .chapter-selector-header {
+            padding: 15px;
+        }
+    
+        .chapter-selector-footer {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+    
+        .chapter-progress {
+            margin-left: 0;
+            max-width: 100%;
+            width: 100%;
+        }
+    
+        .reader-container {
+            padding: 1rem 0.5rem;
+        }
+    
+        #SYNTHOMAREADER {
+            padding: 1rem;
+            max-height: 60vh;
+        }
+    
+        .chapter-container {
+            padding: 1rem;
+        }
+    
+        .chapter-title {
+            font-size: 1.5rem;
+        }
+    
+        .chapter-content {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+    
+        .welcome-message {
+            padding: 1.5rem;
+        }
+    
+        .welcome-message h2 {
+            font-size: 1.8rem;
+        }
+    
+        .welcome-message p {
+            font-size: 1rem;
+        }
+    
+        .btn-primary {
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        .typewriter-container {
+            font-size: calc(2rem * var(--font-size-multiplier));
+        }
+    }

@@ -1,0 +1,255 @@
+  
+   /* =========================
+         GLITCH EFFECTS
+      ========================= */
+      
+      /* Vypnutí všech glitch efektů, když je aktivní .no-animations */
+      .no-animations #glitch-synthoma.glitch-master,
+      .no-animations .glitch-fake1,
+      .no-animations .glitch-fake2,
+      .no-animations .glitch-char,
+      .no-animations .glitch-char.glitchy,
+      .no-animations .glitch-word,
+      .no-animations .alarm-emote,
+      .no-animations #glitch-bg {
+          animation: none !important;
+          text-shadow: none !important;
+          filter: none !important;
+          transform: none !important;
+          opacity: 1 !important;
+          transition: none !important;
+      }
+      
+      /* Vypnutí pseudo-elementů pro glitch efekty */
+      .no-animations .glitch-fake1,
+      .no-animations .glitch-fake2 {
+          display: none !important;
+      }
+      
+      /* Základní vzhled textu bez efektů */
+      .no-animations #glitch-synthoma.glitch-master {
+          text-shadow: 0 0 6px var(--primary-color) !important;
+          color: var(--primary-color) !important;
+      }
+      #glitch-name {
+        display: inline-block;
+        color: var(--text-primary);
+        text-shadow: 0 0 5px var(--glow-secondary), 0 0 10px var(--glow-primary);
+    }
+    
+    #glitch-synthoma.glitch-master {
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.08em; /* Jednotný rozestup pro všechny vrstvy */
+        position: relative;
+        text-align: center;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        z-index: 10;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        text-shadow:
+            0 0 6px var(--glow-secondary),
+            0 0 16px var(--glow-primary),
+            0 0 36px var(--glow-secondary),
+            2px 2px 12px var(--glow-primary);
+        animation: glitch 1.2s infinite linear alternate-reverse;
+        will-change: transform, text-shadow;
+        word-break: keep-all;
+        font-family: 'Synthoma', monospace;
+    } 
+    
+    .glitch-span,
+    .glitch-fake1,
+    .glitch-fake2 {
+        position: absolute;
+        left: -10%;
+        top: 0;
+        width: 120%;
+        height: 100%;
+        pointer-events: none;
+        color: #00f;
+        letter-spacing: 0.08em; /* Stejný rozestup jako popředí */
+    }
+    
+    .glitch-fake1 {
+        color: var(--accent-primary);
+        opacity: 0.58;
+        text-shadow: 2px 0 var(--accent-primary), 0 0 10px var(--glow-primary), 0 0 28px var(--text-primary);
+        z-index: 1;
+        animation: glitchLayer1 2.2s infinite linear alternate;
+    }
+    
+    .glitch-fake2 {
+        color: var(--accent-secondary);
+        opacity: 0.44;
+        text-shadow: -2px 0 var(--accent-secondary), 0 0 8px var(--glow-secondary), 0 0 28px var(--text-primary);
+        z-index: 2;
+        animation: glitchLayer2 1.7s infinite linear alternate;
+    }
+    
+    .glitch-char {
+        display: inline; /* Změna na inline, aby se vyhnulo mezerám mezi span tagy */
+        position: relative;
+        z-index: 20;
+        transition: color 0.06s, filter 0.12s, transform 0.10s;
+        will-change: color, filter, transform;
+        letter-spacing: 0.08em; /* Sjednocený rozestup s pozadím */
+        margin: 0; /* Žádné extra okraje */
+        padding: 0; /* Žádné extra paddingy */
+    }
+
+    .glitch-char.glitchy {
+        color: var(--accent-primary);
+        filter: blur(1.5px) brightness(2.2);
+        text-shadow: 0 0 15px var(--glow-secondary), 0 0 8px var(--glow-primary), 0 0 2px var(--glow-secondary);
+        animation: glitchjump 0.12s linear 2;
+        transform: translateY(-2px) scale(1.07) skewX(3deg);
+    }
+    
+    .glitch-word {
+        animation: glitchWordPulse 0.7s;
+        z-index: 10;
+    }
+    
+    .glitch-word2 {
+        display: inline-block;
+        position: relative;
+        min-width: 1em;
+        text-align: center;
+        color: var(--text-primary);
+        max-width: 80%;
+        margin-right: 0.5rem;
+        text-shadow: 0 0 5px var(--glow-secondary), 0 0 10px var(--glow-secondary);
+        white-space: nowrap;
+    }
+    
+    .alarm-emote {
+        text-shadow: 0 0 16px var(--shadow-primary), 0 0 8px var(--glow-secondary), 0 0 32px var(--glow-primary);
+        animation: alarm-blink 0.46s steps(2, end) infinite, alarm-glitch 0.7s infinite cubic-bezier(.77,0,.23,1.08);
+        filter: brightness(1.4) drop-shadow(0 0 24px var(--glow-primary));
+    }
+    
+    #glitch-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        opacity: 0.2;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        filter: brightness(0.41) contrast(1.1) blur(0.7px);
+    }
+
+
+/* =========================
+ * GLITCHING TEXT EFFECTS
+ * ========================= */
+
+.glitching {
+    /* Základní styl pro kontejner textu s efektem */
+    display: block;
+    text-align: center;
+    margin-top: 0.5rem;
+    
+}
+
+.glitching-word {
+    /* Styl pro jednotlivé slovo, pokud je to potřeba */
+    display: inline-block;
+    white-space: nowrap;
+    position: relative; /* Klíčové pro glitch efekty */
+}
+
+.glitching-char {
+    /* Styl pro každý jednotlivý znak, který se bude měnit */
+    display: inline-block;
+    position: relative;
+    color: #00ffff; /* Výchozí barva pro stabilní text */
+    text-shadow: 0 0 5px #00ffff, 0 0 10px rgba(0, 255, 255, 0.5); /* Jemný neonový stín */
+    transition: transform 0.1s ease, color 0.1s ease; /* Plynulejší přechody */
+}
+
+/* Občasné posunutí a rotace pro dynamičtější dojem */
+.glitching-char:nth-child(3n) {
+    animation: char-glitch-1 0.5s infinite alternate;
+}
+.glitching-char:nth-child(5n) {
+    animation: char-glitch-2 0.7s infinite alternate;
+}
+
+
+
+/* =========================
+ * NOISING TEXT EFFECTS
+ * ========================= */
+
+ .noising-text {
+    /* Základní styl pro kontejner textu s efektem */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.noising-char {
+    /* Základní stav znaku (před blikáním) */
+    transition: all 0.1s ease-in-out;
+    opacity: 1;
+    color: inherit;
+    text-shadow: inherit;
+}
+
+/* Stav po aktivaci (přidání třídy '.noising') */
+.noising-char.noising {
+    animation: neon-noising 0.2s ease-in-out infinite alternate;
+}
+
+
+/* =========================
+ * NEON FLICKER EFFECTS
+ * ========================= */
+
+.no-animations .neon-char {
+    animation: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+ .neon-char {
+    transition: opacity 0.2s ease-out, text-shadow 0.3s ease-out;
+    color: rgba(255, 255, 255, 0.75);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.neon-char.bright {
+    opacity: 1;
+    text-shadow: 
+        0 0 10px var(--accent-primary),
+        0 0 20px var(--accent-primary),
+        0 0 40px var(--accent-primary),
+        0 0 80px var(--accent-primary),
+        0 0 120px var(--accent-primary); /* Silný neonový glow */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+}
+.neon-char.flickering {
+    animation: flicker 0.1s alternate infinite;
+}
+.neon-char.flickering-off {
+    opacity: 0.15 !important;
+    text-shadow: 
+        0 0 2px var(--accent-primary),
+        0 0 5px var(--accent-secondary) !important; /* Slabý stín při zhasnutí */
+}
