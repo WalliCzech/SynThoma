@@ -64,8 +64,7 @@ window.animationManager = {
         if (window.startGlitching) window.startGlitching();
         if (window.startNoising) window.startNoising();
         if (window.startShinning) window.startShinning();
-
-            },
+    },
 
     // Znovu spustí efekty glitchingu a shinningu pro nově vložený obsah.
     // Pokud je předán konkrétní kontejner, efekty se aplikují pouze na jeho potomky.
