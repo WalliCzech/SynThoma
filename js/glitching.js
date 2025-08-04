@@ -1,5 +1,5 @@
 diff --git a/js/glitching.js b/js/glitching.js
-index 0c2350f296d1dab47103b2c2c7aa5b0f0610aedc..9ebd13cedf2344f66610646cd6a40c322a7f5720 100644
+index 0c2350f296d1dab47103b2c2c7aa5b0f0610aedc..f6e5cb17cfc1b6999bd81237f0378de8587a9093 100644
 --- a/js/glitching.js
 +++ b/js/glitching.js
 @@ -1,76 +1,103 @@
@@ -80,8 +80,8 @@ index 0c2350f296d1dab47103b2c2c7aa5b0f0610aedc..9ebd13cedf2344f66610646cd6a40c32
 +    processNewGlitchText(element);
 +}
 +
-+function applyGlitch(selector, changeProbability = 0.05, glitchProbability = 0.05) {
-+    const elements = document.querySelectorAll(selector);
++function applyGlitch(selector, changeProbability = 0.05, glitchProbability = 0.05, root = document) {
++    const elements = root.querySelectorAll(selector);
 +
 +    if (elements.length === 0) return;
 +
@@ -90,8 +90,10 @@ index 0c2350f296d1dab47103b2c2c7aa5b0f0610aedc..9ebd13cedf2344f66610646cd6a40c32
      });
  }
  
- function removeGlitch(selector) {
-     const elements = document.querySelectorAll(selector);
+-function removeGlitch(selector) {
+-    const elements = document.querySelectorAll(selector);
++function removeGlitch(selector, root = document) {
++    const elements = root.querySelectorAll(selector);
  
      elements.forEach(element => {
          if (element.dataset.glitchingActive !== 'true') return;
@@ -105,19 +107,23 @@ index 0c2350f296d1dab47103b2c2c7aa5b0f0610aedc..9ebd13cedf2344f66610646cd6a40c32
  }
  
  // Globalní funkce pro spouštění a zastavování efektu
- window.startGlitching = function(selector = '.glitching') {
+-window.startGlitching = function(selector = '.glitching') {
++window.startGlitching = function(selector = '.glitching', root = document) {
      if (document.body.classList.contains('animations-disabled')) return;
      console.log('Starting Glitching Effect...');
-     applyGlitch(selector);
+-    applyGlitch(selector);
++    applyGlitch(selector, 0.05, 0.05, root);
  };
  
- window.stopGlitching = function(selector = '.glitching') {
+-window.stopGlitching = function(selector = '.glitching') {
++window.stopGlitching = function(selector = '.glitching', root = document) {
      console.log('Stopping Glitching Effect...');
-     removeGlitch(selector);
- };
+-    removeGlitch(selector);
++    removeGlitch(selector, root);
++};
 +
 +// Aktualizace pro nově přidaný text během psaní
 +window.updateGlitchingElement = function(element) {
 +    applyGlitchToElement(element);
-+};
+ };
 +
