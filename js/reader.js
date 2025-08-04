@@ -290,16 +290,25 @@ window.startSynthomaReader = async (filePath) => {
                         newElement.setAttribute(attr.name, attr.value);
                     }
                     targetParent.appendChild(newElement);
-                    await revealNode(childNode, newElement);
-                } else if (childNode.nodeType === Node.TEXT_NODE) {
-                    const text = childNode.textContent;
-                    const textNode = document.createTextNode('');
-                    targetParent.appendChild(textNode);
-                    for (let i = 0; i < text.length; i++) {
-                        if (signal.aborted) return;
-                        textNode.data += text[i];
-                        const speed = Math.random() * (speedMax - speedMin) + speedMin;
-                        await new Promise(resolve => setTimeout(resolve, speed));
+                                     if (targetParent.classList && targetParent.classList.contains('glitching')) {
+                        for (let i = 0; i < text.length; i++) {
+                            if (signal.aborted) return;
+                            targetParent.appendChild(document.createTextNode(text[i]));
+                            if (window.updateGlitchingElement) {
+                                window.updateGlitchingElement(targetParent);
+                            }
+                            const speed = Math.random() * (speedMax - speedMin) + speedMin;
+                            await new Promise(resolve => setTimeout(resolve, speed));
+                        }
+                    } else {
+                        const textNode = document.createTextNode('');
+                        targetParent.appendChild(textNode);
+                        for (let i = 0; i < text.length; i++) {
+                            if (signal.aborted) return;
+                            textNode.data += text[i];
+                            const speed = Math.random() * (speedMax - speedMin) + speedMin;
+                            await new Promise(resolve => setTimeout(resolve, speed));
+                        }
                     }
                 }
             }
