@@ -126,8 +126,11 @@ window.startSynthomaReader = async (filePath) => {
                 }
                 return response.text();
             })
-            .then(htmlContent => {
-                typewriterWrite(htmlContent, typewriterContainer, signal);
+            .then(htmlContent => typewriterWrite(htmlContent, typewriterContainer, signal))
+            .then(() => {
+                if (window.animationManager) {
+                    window.animationManager.initializeEffects(typewriterContainer);
+                }
             })
             .catch(error => {
                 if (error.name !== 'AbortError') {
