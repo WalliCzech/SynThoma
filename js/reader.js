@@ -126,23 +126,12 @@ window.startSynthomaReader = async (filePath) => {
                 }
                 return response.text();
             })
-                        .then(htmlContent => typewriterWrite(htmlContent, typewriterContainer, signal))
+            .then(htmlContent => typewriterWrite(htmlContent, typewriterContainer, signal))
             .then(() => {
                 if (window.animationManager) {
                     window.animationManager.initializeEffects(typewriterContainer);
                 }
             })
-            .catch(error => {
-                if (error.name !== 'AbortError') {
-                    console.error('📜 LOG [FETCH_ERROR]: Chyba při načítání obsahu, asi sabotáž! 💣', error);
-                    typewriterContainer.innerHTML = `<p class="dialogS">**Chyba:** Nelze načíst obsah. Síťová chyba nebo poškozený soubor.</p>`;
-                }
-            })
-            .finally(() => {
-                loadingIndicator.style.opacity = '0';
-                setTimeout(() => loadingIndicator.remove(), 500);
-            });
-    }
 
     // Funkce pro zobrazení seznamu kapitol - teď s extra stylem! 🎭
     async function showChapterSelection() {
