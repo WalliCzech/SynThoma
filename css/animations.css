@@ -218,3 +218,48 @@ body.animations-disabled #glitch-bg {
                 0 0 100px var(--accent-secondary); 
         }
     }
+
+
+    /* Animace pro zobrazení kapitol */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Glitch animace pro kapitoly */
+@keyframes glitchChapter {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+}
+
+/* Responsivní design pro menší obrazovky */
+@media (max-width: 768px) {
+    .chapter-list {
+        padding: 1rem;
+    }
+    
+    .chapter-item {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .chapter-list h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Extra styling pro dark mode kompatibilitu */
+@media (prefers-color-scheme: dark) {
+    .chapter-item {
+        background: #0ff, 0.15;
+    }
+    
+    .chapter-item:hover {
+        background: #0ff, 0.55;
+    }
+}

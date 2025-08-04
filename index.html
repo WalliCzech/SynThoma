@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="assets/favicon.ico">
     <title>Synthoma Reader</title>
     <!-- Základní styl, který pravděpodobně importuje ostatní -->
     <link rel="stylesheet" href="css/base.css">
@@ -32,10 +34,12 @@
     <canvas id="glitch-bg"></canvas>
 
     <!-- Glitch Nadpis -->
-    <div id="glitch-synthoma" class="glitch-master" style="font-size: calc(3.75rem * var(--font-size-multiplier, 1));">
-        <span class="glitch-fake1">SYNTHOMA</span>
-        <span class="glitch-fake2">SYNTHOMA</span>
-        <span class="glitch-real"><span class="glitch-char">S</span><span class="glitch-char">Y</span><span class="glitch-char">N</span><span class="glitch-char">T</span><span class="glitch-char">H</span><span class="glitch-char">O</span><span class="glitch-char">M</span><span class="glitch-char">A</span></span>
+    <div id="resizing-text">
+        <div id="glitch-synthoma" class="glitch-master">
+            <span class="glitch-fake1">SYNTHOMA</span>
+            <span class="glitch-fake2">SYNTHOMA</span>
+            <span class="glitch-real"><span class="glitch-char">S</span><span class="glitch-char">Y</span><span class="glitch-char">N</span><span class="glitch-char">T</span><span class="glitch-char">H</span><span class="glitch-char">O</span><span class="glitch-char">M</span><span class="glitch-char">A</span></span>
+        </div>
     </div>
 
     <!-- Manifest -->
@@ -62,7 +66,11 @@
         </nav>
         <main class="main-reader-content" style="margin: 0 auto;">
             <div id="content-area" >
-                <div id="typewriter-container" class="ctecka SYNTHOMAREADER"></div>
+                <div id="typewriter-container" class="ctecka SYNTHOMAREADER">
+                    <log class="log">NÁPOVĚDA: Tu hudbu vypneš v Ovládacím panelu vpravo dole</log>
+                    <p class="text">V záložce <span class="glitch-word2" data-text="INFO">INFO</span> jsou informace o...</p>
+                    <a href="#" class="glitch-button nav-link active" data-file="data/SYNTHOMAINFO.html" style="align-self: center;">Vstup -></a>
+                </div>
             </div>
         </main>
     </div>

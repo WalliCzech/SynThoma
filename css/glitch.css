@@ -44,8 +44,8 @@
         text-align: center;
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
+        margin-left: 0rem;
+        margin-right: 0rem;
         z-index: 10;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -59,6 +59,7 @@
         animation: glitch 1.2s infinite linear alternate-reverse;
         will-change: transform, text-shadow;
         font-family: 'Synthoma', monospace;
+        inline-size: infinite;
     } 
     
     .glitch-span,
@@ -67,6 +68,8 @@
         position: absolute;
         left: -10%;
         top: 0;
+        margin-left: 0rem;
+        margin-right: 0rem;
         width: 120%;
         height: 100%;
         pointer-events: none;

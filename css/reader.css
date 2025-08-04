@@ -53,6 +53,10 @@
         opacity: 1;
         background-color: rgba(var(--bg-secondary-rgb), var(--reader-bg-opacity, 0.75));
         transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
     
     /* Zajištění, že žádný potomek nebude mít vlastní scrollování */
@@ -67,44 +71,6 @@
     
     .SYNTHOMAREADER.chapter-loaded {
         animation: fadeIn 0.5s ease-in-out;
-    }
-    
-    .chapter-container {
-        position: relative;
-        padding: 2rem;
-        border: 1px solid var(--border-secondary);
-        margin-bottom: 2rem;
-        animation: fadeIn 0.5s ease-in-out;
-    }
-    
-    .chapter-title {
-        color: var(--text-primary);
-        font-family: 'Text01', monospace;
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        text-shadow: 0 0 10px var(--glow-secondary);
-        position: relative;
-        padding-bottom: 0.5rem;
-    }
-    
-    .chapter-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 25%;
-        width: 50%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent);
-    }
-    
-    .chapter-content {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: var(--text-secondary);
     }
     
     .reader-container {
@@ -220,6 +186,132 @@
 .typewriter-text {
     border-right: 2px solid var(--accent-secondary);
     white-space: pre-wrap;
+}
+
+/* ===============================================
+   📚 KNIHY A KAPITOLY - Protože i chaos potřebuje styl! 😈
+   =============================================== */
+
+   .chapter-container {
+    position: relative;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-secondary);
+    margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.chapter-title {
+    color: var(--text-primary);
+    font-family: 'Text01', monospace;
+    font-size: calc(1.5rem * var(--font-size-multiplier));
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--glow-secondary);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.chapter-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent);
+}
+
+.chapter-content {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+/* Kontejner pro seznam kapitol */
+.chapter-list {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.chapter-list h2 {
+    margin-bottom: 2rem;
+    color: var(--accent-primary);
+    text-shadow: 0 0 15px var(--glow-primary), 0 0 25px var(--text-primary);
+    font-size: calc(1.5rem * var(--font-size-multiplier));
+    letter-spacing: 0.2em;
+    text-align: center;
+}
+
+/* Kontejner pro jednotlivé kapitoly */
+.chapters {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+    background: rgba(0, 255, 65, 0);
+}
+
+/* Jednotlivé kapitoly - stylové tlačítka */
+.chapter-item {
+    background: rgba(0, 255, 65, 0);
+    border: 1px solid var(--text-primary);
+    border-radius: 5px;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+    text-shadow: 0 0 10px var(--accent-primary);
+    font-family: 'Courier New', monospace;
+    font-size: calc(1.15rem * var(--font-size-multiplier));
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.chapter-item:hover {
+    background: rgba(var(--glow-primary-rgb), 0);
+    box-shadow: 0 0 20px rgba(var(--glow-primary-rgb), 0.3);
+    transform: translateY(-2px);
+    border-color: var(--glow-primary);
+    color: var(--text-primary);
+    animation: glitch 1s infinite;
+}
+
+.chapter-item:active {
+    transform: translateY(0);
+    box-shadow: 0 0 15px rgba(var(--glow-primary-rgb), 0.5);
+}
+
+/* Glitch efekt pro kapitoly při hoveru */
+.chapter-item::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    color: var(--accent-primary);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.chapter-item:hover::before {
+    opacity: 0.1;
+    animation: glitchChapter 0.3s ease-in-out;
+}
+
+/* Původní styly pokračují... */
+.typewriter-cursor {
     overflow: hidden;
     display: inline-block;
     vertical-align: bottom;

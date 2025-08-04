@@ -343,6 +343,17 @@ document.addEventListener('DOMContentLoaded', () => {
             readerContent.classList.add('fade-in');
             
             console.log('🔥 ČTEČKA AKTIVOVÁNA!');
+            
+            // Inicializace event listenerů pro čtečku - KONEČNĚ! 🎯
+            setTimeout(() => {
+                if (typeof window.initializeReaderEventListeners === 'function') {
+                    console.log('🔧 INTRO: Volám inicializaci event listenerů...');
+                    window.initializeReaderEventListeners();
+                } else {
+                    console.error('💥 INTRO ERROR: Funkce initializeReaderEventListeners nebyla nalezena! 😱');
+                }
+            }, 100); // Krátká prodleva pro ujištění, že DOM je připravený
+            
         }, 500); // Prodleva pro animaci
     });
 }); // Konec DOMContentLoaded
