@@ -126,12 +126,20 @@ window.startSynthomaReader = async (filePath) => {
                 }
                 return response.text();
             })
-            .then(htmlContent => typewriterWrite(htmlContent, typewriterContainer, signal))
-            .then(() => {
-                if (window.animationManager) {
-                    window.animationManager.initializeEffects(typewriterContainer);
+            .then(htmlContent => {
+                typewriterWrite(htmlContent, typewriterContainer, signal);
+            })
+            .catch(error => {
+                if (error.name !== 'AbortError') {
+                    console.error('📜 LOG [FETCH_ERROR]: Chyba při načítání obsahu, asi sabotáž! 💣', error);
+                    typewriterContainer.innerHTML = `<p class="dialogS">**Chyba:** Nelze načíst obsah. Síťová chyba nebo poškozený soubor.</p>`;
                 }
             })
+            .finally(() => {
+                loadingIndicator.style.opacity = '0';
+                setTimeout(() => loadingIndicator.remove(), 500);
+            });
+    }
 
     // Funkce pro zobrazení seznamu kapitol - teď s extra stylem! 🎭
     async function showChapterSelection() {
@@ -279,36 +287,16 @@ window.startSynthomaReader = async (filePath) => {
                         newElement.setAttribute(attr.name, attr.value);
                     }
                     targetParent.appendChild(newElement);
-                                     if (targetParent.classList && targetParent.classList.contains('glitching')) {
-                        for (let i = 0; i < text.length; i++) {
-                            if (signal.aborted) return;
-                            targetParent.appendChild(document.createTextNode(text[i]));
-                            if (window.updateGlitchingElement) {
-                                window.updateGlitchingElement(targetParent);
-                            }
-                            const speed = Math.random() * (speedMax - speedMin) + speedMin;
-                            await new Promise(resolve => setTimeout(resolve, speed));
-                        }
-                    } else {
-                    if (targetParent.classList && targetParent.classList.contains('glitching')) {
-                        for (let i = 0; i < text.length; i++) {
-                            if (signal.aborted) return;
-                            targetParent.appendChild(document.createTextNode(text[i]));
-                            if (window.updateGlitchingElement) {
-                                window.updateGlitchingElement(targetParent);
-                            }
-                            const speed = Math.random() * (speedMax - speedMin) + speedMin;
-                            await new Promise(resolve => setTimeout(resolve, speed));
-                        }
-                    } else {
-                        const textNode = document.createTextNode('');
-                        targetParent.appendChild(textNode);
-                        for (let i = 0; i < text.length; i++) {
-                            if (signal.aborted) return;
-                            textNode.data += text[i];
-                            const speed = Math.random() * (speedMax - speedMin) + speedMin;
-                            await new Promise(resolve => setTimeout(resolve, speed));
-                        }
+                    await revealNode(childNode, newElement);
+                } else if (childNode.nodeType === Node.TEXT_NODE) {
+                    const text = childNode.textContent;
+                    const textNode = document.createTextNode('');
+                    targetParent.appendChild(textNode);
+                    for (let i = 0; i < text.length; i++) {
+                        if (signal.aborted) return;
+                        textNode.data += text[i];
+                        const speed = Math.random() * (speedMax - speedMin) + speedMin;
+                        await new Promise(resolve => setTimeout(resolve, speed));
                     }
                 }
             }

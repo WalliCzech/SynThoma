@@ -64,19 +64,6 @@ window.animationManager = {
         if (window.startGlitching) window.startGlitching();
         if (window.startNoising) window.startNoising();
         if (window.startShinning) window.startShinning();
-   },
-
-    // Znovu spustí efekty glitchingu a shinningu pro nově vložený obsah.
-    // Pokud je předán konkrétní kontejner, efekty se aplikují pouze na jeho potomky.
-    initializeEffects: function(container) {
-        if (document.body.classList.contains('animations-disabled')) {
-            return;
-        }
-
-        const root = container || document;
-
-        if (window.startGlitching) window.startGlitching('.glitching', root);
-        if (window.startShinning) window.startShinning(root);
     }
 };
 
