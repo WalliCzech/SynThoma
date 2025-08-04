@@ -4,8 +4,8 @@
     let activeTimers = [];
     let originalStates = new Map();
 
-    function applyShinning(selector) {
-        const elements = document.querySelectorAll(selector);
+    function applyShinning(selector, root = document) {
+        const elements = root.querySelectorAll(selector);
 
         elements.forEach(el => {
             if (el.dataset.neonActive) return;
@@ -41,11 +41,11 @@
         });
     }
 
-    function removeShinning(selector) {
+    function removeShinning(selector, root = document) {
         activeTimers.forEach(clearTimeout);
         activeTimers = [];
 
-        const elements = document.querySelectorAll(selector);
+        const elements = root.querySelectorAll(selector);
         elements.forEach(el => {
             if (originalStates.has(el)) {
                 el.innerHTML = originalStates.get(el).html;
@@ -55,7 +55,7 @@
         });
     }
 
-    window.startShinning = () => applyShinning('.shinning');
-    window.stopShinning = () => removeShinning('.shinning');
+    window.startShinning = (root) => applyShinning('.shinning', root || document);
+    window.stopShinning = (root) => removeShinning('.shinning', root || document);
 
 })();

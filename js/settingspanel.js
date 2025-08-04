@@ -167,9 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Nejprve načteme nastavení, poté inicializujeme ovládací prvky
-    loadSettings();
-    setupControls();
+    // Načtení uloženého nastavení je zajištěno při inicializaci jednotlivých ovládacích prvků výše
 
     // Zobrazení pop-up okna s informacemi o tlačítku
     const hoverElements = document.querySelectorAll('[data-hover-text]');
