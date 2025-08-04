@@ -64,6 +64,38 @@ window.animationManager = {
         if (window.startGlitching) window.startGlitching();
         if (window.startNoising) window.startNoising();
         if (window.startShinning) window.startShinning();
+
+            },
+
+    // Znovu spustí efekty glitchingu a shinningu pro nově vložený obsah.
+    // Pokud je předán konkrétní kontejner, efekty se aplikují pouze na jeho potomky.
+    initializeEffects: function(container) {
+        if (document.body.classList.contains('animations-disabled')) {
+            return;
+        }
+
+        // Dočasně odebereme příslušné třídy z elementů mimo kontejner,
+        // aby globální start* funkce cílily pouze na nově přidaný obsah.
+        const scopeClassRemoval = (className) => {
+            if (!container) return [];
+            const outside = Array.from(document.querySelectorAll(`.${className}`))
+                .filter(el => !container.contains(el));
+            outside.forEach(el => el.classList.remove(className));
+            return outside;
+        };
+
+        const restoreClasses = (elements, className) => {
+            elements.forEach(el => el.classList.add(className));
+        };
+
+        const removedGlitch = scopeClassRemoval('glitching');
+        const removedShinning = scopeClassRemoval('shinning');
+
+        if (window.startGlitching) window.startGlitching();
+        if (window.startShinning) window.startShinning();
+
+        restoreClasses(removedGlitch, 'glitching');
+        restoreClasses(removedShinning, 'shinning');
     }
 };
 
