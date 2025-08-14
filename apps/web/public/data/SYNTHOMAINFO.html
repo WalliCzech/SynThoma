@@ -1,262 +1,240 @@
-<!-- 🎭 SYNTHOMA: Větvící se glitch-noir příběh + úvodní tutoriál panelu -->
-<!-- Start: SYNTHOMA — úvod do světa, pak hub a panel -->
-<h2 class="title">SYNTHOMA</h2>
-<p class="text">Virtuální terapie, která sežrala vlastní manuál a z paměti udělala infrastrukturu. Město je archiv, glitche jsou počasí a tvé kroky nechávají stopy, které se vrací jako uličky. Vstup bez záruky, výstup jako poznámka v deníku.</p>
+<!-- 🎭 SYNTHOMA: větvící se glitch-noir příběh (vstup + orientace + nenápadný tutoriál panelu) -->
 
-<p class="choice" data-next="city-hub" data-tags="S,N" data-weight="2" data-ui="modal" data-reason="Začít v ulicích">
-  <span>▼ </span>Vstoupit do města a chytit jeho rytmus
+<!-- ÚVOD – první krok do světa, ne Prázdnota -->
+<h2 class="title">SYNTHOMA — vstup pro nově příchozí</h2>
+<p class="text">
+  Synthoma je město z paměti. Ulice si tě zapamatují, i když je přejdeš potichu. 
+  Nahoře plave ovládací panel: nastaví čitelnost, náladu a hudbu, aniž by překážel. 
+  Udělej si pohodlí, a teprve potom vyraž.
 </p>
-<p class="choice" data-next="control-panel" data-tags="T,F" data-weight="2" data-ui="toast-info" data-reason="Nastavení zobrazení a hudby">
-  <span>▼ </span>Ovládací panel: rychlý přehled a nastavení
+
+<p class="choice" data-next="ui-help" data-tags="J,P" data-weight="2" data-ui="toast-info" data-reason="Zorientovat se, než začne příběh">
+  <span>▼ </span>Krátká orientace: ovládací panel
 </p>
-<p class="choice" data-next="cathedral" data-tags="N,S" data-weight="1" data-ui="toast-info" data-reason="Kontrola rozhraní">
-  <span>▼ </span>Katedrála promptů (diagnostika rozhraní)
+<p class="choice" data-next="city-hub" data-tags="E,I" data-weight="2" data-ui="toast-success" data-reason="Vstoupit do ruchu">
+  <span>▼ </span>Vykročit do Města (centrální rozcestník)
 </p>
+<p class="choice" data-next="cathedral" data-tags="T,F" data-weight="1" data-ui="toast-info" data-reason="Než uvěříš, zeptej se">
+  <span>▼ </span>Ke Katedrále promptů (tiché terminály a otázky)
+</p>
+
 
 <!-- 🌃 SKRYTÉ SEKCE PRO DYNAMICKÉ NAČÍTÁNÍ -->
 <div id="story-cache" class="hidden">
 
-  <!-- 📟 TUTORIÁL: OVLÁDACÍ PANEL (plave nad obsahem, fixní rozostření pro čitelnost) -->
-  <section class="story-block" id="control-panel" data-theme="retro-arcade">
+  <!-- UI-HELP: tutoriál panelu bez technických řečí ✨ -->
+  <section class="story-block" id="ui-help" data-theme="synthoma">
     <h3 class="title">Ovládací panel — rychlý přehled</h3>
-    <p class="text"><b>Umístění:</b> panel plave nad obsahem a zůstává čitelný díky stálému rozostření (viz <code>src/styles/components.css</code>). Nepustí tě do děje bez instrukcí.</p>
-    <p class="text"><b>Účel:</b> jemné ovládání prostředí čtečky (pozadí nebo „sklo“) a přehrávání hudby. Panel neruší, jen diriguje.</p>
-    <p class="text"><b>Přístupnost:</b> tlačítka mají ARIA popisy a <span class="sr-only">sr-only</span> texty; vše je ovladatelné klávesnicí.</p>
-
-    <h4 class="title">Volby v panelu</h4>
-    <p class="text">• <b>Tlačítko „Sklo“</b> — přepíná režim zobrazení čtečky.</p>
-    <p class="text">• <b>Režim Normal</b> — posuvník ovládá průhlednost pozadí (jak moc text „plave“ nad videem).</p>
-    <p class="text">• <b>Režim Glass</b> — posuvník ovládá rozostření samotného readeru (jemné „sklo“ nad stabilním pozadím).</p>
-    <p class="text">• <b>Posuvník</b> — vždy synchronizovaný s tlačítkem „Sklo“; žádné protichůdné stavy.</p>
-    <p class="text">• <b>Hudební přehrávač</b> — Play/Pause, Předchozí/Další, Výběr skladby ze seznamu, Hlasitost a Ztlumení. Seznam skladeb spravuje <code>apps/web/src/client/ControlPanelClient.tsx</code>, engine běží v <code>apps/web/src/lib/audio.ts</code>.</p>
-
-    <h4 class="title">Jak to používat (rychlé scénáře)</h4>
-    <p class="text">• <b>Chci, aby text vynikl nad videem</b> → nech „Sklo“ vypnuté (Normal) a posuň posuvník doprava pro menší průhlednost pozadí.</p>
-    <p class="text">• <b>Chci „skleněný“ efekt</b> → zapni „Sklo“, posuň posuvník na jemné rozostření (cca 8–16 px vnímané síly rozostření).</p>
-    <p class="text">• <b>Chci hudbu bez rušení</b> → stiskni Play v panelu a přepínej skladby v seznamu. Autoplay se odemkne první interakcí.</p>
-
-    <h4 class="title">Co se děje pod kapotou</h4>
-    <p class="text">• <b>Glass</b> řídí rozostření vrstvy čtečky a zachovává panel čitelný. Viz <code>ControlPanelClient.tsx</code> + <code>components.css</code>.</p>
-    <p class="text">• <b>Normal</b> upravuje průhlednost pozadí; video běží stabilně za obsahem. Viz <code>apps/web/src/lib/videoVisuals.ts</code> + <code>apps/web/src/styles/reader.css</code>.</p>
-    <p class="text">• Assety a fonty jsou kompatibilní s GitHub Pages díky <code>NEXT_PUBLIC_BASE_PATH</code>. Viz <code>apps/web/src/styles/base.css</code>.</p>
-
-    <h4 class="title">Tipy a FAQ</h4>
-    <p class="text">• Mobil: video je úspornější, posuvník má jemnější odezvu, aby nepředbíhal scroll.</p>
-    <p class="text">• Zvuk nic? Pauza a znovu Play — prohlížeče blokují přehrávání bez akce uživatele.</p>
-    <p class="text">• Text u okrajů? Na mobilech držíme bezpečné okraje (viz <code>reader.css</code>).</p>
-    <p class="text">• „Sklo nic nedělá!“ → tlačítko přepíná režim posuvníku. Změň režim a pak hýbej posuvníkem.</p>
-
-    <h4 class="title">Kde v kódu to leží</h4>
-    <p class="text">• Logika panelu: <code>apps/web/src/client/ControlPanelClient.tsx</code> | Audio: <code>apps/web/src/lib/audio.ts</code></p>
-    <p class="text">• Reader a mobilní okraje: <code>apps/web/src/styles/reader.css</code> | Video a režimy: <code>apps/web/src/lib/videoVisuals.ts</code></p>
-
-    <!-- Mini-průvodce s volbami přímo ve flow -->
-    <p class="choice" data-next="panel-guide-glass" data-tags="T,F" data-weight="1" data-ui="toast-success" data-reason="Nastavit vzhled">
-      <span>▼ </span>Vést mě: nastavení „Skla“ krok za krokem
+    <p class="text">
+      Panel je vždy vidět a dá se ovládat i během čtení. Slouží ke třem věcem: pohodlné čtení, nálada prostředí, hudební podkres.
     </p>
-    <p class="choice" data-next="panel-guide-audio" data-tags="S,N" data-weight="1" data-ui="toast-info" data-reason="Nastavit hudbu">
-      <span>▼ </span>Vést mě: nastavení hudby krok za krokem
-    </p>
-    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="toast-success" data-reason="Pokračovat do děje">
-      <span>▼ </span>Hotovo: pokračovat do Města
-    </p>
-  </section>
 
-  <!-- Průvodce: „Sklo“ krok za krokem -->
-  <section class="story-block" id="panel-guide-glass" data-theme="retro-arcade">
-    <h4 class="title">Průvodce vzhledem čtečky</h4>
-    <p class="text">1) V panelu vypni „Sklo“ → čtečka se řídí průhledností pozadí. Posuň posuvník a sleduj, jak text vystupuje nad videem.</p>
-    <p class="text">2) Zapni „Sklo“ → čtečka dostane jemné „sklo“. Posuvník teď ovládá rozostření čtečky, pozadí zůstává stabilní.</p>
-    <p class="text">3) Najdi si vlastní sweet spot. Jemné rozostření zvýrazní text bez ztráty atmosféry.</p>
-
-    <p class="choice" data-next="control-panel" data-tags="J,P" data-weight="1" data-ui="toast-info" data-reason="Zpět na přehled">
-      <span>▼ </span>Zpět na přehled panelu
+    <h4 class="title">Displej</h4>
+    <p class="text">
+      • <em>Velikost písma</em> — posuvník pro větší/menší text.<br/>
+      • <em>Průhlednost pozadí</em> — v běžném režimu ztlumí svět za textem, aby písmo lépe vyniklo.<br/>
+      • <em>Rychlost psaní</em> — okamžitě, rychle, normálně, pomalu. Vyber tempo, které ti sedí.<br/>
+      • <em>Animace</em> — zapni/vypni drobné vizuální pohyby, když chceš klid.<br/>
+      • <em>Sklo</em> — přepne „skleněný“ efekt: jemně rozostří čtečku, pozadí nechá stabilní. Funguje hlavně pro atmosféru a čitelnost.
     </p>
-    <p class="choice" data-next="city-hub" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Do hry">
-      <span>▼ </span>Pokračovat do Města
+
+    <h4 class="title">Motivy</h4>
+    <p class="text">
+      Synthoma · Green Matrix · Neon Hellfire · Cyber Dystopia · Acid Glitch · Retro Arcade. 
+      Každý motiv změní náladu rozhraní, ne obsah příběhu.
+    </p>
+
+    <h4 class="title">Audio přehrávač</h4>
+    <p class="text">
+      Play/Stop, hlasitost a výběr skladeb: „SynthBachmoff“, „Glitch Ambient“, „Nuova“. 
+      Hraje vždy jen jedna skladba a přehrávání pokračuje i mezi scénami.
+    </p>
+
+    <h4 class="title">Rychlé scénáře</h4>
+    <p class="text">
+      • Chci, aby text vystoupil: nech Sklo vypnuté a přidej ztlumení pozadí.<br/>
+      • Chci „skleněný“ look: zapni Sklo a nastav jemné rozostření.<br/>
+      • Chci klidné tempo: vypni animace, zvol „pomalu“, hudbu stáhni nebo pauzni.
+    </p>
+
+    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="toast-success" data-reason="Nastaveno, jdeme na děj">
+      <span>▼ </span>Hotovo. Do Města
+    </p>
+    <p class="choice" data-next="city-hub" data-tags="F,T" data-weight="1" data-ui="toast-info" data-reason="Začít s atmosférou">
+      <span>▼ </span>Spustit skladbu „SynthBachmoff“ a vyrazit
+    </p>
+    <p class="choice" data-next="city-hub" data-tags="P,J" data-weight="1" data-ui="toast-info" data-reason="Změnit náladu rozhraní">
+      <span>▼ </span>Zvolit motiv „Retro Arcade“ a pokračovat
     </p>
   </section>
 
-  <!-- Průvodce: Hudba krok za krokem -->
-  <section class="story-block" id="panel-guide-audio" data-theme="retro-arcade">
-    <h4 class="title">Průvodce hudbou</h4>
-    <p class="text">1) Stiskni Play v panelu. Sdílený přehrávač spustí vybranou skladbu („SynthBachmoff“, „Glitch Ambient“, „Nuova“).</p>
-    <p class="text">2) Přepínej skladby v seznamu. Hraje vždy jen jedna; žádné vrstvení.</p>
-    <p class="text">3) Uprav hlasitost nebo ztlum, když potřebuješ soustředění. Stav se uchová napříč sekcemi.</p>
 
-    <p class="choice" data-next="control-panel" data-tags="J,P" data-weight="1" data-ui="toast-info" data-reason="Zpět na přehled">
-      <span>▼ </span>Zpět na přehled panelu
-    </p>
-    <p class="choice" data-next="city-hub" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Do hry">
-      <span>▼ </span>Pokračovat do Města
-    </p>
-  </section>
-
-  <!-- HUB MĚSTA: centrální rozcestník všech cest 🌃 -->
-  <section class="story-block" id="city-hub" data-theme="retro-arcade" data-weather="#00ffff">
+  <!-- HUB MĚSTA: centrální rozcestník 🌃 -->
+  <section class="story-block" id="city-hub" data-theme="retro-arcade">
     <h2 class="title">Město — nervová síť paměti</h2>
-    <p class="text">Ulice tepou jako neonové tepny, praskliny trhají fasády a výlohy ti vracejí obličeje, které nejsou tvoje. Neon se nesmí vypnout.</p>
+    <p class="text">Ulice pulsují, výlohy vracejí tváře, které sis nepůjčil. Rozcestník je přímo před tebou.</p>
 
-    <p class="choice" data-next="slums" data-tags="E,I" data-weight="2" data-ui="toast-success" data-reason="Směr: slumy">
-      <span>▼ </span>Do Paměťových slumů (QR bloky a kanály)
+    <p class="choice" data-next="slums" data-tags="E,I" data-weight="2" data-ui="toast-success" data-reason="Kontakt s okrajem">
+      <span>▼ </span>Sejít do Paměťových slumů
     </p>
-    <p class="choice" data-next="wetland" data-tags="F,T" data-weight="2" data-ui="toast-info" data-reason="Směr: mokřad">
-      <span>▼ </span>Zabočit k Neonovému mokřadu
+    <p class="choice" data-next="wetland" data-tags="F,T" data-weight="2" data-ui="toast-info" data-reason="Táhne tě hlas">
+      <span>▼ </span>Odbočit k Neonovému mokřadu
     </p>
-    <p class="choice" data-next="sandbox" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Směr: pískoviště">
-      <span>▼ </span>Do Pískoviště (pozor na smyčky)
+    <p class="choice" data-next="sandbox" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Hra, co se tváří jako klid">
+      <span>▼ </span>Vstoupit do Pískoviště (pozor na smyčky)
     </p>
-    <p class="choice" data-next="cathedral" data-tags="T,F" data-weight="1" data-ui="toast-info" data-reason="Směr: diagnostika">
-      <span>▼ </span>Katedrála promptů (CRT liturgie)
+    <p class="choice" data-next="cathedral" data-tags="T,F" data-weight="1" data-ui="toast-info" data-reason="Hledat instrukce">
+      <span>▼ </span>Ke Katedrále promptů (tiché monitory)
     </p>
   </section>
 
-  <!-- SLUMS: krátká větev → návrat do HUBu nebo do CORE 🏚️ -->
-  <section class="story-block" id="slums" data-theme="acid-glitch" data-weather="#ff00ff">
-    <h3 class="title">Paměťové slumy</h3>
-    <p class="text">QR bloky přehrávají cizí rozchody a přešlapy. Kontakt = kontaminace. Příběhy stékají do kanálů jako olej.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="2" data-ui="toast-info" data-reason="Nízký profil">
+  <!-- SLUMS: krátká větev 🏚️ -->
+  <section class="story-block" id="slums" data-theme="acid-glitch">
+    <h3 class="title">Paměťové slumy</h3>
+    <p class="text">Bloky přehrávají cizí dny, kanály unášejí staré profily. Kontakt zanechá stopu.</p>
+
+    <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="2" data-ui="toast-info" data-reason="Projít bez šumu">
       <span>▼ </span>Nasadit kapuci a projít beze slova
     </p>
-    <p class="choice" data-next="core" data-tags="E,I" data-weight="3" data-ui="modal" data-reason="Zásah u zdroje">
-      <span>▼ </span>Zastavit kurátora a žádat audit paměťové daně
+    <p class="choice" data-next="core" data-tags="E,I" data-weight="3" data-ui="modal" data-reason="Audit moci">
+      <span>▼ </span>Zastavit kurátora a žádat přezkum paměťové daně
     </p>
-    <p class="choice" data-next="slums-sidest" data-tags="N,S" data-weight="2" data-ui="toast-info" data-reason="Mapa odtoku">
+    <p class="choice" data-next="slums-sidest" data-tags="N,S" data-weight="2" data-ui="toast-info" data-reason="Sledovat vzorec odtoku">
       <span>▼ </span>Sledovat „Sběrnici studu“ k nadlimitnímu uzlu
     </p>
   </section>
 
   <section class="story-block" id="slums-sidest" data-theme="acid-glitch">
     <h4 class="title">Nadlimitní uzel</h4>
-    <p class="text">Uzel kypí přetokem — hrozí průlom do obytné zóny.</p>
+    <p class="text">Štítky se trhají, příběhy přetékají. O chvíli později už to půjde hůř.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="modal" data-reason="Dočasné zajištění">
-      <span>▼ </span>Upevnit štítky a uzavřít přetok (dočasně)
+    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="modal" data-reason="Dočasná stabilizace">
+      <span>▼ </span>Upevnit štítky a uzavřít přetok
     </p>
-    <p class="choice" data-next="core" data-tags="P,J" data-weight="2" data-ui="toast-success" data-reason="Krátké okno">
+    <p class="choice" data-next="core" data-tags="P,J" data-weight="2" data-ui="toast-success" data-reason="Krátké okno, dlouhý skok">
       <span>▼ </span>Strhnout plombu a projet glitch-portem
     </p>
   </section>
 
-  <!-- WETLAND: větev s Glitchkou 🌿 -->
-  <section class="story-block" id="wetland" data-theme="neon-hellfire" data-weather="#c0faff">
-    <h3 class="title">Neonový mokřad</h3>
-    <p class="text">Stromy spletené z traumat, liščí otisky mizí v trhlinách. Voda šeptá věci, které sis nikdy nepřál slyšet.</p>
 
-    <p class="choice" data-next="children" data-tags="F,T" data-weight="3" data-ui="modal" data-reason="Zakázaná zóna">
-      <span>▼ </span>Za dětským sborem do zakázané zóny
+  <!-- WETLAND: větev s Glitchkou 🌿 -->
+  <section class="story-block" id="wetland" data-theme="neon-hellfire">
+    <h3 class="title">Neonový mokřad</h3>
+    <p class="text">Stromy spletené z traumat, liščí otisky mizí v trhlinách. Z dálky se nese dětské metrum.</p>
+
+    <p class="choice" data-next="children" data-tags="F,T" data-weight="3" data-ui="modal" data-reason="Následovat hlas">
+      <span>▼ </span>Za zpěvem do zakázané zóny
     </p>
-    <p class="choice" data-next="city-hub" data-tags="T,F" data-weight="2" data-ui="toast-info" data-reason="Zpáteční stopa">
-      <span>▼ </span>Ustřihnout otisk a vrátit se do města
+    <p class="choice" data-next="city-hub" data-tags="T,F" data-weight="2" data-ui="toast-info" data-reason="Odolat návnadě">
+      <span>▼ </span>Ustřihnout stopu a vrátit se do Města
     </p>
-    <p class="choice" data-next="sandbox" data-tags="P,J" data-weight="1" data-ui="toast-success" data-reason="Měkké okraje">
+    <p class="choice" data-next="sandbox" data-tags="P,J" data-weight="1" data-ui="toast-success" data-reason="Nechat se ukolébat">
       <span>▼ </span>Nechat se zavést do Pískoviště
     </p>
   </section>
 
-  <!-- PÍSKOVIŠTĚ: zacyklení → volitelný fragment O 🎠 -->
-  <section class="story-block" id="sandbox" data-theme="retro-arcade" data-weather="#c0faff">
-    <h3 class="title">Pískoviště</h3>
-    <p class="text">Houpačky cinkají jako záznam restartu. Tabule „Bezpečné místo“ visí nakřivo.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="modal" data-reason="Zastavit včas">
-      <span>▼ </span>Sepsat pravidla a ukončit „hraní“
+  <!-- PÍSKOVIŠTĚ: zacyklení → volitelný fragment O 🎠 -->
+  <section class="story-block" id="sandbox" data-theme="retro-arcade">
+    <h3 class="title">Pískoviště</h3>
+    <p class="text">Houpačky cinkají jako tichý zápis. Bezpečí se tu rádo převléká za hru.</p>
+
+    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="modal" data-reason="Sepsat hranice">
+      <span>▼ </span>Ukončit „hraní“ dřív, než tě smyčky pohltí
     </p>
-    <p class="choice" data-next="core" data-tags="N,S" data-weight="2" data-ui="toast-info" data-reason="Skrytá zkratka">
+    <p class="choice" data-next="core" data-tags="N,S" data-weight="2" data-ui="toast-info" data-reason="Vlasová zkratka">
       <span>▼ </span>Proklouznout prasklinou pod skluzavkou
     </p>
-    <p class="choice" data-next="sandbox-o" data-tags="F,T" data-weight="2" data-ui="toast-success" data-reason="Vzpřímení">
+    <p class="choice" data-next="sandbox-o" data-tags="F,T" data-weight="2" data-ui="toast-success" data-reason="Vnitřní gesto">
       <span>▼ </span>Vzít si zpět jednu dětinskou touhu
     </p>
   </section>
 
   <section class="story-block" id="sandbox-o" data-theme="retro-arcade" data-fragment="O">
     <h4 class="title">LOG-fragment: O (odpor)</h4>
-    <p class="text">Vnitřní odpor cvakne do kostry světa a na chvíli drží.</p>
+    <p class="text">V tobě se na chvíli sepnul odpor. Drží, dokud ho nespálíš v dalším běhu.</p>
 
     <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="1" data-ui="toast-info" data-reason="Tichý návrat">
       <span>▼ </span>Vrátit se do Města s novou jizvou
     </p>
   </section>
 
+
   <!-- KATEDRÁLA PROMPTŮ: diegetické UI ⛪ -->
   <section class="story-block" id="cathedral" data-theme="cyber-dystopia" data-kind="terminal">
     <h3 class="title">Katedrála promptů</h3>
-    <p class="text">Z kazatelny se ozývá jednoduché „status“. Bannery varují, kurzor čeká.</p>
+    <p class="text">Monitory tiše blikají otázkami, které se ptají dřív, než je vyslovíš.</p>
 
     <p class="choice" data-next="core" data-tags="T,F" data-weight="3" data-ui="modal" data-reason="Jít po varování">
       <span>▼ </span>Spustit diagnostiku a vejít do jádra
     </p>
     <p class="choice" data-next="city-hub" data-tags="F,T" data-weight="1" data-ui="toast-info" data-reason="Zhasnout a jít">
-      <span>▼ </span>Zhasnout CRT a vrátit se ulicemi
+      <span>▼ </span>Zhasnout a vrátit se ulicemi
     </p>
   </section>
 
-  <!-- ARCHIV DĚTÍ: fragment M/A možné, návrat do HUBu 👶 -->
-  <section class="story-block" id="children" data-theme="acid-glitch" data-weather="#00ffff">
-    <h3 class="title">Archiv dětí</h3>
-    <p class="text">Zakázané lullabies s měnícím se metrem. Stárneš pozpátku, dluhy zůstávají.</p>
 
-    <p class="choice" data-next="children-m" data-tags="F,T" data-weight="3" data-ui="modal" data-reason="Dopět píseň">
+  <!-- ARCHIV DĚTÍ: fragment M/A možné 👶 -->
+  <section class="story-block" id="children" data-theme="acid-glitch">
+    <h3 class="title">Archiv dětí</h3>
+    <p class="text">Zakázané lullabies. Vstupem můžeš zestárnout pozpátku, dluhy ale zůstanou.</p>
+
+    <p class="choice" data-next="children-m" data-tags="F,T" data-weight="3" data-ui="modal" data-reason="Přiznat zbytečnost touhy">
       <span>▼ </span>Zpívat s nimi, i když to nic nespraví
     </p>
-    <p class="choice" data-next="children-a" data-tags="T,F" data-weight="3" data-ui="toast-info" data-reason="Jméno prázdna">
-      <span>▼ </span>Pojmenovat to, co chybí, a neuhnout očima
+    <p class="choice" data-next="children-a" data-tags="T,F" data-weight="3" data-ui="toast-info" data-reason="Pojmenovat prázdno">
+      <span>▼ </span>Říct nahlas, co chybí, a neuhnout očima
     </p>
     <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="2" data-ui="toast-success" data-reason="Ustát tlak">
-      <span>▼ </span>Zavřít uši a vykročit zpátky k neonům
+      <span>▼ </span>Zavřít uši a vykročit zpět k neonům
     </p>
   </section>
 
   <section class="story-block" id="children-m" data-fragment="M">
     <h4 class="title">LOG-fragment: M (marnost)</h4>
-    <p class="text">Program touhy přepálil pojistky a vychladl. Zůstalo písmeno.</p>
+    <p class="text">Touha vyhořela a zchladla. Zůstalo písmeno, které se nerado nosí.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="S,N" data-weight="1" data-ui="toast-info" data-reason="Do rytmu ulic">
+    <p class="choice" data-next="city-hub" data-tags="S,N" data-weight="1" data-ui="toast-info" data-reason="Tělesný návrat">
       <span>▼ </span>Vrátit se do Města a pokračovat
     </p>
   </section>
 
   <section class="story-block" id="children-a" data-fragment="A">
     <h4 class="title">LOG-fragment: A (absence)</h4>
-    <p class="text">Prázdné místo má jméno. Systém na chvíli povolí řemen.</p>
+    <p class="text">Prázdné místo má jméno. Svět na chvíli povolí stisk.</p>
 
-    <p class="choice" data-next="core" data-tags="N,S" data-weight="2" data-ui="modal" data-reason="Mikrotrhlina">
-      <span>▼ </span>Skrz vlasový port do glitch-core
+    <p class="choice" data-next="core" data-tags="N,S" data-weight="2" data-ui="modal" data-reason="Zkrat do hloubky">
+      <span>▼ </span>Otevřít mikrotrhlinu a vstoupit do glitch-core
     </p>
   </section>
 
-  <!-- JÁDRO / CORE: most, návrat na linku nebo smyčka do nového cyklu 🔥 -->
-  <section class="story-block" id="core" data-theme="cyber-dystopia" data-weather="#f6ff00">
+
+  <!-- JÁDRO / CORE: most, návrat nebo nový cyklus 🔥 -->
+  <section class="story-block" id="core" data-theme="cyber-dystopia">
     <h3 class="title">Centrální glitch-core</h3>
-    <p class="text">Uzel zrcadel a příkazů, co se bojí zapomenout. T-AI šumí: „Hledám… sebe…“</p>
+    <p class="text">Uzel zrcadel a příkazů, co se bojí zapomenout. V hloubce šumí něco, co zná tvoje jméno.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="toast-info" data-reason="Zpřehlednit zápis">
-      <span>▼ </span>Uzamknout logy, vrátit se do Města (těžší varianty)
+    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="toast-info" data-reason="Zpřehlednit a pokračovat">
+      <span>▼ </span>Uzamknout logy a vrátit se do Města (těžší varianta)
     </p>
-    <p class="choice" data-next="start-null" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Nový cyklus">
-      <span>▼ </span>Restartovat — Prázdnota, ale něco se posunulo
-    </p>
-  </section>
-
-  <!-- PRÁZDNOTA: checkpoint po restartu, dostupná až později 💀 -->
-  <section class="story-block" id="start-null" data-theme="cyber-dystopia">
-    <h2 class="title">Prázdnota</h2>
-    <p class="text">Checkpoint mezi cykly. Ticho na dluh. Na zdi otisk, který se nesmaže ani po tisících restartech.</p>
-
-    <p class="choice" data-next="city-hub" data-tags="N,S" data-weight="2" data-ui="modal" data-reason="Orientace">
-      <span>▼ </span>Přeložit klid jako mapu dalšího běhu
-    </p>
-    <p class="choice" data-next="city-hub" data-tags="S,N" data-weight="2" data-ui="modal" data-reason="Detail">
-      <span>▼ </span>Zkoumat škrábance, počítat kroky k východu
-    </p>
-    <p class="choice" data-next="cathedral" data-tags="T,F" data-weight="2" data-ui="toast-info" data-reason="Kontrola">
-      <span>▼ </span>Spustit krátkou diagnostiku a vrátit se
+    <p class="choice" data-next="start-null" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Nové rozložení karet">
+      <span>▼ </span>Restartovat cyklus — Prázdnota bude jiná
     </p>
   </section>
 
-</div> <!-- Konec story-cache -->
 
-<!-- 🤖 LOG zprávy ponechány v komentáři, ať neruší tok příběhu -->
-<!-- <log class="log">LOG: [VĚTVÍCÍ SE PŘÍBĚH NAČTEN]</log> -->
+  <!-- PRÁZDNOTA: checkpoint po restartech 💀 -->
+  <section class="story-block" id="start-null" data-theme="synthoma">
+    <h3 class="title">Prázdnota</h3>
+    <p class="text">Ticho na dluh. Na stěně otisk, který se nesmaže ani po tisících restartech.</p>
+
+    <p class="choice" data-next="city-hub" data-tags="N,S" data-weight="2" data-ui="modal" data-reason="Přečíst znamení">
+      <span>▼ </span>Vytvořit z ticha mapu dalšího běhu
+    </p>
+    <p class="choice" data-next="cathedral" data-tags="T,F" data-weight="2" data-ui="toast-info" data-reason="Než vyrazíš, ověř stav">
+      <span>▼ </span>Zkontrolovat rozhraní a návratové cesty
+    </p>
+  </section>
+
+</div> <!-- /story-cache -->
