@@ -37,30 +37,30 @@ body {
 /* Fonty – nahraj do public/fonts a názvy drž konzistentní */
 @font-face {
   font-family: "VT323";
-  src: url("/fonts/VT323-Regular.ttf") format("truetype");
+  src: url("/SynThoma/fonts/VT323-Regular.ttf") format("truetype");
   font-display: swap;
 }
 @font-face {
   font-family: "VT323i";
-  src: url("/fonts/Handjet.ttf") format("truetype");
+  src: url("/SynThoma/fonts/Handjet.ttf") format("truetype");
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "VT323b";
-  src: url("/fonts/VT323-Regular.ttf") format("truetype");
+  src: url("/SynThoma/fonts/VT323-Regular.ttf") format("truetype");
   font-weight: bold;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Handjet";
-  src: url("/fonts/Handjet.ttf") format("truetype");
+  src: url("/SynThoma/fonts/Handjet.ttf") format("truetype");
   font-display: swap;
 }
 @font-face {
   font-family: "SynthomaUI";
-  src: url("/fonts/SynthomaUI-Variable.ttf") format("truetype");
+  src: url("/SynThoma/fonts/SynthomaUI-Variable.ttf") format("truetype");
   font-weight: 100 900;
   font-display: swap;
 }
@@ -68,42 +68,42 @@ body {
 /* Dodatečné rodiny dle dodaného snippetu */
 @font-face {
   font-family: 'Synthoma';
-  src: url('/fonts/astronboy/astronbw.ttf') format('truetype');
+  src: url('/SynThoma/fonts/astronboy/astronbw.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Text01';
-  src: url('/fonts/astronboy/astronbo.ttf') format('truetype');
+  src: url('/SynThoma/fonts/astronboy/astronbo.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Text02';
-  src: url('/fonts/BungeeHairline-Regular.ttf') format('truetype');
+  src: url('/SynThoma/fonts/BungeeHairline-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Text03';
-  src: url('/fonts/euro/eurof35.ttf') format('truetype');
+  src: url('/SynThoma/fonts/euro/eurof35.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Text03b';
-  src: url('/fonts/euro/eurof55.ttf') format('truetype');
+  src: url('/SynThoma/fonts/euro/eurof55.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Text03i';
-  src: url('/fonts/euro/eurof36.ttf') format('truetype');
+  src: url('/SynThoma/fonts/euro/eurof36.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -112,28 +112,28 @@ body {
 /* Zekton – retro arcade rodina (regular, bold, italic, bold italic) */
 @font-face {
   font-family: 'Zekton';
-  src: url('/fonts/zekton/zekton__.ttf') format('truetype');
+  src: url('/SynThoma/fonts/zekton/zekton__.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Zekton';
-  src: url('/fonts/zekton/zektonbo.ttf') format('truetype');
+  src: url('/SynThoma/fonts/zekton/zektonbo.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Zekton';
-  src: url('/fonts/zekton/zektonit.ttf') format('truetype');
+  src: url('/SynThoma/fonts/zekton/zektonit.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Zekton';
-  src: url('/fonts/zekton/zektonbi.ttf') format('truetype');
+  src: url('/SynThoma/fonts/zekton/zektonbi.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
@@ -142,7 +142,7 @@ body {
 /* Retro arcade fonts */
 @font-face {
   font-family: 'Rubik Glitch';
-  src: url('/fonts/RubikGlitch-Regular.ttf') format('truetype');
+  src: url('/SynThoma/fonts/RubikGlitch-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

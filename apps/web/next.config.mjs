@@ -5,6 +5,9 @@ const isProd = process.env.NODE_ENV === 'production';
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@synthoma/shared'],
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isProd ? `/${repo}` : '',
+  },
   // Nechceme blokovat produkční build kvůli ESLintu/TS chybám (nasazení > lint)
   eslint: {
     ignoreDuringBuilds: true,

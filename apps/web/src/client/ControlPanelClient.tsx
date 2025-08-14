@@ -436,15 +436,16 @@ export default function ControlPanelClient() {
       }
 
       // audio
+      const BP = process.env.NEXT_PUBLIC_BASE_PATH || '';
       const playlistContainer = document.getElementById("playlist-container");
       const playPauseBtn = document.getElementById("play-pause-btn");
       const stopBtn = document.getElementById("stop-btn");
       const progressBar = document.getElementById("progress-bar") as HTMLDivElement | null;
       const progressBarContainer = document.getElementById("progress-bar-container");
       const audioTracks = [
-        { title: "SynthBachmoff", file: "/audio/SynthBachmoff.mp3" },
-        { title: "Glitch Ambient", file: "/audio/SYNTHOMA1.mp3" },
-        { title: "Nuova", file: "/audio/Nuova.mp3" },
+        { title: "SynthBachmoff", file: `${BP}/audio/SynthBachmoff.mp3` },
+        { title: "Glitch Ambient", file: `${BP}/audio/SYNTHOMA1.mp3` },
+        { title: "Nuova", file: `${BP}/audio/Nuova.mp3` },
       ];
       let currentTrackIndex = -1;
       // Vytvoř/skonfiguruj sdílený <audio> a připevni do DOM (některé prohlížeče jsou cimprlich)

@@ -3,6 +3,7 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
   const attach = options?.attachToWindow !== false;
   const w = window as any;
   const d = document;
+  const BP = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   // Run-once guard (React Strict Mode volá efekty dvakrát – díky, příteli ironie)
   try {
@@ -39,7 +40,7 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
   }
 
   const paths = Array.from({ length: 10 }, (_, i) => {
-    const base = `/video/SYNTHOMA${i + 1}`;
+    const base = `${BP}/video/SYNTHOMA${i + 1}`;
     return { webm: `${base}.webm` } as const;
   });
 
@@ -115,7 +116,7 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
           if (v) {
             try {
               while (v.firstChild) v.removeChild(v.firstChild);
-              const s = d.createElement('source'); s.src = `/video/SYNTHOMA1.webm`; s.type = 'video/webm'; v.appendChild(s);
+              const s = d.createElement('source'); s.src = `${BP}/video/SYNTHOMA1.webm`; s.type = 'video/webm'; v.appendChild(s);
               v.load(); v.play().catch(()=>{});
             } catch {}
           }
