@@ -162,7 +162,7 @@ html, body {
   /* Center the reader and keep reasonable vertical spacing */
   margin-left: 0rem;
   margin-right: 0rem;
-  margin-bottom: 80rem;
+  margin-bottom: 0rem;
   box-sizing: border-box;
   color: var(--text-primary);
   line-height: 1.2;
@@ -331,6 +331,8 @@ html, body {
   /* Plná šířka pro pěkné „řádky“ odpovědí */
   display: block;
   width: 100%;
+  /* ať 100% respektuje vnitřní padding kontejneru a nelepí se na pravý okraj */
+  box-sizing: border-box;
 }
 
 .choice-box .choice-link:hover { 
@@ -396,6 +398,24 @@ a.chapter-link:focus-visible {
 
 /* Responsivní doladění */
 @media (max-width: 768px) {
+  /* Čtečka: respektuj postranní okraje a nelep se na hrany obrazovky */
+  .SYNTHOMAREADER {
+    margin: 12px 12px 48px;
+    padding: 16px;
+    border-radius: 12px;
+    max-width: calc(100% - 24px);
+  }
+  /* Volby: odstraň zbytečné boční odsazení na úzkých displejích */
+  .choice-box {
+    margin-left: 0rem;
+    margin-right: 0rem;
+    /* přidej vnitřní odsazení, aby linky nemlátily do pravého okraje */
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  /* Linky knih a kapitol: menší levá mezera na mobilech */
+  .book-link { margin-left: 24px; }
+  .chapter-link { margin-left: 20px; }
   .chapter-list { padding: 16px; }
   .chapter-item { padding: 15px 14px; font-size: 1.2rem; }
   .chapter-list h2 { font-size: 1.6rem; }
@@ -462,6 +482,7 @@ a.chapter-link:focus-visible {
 
 /* 🎨 Typewriter efekty během psaní */
 .tw-line {
+
   /* nezačínej neviditelně – ať je progresivní psaní .text vidět */
   opacity: 1;
   transform: translateY(2px);
@@ -488,6 +509,9 @@ a.chapter-link:focus-visible {
     padding: 0.25rem;
     border-radius: 8px;
     font-size: calc(0.9rem * var(--font-size-multiplier, 1));
+    /* drž postranní odsazení od okrajů displeje */
+    margin: 12px 12px 48px;
+    max-width: calc(100% - 24px);
   }
   
   #reader-body, #reader-extra {
