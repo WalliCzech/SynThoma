@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - synthoma-import-2025-08-14
+      - main
   workflow_dispatch:
 
 permissions:
