@@ -675,7 +675,7 @@ export default function HomePage() {
   // Přednačti/pořiď shared audio (bez autoplay)
   useEffect(() => {
     try {
-      const a = getSharedAudio('/audio/SynthBachmoff.mp3');
+      const a = getSharedAudio();
       audioRef.current = a;
       // inicializace stavu podle skutečného přehrávání
       const compute = () => setIsAudioPlaying(() => !!a && !a.paused && !a.ended && a.currentTime > 0);
@@ -708,7 +708,7 @@ export default function HomePage() {
           setTimeout(() => { isStartingAudioRef.current = false; }, 150);
         }
       } else {
-        const a = audioRef.current || getSharedAudio('/audio/SynthBachmoff.mp3');
+        const a = audioRef.current || getSharedAudio();
         // Spusť hudbu jen pokud skutečně nehraje
         if (a && (a.paused || a.ended || a.currentTime === 0)) {
           if (!isStartingAudioRef.current) {

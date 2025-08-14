@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: 'SYNTHOMA',
   description: 'Neon, glitch a paměťové jizvy. Pěkný večer.',
   icons: {
-    icon: '/assets/favicon.ico',
+    icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/assets/favicon.ico`,
   },
 };
 

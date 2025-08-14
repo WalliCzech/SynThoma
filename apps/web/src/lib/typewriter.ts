@@ -1449,10 +1449,11 @@ export async function startBodyTypingFromHtml(html: string, hostSelector = '#rea
 }
 
 export async function typeExternalInfo(): Promise<void> {
-  const url = '/data/SYNTHOMAINFO.html';
+  const BP = (process as any).env?.NEXT_PUBLIC_BASE_PATH || '';
+  const url = `${BP}/data/SYNTHOMAINFO.html`;
   const res = await fetch(url, { cache: 'no-store' });
   const html = await res.text();
-  const baseUrl = '/data/';
+  const baseUrl = `${BP}/data/`;
   const bodyHtml = installChapterAssetsAndGetBody(html, baseUrl, 'info');
   // Zrcadla pro interaktivní navigaci (stejně jako v startInteractiveStory)
   try {
