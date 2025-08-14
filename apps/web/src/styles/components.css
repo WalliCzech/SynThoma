@@ -218,7 +218,7 @@
   .title::before {
     content: '';
     position: absolute;
-    left: -1.25rem;
+    left: -0.5rem;
     width: 4px;
     height: 100%;
     border-radius: 2px;
@@ -277,7 +277,7 @@
   .log::before {
     content: '';
     position: absolute;
-    left: -1.25rem;
+    left: -0.5rem;
     width: 4px;
     height: 100%;
     border-radius: 2px;
@@ -309,7 +309,7 @@
   .dialog::before {
     content: '';
     position: absolute;
-    left: -1.25rem;
+    left: -0.5rem;
     width: 4px;
     height: 100%;
     border-radius: 2px;
@@ -332,7 +332,7 @@
   .dialogS::before {
     content: '';
     position: absolute;
-    left: -1.25rem;
+    left: -0.5rem;
     width: 4px;
     height: 100%;
     border-radius: 2px;
@@ -355,7 +355,7 @@
   .dialogN::before {
     content: '';
     position: absolute;
-    left: -1.25rem;
+    left: -0.5rem;
     width: 4px;
     height: 100%;
     border-radius: 2px;
@@ -383,7 +383,7 @@
   .text::before {
     content: '';
     position: absolute;
-    left: -1.25rem;
+    left: -0.5rem;
     width: 4px;
     height: 100%;
     border-radius: 2px;

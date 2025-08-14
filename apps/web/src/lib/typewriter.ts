@@ -621,7 +621,8 @@ export async function startBodyTypingFromHtml(html: string, hostSelector = '#rea
       const ls = (typeof localStorage !== 'undefined') ? localStorage.getItem('synthoma-autoscroll') : null;
       const enable = (ls === '1') || (document?.body?.dataset?.autoscroll === '1');
       if (!enable) return;
-      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+      // Instant scroll to bottom – no smooth behavior to prevent jank/pop-in on mobile
+      window.scrollTo({ top: document.documentElement.scrollHeight });
     } catch {}
   };
 
