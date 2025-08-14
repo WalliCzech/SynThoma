@@ -1,0 +1,539 @@
+/* Globální: povol stránkový scroll i na mobilech */
+html, body {
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: auto;
+  touch-action: pan-y;
+}
+/* Reader controls toolbar */
+.reader-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.reader-controls::before {
+  content: '';
+  position: absolute;
+  left: 0.2rem;
+  width: 4px;
+  height: 130%;
+  border-radius: 2px;
+  background: rgb(0, 255, 255, 0);
+  box-shadow: -1px 0 4px 0px var(--accent-warning), 1px 0 8px 0px var(--accent-warning), 0px 0 12px 0px var(--accent-warning);
+  animation: border-glow 2.6s infinite cubic-bezier(.8,0,.23,1.1);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Stejný nástup jako CTA tlačítko */
+.reader-controls.appear { 
+  opacity: 0; 
+  transform: translateY(6px) scale(0.99); 
+  filter: brightness(.95) saturate(.98); 
+}
+.reader-controls.appear.visible { 
+  opacity: 1; 
+  transform: none; 
+  filter: var(--filter-primary, none); 
+  transition: opacity .6s ease .1s, transform .6s ease .1s, filter .6s ease; 
+}
+
+/* Title sizing without inline style – odstraněno: nepoužíváme .reader-title (třída) */
+
+/* Terminal should grow with content: hide scrollbars only when requested */
+/* odstraněno: [data-scroll-hide="1"] nepoužíváme */
+
+/* odstraněno: .popup-content nepoužíváme */
+
+/* 🎯 Vylepšené font utility třídy */
+/* odstraněno: .font-text01 nepoužíváme */
+
+.speed-btn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: var(--font-family-mono);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 3px;
+}
+
+.speed-btn:hover {
+  background: var(--border-secondary);
+  transform: translateY(-1px);
+}
+
+.speed-btn.active {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  box-shadow: 0 0 8px var(--glow-primary);
+}
+
+/* Hide rich-hidden containers (content source for typewriter) */
+.rich-hidden { display: none !important; }
+
+/* 🌃 Hide story cache for branching narratives */
+.hidden { display: none !important; }
+#story-cache { display: none !important; }
+
+/* 🎭 Debug mód pro vývojáře */
+.debug-mode .rich-hidden {
+  display: block !important;
+  opacity: 0.3;
+  border: 1px dashed #ff00ff;
+  margin: 1rem 0;
+}
+
+.debug-mode .hidden {
+  display: block !important;
+  opacity: 0.2;
+  border: 1px dashed #00ffff;
+  margin: 1rem 0;
+}
+
+.debug-mode .tw-line {
+  border-left: 2px solid rgba(0, 255, 255, 0.3);
+  padding-left: 0.5rem;
+}
+
+/* CTA button spacing without inline style */
+.hero-cta .glitch-button.appear { margin: 2rem auto; }
+
+/* 🎪 Easter egg: Konami kód aktivace */
+.konami-activated {
+  filter: hue-rotate(180deg) saturate(1.5);
+  animation: rainbow-pulse 2s infinite;
+}
+
+@keyframes rainbow-pulse {
+  0%, 100% { filter: hue-rotate(0deg) saturate(1); }
+  25% { filter: hue-rotate(90deg) saturate(1.5); }
+  50% { filter: hue-rotate(180deg) saturate(2); }
+  75% { filter: hue-rotate(270deg) saturate(1.5); }
+}
+/* SYNTHOMA Reader Styles – oddělené a theme-aware, aby text neplakal a UX neumřelo. */
+
+/* 🛑 Vylepšený kill-switch pro animace s accessibility */
+.no-animations .SYNTHOMAREADER,
+.no-animations .chapter-container,
+.no-animations .chapter-title,
+.no-animations .chapter-content,
+.no-animations .typing-cursor,
+.no-animations .scanline,
+.no-animations .loading-spinner,
+.no-animations .tw-line,
+.no-animations .alarm-emote { 
+  animation: none !important; 
+  transition: none !important; 
+  opacity: 1 !important; 
+  transform: none !important; 
+}
+.no-animations .typing-cursor { display: none !important; }
+
+/* 🎯 Respektuj system preference pro reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tw-line,
+  .alarm-emote,
+  .reader-controls button::before {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+}
+
+/* Přesunuto výše do vylepšené sekce accessibility */
+
+/* Kontejner čtečky */
+.SYNTHOMAREADER {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 15px;
+  border: none;
+  /* Center the reader and keep reasonable vertical spacing */
+  margin-left: 0rem;
+  margin-right: 0rem;
+  margin-bottom: 80rem;
+  box-sizing: border-box;
+  color: var(--text-primary);
+  line-height: 1.2;
+  /* Page-level scroll: nepoužívej vnitřní scroll v readeru */
+  overflow: visible;
+  min-height: 200px;
+  opacity: 1;
+  background-color: rgba(var(--bg-secondary-rgb), var(--reader-bg-opacity, 0.75));
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  -webkit-user-select: none; -moz-user-select: none; user-select: none;
+  --use-components-styles: true;
+  /* musí být NAD glitch/noise canvasy (z=1-2), jinak nemá co rozmazávat */
+  z-index: 5;
+}
+
+/* Zmenšení mezer mezi odstavci uvnitř čtečky */
+.SYNTHOMAREADER p,
+.SYNTHOMAREADER .text,
+.SYNTHOMAREADER .dialog,
+.SYNTHOMAREADER .dialogS,
+.SYNTHOMAREADER .dialogG,
+.SYNTHOMAREADER .log {
+  margin-left: 0rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0rem;
+}
+
+/* Performance hints for large scroll containers */
+#reader-content {
+  content-visibility: auto;
+  contain-intrinsic-size: 1200px;
+}
+
+/* Glass mode: aplikuj stejné chování jako u control panelu */
+.SYNTHOMAREADER.glass {
+  /* Silnější vizuální efekt + spolehlivější compositing */
+  background: rgba(var(--bg-secondary-rgb), 0.18) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur, 80px)) !important;
+  backdrop-filter: blur(var(--glass-blur, 80px)) !important;
+  border: 1px solid var(--border-secondary);
+  /* drž čtečku nad #noise-canvas (z=1) a #glitch-bg (z=2) */
+  z-index: 5;
+  will-change: backdrop-filter;
+}
+
+@supports not (background: color-mix(in oklab, red, transparent)) {
+  /* Fallback pro prohlížeče bez color-mix: drž aspoň černé sklo */
+  .SYNTHOMAREADER.glass { background: rgba(0,0,0,0.28) !important; }
+}
+
+/* Původně jsme brutálně nastavovali overflow:visible všude. To zabilo scroll. */
+/* Nechme scroll na kontejneru .SYNTHOMAREADER a jen hosty nechme přetékat vizuálně. */
+#reader-content,
+#reader-body,
+#reader-extra,
+#reader-log,
+#reader-dialog,
+#reader-title { overflow: visible; max-height: none; }
+
+/* Zajisti, že boot-binary a následná .noising-text v logu budou na vlastních řádcích */
+#reader-log .boot-binary,
+#reader-log .noising-text {
+  display: block;
+}
+#reader-log {
+  text-align: center;
+}
+#reader-log .boot-binary { margin-bottom: 0rem; }
+
+/* trocha místa pod tlačítky, ať se knihovna nelepí */
+#reader-extra { margin-top: 0rem; }
+
+.SYNTHOMAREADER.chapter-loaded { animation: fadeIn 0.5s ease-in-out; }
+
+
+/* Loading stavy pro kapitoly */
+.loading-chapter {
+  display: flex; justify-content: center; align-items: center; min-height: 300px;
+  color: var(--text-primary);
+  font-family: var(--font-family-mono, 'VT323', monospace);
+  font-size: calc(1.1rem * var(--font-size-multiplier));
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-secondary);
+  border-radius: 5px;
+  margin-left: 1rem;
+}
+.loading-chapter p { margin: 0; color: var(--text-primary); text-shadow: 0 0 10px var(--glow-secondary); }
+.loading-animation { margin-top: 0rem; width: 50px; height: 50px; border: 3px solid var(--border-secondary); border-radius: 50%; border-top-color: var(--accent-secondary); animation: spin 1s ease-in-out infinite; }
+
+/* Error stavy – když backend řekne "haha, ne dnes" */
+.error { text-align: center; color: #f00; font-family: 'Text01', monospace; font-size: 1.1rem; margin: 2rem 0; text-shadow: 0 0 10px #f00; }
+.error-message { background: rgba(255, 0, 0, 0.1); border: 1px solid rgba(255, 0, 0, 0.3); border-radius: 5px; padding: 1.5rem; margin: 1rem 0; text-align: center; color: #ff5555; }
+.error-message h3 { margin: 0; color: #ff4444; }
+.error-message p { margin: 0.5rem 0; color: #ff8888; }
+.retry-button { background: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444; color: #ff8888; padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-family-mono, 'VT323', monospace); font-size: 1rem; border-radius: 4px; }
+.retry-button:hover { background: rgba(255, 68, 68, 0.3); color: #fff; border-color: #ff0000; }
+
+/* (odstraněno) Kapitoly: seznam a položky – UI již nepoužíváme */
+
+
+/* Oprava: po dopsání typewriteru nenech <a> zmodrat a podtrhnout – drž se stylu textu */
+#reader-content a,
+#reader-body a,
+#reader-extra a {
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+}
+#reader-content a:visited,
+#reader-body a:visited,
+#reader-extra a:visited {
+  color: inherit;
+}
+/* jemné zvýraznění na hover místo defaultního modrého cirkusu */
+#reader-content a:hover,
+#reader-body a:hover,
+#reader-extra a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--accent-secondary);
+  text-underline-offset: 2px;
+}
+/* stav zamčeno a vybráno pro odkazy v readeru */
+#reader-content a.disabled,
+#reader-body a.disabled,
+#reader-extra a.disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+  text-decoration: none !important;
+}
+#reader-content a.selected,
+#reader-body a.selected,
+#reader-extra a.selected {
+  color: var(--accent-primary, #00ffff);
+  text-shadow: 0 0 6px var(--glow-primary, #00ffff);
+  border-bottom: 1px dashed currentColor;
+}
+/* Interaktivní volby */
+.choice-box {
+  display: flex;
+  font-family: var(--font-family-primary-bold);
+  font-weight: bold;
+  /* Vždycky pod sebou – žádné vedle sebe cirkusy */
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-left: 1.5rem;
+  margin-right: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.choice-box .choice-link {
+  color: inherit;
+  text-decoration: none;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+  /* Plná šířka pro pěkné „řádky“ odpovědí */
+  display: block;
+  width: 100%;
+}
+
+.choice-box .choice-link:hover { 
+  background: var(--border-secondary, 0.5);
+  box-shadow: 0 0 10px var(--glow-secondary);
+  transform: translateY(-1px);
+  text-decoration: none; 
+}
+.choice-box .choice-link:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-primary) 35%, transparent);
+  text-decoration: none;
+}
+.choice-box .choice-link.selected {
+  background: rgba(0,255,255,0.08);
+  box-shadow: 0 0 12px var(--glow-primary);
+}
+
+/* Keyboard focus for book/chapter links */
+a.book-link:focus-visible,
+a.chapter-link:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  text-decoration: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-primary) 28%, transparent);
+}
+.choice-box .choice-link.disabled {
+  opacity: 0.55;
+  cursor: default;
+  box-shadow: none;
+}
+
+
+/* specificky pro linky knih/kapitol – ať vypadají jako text se šipkou, ne jako 90s hypertext */
+.book-link {
+  color: inherit;
+  font-family: var(--font-family-mono);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: calc(1.6rem * var(--font-size-multiplier));
+  margin-left: 80px;
+  cursor: pointer;
+}
+
+.chapter-link {
+  color: inherit;
+  text-decoration: none;
+  margin-left: 70px;
+  cursor: pointer;
+}
+.book-link:hover {
+  transform: translateY(-2px);
+  animation: glitch 1s infinite;
+}
+
+
+.chapter-link:hover {
+  text-decoration: underline;
+  transform: translateY(-2px);
+  animation: glitch 1s infinite;
+}
+
+/* Responsivní doladění */
+@media (max-width: 768px) {
+  .chapter-list { padding: 16px; }
+  .chapter-item { padding: 15px 14px; font-size: 1.2rem; }
+  .chapter-list h2 { font-size: 1.6rem; }
+}
+
+/* Dark mode kompatibilita (reálně přebírá téma, ale necháme fallbacky) */
+@media (prefers-color-scheme: dark) {
+  .chapter-item { background: rgba(0,255,255,0.12); }
+  .chapter-item:hover { background: rgba(0,255,255,0.25); }
+}
+
+/* =========================
+   Kapitola: základní styly
+   ========================= */
+/* Cíle jen v rámci reader hostů, ať to nebouchne mimo čtečku */
+#reader-body, #reader-extra {
+  /* výchozí písmo pro kapitoly */
+  font-family: var(--font-family-reading, 'Text01', 'VT323', monospace);
+  font-size: calc(1rem * var(--font-size-multiplier, 1));
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+#reader-body img, #reader-extra img,
+#reader-body video, #reader-extra video { max-width: 100%; height: auto; display: block; }
+
+/* 🔥 VYMAŽÁNO: Styly z reader.css pro .log, .dialog, .text, .title, .alarm-emote 
+   Nech components.css řídit všechno! */
+
+/* 💪 Jen minimální fallback, pokud by components.css úplně selhal */
+.SYNTHOMAREADER .log:not([class*="components"]),
+.SYNTHOMAREADER .dialog:not([class*="components"]),
+.SYNTHOMAREADER .text:not([class*="components"]),
+.SYNTHOMAREADER .title:not([class*="components"]) {
+  /* Jen základní display, zbytek nech components.css */
+  display: block;
+  position: relative;
+}
+
+/* 🎯 Vylepšená alarm-pulse animace */
+/* 🔥 ODSTRANĚNO: všechny konfliktni styly pro components.css elementy */
+
+/* (konsolidace) --use-components-styles je nyní v hlavním bloku .SYNTHOMAREADER */
+
+/* 🌈 Vylepšené neonové efekty s adaptivní intenzitou */
+#reader-body [style], #reader-extra [style] { 
+  filter: none;
+  transition: all 0.3s ease;
+}
+
+/* 🔥 ODSTRANĚNO: všechny reader.css styly pro components.css elementy 
+   Nech components.css mít úplnou kontrolu! */
+
+/* 🎯 Intenzita podle user preference - aplikuje se na všechny alarm-emote */
+.glitch-minimal .alarm-emote {
+  animation-duration: 2s !important;
+  opacity: 0.7 !important;
+}
+
+.glitch-intense .alarm-emote {
+  animation-duration: 0.5s !important;
+  filter: drop-shadow(0 0 8px currentColor) !important;
+}
+
+/* 🎨 Typewriter efekty během psaní */
+.tw-line {
+  /* nezačínej neviditelně – ať je progresivní psaní .text vidět */
+  opacity: 1;
+  transform: translateY(2px);
+  animation: line-appear 0.4s ease forwards;
+}
+
+@keyframes line-appear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ⚡ Rychlé nastavení pro instant mód */
+.typewriter-instant .tw-line {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* 📱 Vylepšená mobilní responsivita */
+@media (max-width: 768px) {
+  .SYNTHOMAREADER {
+    padding: 0.25rem;
+    border-radius: 8px;
+    font-size: calc(0.9rem * var(--font-size-multiplier, 1));
+  }
+  
+  #reader-body, #reader-extra {
+    line-height: 1.2;
+  }
+  
+  /* 🎯 Menší glowy na mobilu pro lepší čitelnost */
+  #reader-body .log, #reader-extra .log {
+    text-shadow: 0 0 3px var(--glow-secondary);
+  }
+  
+  #reader-body .title, #reader-extra .title {
+    text-shadow: 0 0 4px var(--glow-secondary), 0 0 8px var(--glow-primary);
+    font-size: calc(1.1rem * var(--font-size-multiplier, 1));
+  }
+}
+
+/* 🎮 Interaktivní prvky s lepším feedbackem */
+.reader-controls button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.reader-controls button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(0, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.reader-controls button:active::before {
+  width: 200px;
+  height: 200px;
+}
+
+/* 🔥 Performance optimalizace pro animace */
+.tw-line,
+.alarm-emote,
+.reader-controls button {
+  will-change: transform, opacity;
+}
+

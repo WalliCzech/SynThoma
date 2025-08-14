@@ -1,0 +1,242 @@
+/* ============ TEXT FONTS (use available fonts from /public/fonts) ============ */
+:root{
+  /* Prefer VT323/Handjet which are present; keep robust fallbacks */
+  --font-family-primary: "Text03", "VT323", monospace;
+  --font-family-heading: "Text02", "Handjet", monospace;
+  --font-family-mono: "Text02", "Handjet", monospace;
+  --font-family-ui: "Text02", "Handjet", sans-serif;
+  --font-family-primary-italic: "Text03i", "VT323", monospace;
+  --font-family-primary-bold: "Text03b", "VT323", monospace;
+
+  /* Global surface/background defaults used by components */
+  --bg-primary: #000; /* default fallback before theme sets it */
+  --bg-secondary: rgba(0, 0, 0, 0.7);
+  --bg-tertiary: rgba(0, 15, 30, 0.9);
+  /* Surface maps to current theme secondary by default */
+  --bg-surface: var(--bg-secondary);
+
+  /* Effect and utility palette used in effects.css */
+  --c-neon-cyan: #00ffff;
+  --c-glitch-magenta: #ff00ff;
+  --c-acid-yellow: #f6ff00;
+  --c-ghost-white: #f8faff;
+  --noise-opacity: 0.35;
+}
+
+
+/* ============ SYNTHOMA je default ============ */
+:root[data-theme=synthoma] {
+  --theme-name: "synthoma";
+  --bg-secondary-rgb: 0, 0, 0;
+  --bg-primary: #000;
+  --bg-secondary: rgba(0, 0, 0, 0.7);
+  --bg-tertiary: rgba(0, 15, 30, 0.9);
+  --bg-glass: rgba(0, 255, 255, 0.05);
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+  --text-primary: #0ff;
+  --text-secondary: #f0f;
+  --text-tertiary: rgba(0, 255, 255, 0.5);
+  --text-accent: #f0f;
+  --text-muted: rgba(0, 255, 255, 0.3);
+  --accent-primary: #f0f;
+  --accent-secondary: #0ff;
+  --accent-tertiary: #ff0;
+  --accent-success: #0f0;
+  --accent-warning: #ff0;
+  --accent-error: #f0a;
+  --border-primary: #0ff;
+  --border-secondary: rgba(0, 255, 255, 0.3);
+  --border-tertiary: rgba(0, 255, 255, 0.1);
+  --glow-primary: rgba(255, 0, 255, var(--glow-intensity));
+  --glow-secondary: rgba(0, 255, 255, var(--glow-intensity));
+  --glow-tertiary: rgba(255, 255, 0, var(--glow-intensity));
+  --shadow-primary: #0ff;
+  --shadow-secondary: rgba(255, 0, 255, 0.5);
+  --filter-primary: hue-rotate(0deg);
+}
+
+/* ============ GREEN MATRIX ============ */
+:root[data-theme=green-matrix] {
+  --theme-name: "green-matrix";
+  --bg-secondary-rgb: 0, 10, 0;
+  --bg-primary: #000;
+  --bg-secondary: rgba(0, 15, 0, 0.8);
+  --bg-tertiary: rgba(0, 30, 0, 0.9);
+  --bg-glass: rgba(0, 204, 0, 0.05);
+  --bg-overlay: rgba(0, 15, 0, 0.7);
+  --text-primary: #0c0;
+  --text-secondary: rgba(0, 204, 0, 0.7);
+  --text-tertiary: rgba(0, 204, 0, 0.5);
+  --text-accent: #0f8;
+  --text-muted: rgba(0, 255, 0, 0.3);
+  --accent-primary: #0f8;
+  --accent-secondary: #0f0;
+  --accent-tertiary: #8f0;
+  --accent-success: #0f0;
+  --accent-warning: #ff0;
+  --accent-error: #f40;
+  --border-primary: #0c0;
+  --border-secondary: rgba(0, 204, 0, 0.3);
+  --border-tertiary: rgba(0, 204, 0, 0.1);
+  --glow-primary: rgba(0, 255, 136, var(--glow-intensity));
+  --glow-secondary: rgba(0, 204, 0, var(--glow-intensity));
+  --glow-tertiary: rgba(136, 255, 0, var(--glow-intensity));
+  --shadow-primary: #0a0;
+  --shadow-secondary: rgba(0, 15, 0, 0.5);
+  --filter-primary: hue-rotate(180deg);
+}
+
+/* ============ NEON HELLFIRE ============ */
+:root[data-theme=neon-hellfire] {
+  --theme-name: "neon-hellfire";
+  --bg-secondary-rgb: 40, 0, 0;
+  --bg-primary: #0d0000;
+  --bg-secondary: rgba(40, 0, 0, 0.8);
+  --bg-tertiary: rgba(80, 10, 10, 0.9);
+  --bg-glass: rgba(255, 69, 0, 0.05);
+  --bg-overlay: rgba(40, 0, 0, 0.7);
+  --text-primary: #ff4500;
+  --text-secondary: rgba(255, 69, 0, 0.7);
+  --text-tertiary: rgba(255, 69, 0, 0.5);
+  --text-accent: #ff1a1a;
+  --text-muted: rgba(255, 100, 100, 0.3);
+  --accent-primary: #ff1a1a;
+  --accent-secondary: #ff8c00;
+  --accent-tertiary: #ff0;
+  --accent-success: #f80;
+  --accent-warning: #fa0;
+  --accent-error: red;
+  --border-primary: #ff4500;
+  --border-secondary: rgba(255, 69, 0, 0.3);
+  --border-tertiary: rgba(255, 69, 0, 0.1);
+  --glow-primary: rgba(255, 0, 0, var(--glow-intensity));
+  --glow-secondary: rgba(255, 140, 0, var(--glow-intensity));
+  --glow-tertiary: rgba(255, 255, 0, var(--glow-intensity));
+  --shadow-primary: #b22222;
+  --shadow-secondary: rgba(40, 0, 0, 0.5);
+  --filter-primary: hue-rotate(135deg);
+}
+
+/* ============ CYBER DYSTOPIA ============ */
+:root[data-theme=cyber-dystopia] {
+  --theme-name: "cyber-dystopia";
+  --bg-secondary-rgb: 30, 30, 30;
+  --bg-primary: #111;
+  --bg-secondary: rgba(30, 30, 30, 0.8);
+  --bg-tertiary: rgba(50, 50, 60, 0.9);
+  --bg-glass: rgba(0, 234, 255, 0.05);
+  --bg-overlay: rgba(30, 30, 30, 0.7);
+  --text-primary: #00eaff;
+  --text-secondary: rgba(0, 234, 255, 0.7);
+  --text-tertiary: rgba(0, 234, 255, 0.5);
+  --text-accent: #ff007a;
+  --text-muted: hsla(0, 0%, 78.4%, 0.3);
+  --accent-primary: #ff007a;
+  --accent-secondary: #00b7eb;
+  --accent-tertiary: #00eaff;
+  --accent-success: #00ff80;
+  --accent-warning: #fa0;
+  --accent-error: #ff0040;
+  --border-primary: #00b7eb;
+  --border-secondary: rgba(0, 183, 235, 0.3);
+  /* FIX: odstraněn překlep "Owner" */
+  --border-tertiary: rgba(0, 183, 235, 0.1);
+  --glow-primary: rgba(255, 0, 122, var(--glow-intensity));
+  --glow-secondary: rgba(0, 183, 235, var(--glow-intensity));
+  --glow-tertiary: rgba(0, 234, 255, var(--glow-intensity));
+  --shadow-primary: #004d66;
+  --shadow-secondary: rgba(30, 30, 30, 0.5);
+  --filter-primary: hue-rotate(-310deg);
+}
+
+/* ============ ACID GLITCH ============ */
+:root[data-theme=acid-glitch] {
+  --theme-name: "acid-glitch";
+  --bg-secondary-rgb: 10, 0, 20;
+  --bg-primary: #000;
+  --bg-secondary: rgba(10, 0, 20, 0.8);
+  --bg-tertiary: rgba(20, 0, 40, 0.9);
+  --bg-glass: rgba(255, 0, 255, 0.05);
+  --bg-overlay: rgba(10, 0, 20, 0.7);
+  --text-primary: #f0f;
+  --text-secondary: rgba(255, 0, 255, 0.7);
+  --text-tertiary: rgba(255, 0, 255, 0.5);
+  --text-accent: #0f0;
+  --text-muted: rgba(255, 255, 0, 0.3);
+  --accent-primary: #0f0;
+  --accent-secondary: #f0f;
+  --accent-tertiary: #ff0;
+  --accent-success: #0f0;
+  --accent-warning: #ff0;
+  --accent-error: #f0a;
+  --border-primary: #0f0;
+  --border-secondary: rgba(0, 255, 0, 0.3);
+  --border-tertiary: rgba(0, 255, 0, 0.1);
+  --glow-primary: rgba(0, 255, 0, var(--glow-intensity));
+  --glow-secondary: rgba(255, 0, 255, var(--glow-intensity));
+  --glow-tertiary: rgba(255, 255, 0, var(--glow-intensity));
+  --shadow-primary: indigo;
+  --shadow-secondary: rgba(10, 0, 20, 0.5);
+  --filter-primary: hue-rotate(-45deg);
+}
+
+/* ============ RETRO ARCADE ============ */
+:root[data-theme=retro-arcade] {
+  --theme-name: "retro-arcade";
+  --bg-secondary-rgb: 0, 17, 0;
+  --bg-primary: #010;
+  --bg-secondary: rgba(0, 17, 0, 0.9);
+  --bg-tertiary: rgba(0, 34, 0, 0.8);
+  --bg-glass: rgba(0, 255, 0, 0.05);
+  --bg-overlay: rgba(0, 17, 0, 0.8);
+  --text-primary: #0ff;
+  --text-secondary: rgba(255, 0, 255, 0.95);
+  --text-tertiary: rgba(255, 0, 255, 0.6);
+  --text-accent: #0ff;
+  --text-muted: rgba(255, 0, 255, 0.4);
+  --accent-primary: #f0f;
+  --accent-secondary: rgb(255, 0, 255, 0.5);
+  --accent-tertiary: #f0f;
+  --accent-success: #0ff;
+  --accent-warning: #f0f;
+  --accent-error: #f0a;
+  --border-primary: #0ff;
+  --border-secondary: rgba(0, 255, 255, 0.5);
+  --border-tertiary: rgba(0, 255, 255, 0.2);
+  --glow-primary: rgba(0, 255, 255, var(--glow-intensity));
+  --glow-secondary: rgba(0, 255, 255, var(--glow-intensity));
+  --glow-tertiary: rgba(0, 255, 255, var(--glow-intensity));
+  --shadow-primary: #0ff;
+  --shadow-secondary: rgba(0, 255, 255, 0.7);
+  --shadow-glow: 0 0 15px var(--text-primary);
+  --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  --gradient-secondary: linear-gradient(45deg, var(--bg-secondary), var(--bg-tertiary));
+  --filter-primary: brightness(1.1) contrast(1.2) saturate(1.1);
+  --font-family-primary: "VT323", monospace;
+  --font-family-heading: "Handjet", monospace;
+  --font-family-mono: "VT323", monospace;
+  --font-family-ui: "VT323", monospace;
+  --font-family-primary-italic: "VT323i", monospace;
+  --font-family-primary-bold: "VT323b", monospace;
+  --font-size-base: 1.2rem;
+  --font-size-multiplier: 1.2;
+  --line-height-base: 1.3;
+  /* Video pixelation tuning */
+  --retro-canvas-pixelate: 1;   
+  --pixelate-scale: 10;           /* heavy pixelation (near 16-bit vibe) */
+  --pixelate-contrast: 1.15;     /* extra contrast for arcade feel */
+  --pixelate-saturation: 1.2;    /* extra saturation */
+  --video-opacity: 1;            /* ensure active video fully visible */
+  --retro-canvas-opacity: 0.9;   /* overlay alpha for pixel filter over video */
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 2px, rgba(0, 255, 0, .03) 0, rgba(0, 255, 0, .03) 4px
+  );
+  /* Disable body flicker for retro: steady CRT, no blinking */
+  animation: none;
+}
+
+/* Keyframes pro retro a CRT flavour */
+@keyframes retro-flicker {
+  0%   { opacity: .98; filter: saturate(1) contrast(1); }
+  100% { opacity: 1;   filter: saturate(1.05) contrast(1.05); }
+}

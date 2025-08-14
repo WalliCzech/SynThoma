@@ -1,0 +1,78 @@
+/* Globální kořeny proměnných – vše jde přes theme.ts a data-theme. */
+:root {
+  --c-neon-cyan: #00ffff;
+  --c-glitch-magenta: #ff00ff;
+  --c-acid-yellow: #f6ff00;
+  --c-void-navy: #000d1a;
+  --c-data-fog: #c0faff;
+
+  --c-surface-00: #000000;
+  --c-surface-10: #222833;
+  --c-surface-20: #444444;
+  --c-ghost-white: #f8f8ff;
+  --c-ink: #0a0a0a;
+  --c-punk-pink: #f92572;
+
+  --app-bg: var(--c-void-navy);
+  --app-fg: var(--c-ghost-white);
+  --saturation: 1;
+  --noise-opacity: 0.06;
+}
+
+html, body { height: 100%; min-height: 100svh; }
+
+body {
+  margin: 0;
+  background: var(--app-bg);
+  color: var(--app-fg);
+  font-family: system-ui, Segoe UI, Roboto, Inter, sans-serif;
+}
+
+/* Umožni vertikální scroll (X schovej), aby nic "nedrhlo" dole */
+html, body { overflow-x: hidden; overflow-y: auto; }
+/* Zabrání pull-to-refresh/overscroll cirkusu */
+* { overscroll-behavior: none; }
+
+/* Demo card styl pro ukázky efektů */
+.demo-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Zajisti, že video a glitch/noise plátna zůstanou pod obsahem a/* video background layers */
+.video-background { position: fixed; inset: 0; width: 100vw; height: 100dvh; overflow: hidden; pointer-events: none; z-index: 0 !important; }
+.video-background video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left top; transform: none; }
+
+/* Retro Arcade: ponech videa viditelná a přehrávaná; canvas je jen překryv s nastavitelnou opacitou */
+#retro-video-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; image-rendering: pixelated; opacity: var(--retro-canvas-opacity, 1); }
+#glitch-bg { position: fixed; inset: 0; z-index: 1 !important; pointer-events: none; }
+#noise-canvas { position: fixed; inset: 0; z-index: 1 !important; pointer-events: none; }
+/* Hlavní obsah výš než bg vrstvy, aby plátna nepřekryla text */
+.home { position: relative; z-index: 2; filter: saturate(var(--saturation)); }
+
+/* Bezpečná spodní mez pro mobilní prohlížeče s dynamic viewportem */
+main { min-height: 100svh; padding-bottom: env(safe-area-inset-bottom, 0); box-sizing: border-box; }
+
+/* Footer? Nikdo ho nechtěl. Nikdo ho neuvidí. */
+footer,
+[role="contentinfo"],
+.footer,
+#footer { display: none !important; visibility: hidden !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
+
+/* Režimy – tyto atributy přepíná ThemeProvider */
+:root[data-theme="default"] {
+  --saturation: 1;
+  --noise-opacity: 0.04;
+}
+:root[data-theme="neon"] {
+  --saturation: 1.2;
+  --noise-opacity: 0.08;
+}
+:root[data-theme="glitch"] {
+  --saturation: 1.4;
+  --noise-opacity: 0.12;
+}
+:root[data-theme="sanity_breach"] {
+  --saturation: 1.6;
+  --noise-opacity: 0.16;
+}

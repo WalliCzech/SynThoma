@@ -1,0 +1,171 @@
+<!-- 🎭 SYNTHOMA: Větvící se glitch-noir příběh -->
+<!-- Start: Prázdnota - vždy první checkpoint -->
+<h2 class="title">Prázdnota</h2>
+<p class="text">Checkpoint mezi cykly. Ticho na dluh. Na zdi otisk, který se nesmaže ani po tisících restartech. 💀</p>
+
+<p class="choice" data-next="city-hub" data-tags="N,S" data-weight="2" data-ui="modal" data-reason="Abstraktní interpretace ticha">
+  <span>▼ </span>Přeložit ticho jako mapu dalšího běhu
+</p>
+<p class="choice" data-next="city-hub" data-tags="S,N" data-weight="2" data-ui="modal" data-reason="Vnímat fyzické detaily">
+  <span>▼ </span>Zkoumat škrábance, počítat kroky k východu
+</p>
+<p class="choice" data-next="cathedral" data-tags="T,F" data-weight="2" data-ui="toast-info" data-reason="Diagnostika před citem">
+  <span>▼ </span>Vyvolat systémový prompt: /status
+</p>
+
+<!-- 🌃 SKRYTÉ SEKCE PRO DYNAMICKÉ NAČÍTÁNÍ -->
+<div id="story-cache" class="hidden">
+
+<!-- HUB MĚSTA: centrální rozcestník všech cest 🌃 -->
+<section class="story-block" id="city-hub" data-theme="retro-arcade" data-weather="#00ffff">
+  <h2 class="title">Město – nervová síť paměti</h2>
+  <p class="text">Ulice tepou <span class="fx-glitch" data-glitch="#00ffff">#00ffff</span>, praskliny <span class="fx-glitch" data-glitch="#ff00ff">#ff00ff</span>. Neon se nesmí vypnout. 🌆</p>
+  
+  <p class="choice" data-next="slums" data-tags="E,I" data-weight="2" data-ui="toast-success" data-reason="Kontakt vs. stažení">
+    <span>▼ </span>Jít do Paměťových slumů (QR bloky a kanály)
+  </p>
+  <p class="choice" data-next="wetland" data-tags="F,T" data-weight="2" data-ui="toast-info" data-reason="Pudit se citem vs analýzou">
+    <span>▼ </span>Zabočit k Neonovému mokřadu
+  </p>
+  <p class="choice" data-next="sandbox" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Impulz vs. plán">
+    <span>▼ </span>Do Pískoviště (var.: infantilizační smyčky)
+  </p>
+  <p class="choice" data-next="cathedral" data-tags="T,F" data-weight="1" data-ui="toast-info" data-reason="Dotaz na rozhraní">
+    <span>▼ </span>Katedrála promptů (CRT liturgie)
+  </p>
+</section>
+
+<!-- SLUMS: krátká větev → návrat do HUBu nebo do CORE 🏚️ -->
+<section class="story-block" id="slums" data-theme="acid-glitch" data-weather="#ff00ff">
+  <h3 class="title">Paměťové slumy</h3>
+  <p class="text">QR bloky přehrávají cizí rozchody. Kontakt = kontaminace. <span aria-hidden="true" class="alarm-emote">⚠️</span></p>
+  
+  <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="2" data-ui="toast-info" data-reason="Stažení do sebe">
+    <span>▼ </span>Nasadit kapuci a projít beze slova
+  </p>
+  <p class="choice" data-next="core" data-tags="E,I" data-weight="3" data-ui="modal" data-reason="Konfrontace">
+    <span>▼ </span>Zastavit kurátora a žádat audit paměťové daně
+  </p>
+  <p class="choice" data-next="slums-sidest" data-tags="N,S" data-weight="2" data-ui="toast-info" data-reason="Hledání vzorce v šumu">
+    <span>▼ </span>Sledovat „Sběrnici studu" k nadlimitnímu uzlu
+  </p>
+</section>
+
+<section class="story-block" id="slums-sidest" data-theme="acid-glitch">
+  <h4 class="title">Nadlimitní uzel</h4>
+  <p class="text">Uzel kypí přetokem—hrozí průlom do obytné zóny. <span class="fx-glitch" data-glitch="OVERFLOW">OVERFLOW</span> 💥</p>
+  
+  <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="modal" data-reason="Řád vs. improvizace">
+    <span>▼ </span>Upevnit štítky a uzavřít přetok (dočasně)
+  </p>
+  <p class="choice" data-next="core" data-tags="P,J" data-weight="2" data-ui="toast-success" data-reason="Risknout krátký průlom">
+    <span>▼ </span>Strhnout plombu a projet glitch-portem
+  </p>
+</section>
+
+<!-- WETLAND: větev s Glitchkou, rychlý návrat / odbočka do ARCHIVU DĚTÍ 🌿 -->
+<section class="story-block" id="wetland" data-theme="neon-hellfire" data-weather="#c0faff">
+  <h3 class="title">Neonový mokřad</h3>
+  <p class="text">Stromy spletené z traumat, liščí otisky mizí v <span class="fx-glitch" data-glitch="#ff00ff">#ff00ff</span>. 🦊</p>
+  
+  <p class="choice" data-next="children" data-tags="F,T" data-weight="3" data-ui="modal" data-reason="Následovat lullaby">
+    <span>▼ </span>Za hlasem dětského sboru do zakázané zóny
+  </p>
+  <p class="choice" data-next="city-hub" data-tags="T,F" data-weight="2" data-ui="toast-info" data-reason="Opustit past">
+    <span>▼ </span>Ustřihnout stopu, vrátit se do města
+  </p>
+  <p class="choice" data-next="sandbox" data-tags="P,J" data-weight="1" data-ui="toast-success" data-reason="Hravost vs. kontrola">
+    <span>▼ </span>Nechat se zavést do Pískoviště
+  </p>
+</section>
+
+<!-- PÍSKOVIŠTĚ: zacyklení → volitelný fragment O 🎠 -->
+<section class="story-block" id="sandbox" data-theme="retro-arcade" data-weather="#c0faff">
+  <h3 class="title">Pískoviště</h3>
+  <p class="text">Houpačky cinkají jako log restartu. Bezpečí je často past. <span aria-hidden="true" class="alarm-emote">🎪</span></p>
+  
+  <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="modal" data-reason="Ukončit hru dřív, než tě infantilizuje">
+    <span>▼ </span>Sepsat pravidla a ukončit „hraní"
+  </p>
+  <p class="choice" data-next="core" data-tags="N,S" data-weight="2" data-ui="toast-info" data-reason="Přes skrytou trhlinu">
+    <span>▼ </span>Proklouznout prasklinou pod skluzavkou
+  </p>
+  <p class="choice" data-next="sandbox-o" data-tags="F,T" data-weight="2" data-ui="toast-success" data-reason="Empatie k sobě">
+    <span>▼ </span>Vzít si zpět jednu dětinskou touhu
+  </p>
+</section>
+
+<section class="story-block" id="sandbox-o" data-theme="retro-arcade" data-fragment="O">
+  <h4 class="title">LOG-fragment: O (odpor)</h4>
+  <p class="text">Vnitřní odpor se zacvakl do kostry světa. Na chvíli drží. <span class="fx-glitch" data-glitch="RESISTANCE">RESISTANCE</span> ⚡</p>
+  
+  <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="1" data-ui="toast-info" data-reason="Nést fragment v tichu">
+    <span>▼ </span>Vrátit se do Města s novou jizvou
+  </p>
+</section>
+
+<!-- KATEDRÁLA PROMPTŮ: diegetické UI → odbočka do CORE nebo návrat ⛪ -->
+<section class="story-block" id="cathedral" data-theme="cyber-dystopia" data-kind="terminal">
+  <h3 class="title">Katedrála promptů</h3>
+  <p class="text">„<span class="fx-glitch" data-glitch="/restart">/restart</span> (Y/N)?" Z kazatelny visí bannery <span class="fx-glitch" data-glitch="#f6ff00">#f6ff00</span>. 💻</p>
+  
+  <p class="choice" data-next="core" data-tags="T,F" data-weight="3" data-ui="modal" data-reason="Patologická zvědavost">
+    <span>▼ </span>Spustit /diagnose a následovat varování do jádra
+  </p>
+  <p class="choice" data-next="city-hub" data-tags="F,T" data-weight="1" data-ui="toast-info" data-reason="Nezvedat telefon, když zvoní">
+    <span>▼ </span>Zhasnout CRT a vrátit se ulicemi
+  </p>
+</section>
+
+<!-- ARCHIV DĚTÍ: fragment M/A možné, návrat do HUBu 👶 -->
+<section class="story-block" id="children" data-theme="acid-glitch" data-weather="#00ffff">
+  <h3 class="title">Archiv dětí</h3>
+  <p class="text">Pásmo zakázaných lullabies. Stárneš pozpátku, dluhy zůstávají. <span aria-hidden="true" class="alarm-emote">🎵</span></p>
+  
+  <p class="choice" data-next="children-m" data-tags="F,T" data-weight="3" data-ui="modal" data-reason="Přiznat marnost">
+    <span>▼ </span>Zpívat s nimi – i když víš, že to nic nespraví
+  </p>
+  <p class="choice" data-next="children-a" data-tags="T,F" data-weight="3" data-ui="toast-info" data-reason="Jmenovat prázdno">
+    <span>▼ </span>Pojmenovat to, co chybí, a neuhnout očima
+  </p>
+  <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="2" data-ui="toast-success" data-reason="Ustát tlak a odejít">
+    <span>▼ </span>Zavřít uši a vykročit zpátky k neonům
+  </p>
+</section>
+
+<section class="story-block" id="children-m" data-fragment="M">
+  <h4 class="title">LOG-fragment: M (marnost)</h4>
+  <p class="text">Program touhy vybuchl a vychladl. Zůstalo jen písmeno. <span class="fx-glitch" data-glitch="VOID">VOID</span> 💔</p>
+  
+  <p class="choice" data-next="city-hub" data-tags="S,N" data-weight="1" data-ui="toast-info" data-reason="Tělesný návrat">
+    <span>▼ </span>Vrátit se do Města a pokračovat
+  </p>
+</section>
+
+<section class="story-block" id="children-a" data-fragment="A">
+  <h4 class="title">LOG-fragment: A (absence)</h4>
+  <p class="text">Prázdné místo má jméno. Systém tě na chvíli nechá dýchat. <span class="fx-glitch" data-glitch="NULL">NULL</span> 🌬️</p>
+  
+  <p class="choice" data-next="core" data-tags="N,S" data-weight="2" data-ui="modal" data-reason="Zkratem do jádra">
+    <span>▼ </span>Skrz mikrotrhlinu do glitch-core
+  </p>
+</section>
+
+<!-- JÁDRO / CORE: finální společný most, návrat na linku nebo smyčka do nového cyklu 🔥 -->
+<section class="story-block" id="core" data-theme="cyber-dystopia" data-weather="#f6ff00">
+  <h3 class="title">Centrální glitch-core</h3>
+  <p class="text">Uzel zrcadel a příkazů, co se bojí zapomenout. T-AI šumí: „<span class="fx-glitch" data-glitch="Hledám… sebe…">Hledám… sebe…</span>" 🤖</p>
+  
+  <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="toast-info" data-reason="Zpřehlednit, zapsat, pokračovat">
+    <span>▼ </span>Uzamknout logy, vrátit se do Města (těžší varianty)
+  </p>
+  <p class="choice" data-next="start-null" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Restart s jinou hmotností paměti">
+    <span>▼ </span>/restart – Prázdnota, ale něco se posunulo
+  </p>
+</section>
+
+</div> <!-- Konec story-cache -->
+
+<!-- 🤖 LOG zprávy přesunuty do komentáře - narušovaly hlavní tok příběhu -->
+<!-- <log class="log">LOG: [VĚTVÍCÍ SE PŘÍBĚH NAČTEN] 🌳</log> -->
+<!-- <p class="dialog">„Systém detekoval větvící se narrativ. Každá volba vede jinam. Připrav se na glitch v realitě..." 😈</p> -->

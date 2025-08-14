@@ -1,0 +1,37 @@
+{
+  "name": "@synthoma/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --report-unused-disable-directives",
+    "lint:fix": "pnpm run lint -- --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.20",
+    "@mui/material": "^5.15.20",
+    "@tanstack/react-query": "^5.51.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.2.12",
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.5",
+    "eslint-config-prettier": "^9.1.2",
+    "prettier": "^3.6.2"
+  }
+}

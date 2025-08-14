@@ -1,0 +1,7 @@
+{
+  "name": "@synthoma/server-meta",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Placeholder pro Python FastAPI server v monorepu (není Node app)",
+  "license": "UNLICENSED"
+}

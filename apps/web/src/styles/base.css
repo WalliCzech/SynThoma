@@ -1,0 +1,149 @@
+/* Reset s trochou rozumu, ať neon nebrečí */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg-primary, #000);
+  color: var(--text-primary, #0ff);
+  font-family: var(--font-family-ui, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol");
+  line-height: var(--line-height-base, 1.5);
+}
+
+/* Globální základní tokeny, které témata přepisují */
+:root {
+  --glow-intensity: .65;
+  --font-size-base: 16px;
+  --font-size-multiplier: 1.0;
+  --line-height-base: 1.5;
+  --shadow-glow: 0 0 12px var(--glow-secondary, rgba(0,255,255,.4));
+  /* Výchozí UI font proměnné, témata je mohou přepsat */
+  --font-family-primary: "Text03", monospace;
+  --font-family-heading: "Text02", "Rubik Glitch", monospace;
+  --font-family-mono: "Text02", ui-monospace, monospace;
+  --font-family-ui: "Text02", system-ui, sans-serif;
+  --font-family-primary-italic: "Text03i", "VT323", monospace;
+  --font-family-primary-bold: "Text03b", "VT323", monospace;
+}
+
+/* Vypnutí animací pro uživatele s preferencí "reduced motion" */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* Fonty – nahraj do public/fonts a názvy drž konzistentní */
+@font-face {
+  font-family: "VT323";
+  src: url("/fonts/VT323-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "VT323i";
+  src: url("/fonts/Handjet.ttf") format("truetype");
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "VT323b";
+  src: url("/fonts/VT323-Regular.ttf") format("truetype");
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Handjet";
+  src: url("/fonts/Handjet.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "SynthomaUI";
+  src: url("/fonts/SynthomaUI-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* Dodatečné rodiny dle dodaného snippetu */
+@font-face {
+  font-family: 'Synthoma';
+  src: url('/fonts/astronboy/astronbw.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Text01';
+  src: url('/fonts/astronboy/astronbo.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Text02';
+  src: url('/fonts/BungeeHairline-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Text03';
+  src: url('/fonts/euro/eurof35.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Text03b';
+  src: url('/fonts/euro/eurof55.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Text03i';
+  src: url('/fonts/euro/eurof36.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Zekton – retro arcade rodina (regular, bold, italic, bold italic) */
+@font-face {
+  font-family: 'Zekton';
+  src: url('/fonts/zekton/zekton__.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zekton';
+  src: url('/fonts/zekton/zektonbo.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zekton';
+  src: url('/fonts/zekton/zektonit.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zekton';
+  src: url('/fonts/zekton/zektonbi.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Retro arcade fonts */
+@font-face {
+  font-family: 'Rubik Glitch';
+  src: url('/fonts/RubikGlitch-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
