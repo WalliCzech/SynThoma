@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Ano, i commity potřebují hygienu. Neboj, jen to štípne.
+pnpm lint-staged

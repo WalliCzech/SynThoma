@@ -1,0 +1,9 @@
+
+> @synthoma/web@0.1.0 typecheck C:\SYNTHOMA\apps\web
+> tsc -p tsconfig.json --noEmit
+
+app/page.tsx(387,24): error TS2349: This expression is not callable.
+  Type 'never' has no call signatures.
+app/page.tsx(388,24): error TS2349: This expression is not callable.
+  Type 'never' has no call signatures.
+ ELIFECYCLE  Command failed with exit code 1.

@@ -1,0 +1,4 @@
+
+> @synthoma/shared@0.1.0 typecheck C:\SYNTHOMA\packages\shared
+> tsc -p tsconfig.json --noEmit
+
