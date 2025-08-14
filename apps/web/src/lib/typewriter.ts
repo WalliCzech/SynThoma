@@ -1567,6 +1567,53 @@ function setupInteractiveHandlers(): void {
     const root = document.querySelector('#reader-content') as HTMLElement | null;
     if (!root) return;
     const cache = root.querySelector('#story-cache') as HTMLElement | null;
+
+    // Speciální případ: cílová sekce deklaruje data-import (načti externí kapitolu a přepni do ní)
+    try {
+      const importedSection = cache ? (cache.querySelector(`section.story-block#${CSS.escape(nextId)}`) as HTMLElement | null) : null;
+      const importFile = importedSection ? (importedSection.getAttribute('data-import') || '').trim() : '';
+      if (importedSection && importFile) {
+        // Zabraň opakovanému načítání, pokud už probíhá/bylo načteno
+        if (importedSection.getAttribute('data-import-loaded') === '1') {
+          // už je načteno, pokračuj standardní cestou
+        } else {
+          importedSection.setAttribute('data-import-loaded', '1');
+          const BP = (process as any).env?.NEXT_PUBLIC_BASE_PATH || '';
+          // Zjisti aktuální knihu, případně fallback
+          const w = window as any;
+          const book: string = (w.__synthomaStory && w.__synthomaStory.book) ? String(w.__synthomaStory.book) : 'SYNTHOMA-NULL';
+          // Pokud import obsahuje cestu, respektuj ji, jinak použij /books/<book>/
+          const useDirect = /\//.test(importFile);
+          const url = useDirect ? `${BP}/${importFile.replace(/^\/+/, '')}` : `${BP}/books/${encodeURIComponent(book)}/${importFile}`;
+          // baseUrl = adresář importu pro přepis relativních URL
+          const baseUrl = url.replace(/[^\/]*$/, '');
+          fetch(url, { cache: 'no-store' })
+            .then(res => res.text())
+            .then(html => {
+              const bodyHtml = installChapterAssetsAndGetBody(html, baseUrl, `${book}:${importFile}`);
+              // Přepni do interaktivního režimu nad importovanou kapitolou
+              try { startInteractiveStory(book, importFile, bodyHtml); } catch {}
+            })
+            .catch((e) => {
+              console.warn('🧱 Import kapitoly selhal:', importFile, e);
+              // Při pádu odemkni box a dovol jinou volbu
+              try {
+                const bx = a.closest('.choice-box') as HTMLElement | null;
+                if (bx) {
+                  bx.removeAttribute('data-locked');
+                  const links = Array.from(bx.querySelectorAll('a.choice-link')) as HTMLAnchorElement[];
+                  links.forEach((el)=>{
+                    el.removeAttribute('aria-disabled');
+                    el.classList.remove('disabled');
+                    (el.style as any).pointerEvents = '';
+                  });
+                }
+              } catch {}
+            });
+          return; // Zastav standardní flow – přebírá to import
+        }
+      }
+    } catch {}
     let html: string | null = null;
     if (cache) {
       const block = cache.querySelector(`section.story-block#${CSS.escape(nextId)}`) as HTMLElement | null;
