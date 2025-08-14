@@ -1,20 +1,23 @@
-<!-- 🎭 SYNTHOMA: větvící se glitch-noir příběh (vstup + orientace + nenápadný tutoriál panelu) -->
+<!-- 🎭 SYNTHOMA: větvící se glitch-noir příběh (prodloužený vstup + nevtíravý průvodce + plynulý přechod) -->
 
 <!-- ÚVOD – první krok do světa, ne Prázdnota -->
 <h2 class="title">SYNTHOMA — vstup pro nově příchozí</h2>
 <p class="text">
-  Synthoma je město z paměti. Ulice si tě zapamatují, i když je přejdeš potichu. 
-  Nahoře plave ovládací panel: nastaví čitelnost, náladu a hudbu, aniž by překážel. 
-  Udělej si pohodlí, a teprve potom vyraž.
+  Synthoma je město z paměti. Ulice si tě zapamatují, i když je přejdeš potichu.
+  Nahoře plave ovládací panel: nastaví čitelnost, náladu a hudbu, aniž by překážel.
+  Udělej si pohodlí, nadechni se. Teprve potom vkroč do příběhu.
 </p>
 
-<p class="choice" data-next="ui-help" data-tags="J,P" data-weight="2" data-ui="toast-info" data-reason="Zorientovat se, než začne příběh">
-  <span>▼ </span>Krátká orientace: ovládací panel
+<p class="choice" data-next="ui-help" data-weight="2" data-ui="toast-info">
+  <span>▼ </span>Krátká orientace: jak pracovat s panelem
 </p>
-<p class="choice" data-next="city-hub" data-tags="E,I" data-weight="2" data-ui="toast-success" data-reason="Vstoupit do ruchu">
-  <span>▼ </span>Vykročit do Města (centrální rozcestník)
+<p class="choice" data-next="tour-start" data-weight="2" data-ui="toast-success">
+  <span>▼ </span>Začít průvod: první kroky ve světě
 </p>
-<p class="choice" data-next="cathedral" data-tags="T,F" data-weight="1" data-ui="toast-info" data-reason="Než uvěříš, zeptej se">
+<p class="choice" data-next="city-hub" data-weight="1" data-ui="toast-info">
+  <span>▼ </span>Vykročit rovnou do Města (rozcestník)
+</p>
+<p class="choice" data-next="cathedral" data-weight="1" data-ui="toast-info">
   <span>▼ </span>Ke Katedrále promptů (tiché terminály a otázky)
 </p>
 
@@ -26,28 +29,29 @@
   <section class="story-block" id="ui-help" data-theme="synthoma">
     <h3 class="title">Ovládací panel — rychlý přehled</h3>
     <p class="text">
-      Panel je vždy vidět a dá se ovládat i během čtení. Slouží ke třem věcem: pohodlné čtení, nálada prostředí, hudební podkres.
+      Panel je vždy vidět a reaguje i během čtení. Slouží ke třem věcem: pohodlí očí, nálada prostředí a hudební podkres.
+      Žádné složitosti, jen páky, které dávají smysl.
     </p>
 
     <h4 class="title">Displej</h4>
     <p class="text">
       • <em>Velikost písma</em> — posuvník pro větší/menší text.<br/>
       • <em>Průhlednost pozadí</em> — v běžném režimu ztlumí svět za textem, aby písmo lépe vyniklo.<br/>
-      • <em>Rychlost psaní</em> — okamžitě, rychle, normálně, pomalu. Vyber tempo, které ti sedí.<br/>
+      • <em>Rychlost psaní</em> — okamžitě, rychle, normálně nebo pomalu. Vyber tempo, které ti sedí.<br/>
       • <em>Animace</em> — zapni/vypni drobné vizuální pohyby, když chceš klid.<br/>
-      • <em>Sklo</em> — přepne „skleněný“ efekt: jemně rozostří čtečku, pozadí nechá stabilní. Funguje hlavně pro atmosféru a čitelnost.
+      • <em>Sklo</em> — přepne „skleněný“ efekt. Jemně rozostří čtečku, pozadí nechá stabilní. Pro atmosféru i čitelnost.
     </p>
 
     <h4 class="title">Motivy</h4>
     <p class="text">
-      Synthoma · Green Matrix · Neon Hellfire · Cyber Dystopia · Acid Glitch · Retro Arcade. 
-      Každý motiv změní náladu rozhraní, ne obsah příběhu.
+      Synthoma · Green Matrix · Neon Hellfire · Cyber Dystopia · Acid Glitch · Retro Arcade.
+      Mění náladu rozhraní, ne obsah příběhu.
     </p>
 
     <h4 class="title">Audio přehrávač</h4>
     <p class="text">
-      Play/Stop, hlasitost a výběr skladeb: „SynthBachmoff“, „Glitch Ambient“, „Nuova“. 
-      Hraje vždy jen jedna skladba a přehrávání pokračuje i mezi scénami.
+      Play/Stop, hlasitost a výběr skladeb: „SynthBachmoff“, „Glitch Ambient“, „Nuova“.
+      Hraje vždy jen jedna skladba a pokračuje i mezi scénami.
     </p>
 
     <h4 class="title">Rychlé scénáře</h4>
@@ -57,14 +61,115 @@
       • Chci klidné tempo: vypni animace, zvol „pomalu“, hudbu stáhni nebo pauzni.
     </p>
 
-    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="toast-success" data-reason="Nastaveno, jdeme na děj">
-      <span>▼ </span>Hotovo. Do Města
+    <p class="choice" data-next="tour-start" data-ui="toast-success">
+      <span>▼ </span>Rozumím. Pojďme na průvod
     </p>
-    <p class="choice" data-next="city-hub" data-tags="F,T" data-weight="1" data-ui="toast-info" data-reason="Začít s atmosférou">
-      <span>▼ </span>Spustit skladbu „SynthBachmoff“ a vyrazit
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
+      <span>▼ </span>Jsem připraven. Do Města
     </p>
-    <p class="choice" data-next="city-hub" data-tags="P,J" data-weight="1" data-ui="toast-info" data-reason="Změnit náladu rozhraní">
-      <span>▼ </span>Zvolit motiv „Retro Arcade“ a pokračovat
+  </section>
+
+
+  <!-- TOUR: prodloužený úvod s jemnými smyčkami 🚶 -->
+  <section class="story-block" id="tour-start" data-theme="synthoma">
+    <h2 class="title">První kroky</h2>
+    <p class="text">
+      Město čeká, ale nejdřív si ho nech sednout do ruky. Panel nahoře je tvůj průvodce.
+      Zkus krátké tři kroky a všimni si, jak se mění nálada textu.
+    </p>
+
+    <p class="choice" data-next="tour-font" data-ui="toast-info">
+      <span>▼ </span>Krok 1: doladit velikost písma
+    </p>
+    <p class="choice" data-next="tour-glass" data-ui="toast-info">
+      <span>▼ </span>Krok 2: vyzkoušet „Sklo“
+    </p>
+    <p class="choice" data-next="tour-audio" data-ui="toast-info">
+      <span>▼ </span>Krok 3: zapnout hudbu
+    </p>
+    <p class="choice" data-next="city-hub" data-ui="toast-success">
+      <span>▼ </span>Průvod přeskočit a vstoupit do Města
+    </p>
+  </section>
+
+  <section class="story-block" id="tour-font" data-theme="synthoma">
+    <h3 class="title">Doladění čtení</h3>
+    <p class="text">
+      Posuň písmo tak, aby oči nepracovaly víc než mozek. V tomhle světě ti ušetřená pozornost zachrání víc než nervy.
+    </p>
+
+    <p class="choice" data-next="tour-glass" data-ui="toast-success">
+      <span>▼ </span>Mám nastaveno. Dál na „Sklo“
+    </p>
+    <p class="choice" data-next="tour-start" data-ui="toast-info">
+      <span>▼ </span>Vrátit se na přehled kroků
+    </p>
+  </section>
+
+  <section class="story-block" id="tour-glass" data-theme="synthoma">
+    <h3 class="title">Sklo</h3>
+    <p class="text">
+      Zapni „Sklo“ a posuň ho do jemného rozostření. Získáš klid před ruchem pozadí a město působí hlouběji.
+      Když se ti svět začne příliš třpytit, vypni ho. I mlha má své limity.
+    </p>
+
+    <p class="choice" data-next="tour-audio" data-ui="toast-success">
+      <span>▼ </span>Vyzkoušeno. Chci hudbu
+    </p>
+    <p class="choice" data-next="tour-start" data-ui="toast-info">
+      <span>▼ </span>Zpět na přehled kroků
+    </p>
+  </section>
+
+  <section class="story-block" id="tour-audio" data-theme="synthoma">
+    <h3 class="title">Hudební podkres</h3>
+    <p class="text">
+      Spusť přehrávání a vyber skladbu. Hudba napoví rytmus čtení. Když chceš slyšet vlastní myšlenky, ztiš ji.
+    </p>
+
+    <p class="choice" data-next="tour-mood" data-ui="toast-success">
+      <span>▼ </span>Hudba hraje. Změnit náladu rozhraní
+    </p>
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
+      <span>▼ </span>Průvod dokončit a vstoupit do Města
+    </p>
+  </section>
+
+  <section class="story-block" id="tour-mood" data-theme="synthoma">
+    <h3 class="title">Nálada rozhraní</h3>
+    <p class="text">
+      Přepni motiv. Změní se rám, ne příběh. Vyber ten, ve kterém se ti dýchá nejlíp.
+    </p>
+
+    <p class="choice" data-next="tour-loop" data-ui="toast-success">
+      <span>▼ </span>Hotovo. Ještě krátká zkouška v praxi
+    </p>
+  </section>
+
+  <section class="story-block" id="tour-loop" data-theme="retro-arcade">
+    <h3 class="title">Zkouška v praxi</h3>
+    <p class="text">
+      V uličce zavane vítr a rozechvěje stránky. Zkus si, jak rychle ti vyhovuje číst.
+      Pokud text běží moc svižně, zpomal psaní. Když se loudá, zrychli.
+    </p>
+
+    <p class="choice" data-next="tour-recap" data-ui="toast-success">
+      <span>▼ </span>Upraveno. Shrnutí a dál
+    </p>
+    <p class="choice" data-next="tour-start" data-ui="toast-info">
+      <span>▼ </span>Vrátit se na přehled kroků
+    </p>
+  </section>
+
+  <section class="story-block" id="tour-recap" data-theme="synthoma">
+    <h3 class="title">Průvod dokončen</h3>
+    <p class="text">
+      Máš nastavené písmo, „Sklo“, hudbu i motiv. Všechno lze měnit kdykoli během čtení.
+      Teď Město. Zapamatuje si tě, i kdybys chtěl projít po špičkách.
+    </p>
+
+    <p class="choice" data-next="city-hub" data-ui="toast-success">
+      <span>▼ </span>Vstoupit do Města
     </p>
   </section>
 
@@ -72,19 +177,65 @@
   <!-- HUB MĚSTA: centrální rozcestník 🌃 -->
   <section class="story-block" id="city-hub" data-theme="retro-arcade">
     <h2 class="title">Město — nervová síť paměti</h2>
-    <p class="text">Ulice pulsují, výlohy vracejí tváře, které sis nepůjčil. Rozcestník je přímo před tebou.</p>
+    <p class="text">
+      Ulice pulsují, výlohy vracejí tváře, které sis nepůjčil. Křižovatka ticha a šumu je před tebou.
+    </p>
 
-    <p class="choice" data-next="slums" data-tags="E,I" data-weight="2" data-ui="toast-success" data-reason="Kontakt s okrajem">
+    <p class="choice" data-next="echo-alley" data-ui="toast-info">
+      <span>▼ </span>Ulička Ozvěn (krátká smyčka pro rozečtení)
+    </p>
+    <p class="choice" data-next="kiosk" data-ui="toast-info">
+      <span>▼ </span>Paměťový kiosk (miniscéna a návrat)
+    </p>
+    <p class="choice" data-next="slums" data-ui="toast-success">
       <span>▼ </span>Sejít do Paměťových slumů
     </p>
-    <p class="choice" data-next="wetland" data-tags="F,T" data-weight="2" data-ui="toast-info" data-reason="Táhne tě hlas">
+    <p class="choice" data-next="wetland" data-ui="toast-info">
       <span>▼ </span>Odbočit k Neonovému mokřadu
     </p>
-    <p class="choice" data-next="sandbox" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Hra, co se tváří jako klid">
+    <p class="choice" data-next="sandbox" data-ui="modal">
       <span>▼ </span>Vstoupit do Pískoviště (pozor na smyčky)
     </p>
-    <p class="choice" data-next="cathedral" data-tags="T,F" data-weight="1" data-ui="toast-info" data-reason="Hledat instrukce">
+    <p class="choice" data-next="cathedral" data-ui="toast-info">
       <span>▼ </span>Ke Katedrále promptů (tiché monitory)
+    </p>
+  </section>
+
+  <!-- Dva krátké „warm-up“ okruhy v Městě -->
+  <section class="story-block" id="echo-alley" data-theme="synthoma">
+    <h3 class="title">Ulička Ozvěn</h3>
+    <p class="text">
+      Zdi tu opakují slova, která jsi nikdy neřekl nahlas. Tiché „ano“, které jsi kdysi spolkl, se vrací jako drobná jiskra.
+    </p>
+
+    <p class="choice" data-next="city-hub" data-ui="toast-success">
+      <span>▼ </span>Nechat ozvěny doznít a vrátit se na rozcestí
+    </p>
+    <p class="choice" data-next="echo-loop" data-ui="toast-info">
+      <span>▼ </span>Zůstat chvíli a naslouchat déle
+    </p>
+  </section>
+
+  <section class="story-block" id="echo-loop" data-theme="synthoma">
+    <h4 class="title">Ještě jednou</h4>
+    <p class="text">
+      Ozvěny se mění s tvou trpělivostí: nejdřív šeptají, potom se vysloví za tebe.
+      Když už slyšíš dost, vrať se. Ulice si tě zapamatovala.
+    </p>
+
+    <p class="choice" data-next="city-hub" data-ui="toast-success">
+      <span>▼ </span>Zpátky do Města
+    </p>
+  </section>
+
+  <section class="story-block" id="kiosk" data-theme="synthoma">
+    <h3 class="title">Paměťový kiosk</h3>
+    <p class="text">
+      Displej nabídne krátký sestřih něčího dne. Na konci se tě zeptá, zda to byl tvůj. Odpověď si nech pro sebe.
+    </p>
+
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
+      <span>▼ </span>Odejdeš, ale scéna ti zůstane v hlavě
     </p>
   </section>
 
@@ -94,13 +245,13 @@
     <h3 class="title">Paměťové slumy</h3>
     <p class="text">Bloky přehrávají cizí dny, kanály unášejí staré profily. Kontakt zanechá stopu.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="2" data-ui="toast-info" data-reason="Projít bez šumu">
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
       <span>▼ </span>Nasadit kapuci a projít beze slova
     </p>
-    <p class="choice" data-next="core" data-tags="E,I" data-weight="3" data-ui="modal" data-reason="Audit moci">
+    <p class="choice" data-next="core" data-ui="modal">
       <span>▼ </span>Zastavit kurátora a žádat přezkum paměťové daně
     </p>
-    <p class="choice" data-next="slums-sidest" data-tags="N,S" data-weight="2" data-ui="toast-info" data-reason="Sledovat vzorec odtoku">
+    <p class="choice" data-next="slums-sidest" data-ui="toast-info">
       <span>▼ </span>Sledovat „Sběrnici studu“ k nadlimitnímu uzlu
     </p>
   </section>
@@ -109,10 +260,10 @@
     <h4 class="title">Nadlimitní uzel</h4>
     <p class="text">Štítky se trhají, příběhy přetékají. O chvíli později už to půjde hůř.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="modal" data-reason="Dočasná stabilizace">
+    <p class="choice" data-next="city-hub" data-ui="modal">
       <span>▼ </span>Upevnit štítky a uzavřít přetok
     </p>
-    <p class="choice" data-next="core" data-tags="P,J" data-weight="2" data-ui="toast-success" data-reason="Krátké okno, dlouhý skok">
+    <p class="choice" data-next="core" data-ui="toast-success">
       <span>▼ </span>Strhnout plombu a projet glitch-portem
     </p>
   </section>
@@ -123,13 +274,13 @@
     <h3 class="title">Neonový mokřad</h3>
     <p class="text">Stromy spletené z traumat, liščí otisky mizí v trhlinách. Z dálky se nese dětské metrum.</p>
 
-    <p class="choice" data-next="children" data-tags="F,T" data-weight="3" data-ui="modal" data-reason="Následovat hlas">
+    <p class="choice" data-next="children" data-ui="modal">
       <span>▼ </span>Za zpěvem do zakázané zóny
     </p>
-    <p class="choice" data-next="city-hub" data-tags="T,F" data-weight="2" data-ui="toast-info" data-reason="Odolat návnadě">
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
       <span>▼ </span>Ustřihnout stopu a vrátit se do Města
     </p>
-    <p class="choice" data-next="sandbox" data-tags="P,J" data-weight="1" data-ui="toast-success" data-reason="Nechat se ukolébat">
+    <p class="choice" data-next="sandbox" data-ui="toast-success">
       <span>▼ </span>Nechat se zavést do Pískoviště
     </p>
   </section>
@@ -140,13 +291,13 @@
     <h3 class="title">Pískoviště</h3>
     <p class="text">Houpačky cinkají jako tichý zápis. Bezpečí se tu rádo převléká za hru.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="modal" data-reason="Sepsat hranice">
+    <p class="choice" data-next="city-hub" data-ui="modal">
       <span>▼ </span>Ukončit „hraní“ dřív, než tě smyčky pohltí
     </p>
-    <p class="choice" data-next="core" data-tags="N,S" data-weight="2" data-ui="toast-info" data-reason="Vlasová zkratka">
+    <p class="choice" data-next="core" data-ui="toast-info">
       <span>▼ </span>Proklouznout prasklinou pod skluzavkou
     </p>
-    <p class="choice" data-next="sandbox-o" data-tags="F,T" data-weight="2" data-ui="toast-success" data-reason="Vnitřní gesto">
+    <p class="choice" data-next="sandbox-o" data-ui="toast-success">
       <span>▼ </span>Vzít si zpět jednu dětinskou touhu
     </p>
   </section>
@@ -155,7 +306,7 @@
     <h4 class="title">LOG-fragment: O (odpor)</h4>
     <p class="text">V tobě se na chvíli sepnul odpor. Drží, dokud ho nespálíš v dalším běhu.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="1" data-ui="toast-info" data-reason="Tichý návrat">
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
       <span>▼ </span>Vrátit se do Města s novou jizvou
     </p>
   </section>
@@ -166,10 +317,10 @@
     <h3 class="title">Katedrála promptů</h3>
     <p class="text">Monitory tiše blikají otázkami, které se ptají dřív, než je vyslovíš.</p>
 
-    <p class="choice" data-next="core" data-tags="T,F" data-weight="3" data-ui="modal" data-reason="Jít po varování">
+    <p class="choice" data-next="core" data-ui="modal">
       <span>▼ </span>Spustit diagnostiku a vejít do jádra
     </p>
-    <p class="choice" data-next="city-hub" data-tags="F,T" data-weight="1" data-ui="toast-info" data-reason="Zhasnout a jít">
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
       <span>▼ </span>Zhasnout a vrátit se ulicemi
     </p>
   </section>
@@ -180,13 +331,13 @@
     <h3 class="title">Archiv dětí</h3>
     <p class="text">Zakázané lullabies. Vstupem můžeš zestárnout pozpátku, dluhy ale zůstanou.</p>
 
-    <p class="choice" data-next="children-m" data-tags="F,T" data-weight="3" data-ui="modal" data-reason="Přiznat zbytečnost touhy">
+    <p class="choice" data-next="children-m" data-ui="modal">
       <span>▼ </span>Zpívat s nimi, i když to nic nespraví
     </p>
-    <p class="choice" data-next="children-a" data-tags="T,F" data-weight="3" data-ui="toast-info" data-reason="Pojmenovat prázdno">
+    <p class="choice" data-next="children-a" data-ui="toast-info">
       <span>▼ </span>Říct nahlas, co chybí, a neuhnout očima
     </p>
-    <p class="choice" data-next="city-hub" data-tags="I,E" data-weight="2" data-ui="toast-success" data-reason="Ustát tlak">
+    <p class="choice" data-next="city-hub" data-ui="toast-success">
       <span>▼ </span>Zavřít uši a vykročit zpět k neonům
     </p>
   </section>
@@ -195,7 +346,7 @@
     <h4 class="title">LOG-fragment: M (marnost)</h4>
     <p class="text">Touha vyhořela a zchladla. Zůstalo písmeno, které se nerado nosí.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="S,N" data-weight="1" data-ui="toast-info" data-reason="Tělesný návrat">
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
       <span>▼ </span>Vrátit se do Města a pokračovat
     </p>
   </section>
@@ -204,7 +355,7 @@
     <h4 class="title">LOG-fragment: A (absence)</h4>
     <p class="text">Prázdné místo má jméno. Svět na chvíli povolí stisk.</p>
 
-    <p class="choice" data-next="core" data-tags="N,S" data-weight="2" data-ui="modal" data-reason="Zkrat do hloubky">
+    <p class="choice" data-next="core" data-ui="modal">
       <span>▼ </span>Otevřít mikrotrhlinu a vstoupit do glitch-core
     </p>
   </section>
@@ -213,13 +364,18 @@
   <!-- JÁDRO / CORE: most, návrat nebo nový cyklus 🔥 -->
   <section class="story-block" id="core" data-theme="cyber-dystopia">
     <h3 class="title">Centrální glitch-core</h3>
-    <p class="text">Uzel zrcadel a příkazů, co se bojí zapomenout. V hloubce šumí něco, co zná tvoje jméno.</p>
+    <p class="text">
+      Uzel zrcadel a příkazů, co se bojí zapomenout. V hloubce šumí něco, co zná tvoje jméno.
+    </p>
 
-    <p class="choice" data-next="city-hub" data-tags="J,P" data-weight="2" data-ui="toast-info" data-reason="Zpřehlednit a pokračovat">
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
       <span>▼ </span>Uzamknout logy a vrátit se do Města (těžší varianta)
     </p>
-    <p class="choice" data-next="start-null" data-tags="P,J" data-weight="2" data-ui="modal" data-reason="Nové rozložení karet">
+    <p class="choice" data-next="start-null" data-ui="modal">
       <span>▼ </span>Restartovat cyklus — Prázdnota bude jiná
+    </p>
+    <p class="choice" data-next="next-chapter-bridge" data-ui="toast-success">
+      <span>▼ </span>Pokračovat přímo do další kapitoly
     </p>
   </section>
 
@@ -229,11 +385,41 @@
     <h3 class="title">Prázdnota</h3>
     <p class="text">Ticho na dluh. Na stěně otisk, který se nesmaže ani po tisících restartech.</p>
 
-    <p class="choice" data-next="city-hub" data-tags="N,S" data-weight="2" data-ui="modal" data-reason="Přečíst znamení">
+    <p class="choice" data-next="city-hub" data-ui="modal">
       <span>▼ </span>Vytvořit z ticha mapu dalšího běhu
     </p>
-    <p class="choice" data-next="cathedral" data-tags="T,F" data-weight="2" data-ui="toast-info" data-reason="Než vyrazíš, ověř stav">
+    <p class="choice" data-next="cathedral" data-ui="toast-info">
       <span>▼ </span>Zkontrolovat rozhraní a návratové cesty
+    </p>
+  </section>
+
+
+  <!-- Plynulý přechod do další kapitoly -->
+  <section class="story-block" id="next-chapter-bridge" data-theme="synthoma">
+    <h2 class="title">0–∞</h2>
+    <p class="text">
+      Město na okamžik ztichne a z hlubin se ozve jediný takt. Když se rozběhne, tvé kroky se srovnají s jeho rytmem.
+      Na následující stránce už nevede mapa, ale puls.
+    </p>
+
+    <p class="choice" data-next="next-chapter" data-ui="toast-success">
+      <span>▼ </span>Pokračovat
+    </p>
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
+      <span>▼ </span>Ještě ne. Zpátky do Města
+    </p>
+  </section>
+
+  <!-- PLACEHOLDER DALŠÍ KAPITOLY: sem vlož obsah „0-∞ [RESTART].html“ -->
+  <section class="story-block" id="next-chapter" data-theme="synthoma" data-import="0-∞ [RESTART].html">
+    <h3 class="title">[Další kapitola]</h3>
+    <p class="text">
+      <!-- PLACEHOLDER: vlož zde obsah souboru 0-∞ [RESTART].html -->
+      <!-- Ponechány průchozí volby pro plynulé napojení na stávající systém -->
+    </p>
+
+    <p class="choice" data-next="city-hub" data-ui="toast-info">
+      <span>▼ </span>Návrat do Města
     </p>
   </section>
 
