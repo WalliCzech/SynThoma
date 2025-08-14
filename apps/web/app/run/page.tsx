@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState, useCallback } from 'react';
+import { getSharedAudio } from '@web/lib/audio';
 import { useRunStore } from '@web/stores/runStore';
 import { NODES } from '@shared/data/nodes';
 import type { NodeDef, Option, OptionTag } from '@shared/schemas/game';
@@ -69,9 +70,7 @@ export default function RunPage() {
       sessionStorage.removeItem('synthoma_play_audio');
       const w = window as any;
       if (!w.__synthomaAudio) {
-        w.__synthomaAudio = new Audio('/audio/SynthBachmoff.mp3');
-        w.__synthomaAudio.loop = false; // necháme doznít
-        w.__synthomaAudio.volume = 1.0;
+        w.__synthomaAudio = getSharedAudio();
       }
       w.__synthomaAudio.play?.().catch(() => { /* no-op: autoplay může být blokován */ return; });
     } catch { /* ignore audio init errors */ }

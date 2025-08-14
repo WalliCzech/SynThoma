@@ -3,6 +3,9 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
   const attach = options?.attachToWindow !== false;
   const w = window as any;
   const d = document;
+  const BP = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const mq = (q: string) => { try { return window.matchMedia && window.matchMedia(q).matches; } catch { return false; } };
+  const isMobile = () => mq('(max-width: 768px)');
 
   // Run-once guard (React Strict Mode volá efekty dvakrát – díky, příteli ironie)
   try {
@@ -39,7 +42,7 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
   }
 
   const paths = Array.from({ length: 10 }, (_, i) => {
-    const base = `/video/SYNTHOMA${i + 1}`;
+    const base = `${BP}/video/SYNTHOMA${i + 1}`;
     return { webm: `${base}.webm` } as const;
   });
 
@@ -49,12 +52,19 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
     if (!videoContainer) return;
     const vids = videoContainer.querySelectorAll('video');
     try { console.info('[SYNTHOMA][video] nalezeno <video> kusů:', vids.length); } catch {}
+    const mobile = isMobile();
+    // Připrav co nejvíc slotů až do 10 (nebo podle počtu <video> v DOM)
+    const cap = Math.min(paths.length, vids.length, 10);
     for (const [i, vEl] of Array.from(vids).entries()){
-      if (i >= paths.length) break;
+      if (i >= cap) break;
       const v = vEl as HTMLVideoElement;
       const p = paths[i];
       // Konfigurace
-      v.loop = true; v.muted = true; v.playsInline = true; v.preload = 'auto'; v.playbackRate = 0.5;
+      v.loop = true;
+      v.muted = true;
+      v.playsInline = true;
+      v.preload = isMobile() ? 'metadata' : 'auto';
+      v.playbackRate = mobile ? 0.35 : 0.5;
       // Vyčisti existující sources a nastav obě varianty, ať si prohlížeč vybere co existuje
       try {
         while (v.firstChild) v.removeChild(v.firstChild);
@@ -82,7 +92,7 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
     }
     if (vids.length){
       vids.forEach(v => v.classList.remove('active'));
-      const max = Math.min(vids.length, paths.length);
+      const max = Math.min(vids.length, cap);
       const startIndex = 0; // deterministicky první, ať se neroztočí prázdný slot
       const startVid = vids[startIndex] as HTMLVideoElement | undefined;
       if (startVid){
@@ -115,7 +125,7 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
           if (v) {
             try {
               while (v.firstChild) v.removeChild(v.firstChild);
-              const s = d.createElement('source'); s.src = `/video/SYNTHOMA1.webm`; s.type = 'video/webm'; v.appendChild(s);
+              const s = d.createElement('source'); s.src = `${BP}/video/SYNTHOMA1.webm`; s.type = 'video/webm'; v.appendChild(s);
               v.load(); v.play().catch(()=>{});
             } catch {}
           }
@@ -133,7 +143,14 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
       ioVideo.observe(videoContainer);
     }
   }
-  function scheduleNextTransition(){ if (transitionTimeout) window.clearTimeout(transitionTimeout); transitionTimeout = window.setTimeout(transitionToVideo, 15000 + Math.random()*15000); }
+  function scheduleNextTransition(){
+    if (transitionTimeout) window.clearTimeout(transitionTimeout);
+    const mobile = isMobile();
+    // Desktop: ~15–30s, Mobile: ~25–45s (šetři baterku a teplotu)
+    const base = mobile ? 25000 : 15000;
+    const jitter = mobile ? 20000 : 15000;
+    transitionTimeout = window.setTimeout(transitionToVideo, base + Math.random()*jitter);
+  }
   function transitionToVideo(){
     if (!videoContainer) return;
     const vids = videoContainer.querySelectorAll('video');
@@ -150,6 +167,10 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
         if (nextVideo.readyState < 2) { try { nextVideo.addEventListener('canplay', safePlay, { once: true }); } catch {} try { nextVideo.load(); } catch {} }
         else { safePlay(); }
       }
+      // Šetři zdroje: pauzni všechna neaktivní videa, nech běžet jen aktivní zdroj
+      try {
+        vids.forEach((v, idx) => { if (idx !== nextIndex) { try { (v as HTMLVideoElement).pause(); } catch {} } });
+      } catch {}
     }
     activeVideoIndex = nextIndex;
     scheduleNextTransition();
@@ -158,6 +179,7 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
     if (transitionTimeout) { try { console.info('[SYNTHOMA][video] startVideoRotation – už běží, klid.'); } catch {} return; }
     try { console.info('[SYNTHOMA][video] startVideoRotation – kola se točí.'); } catch {}
     rotationStarted = true;
+    // Na mobilu také plánujeme rotaci (požadavek: přehrávat všechna videa i na telefonu)
     scheduleNextTransition();
   }
   function stopVideoRotation(){ if (transitionTimeout){ clearTimeout(transitionTimeout); transitionTimeout = null; } }
@@ -183,12 +205,13 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
       } catch {}
     });
   }
-  function onScroll(){ if (animationsDisabled()) return; if (rafScrollId) return; rafScrollId = requestAnimationFrame(()=>{ rafScrollId = null; applyScrollCrop(); }); }
+  function onScroll(){ if (animationsDisabled()) return; if (isMobile()) return; if (rafScrollId) return; rafScrollId = requestAnimationFrame(()=>{ rafScrollId = null; applyScrollCrop(); }); }
 
   // Vynucení fixního rozložení a ukotvení vlevo nahoře (bez spoléhání jen na CSS)
   function applyFixedLayout(){
     if (!videoContainer) return;
     const s = (videoContainer as HTMLElement).style;
+    // VŽDY fixed – video musí zůstat trvale jako pozadí, obsah přes něj scrolluje
     s.position = 'fixed'; s.top = '0'; s.left = '0'; s.right = '0'; s.bottom = '0';
     s.width = '100vw'; s.height = '100dvh'; s.overflow = 'hidden'; s.pointerEvents = 'none';
     const vids = videoContainer.querySelectorAll('video');
@@ -209,7 +232,7 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
   let W = 0, H = 0; let rafId: number | null = null; let last = 0; let running = false; let ioGlitch: IntersectionObserver | null = null;
   let onVis: (() => void) | null = null;
   function resize(){ if (!canvas) return; W = window.innerWidth; H = window.innerHeight; canvas.width = W; canvas.height = H; }
-  function draw(ts?: number){ if (!running) return; const now = ts || performance.now(); if (now - last < 1000/5) { rafId = requestAnimationFrame(draw); return; } last = now; if (!ctx) { rafId = requestAnimationFrame(draw); return; } ctx.clearRect(0,0,W,H); ctx.fillStyle = 'rgba(0,0,0,0.10)'; ctx.fillRect(0,0,W,H); const segments = 8 + ((Math.random()*6)|0); const palette = ['rgba(0,255,249,0.18)','rgba(255,0,200,0.14)','rgba(250,255,0,0.10)','rgba(255,255,255,0.06)']; for (let i=0;i<segments;i++){ const fromLeft = Math.random() < 0.5; let y = (Math.random()*H)|0; const h = 2 + ((Math.random()*5)|0); const len = Math.max(30, Math.min(W*0.55, (W * (0.15 + Math.random()*0.4))|0)); const x = fromLeft ? 0 : Math.max(0, W - len); const jitter = ((Math.random()*6)|0) - 3; y = Math.max(0, Math.min(H-1, y + jitter)); ctx.fillStyle = palette[(Math.random()*palette.length)|0]; ctx.fillRect(x, y, len, h); ctx.save(); ctx.globalCompositeOperation = 'lighter'; const overlayLen = Math.max(10, (len * (0.4 + Math.random()*0.4))|0); const overlayX = fromLeft ? x : (x + (len - overlayLen)); ctx.fillRect(overlayX, y, overlayLen, Math.max(1, h-1)); ctx.restore(); } ctx.fillStyle = 'rgba(0,0,0,0.06)'; for (let sy=0; sy<H; sy+=2) ctx.fillRect(0, sy, W, 1); rafId = requestAnimationFrame(draw); }
+  function draw(ts?: number){ if (!running) return; const now = ts || performance.now(); const targetFps = isMobile() ? 3 : 5; if (now - last < 1000/targetFps) { rafId = requestAnimationFrame(draw); return; } last = now; if (!ctx) { rafId = requestAnimationFrame(draw); return; } ctx.clearRect(0,0,W,H); ctx.fillStyle = 'rgba(0,0,0,0.10)'; ctx.fillRect(0,0,W,H); const segments = (isMobile() ? 4 : 8) + ((Math.random()*(isMobile()?3:6))|0); const palette = ['rgba(0,255,249,0.18)','rgba(255,0,200,0.14)','rgba(250,255,0,0.10)','rgba(255,255,255,0.06)']; for (let i=0;i<segments;i++){ const fromLeft = Math.random() < 0.5; let y = (Math.random()*H)|0; const h = 2 + ((Math.random()*5)|0); const len = Math.max(30, Math.min(W*(isMobile()?0.35:0.55), (W * (0.15 + Math.random()*0.4))|0)); const x = fromLeft ? 0 : Math.max(0, W - len); const jitter = ((Math.random()*6)|0) - 3; y = Math.max(0, Math.min(H-1, y + jitter)); ctx.fillStyle = palette[(Math.random()*palette.length)|0]; ctx.fillRect(x, y, len, h); if (!isMobile()){ ctx.save(); ctx.globalCompositeOperation = 'lighter'; const overlayLen = Math.max(10, (len * (0.4 + Math.random()*0.4))|0); const overlayX = fromLeft ? x : (x + (len - overlayLen)); ctx.fillRect(overlayX, y, overlayLen, Math.max(1, h-1)); ctx.restore(); } } ctx.fillStyle = 'rgba(0,0,0,0.06)'; for (let sy=0; sy<H; sy+=2) ctx.fillRect(0, sy, W, 1); rafId = requestAnimationFrame(draw); }
   function startGlitch(){ if (!canvas || animationsDisabled()) return; if (running) return; running = true; (canvas as any).style.display='block'; rafId = requestAnimationFrame(draw); }
   function stopGlitch(){ running = false; if (rafId) cancelAnimationFrame(rafId); rafId=null; if (ctx) ctx.clearRect(0,0,W,H); if(canvas) (canvas as any).style.display='none'; }
 
@@ -217,7 +240,7 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
     initializeVideos();
     canvas = d.getElementById('glitch-bg') as HTMLCanvasElement | null;
     if (canvas){ ctx = canvas.getContext('2d'); window.addEventListener('resize', resize); resize(); }
-    // vynucení fixního layoutu hned po bootu
+    // vynucení fixního/absolute layoutu hned po bootu
     try { applyFixedLayout(); } catch {}
     if ('IntersectionObserver' in window && canvas){
       if (ioGlitch) ioGlitch.disconnect();
@@ -227,15 +250,14 @@ export function initVideoVisuals(options?: { attachToWindow?: boolean }){
       }, { threshold: 0.01 });
       ioGlitch.observe(canvas);
     }
-    if (!animationsDisabled()) { startGlitch(); startVideoRotation(); }
-    // Scroll-linked crop init + listeners (bez mezer při žádném scrollu)
-    try { applyScrollCrop(); } catch {}
-    window.addEventListener('scroll', onScroll, { passive: true });
+    if (!animationsDisabled()) { if (!isMobile()) startGlitch(); startVideoRotation(); }
+    // Scroll-linked crop init + listeners – na mobilech vypnuto kvůli jank
+    if (!isMobile()) { try { applyScrollCrop(); } catch {} window.addEventListener('scroll', onScroll, { passive: true }); }
     window.addEventListener('resize', onScroll, { passive: true });
     window.addEventListener('resize', onResizeApplyFixed, { passive: true } as any);
     onVis = () => {
       if (d.hidden) { stopGlitch(); stopVideoRotation(); }
-      else { if (!animationsDisabled()) { startGlitch(); startVideoRotation(); } try { applyFixedLayout(); applyScrollCrop(); } catch {} }
+      else { if (!animationsDisabled()) { if (!isMobile()) startGlitch(); startVideoRotation(); } try { applyFixedLayout(); if (!isMobile()) applyScrollCrop(); } catch {} }
     };
     d.addEventListener('visibilitychange', onVis);
     if (bootMo) { try { bootMo.disconnect(); } catch {} bootMo = null; }

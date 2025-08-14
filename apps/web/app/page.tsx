@@ -27,8 +27,7 @@ export default function HomePage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const btnGlitchRef = useRef<HTMLButtonElement | null>(null);
   const isStartingAudioRef = useRef(false);
-  // Ref pro binární boot text, který musí být vždy na jednom řádku
-  const bootBinaryRef = useRef<HTMLSpanElement | null>(null);
+  // (removed) binární boot text a jeho ref
 
   // Handlery pro tlačítka – využij knihovnu z src/lib/typewriter.ts
   const handleInfoClick = () => { typeExternalInfo().catch((e) => console.error('INFO failed', e)); };
@@ -47,71 +46,7 @@ export default function HomePage() {
 
   // (reverted) Globální skrývání scrollbarů odstraněno – způsobovalo vedlejší efekty
 
-  // Auto-fit pro binární boot text: udržuj na jednom řádku a přizpůsob font-size
-  useEffect(() => {
-    const el = bootBinaryRef.current;
-    if (!el) return;
-    const container = el.parentElement as HTMLElement | null;
-    if (!container) return;
-    // Vizuální garance jednoho řádku
-    el.style.whiteSpace = 'nowrap';
-    el.style.display = 'inline-block';
-    container.style.overflow = 'hidden';
-
-    const getPx = () => {
-      const fs = getComputedStyle(el).fontSize;
-      const v = parseFloat(fs || '16');
-      return isFinite(v) ? v : 16;
-    };
-    const setPx = (px: number) => { el.style.fontSize = `${Math.max(1, Math.round(px))}px`; };
-
-    // Považuj počáteční velikost za maximum, ale necháme bezpečné minimum ~30% nebo 10px
-    let maxPx = getPx();
-    let minPx = Math.max(10, Math.floor(maxPx * 0.3));
-
-    const fit = () => {
-      if (!el || !container) return;
-      const cw = Math.max(0, container.clientWidth - 2);
-      if (cw <= 0) return;
-      // Začni z maxima a případně zmenši
-      setPx(maxPx);
-      let sw = el.scrollWidth;
-      if (sw > cw) {
-        const ratio = cw / sw;
-        setPx(Math.max(minPx, Math.floor(getPx() * ratio * 0.98)));
-        // Jemný doladění iteracemi
-        let guard = 8;
-        while (el.scrollWidth > cw && guard--) {
-          const cur = getPx();
-          if (cur <= minPx) break;
-          setPx(Math.max(minPx, Math.floor(cur * 0.9)));
-        }
-      } else {
-        // Případně dorůst až do maxima, ale nikdy nepřetéct
-        let guard = 8;
-        while (getPx() < maxPx && guard--) {
-          const cur = getPx();
-          const next = Math.min(maxPx, Math.floor(cur * 1.05));
-          if (next === cur) break;
-          setPx(next);
-          if (el.scrollWidth > cw) { setPx(cur); break; }
-        }
-      }
-    };
-
-    const ro = new ResizeObserver(() => fit());
-    try { ro.observe(container); } catch {}
-    // Vícenásobné plánování pro stabilizaci po mountu/layoutu
-    const id1 = window.setTimeout(fit, 0);
-    const id2 = window.setTimeout(fit, 250);
-    const id3 = window.setTimeout(fit, 1000);
-    window.addEventListener('load', fit);
-    return () => {
-      try { ro.disconnect(); } catch {}
-      window.clearTimeout(id1); window.clearTimeout(id2); window.clearTimeout(id3);
-      window.removeEventListener('load', fit);
-    };
-  }, [showReader]);
+  // (removed) auto-fit efekt pro binární boot text
 
   // Typewriter pro čtečku/terminál po kliknutí na Pokračovat
   useEffect(() => {
@@ -127,9 +62,8 @@ export default function HomePage() {
     // Každý vstup do readeru začíná bez detailů; detail zobrazíme až po dopsání dialogu
     setShowReaderDetails(false);
     setControlsVisible(false);
-    const logHost = document.querySelector('#reader-log') as HTMLElement | null;
     const dialogHost = document.querySelector('#reader-dialog') as HTMLElement | null;
-    if (!logHost || !dialogHost) return;
+    if (!dialogHost) return;
     // Připrav cílové span prvky, podobně jako u tlačítka
     function ensureTarget(h: HTMLElement){
       let span = h.querySelector('.noising-text') as HTMLElement | null;
@@ -140,89 +74,78 @@ export default function HomePage() {
       } else { span.textContent = ''; }
       return span;
     }
-    if (logHost) ensureTarget(logHost as HTMLElement);
     if (dialogHost) ensureTarget(dialogHost as HTMLElement);
 
-    let cancelLog: (() => void) | null = null;
     let cancelDialog: (() => void) | null = null;
 
-    // Napiš nejdřív LOG, pak dialog
-    cancelLog = runTypewriter({
-      text: '',
-      host: logHost,
-      getDurationMs: () => 1400,
-      onStart: () => { /* no-op */ return; },
-      onDone: () => {
-        cancelDialog = runTypewriter({
-          text: '„Vítej v SYNTHOMĚ, @&SĐYŁ !!! Tady jméno nikoho nezajímá, ale chyby? Ty jsou v paměti věčně.“',
-          host: dialogHost,
-          getDurationMs: () => {
-            // zarovnat tempo k manifestu, ale trochu rychlejší
-            const mw = document.getElementById('manifest-container');
-            if (mw) {
-              const cs = getComputedStyle(mw);
-              const durVar = cs.getPropertyValue('--typewriter-duration').trim();
-              if (durVar.endsWith('ms')) return parseFloat(durVar) * 0.7;
-              if (durVar.endsWith('s')) return parseFloat(durVar) * 1000 * 0.7;
-            }
-            return 5200;
-          },
-          onStart: () => {
-            // Najdi cílové termy z a11y obsahu: .sr-only .glitching (libovolné výskyty)
-            const glitchTerms = Array.from(dialogHost.querySelectorAll('.sr-only .glitching'))
-              .map(n => (n as HTMLElement).textContent || '')
-              .filter(t => t && t.trim().length > 0);
-            if (!glitchTerms.length) return;
-            let tries = 0;
-            const maxTries = 220; // ~26s při 120ms
-            const doneTerms = new Set<string>();
-            const poll = window.setInterval(() => {
-              tries++;
-              try {
-                const span = dialogHost.querySelector('.noising-text') as HTMLElement | null;
-                if (!span) return;
-                const chars = Array.from(span.querySelectorAll('.tw-char')) as HTMLElement[];
-                if (!chars.length) return;
-                const textNow = chars.map(c => c.textContent || '').join('');
-                for (const term of glitchTerms) {
-                  if (doneTerms.has(term)) continue;
-                  const idx = textNow.indexOf(term);
-                  if (idx !== -1) {
-                    // Vlož wrapper před první znak termu
-                    const wrap = document.createElement('span');
-                    wrap.className = 'glitching';
-                    const first = chars[idx] as HTMLElement | undefined;
-                    const parent = first && first.parentNode as HTMLElement | null;
-                    if (parent && first) {
-                      parent.insertBefore(wrap, first);
-                      // Původní znaky skryj, aby finalizační fáze typewriteru nepřekreslila text vizuálně podruhé
-                      for (let i = 0; i < term.length && (idx + i) < chars.length; i++) {
-                        const el = chars[idx + i];
-                        if (el) el.classList.add('tw-char-hidden');
-                      }
-                      // Nastav viditelný text do wrapperu (glitch engine jej interně rozdělí)
-                      wrap.textContent = term;
-                      try {
-                        const w: any = window as any;
-                        if (w.startGlitching) w.startGlitching('.glitching');
-                      } catch {}
-                      doneTerms.add(term);
-                    }
+    // Napiš rovnou dialog (bez úvodního logu)
+    cancelDialog = runTypewriter({
+      text: '„Vítej v SYNTHOMĚ, @&SĐYŁ !!! Tady jméno nikoho nezajímá, ale chyby? Ty jsou v paměti věčně.“',
+      host: dialogHost,
+      getDurationMs: () => {
+        // zarovnat tempo k manifestu, ale trochu rychlejší
+        const mw = document.getElementById('manifest-container');
+        if (mw) {
+          const cs = getComputedStyle(mw);
+          const durVar = cs.getPropertyValue('--typewriter-duration').trim();
+          if (durVar.endsWith('ms')) return parseFloat(durVar) * 0.7;
+          if (durVar.endsWith('s')) return parseFloat(durVar) * 1000 * 0.7;
+        }
+        return 5200;
+      },
+      onStart: () => {
+        // Najdi cílové termy z a11y obsahu: .sr-only .glitching (libovolné výskyty)
+        const glitchTerms = Array.from(dialogHost.querySelectorAll('.sr-only .glitching'))
+          .map(n => (n as HTMLElement).textContent || '')
+          .filter(t => t && t.trim().length > 0);
+        if (!glitchTerms.length) return;
+        let tries = 0;
+        const maxTries = 220; // ~26s při 120ms
+        const doneTerms = new Set<string>();
+        const poll = window.setInterval(() => {
+          tries++;
+          try {
+            const span = dialogHost.querySelector('.noising-text') as HTMLElement | null;
+            if (!span) return;
+            const chars = Array.from(span.querySelectorAll('.tw-char')) as HTMLElement[];
+            if (!chars.length) return;
+            const textNow = chars.map(c => c.textContent || '').join('');
+            for (const term of glitchTerms) {
+              if (doneTerms.has(term)) continue;
+              const idx = textNow.indexOf(term);
+              if (idx !== -1) {
+                // Vlož wrapper před první znak termu
+                const wrap = document.createElement('span');
+                wrap.className = 'glitching';
+                const first = chars[idx] as HTMLElement | undefined;
+                const parent = first && first.parentNode as HTMLElement | null;
+                if (parent && first) {
+                  parent.insertBefore(wrap, first);
+                  // Původní znaky skryj, aby finalizační fáze typewriteru nepřekreslila text vizuálně podruhé
+                  for (let i = 0; i < term.length && (idx + i) < chars.length; i++) {
+                    const el = chars[idx + i];
+                    if (el) el.classList.add('tw-char-hidden');
                   }
+                  // Nastav viditelný text do wrapperu (glitch engine jej interně rozdělí)
+                  wrap.textContent = term;
+                  try {
+                    const w: any = window as any;
+                    if (w.startGlitching) w.startGlitching('.glitching');
+                  } catch {}
+                  doneTerms.add(term);
                 }
-                // hotovo pro všechny termy
-                if (doneTerms.size === glitchTerms.length) { window.clearInterval(poll); }
-              } catch {}
-              if (tries > maxTries) { try { window.clearInterval(poll); } catch {} }
-            }, 120) as unknown as number;
-          },
-          onDone: () => { setShowReaderDetails(true); }
-        });
-      }
+              }
+            }
+            // hotovo pro všechny termy
+            if (doneTerms.size === glitchTerms.length) { window.clearInterval(poll); }
+          } catch {}
+          if (tries > maxTries) { try { window.clearInterval(poll); } catch {} }
+        }, 120) as unknown as number;
+      },
+      onDone: () => { setShowReaderDetails(true); }
     });
 
     return () => {
-      try { if (cancelLog) cancelLog(); } catch {}
       try { if (cancelDialog) cancelDialog(); } catch {}
       try {
         const w: any = window as any;
@@ -242,11 +165,10 @@ export default function HomePage() {
     // 1) Titulek
     const titleHost = document.querySelector('#reader-title') as HTMLElement | null;
     const bodyHost = document.querySelector('#reader-body') as HTMLElement | null;
-    const userLogHost = document.querySelector('#reader-log') as HTMLElement | null;
     const userDialogHost = document.querySelector('#reader-dialog') as HTMLElement | null;
-    if (!titleHost || !userLogHost || !userDialogHost) {
+    if (!titleHost || !userDialogHost) {
       console.log('typewriter: missing hosts', {
-        title: !!titleHost, body: !!bodyHost, userLog: !!userLogHost, userDialog: !!userDialogHost
+        title: !!titleHost, body: !!bodyHost, userDialog: !!userDialogHost
       });
       return;
     }
@@ -675,7 +597,7 @@ export default function HomePage() {
   // Přednačti/pořiď shared audio (bez autoplay)
   useEffect(() => {
     try {
-      const a = getSharedAudio('/audio/SynthBachmoff.mp3');
+      const a = getSharedAudio();
       audioRef.current = a;
       // inicializace stavu podle skutečného přehrávání
       const compute = () => setIsAudioPlaying(() => !!a && !a.paused && !a.ended && a.currentTime > 0);
@@ -708,7 +630,7 @@ export default function HomePage() {
           setTimeout(() => { isStartingAudioRef.current = false; }, 150);
         }
       } else {
-        const a = audioRef.current || getSharedAudio('/audio/SynthBachmoff.mp3');
+        const a = audioRef.current || getSharedAudio();
         // Spusť hudbu jen pokud skutečně nehraje
         if (a && (a.paused || a.ended || a.currentTime === 0)) {
           if (!isStartingAudioRef.current) {
@@ -881,9 +803,6 @@ export default function HomePage() {
           <div className="reader-container" aria-live="polite">
             <div className="SYNTHOMAREADER terminal" role="region" aria-label="Terminál SYNTHOMA">
               <div id="reader-content">
-                <div id="reader-log" className="log">
-                  <span ref={bootBinaryRef} className="boot-binary halo glitchy glitching" style={{ opacity: 0.33, fontSize: '0.4em', whiteSpace: 'nowrap' }} aria-hidden="true">01010011 01011001 01001110 01010100 01001000 01001111 01001101 01000001</span>
-                </div>
                 {/* Minimal body host kvůli sekvenci typewriteru */}
                 <div id="reader-body" className="text">
                   <span className="noising-text" aria-hidden="true"></span>
@@ -895,12 +814,12 @@ export default function HomePage() {
                 <p id="reader-title" className="text" style={{ marginLeft: '0.7rem' }}>
                   <span className="noising-text" aria-hidden="true"></span>
                   <span className="rich-hidden" aria-hidden="true">
-                    Chceš si přečíst něco o SYNTHOMĚ nebo rovnou začít číst?
+                    Chceš si přečíst pár informací nebo se rovnou dát na čtení?
                   </span>
                 </p>
                 <div className={`reader-controls appear ${controlsVisible ? 'visible' : ''}`.trim()}>
                   <button type="button" className="glitch-button small" onClick={handleInfoClick} aria-label="Zobrazit INFO">INFO</button>
-                  <button type="button" className="glitch-button small" onClick={handleBooksClick} aria-label="Začít číst">ČÍST</button>
+                  <button type="button" className="glitch-button small" onClick={handleBooksClick} aria-label="Začít číst">KNIHA</button>
                 </div>
                 {/* Extra output area for dynamic lists (books/chapters) below controls */}
                 <div id="reader-extra" className="text" aria-live="polite">

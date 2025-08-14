@@ -19,7 +19,7 @@
   var PARALLAX = 0;
   // Repo přešlo na WEBM (SYNTHOMA1..10.webm). Jen WEBM, bez fallbacku na MP4.
   var paths = Array.from({length: 11}, function(_, i){
-    var base = '/video/SYNTHOMA' + (i+1);
+    var base = 'video/SYNTHOMA' + (i+1);
     return { webm: base + '.webm' };
   });
 
