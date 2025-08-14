@@ -807,11 +807,11 @@ export default function HomePage() {
                 <div id="reader-body" className="text">
                   <span className="noising-text" aria-hidden="true"></span>
                 </div>
-                <p id="reader-dialog" className="dialog" style={{ marginLeft: '0.7rem' }}>
+                <p id="reader-dialog" className="dialog">
                   <span className="noising-text"></span>
                   <span className="sr-only">„Vítej v SYNTHOMĚ, <span className="glitching">@&SĐYŁ</span> !!! Tady jméno nikoho nezajímá, ale chyby? Ty jsou v paměti věčně.“</span>
                 </p>
-                <p id="reader-title" className="text" style={{ marginLeft: '0.7rem' }}>
+                <p id="reader-title" className="text">
                   <span className="noising-text" aria-hidden="true"></span>
                   <span className="rich-hidden" aria-hidden="true">
                     Chceš si přečíst pár informací nebo se rovnou dát na čtení?
@@ -822,7 +822,7 @@ export default function HomePage() {
                   <button type="button" className="glitch-button small" onClick={handleBooksClick} aria-label="Začít číst">KNIHA</button>
                 </div>
                 {/* Extra output area for dynamic lists (books/chapters) below controls */}
-                <div id="reader-extra" className="text" aria-live="polite">
+                <div id="reader-extra" aria-live="polite">
                   <span className="noising-text" aria-hidden="true"></span>
                 </div>
               </div>

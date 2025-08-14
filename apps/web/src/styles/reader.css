@@ -190,11 +190,7 @@ html, body {
   margin-bottom: 0rem;
 }
 
-/* Performance hints for large scroll containers */
-#reader-content {
-  content-visibility: auto;
-  contain-intrinsic-size: 1200px;
-}
+/* Performance hints for large scroll containers removed to prevent pop-in on mobile */
 
 /* Glass mode: aplikuj stejné chování jako u control panelu */
 .SYNTHOMAREADER.glass {
@@ -220,7 +216,7 @@ html, body {
 #reader-extra,
 #reader-log,
 #reader-dialog,
-#reader-title { overflow: visible; max-height: none; }
+#reader-title { overflow: visible; max-height: none; margin-left: 0rem; }
 
 /* Zajisti, že boot-binary a následná .noising-text v logu budou na vlastních řádcích */
 #reader-log .boot-binary,
@@ -399,12 +395,6 @@ a.chapter-link:focus-visible {
 /* Responsivní doladění */
 @media (max-width: 768px) {
   /* Čtečka: respektuj postranní okraje a nelep se na hrany obrazovky */
-  .SYNTHOMAREADER {
-    margin: 12px 12px 48px;
-    padding: 16px;
-    border-radius: 12px;
-    max-width: calc(100% - 24px);
-  }
   /* Volby: odstraň zbytečné boční odsazení na úzkých displejích */
   .choice-box {
     margin-left: 0rem;
@@ -504,18 +494,21 @@ a.chapter-link:focus-visible {
 }
 
 /* 📱 Vylepšená mobilní responsivita */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .SYNTHOMAREADER {
-    padding: 0.25rem;
+    padding: 0rem;
     border-radius: 8px;
     font-size: calc(0.9rem * var(--font-size-multiplier, 1));
     /* drž postranní odsazení od okrajů displeje */
-    margin: 12px 12px 48px;
-    max-width: calc(100% - 24px);
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+    max-width: calc(100% - 4px);
   }
   
   #reader-body, #reader-extra {
     line-height: 1.2;
+    margin-left: 0rem;
+    margin-right: 0.05rem;
   }
   
   /* 🎯 Menší glowy na mobilu pro lepší čitelnost */
