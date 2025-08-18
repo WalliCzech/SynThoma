@@ -1,0 +1,75 @@
+2:I[5199,[],"ClientPageRoot"]
+3:I[343,["931","static/chunks/app/page-0305c810e9932e46.js"],"default"]
+4:I[149,["428","static/chunks/428-fb3b724648eb0af6.js","185","static/chunks/app/layout-25b23a3c3a430da1.js"],""]
+6:I[7754,["428","static/chunks/428-fb3b724648eb0af6.js","185","static/chunks/app/layout-25b23a3c3a430da1.js"],"ThemeRegistry"]
+7:I[9073,[],""]
+8:I[9972,[],""]
+9:I[9641,["428","static/chunks/428-fb3b724648eb0af6.js","185","static/chunks/app/layout-25b23a3c3a430da1.js"],"default"]
+a:I[3161,["428","static/chunks/428-fb3b724648eb0af6.js","185","static/chunks/app/layout-25b23a3c3a430da1.js"],"default"]
+c:I[4707,["428","static/chunks/428-fb3b724648eb0af6.js","185","static/chunks/app/layout-25b23a3c3a430da1.js"],"default"]
+5:T532,
+            (function(){
+              var ALLOWED = ["synthoma","green-matrix","neon-hellfire","cyber-dystopia","acid-glitch","retro-arcade"];
+              try {
+                var saved = localStorage.getItem('theme');
+                var next = ALLOWED.indexOf(saved) !== -1 ? saved : 'synthoma';
+                // Nastav co nejdřív na <html> kvůli FOUC
+                if (typeof document !== 'undefined') {
+                  document.documentElement.setAttribute('data-theme', next);
+                  document.addEventListener('DOMContentLoaded', function(){
+                    document.body && document.body.setAttribute('data-theme', next);
+                  });
+                }
+                // Exponovat rituál pro přepínání, žádné hračky (čisté JS, žádný TS cast)
+                window.setTheme = function(name){
+                  if (ALLOWED.indexOf(name) === -1) return;
+                  document.documentElement && document.documentElement.setAttribute('data-theme', name);
+                  document.body && document.body.setAttribute('data-theme', name);
+                  try { localStorage.setItem('theme', name); } catch(e) {}
+                };
+              } catch (e) {
+                // Když localStorage trucuje, necháme synthoma
+              }
+            })();
+          b:T7ee,;(function(){
+            'use strict';
+            // If ui-helpers.js already provided startShinning/stopShinning, keep those
+            if (window.startShinning && window.stopShinning) return;
+            var timers = [];
+            function qs(){ return document.querySelectorAll('.shinning .noising-text'); }
+            function apply(){
+              var hosts = qs();
+              hosts.forEach(function(host){
+                var chars = host.querySelectorAll('.noising-char');
+                chars.forEach(function(c){ c.classList.add('noising'); });
+                // very light random toggling to simulate flicker without rewrapping
+                function flick(h){
+                  if (!h.dataset || h.dataset.shineOff === '1') return;
+                  var arr = h.querySelectorAll('.noising-char'); if (!arr.length) return;
+                  var i = Math.floor(Math.random()*arr.length); var el = arr[i];
+                  el && el.classList.add('flickering');
+                  var t1 = setTimeout(function(){ el && el.classList && el.classList.remove('flickering'); }, 100 + Math.random()*200);
+                  timers.push(t1);
+                  var t2 = setTimeout(function(){ flick(h); }, 500 + Math.random()*2000);
+                  timers.push(t2);
+                }
+                flick(host);
+              });
+            }
+            function remove(){
+              timers.forEach(clearTimeout); timers = [];
+              var hosts = qs();
+              hosts.forEach(function(host){ host.dataset.shineOff = '1'; });
+              setTimeout(function(){
+                hosts.forEach(function(host){
+                  delete host.dataset.shineOff;
+                  var chars = host.querySelectorAll('.noising-char');
+                  chars.forEach(function(c){ c.classList.remove('flickering'); });
+                });
+              }, 20);
+            }
+            window.startShinning = function(){ apply(); };
+            window.stopShinning  = function(){ remove(); };
+          })();0:["TX9x_TcTAnA6m14ia0C5B",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",{"children":["__PAGE__",{},[["$L1",["$","$L2",null,{"props":{"params":{},"searchParams":{}},"Component":"$3"}]],null],null]},[["$","html",null,{"lang":"cs","data-theme":"synthoma","suppressHydrationWarning":true,"children":["$","body",null,{"data-theme":"synthoma","children":[["$","div",null,{"className":"video-background","aria-hidden":"true","children":[["$","video",null,{"id":"bgvid1","muted":true,"playsInline":true}],["$","video",null,{"id":"bgvid2","muted":true,"playsInline":true}],["$","video",null,{"id":"bgvid3","muted":true,"playsInline":true}],["$","video",null,{"id":"bgvid4","muted":true,"playsInline":true}],["$","video",null,{"id":"bgvid5","muted":true,"playsInline":true}],["$","video",null,{"id":"bgvid6","muted":true,"playsInline":true}],["$","video",null,{"id":"bgvid7","muted":true,"playsInline":true}],["$","video",null,{"id":"bgvid8","muted":true,"playsInline":true}],["$","video",null,{"id":"bgvid9","muted":true,"playsInline":true}],["$","video",null,{"id":"bgvid10","muted":true,"playsInline":true}]]}],["$","canvas",null,{"id":"glitch-bg","className":"clitchbg","aria-hidden":"true"}],["$","$L4",null,{"id":"theme-bootstrap","strategy":"beforeInteractive","children":"$5"}],["$","$L6",null,{"children":["$","$L7",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":"404"}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],"notFoundStyles":[],"styles":null}]}],["$","div",null,{"id":"toaster","aria-live":"polite","aria-atomic":"true"}],["$","div",null,{"className":"modal","id":"modal-run","hidden":true,"aria-hidden":"true","role":"dialog","aria-modal":"true","children":["$","div",null,{"className":"modal-content panel","role":"document","children":[["$","h3",null,{"className":"halo no-top-margin","children":"Potvrdit riziko?"}],["$","p",null,{"className":"text-muted","children":"Jistý si opravdu nejsi. Chceš pokračovat?"}],["$","div",null,{"className":"modal-actions","children":[["$","button",null,{"className":"btn","data-action":"cancel","children":"Zrušit"}],["$","button",null,{"className":"btn accent","data-action":"confirm","children":"Pokračovat"}]]}]]}]}],["$","canvas",null,{"id":"noise-canvas","aria-hidden":"true"}],["$","$L9",null,{}],["$","$La",null,{}],["$","$L4",null,{"id":"shinning-effect","strategy":"afterInteractive","children":"$b"}],["$","button",null,{"id":"toggle-panel-btn","className":"panel-toggle-button","aria-controls":"control-panel","aria-expanded":"false","aria-label":"Ovládací panel","children":"🔧️"}],["$","div",null,{"id":"control-panel","role":"region","aria-label":"Ovládací panel","children":[["$","div",null,{"className":"panel-section","children":[["$","h3",null,{"className":"panel-heading","children":"Nastavení displeje"}],["$","div",null,{"className":"setting-item","children":[["$","label",null,{"htmlFor":"font-size-slider","children":"Velikost písma"}],["$","input",null,{"type":"range","id":"font-size-slider","min":"0.8","max":"2.7","step":"0.05","defaultValue":"1"}]]}],["$","div",null,{"className":"setting-item","children":[["$","label",null,{"htmlFor":"opacity-slider","children":"Průhlednost pozadí"}],["$","input",null,{"type":"range","id":"opacity-slider","min":"0","max":"1","step":"0.05","defaultValue":"0.8"}]]}],["$","div",null,{"className":"setting-item","children":[["$","label",null,{"htmlFor":"typewriter-speed","children":"Rychlost psaní"}],["$","div",null,{"className":"speed-controls","children":[["$","button",null,{"id":"speed-instant","className":"speed-btn","data-speed":"instant","type":"button","children":"⚡ Okamžitě"}],["$","button",null,{"id":"speed-fast","className":"speed-btn","data-speed":"fast","type":"button","children":"🏃 Rychle"}],["$","button",null,{"id":"speed-normal","className":"speed-btn active","data-speed":"normal","type":"button","children":"🚶 Normálně"}],["$","button",null,{"id":"speed-slow","className":"speed-btn","data-speed":"slow","type":"button","children":"🐌 Pomalu"}]]}]]}],["$","div",null,{"className":"setting-item flex gap-8 items-center flex-wrap","children":[["$","button",null,{"id":"toggle-animations","className":"panel-button","type":"button","children":"Animace: Zapnuty"}],["$","button",null,{"id":"toggle-glass","className":"panel-button","type":"button","children":"Sklo"}]]}]]}],["$","div",null,{"className":"panel-section","children":[["$","h3",null,{"className":"panel-heading","children":"Motivy"}],["$","div",null,{"className":"theme-buttons","children":[["$","button",null,{"className":"theme-button","data-theme":"synthoma","type":"button","children":"Synthoma"}],["$","button",null,{"className":"theme-button","data-theme":"green-matrix","type":"button","children":"Green Matrix"}],["$","button",null,{"className":"theme-button","data-theme":"neon-hellfire","type":"button","children":"Neon Hellfire"}],["$","button",null,{"className":"theme-button","data-theme":"cyber-dystopia","type":"button","children":"Cyber Dystopia"}],["$","button",null,{"className":"theme-button","data-theme":"acid-glitch","type":"button","children":"Acid Glitch"}],["$","button",null,{"className":"theme-button","style":{"fontFamily":"VT323"},"data-theme":"retro-arcade","type":"button","children":"Retro Arcade"}]]}]]}],["$","div",null,{"className":"panel-section","children":[["$","h3",null,{"className":"panel-heading","children":"Audio přehrávač"}],["$","div",null,{"id":"audio-player-controls","children":[["$","div",null,{"id":"custom-audio-controls","children":[["$","button",null,{"id":"play-pause-btn","className":"panel-button","type":"button","aria-label":"Play/Pause","children":"▶️"}],["$","button",null,{"id":"stop-btn","className":"panel-button","type":"button","aria-label":"Stop","children":"⏹️"}],["$","div",null,{"id":"progress-bar-container","aria-label":"Průběh","children":["$","div",null,{"id":"progress-bar"}]}]]}],["$","div",null,{"id":"playlist-container","aria-label":"Playlist"}]]}]]}]]}],["$","$Lc",null,{}]]}]}],null],null],[[["$","link","0",{"rel":"stylesheet","href":"/SynThoma/_next/static/css/10fbf854a455ce9e.css","precedence":"next","crossOrigin":"$undefined"}]],[null,"$Ld"]]]]]
+d:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"SYNTHOMA"}],["$","meta","3",{"name":"description","content":"Neon, glitch a paměťové jizvy. Pěkný večer."}],["$","link","4",{"rel":"icon","href":"/SynThoma/assets/favicon.ico"}]]
+1:null
