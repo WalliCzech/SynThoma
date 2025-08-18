@@ -12,6 +12,9 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      # Prefer repository variable; fallback to secret. Set this in GitHub repo → Settings → Variables → Actions
+      NEXT_PUBLIC_API_BASE: ${{ vars.NEXT_PUBLIC_API_BASE || secrets.NEXT_PUBLIC_API_BASE }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

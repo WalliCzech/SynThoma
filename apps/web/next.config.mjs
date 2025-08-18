@@ -16,8 +16,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   // GitHub Pages: statický export + basePath/assetPrefix pro projektové stránky
-  output: 'export',
-  trailingSlash: true,
+  output: isProd ? 'export' : undefined,
+  trailingSlash: isProd ? true : false,
   basePath: isProd ? `/${repo}` : '',
   assetPrefix: isProd ? `/${repo}/` : undefined,
   images: {
